@@ -13,14 +13,6 @@
 	    android:text="@string/choose"
 	    android:textSize="40dp" />
 
-	<Button
-	    android:id="@+id/chooseButton"
-	    android:layout_width="wrap_content"
-	    android:layout_height="wrap_content"
-	    android:layout_alignParentBottom="true"
-	    android:layout_centerHorizontal="true"
-	    android:layout_marginBottom="127dp"
-	    android:text="@string/chooseButton"
-	    android:textSize="20dp" />
+
 	
 </RelativeLayout>
