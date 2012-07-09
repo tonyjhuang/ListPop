@@ -52,7 +52,7 @@ public class DbAdapter {
 	}
 
 	//Insert ArrayList as Byte Array
-	public long enterPhrase(ArrayList<String> a) {
+	public long enterList(ArrayList<String> a) {
 		// Change ArrayList<String> to Byte Array.
 		ByteArrayOutputStream baos = new ByteArrayOutputStream();
 		DataOutputStream out = new DataOutputStream(baos);
@@ -73,15 +73,6 @@ public class DbAdapter {
 		return mDb.insert(DATABASE_TABLE, null, initialValues);
 	}
 	
-	
-	/*	
-	//Delete's the last entry to the database (first in last out)
-	public void deleteLast(){
-		mDb.execSQL("DELETE FROM "+DATABASE_TABLE+" WHERE "+KEY_ROWID+
-				" = (SELECT MAX("+KEY_ROWID+") FROM "+DATABASE_TABLE+");");
-	}
-	*/
-	
 	public boolean deleteById(long id){
 		return mDb.delete(DATABASE_TABLE,  KEY_ROWID+"="+id, null) > 0;
 	}
@@ -93,8 +84,8 @@ public class DbAdapter {
 		if (mCursor != null){
 			mCursor.moveToFirst();
 		}
-		byte[] arrayByte = mCursor.getBlob(1);
-		return arrayByte;
+		byte[] array = mCursor.getBlob(1);
+		return array;
 	}
 	
 	//Returns a cursor with all columns' row id's and byte arrays.

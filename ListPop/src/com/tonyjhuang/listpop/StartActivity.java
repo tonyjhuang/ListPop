@@ -1,7 +1,6 @@
 package com.tonyjhuang.listpop;
 
 import android.app.Activity;
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.View;
@@ -11,14 +10,19 @@ import android.widget.Button;
 public class StartActivity extends Activity {
 	
 	Button chooseButton;
+	private DbAdapter mDbA;
 	
-	// 'start' or 'choose'
+	// 'start' or 'choose'.
 	String status;
 	
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.start);
+        
+        //Start SQLite database;
+        mDbA = new DbAdapter(this);
+        mDbA.open();
         
         chooseButton = (Button)findViewById(R.id.chooseButton);
         hookUpChoose();
@@ -34,6 +38,24 @@ public class StartActivity extends Activity {
         		status = "choose";
         	}
         });
+    }
+    
+    @Override
+    public void onResume(){
+    	super.onResume();
+    	mDbA.open();
+    }
+    
+    @Override
+    public void onStop(){
+    	super.onStop();
+    	mDbA.close();
+    }
+    
+    @Override
+    public void onDestroy(){
+    	super.onDestroy();
+    	mDbA.close();
     }
     
     @Override
