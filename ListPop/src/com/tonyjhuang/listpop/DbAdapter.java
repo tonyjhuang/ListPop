@@ -51,6 +51,7 @@ public class DbAdapter {
 		mDbHelper.close();
 	}
 
+	//Insert ArrayList as Byte Array
 	public long enterPhrase(ArrayList<String> a) {
 		// Change ArrayList<String> to Byte Array.
 		ByteArrayOutputStream baos = new ByteArrayOutputStream();
@@ -80,38 +81,35 @@ public class DbAdapter {
 				" = (SELECT MAX("+KEY_ROWID+") FROM "+DATABASE_TABLE+");");
 	}
 	*/
-	public void deleteByName(String phrase){
-		 mDb.delete(DATABASE_TABLE, "=?", new String[] { phrase });
-	}
 	
 	public boolean deleteById(long id){
 		return mDb.delete(DATABASE_TABLE,  KEY_ROWID+"="+id, null) > 0;
 	}
 	
-
-	public long fetchNumberOfLists(){
-		String cmd = "SELECT COUNT(*) FROM " + DATABASE_TABLE;
-		SQLiteStatement statement = mDb.compileStatement(cmd);
-		long count = statement.simpleQueryForLong();
-		return count;
-	}
-	
-	public Cursor fetchByRowId(long rowId) throws SQLException {
+	public byte[] fetchByRowId(long rowId) throws SQLException {
 		Cursor mCursor =
 				mDb.query(true, DATABASE_TABLE, new String[] {KEY_ROWID,KEY_LIST_HEADERS},
 						KEY_ROWID+"="+rowId, null, null, null, null, null);
 		if (mCursor != null){
 			mCursor.moveToFirst();
 		}
-		return mCursor;
+		byte[] arrayByte = mCursor.getBlob(1);
+		return arrayByte;
 	}
 	
-	//returns a result set of all existing phrases and their rowid's in the db
+	//Returns a cursor with all columns' row id's and byte arrays.
 	public Cursor fetchAll(){
 		return mDb.query(DATABASE_TABLE, new String[] {KEY_ROWID, KEY_LIST_HEADERS},
 				null, null, null, null, null);
 	}
-		
+	
+	public long fetchNumberOfLists(){
+		String cmd = "SELECT COUNT(*) FROM " + DATABASE_TABLE;
+		SQLiteStatement statement = mDb.compileStatement(cmd);
+		long count = statement.simpleQueryForLong();
+		return count;
+	}	
+	
 	public boolean isEmpty(){
 		return fetchNumberOfLists() == 0;
 	}
