@@ -12,6 +12,9 @@ public class StartActivity extends Activity {
 	
 	Button chooseButton;
 	
+	// 'start' or 'choose'
+	String status;
+	
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -19,14 +22,16 @@ public class StartActivity extends Activity {
         
         chooseButton = (Button)findViewById(R.id.chooseButton);
         hookUpChoose();
+        status = "start";
         
     }
 
-    //Attachs onClickListener to chooseButton
+    //Attaches onClickListener to chooseButton
     private void hookUpChoose(){
     	chooseButton.setOnClickListener(new OnClickListener(){
         	public void onClick(View v){
         		setContentView(R.layout.choose);
+        		status = "choose";
         	}
         });
     }
