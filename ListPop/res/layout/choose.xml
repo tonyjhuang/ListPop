@@ -14,19 +14,29 @@
 	    android:textSize="40dp" />
 	
 	<TextView
-	    android:id="@+id/debugtextview"
+	    android:id="@+id/debugcounttextview"
 	    android:layout_width="wrap_content"
 	    android:layout_height="wrap_content"
 	    android:layout_centerHorizontal="true"
-	    android:paddingTop="20dp"
+		android:layout_below="@id/textview"
+		android:paddingTop="15dp"
 	    android:textSize="15dp" />
 	
-	<ListView
-	    android:id="@+id/listview"
+	<TextView
+	    android:id="@+id/debugtitletextview"
 	    android:layout_width="wrap_content"
 	    android:layout_height="wrap_content"
-	    android:layout_below="@id/textview"
-	    android:paddingTop="50dp" />
+	    android:layout_centerHorizontal="true"
+		android:layout_below="@id/debugcounttextview"
+		android:paddingTop="25dp"
+	    android:textSize="15dp" />
+	
+	<Button
+	    android:id="@+id/nextbutton"
+	    android:layout_width="match_parent"
+	    android:layout_height="wrap_content"
+	    android:layout_below="@id/debugtitletextview"
+	    android:text="@string/nexttext" />
 
 
 	

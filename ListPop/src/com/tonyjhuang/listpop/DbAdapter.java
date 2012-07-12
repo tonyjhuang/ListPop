@@ -74,6 +74,10 @@ public class DbAdapter {
 		return mDb.delete(DATABASE_TABLE,  KEY_ROWID+"="+id, null) > 0;
 	}
 	
+	public void deleteAll(){
+		 mDb.delete(DATABASE_TABLE, null, null);
+	}
+	
 	public Cursor fetchByRowId(long rowId) throws SQLException {
 		Cursor mCursor =
 				mDb.query(true, DATABASE_TABLE, new String[] {KEY_ROWID,KEY_LIST_HEADER,KEY_LIST},
@@ -86,8 +90,16 @@ public class DbAdapter {
 	
 	//Returns a cursor with all columns' row id's and byte arrays.
 	public Cursor fetchAll(){
-		return mDb.query(DATABASE_TABLE, new String[] {KEY_ROWID, KEY_LIST_HEADER,KEY_LIST},
+		Cursor mCursor = mDb.query(DATABASE_TABLE, new String[] {KEY_ROWID, KEY_LIST_HEADER,KEY_LIST},
 				null, null, null, null, null);
+		if (mCursor != null){
+			mCursor.moveToFirst();
+		}
+		return mCursor;
+	}
+	
+	public Cursor debugFetch(){
+		return fetchAll();
 	}
 	
 	public long fetchNumberOfLists(){
