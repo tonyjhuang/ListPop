@@ -1,5 +1,9 @@
 package com.tonyjhuang.listpop;
 
+import java.util.ArrayList;
+
+import org.json.JSONException;
+
 import android.app.Activity;
 import android.os.Bundle;
 import android.view.Menu;
@@ -11,6 +15,7 @@ public class StartActivity extends Activity {
 	
 	Button chooseButton;
 	private DbAdapter mDbA;
+	private ArrayList<String> a = new ArrayList<String>();
 	
 	// 'start' or 'choose'.
 	String status;
@@ -27,6 +32,16 @@ public class StartActivity extends Activity {
         chooseButton = (Button)findViewById(R.id.chooseButton);
         hookUpChoose();
         status = "start";
+        
+        //DEBUG ARRAYLIST
+        a.add("a");
+        a.add("b");
+        
+        try {
+			mDbA.enterList("list 1", a);
+		} catch (JSONException e) {
+			e.printStackTrace();
+		}
         
     }
 
