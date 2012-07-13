@@ -37,6 +37,13 @@
 	    android:layout_height="wrap_content"
 	    android:layout_below="@id/debugtitletextview"
 	    android:text="@string/nexttext" />
+	
+	<Button
+	    android:id="@+id/popbutton"
+	    android:layout_width="match_parent"
+	    android:layout_height="wrap_content"
+	    android:layout_below="@id/nextbutton"
+	    android:text="@string/poptext" />
 
 
 	

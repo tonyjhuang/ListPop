@@ -2,9 +2,12 @@ package com.tonyjhuang.listpop;
 
 import java.util.ArrayList;
 
+import org.json.JSONArray;
 import org.json.JSONException;
+import org.json.JSONObject;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.view.Menu;
@@ -17,14 +20,12 @@ public class StartActivity extends Activity {
 	
 	Button chooseButton;
 	private DbAdapter mDbA;
-	//private ArrayList<String> a = new ArrayList<String>();
 	private TextView debugCount;
 	private Cursor cIndex;
 	Button nextButton;
 	private TextView debugTitle;
+	Button moveToPop;
 	
-	// 'start' or 'choose'.
-	String status;
 	
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -37,7 +38,6 @@ public class StartActivity extends Activity {
         
         chooseButton = (Button)findViewById(R.id.chooseButton);
         hookUpChoose();
-        status = "start";
         
         cIndex = null;
         
@@ -54,7 +54,6 @@ public class StartActivity extends Activity {
     	chooseButton.setOnClickListener(new OnClickListener(){
         	public void onClick(View v){
         		setContentView(R.layout.choose);
-        		status = "choose";
         		
         		debugCount = (TextView)findViewById(R.id.debugcounttextview);
                 debugCount.setText(Long.toString(mDbA.fetchNumberOfLists()));
@@ -63,6 +62,9 @@ public class StartActivity extends Activity {
                 
                 nextButton = (Button)findViewById(R.id.nextbutton);
                 hookUpNext();
+                
+                moveToPop = (Button)findViewById(R.id.popbutton);
+                hookUpPop();
         	}
         });
     }
@@ -79,10 +81,57 @@ public class StartActivity extends Activity {
     	});
     }
     
+    private void hookUpPop(){
+    	moveToPop.setOnClickListener(new OnClickListener(){
+    		@Override
+    		public void onClick(View v) {
+    			try {
+					ArrayList<String> a = fetchArrayListByRowId(cIndex.getColumnIndexOrThrow(DbAdapter.KEY_LIST));
+					debugCount.setText(a.get(1));
+				} catch (IllegalArgumentException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				} catch (JSONException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+    			
+    			//Intent goToPop = new Intent(StartActivity.this, PopActivity.class);
+    			//goToPop.putStringArrayListExtra("arraylist", currentArray);
+    			//StartActivity.this.startActivity(goToPop);
+    		}
+    	});
+    }
+    
+    private ArrayList<String> fetchArrayListByRowId(long rowid) throws JSONException{
+    	String list = 
+				cIndex.getString(cIndex.getColumnIndexOrThrow(
+						DbAdapter.KEY_LIST));
+    	JSONObject json = new JSONObject(list);
+    	JSONArray items = json.optJSONArray("array");
+    	
+    	ArrayList<String> currentArray = new ArrayList<String>();
+    	for(int i=0; i<items.length(); i++){
+    		currentArray.add(items.getString(i));
+    	}
+    	return currentArray;
+    }
+    
     private void debugInitialize() throws JSONException{
     	mDbA.deleteAll();
-    	mDbA.enterList("list 1", new ArrayList<String>());
-    	mDbA.enterList("list 2", new ArrayList<String>());
+    	ArrayList<String> array1 = new ArrayList<String>();
+    	array1.add("a");
+    	array1.add("b");
+    	array1.add("c");
+    	
+    	
+    	ArrayList<String> array2 = new ArrayList<String>();
+    	array2.add("1");
+    	array2.add("2");
+    	array2.add("3");
+    	
+    	mDbA.enterList("list 1", array1);
+    	mDbA.enterList("list 2", array2);
     }
     
     private void debugNewText(){

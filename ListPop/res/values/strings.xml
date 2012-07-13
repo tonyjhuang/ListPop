@@ -6,5 +6,7 @@
     <string name="choose">Choose your list!</string>
     <string name="chooseButton">Lists</string>
     <string name="nexttext">Next</string>
+    <string name="poptext">Move to pop!</string>
+    <string name="poplist">Pop!</string>
 
 </resources>
