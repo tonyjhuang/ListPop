@@ -12,27 +12,23 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
+import android.database.sqlite.SQLiteDatabase.CursorFactory;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.database.sqlite.SQLiteStatement;
+import android.util.Log;
 
 public class DbAdapter {
 
-	private static final String DATABASE_NAME="ListPopDB";
-	private static final String DATABASE_TABLE="Lists";
-	private static final int DATABASE_VERSION=1;
+	
 	
 	public static final String KEY_ROWID="_id";
-	public static final String KEY_LIST_HEADER="List_Header";
-	public static final String KEY_LIST="List";
+	public static final String KEY_LIST_HEADER_COLUMN="List_Header";
+	public static final String KEY_LIST_COLUMN="List";
 	
-	private DatabaseHelper mDbHelper;
+	private ListPopDBOpenHelper mDbHelper;
 	private SQLiteDatabase mDb;
 
-	private static final String DATABASE_CREATE=
-			"create table " + DATABASE_TABLE + " ("  
-				+ KEY_ROWID + " integer primary key autoincrement, "
-				+ KEY_LIST_HEADER + " text not null, "
-				+ KEY_LIST + " text not null);";
+	
 	
 	private final Context mCtx;
 	
@@ -43,7 +39,7 @@ public class DbAdapter {
 	//Opens Read/Write-accessible database.
 	//Call this in onCreate, onResume!
 	public DbAdapter open() throws android.database.SQLException{
-		mDbHelper = new DatabaseHelper(mCtx);
+		mDbHelper = new ListPopDBOpenHelper(mCtx);
 		mDb = mDbHelper.getWritableDatabase();
 		return this;
 	}
@@ -64,8 +60,8 @@ public class DbAdapter {
 		 String arrayList = json.toString();
 		
 		ContentValues initialValues = new ContentValues();
-		initialValues.put(KEY_LIST_HEADER,	list_header);
-		initialValues.put(KEY_LIST, arrayList);	
+		initialValues.put(KEY_LIST_HEADER_COLUMN,	list_header);
+		initialValues.put(KEY_LIST_COLUMN, arrayList);	
 		
 		return mDb.insert(DATABASE_TABLE, null, initialValues);
 	}
@@ -80,7 +76,7 @@ public class DbAdapter {
 	
 	public Cursor fetchByRowId(long rowId) throws SQLException {
 		Cursor mCursor =
-				mDb.query(true, DATABASE_TABLE, new String[] {KEY_ROWID,KEY_LIST_HEADER,KEY_LIST},
+				mDb.query(true, DATABASE_TABLE, new String[] {KEY_ROWID,KEY_LIST_HEADER_COLUMN,KEY_LIST_COLUMN},
 						KEY_ROWID+"="+rowId, null, null, null, null, null);
 		if (mCursor != null){
 			mCursor.moveToFirst();
@@ -90,7 +86,7 @@ public class DbAdapter {
 	
 	//Returns a cursor with all columns' row id's and byte arrays.
 	public Cursor fetchAll(){
-		Cursor mCursor = mDb.query(DATABASE_TABLE, new String[] {KEY_ROWID, KEY_LIST_HEADER,KEY_LIST},
+		Cursor mCursor = mDb.query(DATABASE_TABLE, new String[] {KEY_ROWID, KEY_LIST_HEADER_COLUMN,KEY_LIST_COLUMN},
 				null, null, null, null, null);
 		if (mCursor != null){
 			mCursor.moveToFirst();
@@ -113,20 +109,42 @@ public class DbAdapter {
 		return fetchNumberOfLists() == 0;
 	}
 
-	private static class DatabaseHelper extends SQLiteOpenHelper {
-		DatabaseHelper(Context c){
-			super(c, DATABASE_NAME, null, DATABASE_VERSION);
+	private static class ListPopDBOpenHelper extends SQLiteOpenHelper {
+		private static final String DATABASE_NAME="ListPopDB.db";
+		private static final String DATABASE_TABLE="CacheOfLists";
+		private static final int DATABASE_VERSION=1;
+		
+		private static final String DATABASE_CREATE=
+				"create table " + DATABASE_TABLE + " ("  
+					+ KEY_ROWID + " integer primary key autoincrement, "
+					+ KEY_LIST_HEADER_COLUMN + " text not null, "
+					+ KEY_LIST_COLUMN + " text not null);";
+		
+		ListPopDBOpenHelper(Context c, String name,
+				CursorFactory factory, int version){
+			super(c, name, factory, version);
 		}
 		
+		//Called when no database exists on disk and the helper class needs
+		// to create a new one.
 		@Override
 		public void onCreate(SQLiteDatabase db) {
 			db.execSQL(DATABASE_CREATE);
 		}
 		
+		//Callaed when there is a database version mismatch meaning that
+		// the current version of the database on disk needs to be
+		// upgraded to the newest version.
 		@Override
 		public void onUpgrade(SQLiteDatabase db, int oldVersion,
 				int newVersion){
-			//Not used
+			//Log the version upgrade.
+			Log.w("ListDbAdapter", "Upgrading from version " + 
+					oldVersion + " to " + 
+					newVersion + ", which will destroy all old data");
+			
+			//Upgrade the existing database to conform to the new
+			// version. Multiple 
 		}
 		
 	}

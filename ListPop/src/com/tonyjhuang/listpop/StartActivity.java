@@ -86,7 +86,7 @@ public class StartActivity extends Activity {
     		@Override
     		public void onClick(View v) {
     			try {
-					ArrayList<String> a = fetchArrayListByRowId(cIndex.getColumnIndexOrThrow(DbAdapter.KEY_LIST));
+					ArrayList<String> a = fetchArrayListByRowId(cIndex.getColumnIndexOrThrow(DbAdapter.KEY_LIST_COLUMN));
 					debugCount.setText(a.get(1));
 				} catch (IllegalArgumentException e) {
 					// TODO Auto-generated catch block
@@ -106,7 +106,7 @@ public class StartActivity extends Activity {
     private ArrayList<String> fetchArrayListByRowId(long rowid) throws JSONException{
     	String list = 
 				cIndex.getString(cIndex.getColumnIndexOrThrow(
-						DbAdapter.KEY_LIST));
+						DbAdapter.KEY_LIST_COLUMN));
     	JSONObject json = new JSONObject(list);
     	JSONArray items = json.optJSONArray("array");
     	
@@ -137,7 +137,7 @@ public class StartActivity extends Activity {
     private void debugNewText(){
     	String title = 
 				cIndex.getString(cIndex.getColumnIndexOrThrow(
-						DbAdapter.KEY_LIST_HEADER));
+						DbAdapter.KEY_LIST_HEADER_COLUMN));
 		debugTitle.setText(title);
 		cIndex.moveToNext();
     }
