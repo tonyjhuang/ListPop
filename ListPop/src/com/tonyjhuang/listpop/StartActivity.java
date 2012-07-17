@@ -1,6 +1,7 @@
 package com.tonyjhuang.listpop;
 
-import android.annotation.SuppressLint;
+import java.util.ArrayList;
+
 import android.app.Activity;
 import android.database.Cursor;
 import android.os.Bundle;
@@ -10,6 +11,7 @@ import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.SimpleCursorAdapter;
+import android.widget.TextView;
 //import android.content.Intent;
 
 public class StartActivity extends Activity {
@@ -17,9 +19,9 @@ public class StartActivity extends Activity {
 	Button chooseButton;
 	private DbAdapter mDbA;
 	ListView mListView;
+	TextView mTextView;
 	
 	
-    @SuppressLint("ParserError")
 	@Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -28,6 +30,11 @@ public class StartActivity extends Activity {
         //Start SQLite database;
         mDbA = new DbAdapter(this);
         mDbA.open();
+        mDbA.deleteAll();
+        mDbA.enterList("List 1", new ArrayList<String>());
+        mDbA.enterList("List 2", new ArrayList<String>());
+        mDbA.enterList("List 3", new ArrayList<String>());
+        mDbA.enterList("List 4", new ArrayList<String>());
         
         chooseButton = (Button)findViewById(R.id.chooseButton);
         hookUpChoose();
@@ -41,6 +48,8 @@ public class StartActivity extends Activity {
         	public void onClick(View v){
         		setContentView(R.layout.choose);
         		fillData();
+        		mListView = (ListView)findViewById(R.id.listselection);
+        		mTextView = (TextView)findViewById(R.id.textview);
         	}
         });
     }
@@ -49,6 +58,11 @@ public class StartActivity extends Activity {
     @SuppressWarnings("deprecation")
 	private void fillData() {
         Cursor listCursor = mDbA.fetchAll();
+        		//null;
+        listCursor.moveToFirst();
+        String s = listCursor.getString(listCursor.getColumnIndexOrThrow(DbAdapter.KEY_LIST_COLUMN));
+        mTextView.setText(s);
+        /*
         if(listCursor != null){
         startManagingCursor(listCursor);
 
@@ -64,6 +78,7 @@ public class StartActivity extends Activity {
        
         mListView.setAdapter(aa);
         }
+        */
     }
     
     

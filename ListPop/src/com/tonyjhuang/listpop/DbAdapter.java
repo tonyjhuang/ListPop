@@ -97,6 +97,20 @@ public class DbAdapter {
 		return mDb.delete(DATABASE_TABLE,  KEY_ROWID+"="+id, null) > 0;
 	}
 	
+	public void deleteAll(){
+		mDb.delete(DATABASE_TABLE, null, null);
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	
 	public Cursor fetchListItem(long rowId) throws SQLException {
 		Cursor mCursor =
@@ -108,7 +122,6 @@ public class DbAdapter {
 		return mCursor;
 	}
 	
-	//Returns a cursor with all columns' row id's and byte arrays.
 	public Cursor fetchAll(){
 		return mDb.query(DATABASE_TABLE, new String[] {KEY_ROWID, KEY_LIST_HEADER_COLUMN,KEY_LIST_COLUMN},
 				null, null, null, null, null);
@@ -118,6 +131,18 @@ public class DbAdapter {
 		return fetchAll().getCount();
 	}	
 
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	private static class ListPopDBOpenHelper extends SQLiteOpenHelper {
 		
 		private static final String DATABASE_CREATE=
