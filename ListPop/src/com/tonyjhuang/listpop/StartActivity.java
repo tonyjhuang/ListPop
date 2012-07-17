@@ -1,14 +1,13 @@
 package com.tonyjhuang.listpop;
 
+import java.io.IOException;
 import java.util.ArrayList;
 
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
-
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Intent;
 import android.database.Cursor;
+import android.database.SQLException;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.View;
@@ -43,7 +42,11 @@ public class StartActivity extends Activity {
         
         try {
 			debugInitialize();
-		} catch (JSONException e) {
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
         
@@ -81,43 +84,40 @@ public class StartActivity extends Activity {
     	});
     }
     
-    private void hookUpPop(){
+    @SuppressLint("ParserError")
+	private void hookUpPop(){
     	moveToPop.setOnClickListener(new OnClickListener(){
     		@Override
     		public void onClick(View v) {
-    			try {
-					ArrayList<String> a = fetchArrayListByRowId(cIndex.getColumnIndexOrThrow(DbAdapter.KEY_LIST_COLUMN));
-					debugCount.setText(a.get(1));
-				} catch (IllegalArgumentException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				} catch (JSONException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
+    			int KEY_ROWID_COLUMN_INDEX = cIndex.getColumnIndexOrThrow(
+    					DbAdapter.KEY_ROWID);
+    			int rowid = cIndex.getInt(KEY_ROWID_COLUMN_INDEX);
+    			long _rowid = Long.valueOf(rowid);
     			
-    			//Intent goToPop = new Intent(StartActivity.this, PopActivity.class);
-    			//goToPop.putStringArrayListExtra("arraylist", currentArray);
-    			//StartActivity.this.startActivity(goToPop);
+    			
+    			ArrayList<String> currentArray = 
+    					fetchArrayListByRowId(_rowid);
+    			Intent goToPop = new Intent(StartActivity.this, PopActivity.class);
+    			goToPop.putStringArrayListExtra("arraylist", currentArray);
+    			StartActivity.this.startActivity(goToPop);
     		}
     	});
     }
     
-    private ArrayList<String> fetchArrayListByRowId(long rowid) throws JSONException{
-    	String list = 
-				cIndex.getString(cIndex.getColumnIndexOrThrow(
-						DbAdapter.KEY_LIST_COLUMN));
-    	JSONObject json = new JSONObject(list);
-    	JSONArray items = json.optJSONArray("array");
-    	
-    	ArrayList<String> currentArray = new ArrayList<String>();
-    	for(int i=0; i<items.length(); i++){
-    		currentArray.add(items.getString(i));
-    	}
-    	return currentArray;
+    private ArrayList<String> fetchArrayListByRowId(long rowid){
+    	try {
+			return mDbA.fetchArrayListByRowId(rowid);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+    	return null;
     }
     
-    private void debugInitialize() throws JSONException{
+    private void debugInitialize() throws SQLException, IOException{
     	mDbA.deleteAll();
     	
     	ArrayList<String> array1 = new ArrayList<String>();
