@@ -44,7 +44,15 @@
 	    android:layout_height="wrap_content"
 	    android:layout_below="@id/nextbutton"
 	    android:text="@string/poptext" />
-
+	
+	<TextView
+	    android:id="@+id/firstarrayelementtextview"
+	    android:layout_width="wrap_content"
+	    android:layout_height="wrap_content"
+	    android:layout_centerHorizontal="true"
+		android:layout_below="@id/popbutton"
+		android:paddingTop="25dp"
+	    android:textSize="15dp" />
 
 	
 </RelativeLayout>
