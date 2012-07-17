@@ -19,16 +19,16 @@ import android.util.Log;
 
 public class DbAdapter {
 
-	
+	private static final String DATABASE_NAME="ListPopDB.db";
+	private static final String DATABASE_TABLE="CacheOfLists";
+	private static final int DATABASE_VERSION=1;
 	
 	public static final String KEY_ROWID="_id";
 	public static final String KEY_LIST_HEADER_COLUMN="List_Header";
 	public static final String KEY_LIST_COLUMN="List";
 	
-	private ListPopDBOpenHelper mDbHelper;
+	private ListPopDBOpenHelper mListPopDBOpenHelper;
 	private SQLiteDatabase mDb;
-
-	
 	
 	private final Context mCtx;
 	
@@ -39,15 +39,16 @@ public class DbAdapter {
 	//Opens Read/Write-accessible database.
 	//Call this in onCreate, onResume!
 	public DbAdapter open() throws android.database.SQLException{
-		mDbHelper = new ListPopDBOpenHelper(mCtx);
-		mDb = mDbHelper.getWritableDatabase();
+		mListPopDBOpenHelper = new ListPopDBOpenHelper(mCtx, DATABASE_NAME, 
+														null, DATABASE_VERSION);
+		mDb = mListPopDBOpenHelper.getWritableDatabase();
 		return this;
 	}
 	
 	//Closes database to free up resources.
 	//Call this in onStop!
 	public void close(){
-		mDbHelper.close();
+		mListPopDBOpenHelper.close();
 	}
 
 	
@@ -59,11 +60,11 @@ public class DbAdapter {
 		 // ArrayList of strings converted to JSON object, flattened to string (arrayList)
 		 String arrayList = json.toString();
 		
-		ContentValues initialValues = new ContentValues();
-		initialValues.put(KEY_LIST_HEADER_COLUMN,	list_header);
-		initialValues.put(KEY_LIST_COLUMN, arrayList);	
+		ContentValues values = new ContentValues();
+		values.put(KEY_LIST_HEADER_COLUMN, list_header);
+		values.put(KEY_LIST_COLUMN, arrayList);	
 		
-		return mDb.insert(DATABASE_TABLE, null, initialValues);
+		return mDb.insert(DATABASE_TABLE, null, values);
 	}
 	
 	public boolean deleteById(long id){
@@ -94,25 +95,11 @@ public class DbAdapter {
 		return mCursor;
 	}
 	
-	public Cursor debugFetch(){
-		return fetchAll();
-	}
-	
 	public long fetchNumberOfLists(){
-		String cmd = "SELECT COUNT(*) FROM " + DATABASE_TABLE;
-		SQLiteStatement statement = mDb.compileStatement(cmd);
-		long count = statement.simpleQueryForLong();
-		return count;
+		return fetchAll().getCount();
 	}	
-	
-	public boolean isEmpty(){
-		return fetchNumberOfLists() == 0;
-	}
 
 	private static class ListPopDBOpenHelper extends SQLiteOpenHelper {
-		private static final String DATABASE_NAME="ListPopDB.db";
-		private static final String DATABASE_TABLE="CacheOfLists";
-		private static final int DATABASE_VERSION=1;
 		
 		private static final String DATABASE_CREATE=
 				"create table " + DATABASE_TABLE + " ("  
@@ -132,7 +119,7 @@ public class DbAdapter {
 			db.execSQL(DATABASE_CREATE);
 		}
 		
-		//Callaed when there is a database version mismatch meaning that
+		//Called when there is a database version mismatch meaning that
 		// the current version of the database on disk needs to be
 		// upgraded to the newest version.
 		@Override

@@ -119,6 +119,7 @@ public class StartActivity extends Activity {
     
     private void debugInitialize() throws JSONException{
     	mDbA.deleteAll();
+    	
     	ArrayList<String> array1 = new ArrayList<String>();
     	array1.add("a");
     	array1.add("b");
@@ -130,8 +131,14 @@ public class StartActivity extends Activity {
     	array2.add("2");
     	array2.add("3");
     	
+    	ArrayList<String> array3 = new ArrayList<String>();
+    	array2.add("x");
+    	array2.add("y");
+    	array2.add("z");
+    	
     	mDbA.enterList("list 1", array1);
     	mDbA.enterList("list 2", array2);
+    	mDbA.enterList("LIST THREE", array3);
     }
     
     private void debugNewText(){
@@ -143,7 +150,7 @@ public class StartActivity extends Activity {
     }
     
     private void debugDB(){
-    	cIndex = mDbA.debugFetch();
+    	cIndex = mDbA.fetchAll();
     }
     
     @Override
