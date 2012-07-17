@@ -1,11 +1,7 @@
 package com.tonyjhuang.listpop;
 
-import java.io.ByteArrayOutputStream;
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.io.ObjectOutputStream;
-import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Collections;
 
 import android.content.ContentValues;
 import android.content.Context;
@@ -14,7 +10,6 @@ import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteDatabase.CursorFactory;
 import android.database.sqlite.SQLiteOpenHelper;
-import android.util.Base64;
 import android.util.Log;
 
 
@@ -65,26 +60,26 @@ public class DbAdapter {
 	
 	
 	
-	public long enterList(String list_header, ArrayList<String> array) throws FileNotFoundException, IOException{
+	public long enterList(String list_header, ArrayList<String> array) {
+		String sArray = arraylistToString(array);
+		
 		ContentValues values = new ContentValues();
 		values.put(KEY_LIST_HEADER_COLUMN, list_header);
-		values.put(KEY_LIST_COLUMN, toString(array));	
+		values.put(KEY_LIST_COLUMN, sArray);	
 		
 		return mDb.insert(DATABASE_TABLE, null, values);
 	}
 	
-	
-	
-	 //Write the object to a Base64 string. 
-    private static String toString( Serializable o ) throws IOException {
-        ByteArrayOutputStream baos = new ByteArrayOutputStream();
-        ObjectOutputStream oos = new ObjectOutputStream( baos );
-        oos.writeObject( o );
-        oos.close();
-        return new String( Base64.encode( baos.toByteArray(), 0 ) );
-    }
     
   
+	private String arraylistToString(ArrayList<String> arraylist){
+		String s = "";
+		Collections.reverse(arraylist);
+		for(String i : arraylist){
+			s = i + "," + s;
+		}
+		return s;
+	}
 	
 	
 	
@@ -98,16 +93,12 @@ public class DbAdapter {
 	
 	
 	
-	
-	public boolean deleteById(long id){
+	public boolean deleteListItem(long id){
 		return mDb.delete(DATABASE_TABLE,  KEY_ROWID+"="+id, null) > 0;
 	}
 	
-	public void deleteAll(){
-		 mDb.delete(DATABASE_TABLE, null, null);
-	}
 	
-	public Cursor fetchByRowId(long rowId) throws SQLException {
+	public Cursor fetchListItem(long rowId) throws SQLException {
 		Cursor mCursor =
 				mDb.query(true, DATABASE_TABLE, new String[] {KEY_ROWID,KEY_LIST_HEADER_COLUMN,KEY_LIST_COLUMN},
 						KEY_ROWID+"="+rowId, null, null, null, null, null);
@@ -119,12 +110,8 @@ public class DbAdapter {
 	
 	//Returns a cursor with all columns' row id's and byte arrays.
 	public Cursor fetchAll(){
-		Cursor mCursor = mDb.query(DATABASE_TABLE, new String[] {KEY_ROWID, KEY_LIST_HEADER_COLUMN,KEY_LIST_COLUMN},
+		return mDb.query(DATABASE_TABLE, new String[] {KEY_ROWID, KEY_LIST_HEADER_COLUMN,KEY_LIST_COLUMN},
 				null, null, null, null, null);
-		if (mCursor != null){
-			mCursor.moveToFirst();
-		}
-		return mCursor;
 	}
 	
 	public long fetchNumberOfLists(){
@@ -162,8 +149,7 @@ public class DbAdapter {
 					oldVersion + " to " + 
 					newVersion + ", which will destroy all old data");
 			
-			//Upgrade the existing database to conform to the new
-			// version. Multiple 
+			//Upgrade the existing database to conform to the new version. 
 		}
 		
 	}
