@@ -1,14 +1,15 @@
 package com.tonyjhuang.listpop;
 
 import java.util.ArrayList;
-
 import android.app.Activity;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.SimpleCursorAdapter;
 import android.widget.TextView;
@@ -30,11 +31,12 @@ public class StartActivity extends Activity {
         //Start SQLite database;
         mDbA = new DbAdapter(this);
         mDbA.open();
+        //mDbA.enterList("HELLO!", new ArrayList<String>());
         mDbA.deleteAll();
-        mDbA.enterList("List 1", new ArrayList<String>());
-        mDbA.enterList("List 2", new ArrayList<String>());
-        mDbA.enterList("List 3", new ArrayList<String>());
-        mDbA.enterList("List 4", new ArrayList<String>());
+        ArrayList<String> sampleArray = new ArrayList<String>();
+        sampleArray.add("YO");
+        mDbA.enterList("WORLD!", sampleArray);
+       
         
         chooseButton = (Button)findViewById(R.id.chooseButton);
         hookUpChoose();
@@ -47,39 +49,31 @@ public class StartActivity extends Activity {
     	chooseButton.setOnClickListener(new OnClickListener(){
         	public void onClick(View v){
         		setContentView(R.layout.choose);
-        		fillData();
+        		
         		mListView = (ListView)findViewById(R.id.listselection);
         		mTextView = (TextView)findViewById(R.id.textview);
+        		
+        		ArrayList<String> list = new ArrayList<String>();
+        		list.add("item 1");
+        		list.add("item 2");
+        		list.add("item 3");
+        		ArrayAdapter<String> aa = new ArrayAdapter<String>(StartActivity.this, 
+                								R.layout.list_item, list);
+        		//mListView.setAdapter(aa);
+        		
+        		Cursor c = mDbA.fetchAll();
+        		startManagingCursor(c);
+            	
+            	String[] from = new String[]{DbAdapter.KEY_LIST_COLUMN};
+            	int[] to = new int[]{R.id.listitem};
+            	SimpleCursorAdapter mAdapter =
+            			new SimpleCursorAdapter(StartActivity.this, R.layout.list_item,
+            					c, from, to);
+            	mListView.setAdapter(mAdapter);
         	}
         });
     }
     
-    
-    @SuppressWarnings("deprecation")
-	private void fillData() {
-        Cursor listCursor = mDbA.fetchAll();
-        		//null;
-        listCursor.moveToFirst();
-        String s = listCursor.getString(listCursor.getColumnIndexOrThrow(DbAdapter.KEY_LIST_COLUMN));
-        mTextView.setText(s);
-        /*
-        if(listCursor != null){
-        startManagingCursor(listCursor);
-
-        // Create an array to specify the fields we want to display in the list (only TITLE)
-        String[] from = new String[]{DbAdapter.KEY_LIST_HEADER_COLUMN};
-
-        // and an array of the fields we want to bind those fields to (in this case just text1)
-        int[] to = new int[]{R.id.listitem};
-
-        // Now create a simple cursor adapter and set it to display
-        SimpleCursorAdapter aa = 
-            new SimpleCursorAdapter(this, R.layout.list_item, listCursor, from, to);
-       
-        mListView.setAdapter(aa);
-        }
-        */
-    }
     
     
     @Override
@@ -105,6 +99,7 @@ public class StartActivity extends Activity {
         getMenuInflater().inflate(R.menu.start, menu);
         return true;
     }
+}
 
     
-}
+	
