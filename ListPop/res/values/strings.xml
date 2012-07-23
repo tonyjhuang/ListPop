@@ -8,5 +8,7 @@
     <string name="nexttext">Next</string>
     <string name="poptext">Move to pop!</string>
     <string name="poplist">Pop!</string>
+    <string name="add">+</string>
+    <string name="edit">Edit</string>
 
 </resources>

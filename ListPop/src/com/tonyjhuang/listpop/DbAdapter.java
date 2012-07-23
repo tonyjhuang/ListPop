@@ -76,7 +76,7 @@ public class DbAdapter {
 		String s = "";
 		Collections.reverse(arraylist);
 		for(String i : arraylist){
-			s = i + "," + s;
+			s = i + "|" + s;
 		}
 		return s;
 	}
@@ -114,7 +114,8 @@ public class DbAdapter {
 	
 	public Cursor fetchListItem(long rowId) throws SQLException {
 		Cursor mCursor =
-				mDb.query(true, DATABASE_TABLE, new String[] {KEY_ROWID,KEY_LIST_HEADER_COLUMN,KEY_LIST_COLUMN},
+				mDb.query(true, DATABASE_TABLE, new String[] 
+						{KEY_ROWID,KEY_LIST_HEADER_COLUMN,KEY_LIST_COLUMN},
 						KEY_ROWID+"="+rowId, null, null, null, null, null);
 		if (mCursor != null){
 			mCursor.moveToFirst();

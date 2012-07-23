@@ -1,15 +1,28 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:paddingTop="@dimen/padding_large" >
+    android:layout_height="match_parent" >
+    
+    <Button
+        android:id="@+id/addbutton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:text="@string/add" />
+    
+    <Button
+        android:id="@+id/editbutton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toLeftOf="@id/addbutton"
+        android:text="@string/edit" />
     
 	<TextView
 	    android:id="@+id/textview"
 	    android:layout_width="wrap_content"
 	    android:layout_height="wrap_content"
 	    android:layout_centerHorizontal="true"
-	    android:paddingTop="30dp"
+	    android:paddingTop="50dp"
 	    android:text="@string/choose"
 	    android:textSize="40dp" />
 	
@@ -19,7 +32,7 @@
 	    android:layout_height="wrap_content"
 	    android:layout_centerHorizontal="true"
 	    android:layout_below="@id/textview"
-	    android:paddingTop="20dp" />
+	    android:paddingTop="30dp" />
 
 	
 </RelativeLayout>
