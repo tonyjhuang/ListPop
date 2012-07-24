@@ -19,5 +19,6 @@
     <string name="no_items">Add at least one item!</string>
     <string name="no_header">Missing name!</string>
     <string name="preset">p</string>
+    <string name="number_range_menu_title">Number Range</string>
 
 </resources>

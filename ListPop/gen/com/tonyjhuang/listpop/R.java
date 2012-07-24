@@ -31,8 +31,9 @@ public final class R {
         public static final int listnameheader=0x7f080000;
         public static final int listselection=0x7f08000a;
         public static final int listview=0x7f08000e;
-        public static final int menu_settings=0x7f08000f;
+        public static final int menu_settings=0x7f080010;
         public static final int newitems=0x7f080004;
+        public static final int number_range=0x7f08000f;
         public static final int pop=0x7f08000d;
         public static final int presets=0x7f080008;
         public static final int textview=0x7f080009;
@@ -44,7 +45,8 @@ public final class R {
         public static final int pop=0x7f030003;
     }
     public static final class menu {
-        public static final int start=0x7f070000;
+        public static final int presets=0x7f070000;
+        public static final int start=0x7f070001;
     }
     public static final class string {
         public static final int add=0x7f050008;
@@ -62,6 +64,7 @@ public final class R {
         public static final int nexttext=0x7f050005;
         public static final int no_header=0x7f050011;
         public static final int no_items=0x7f050010;
+        public static final int number_range_menu_title=0x7f050013;
         public static final int poplist=0x7f050007;
         public static final int poptext=0x7f050006;
         public static final int preset=0x7f050012;
