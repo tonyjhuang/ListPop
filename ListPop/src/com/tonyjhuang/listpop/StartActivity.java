@@ -1,14 +1,19 @@
 package com.tonyjhuang.listpop;
 
 import java.util.ArrayList;
+
 import android.app.Activity;
 import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
+import android.view.ContextMenu;
+import android.view.ContextMenu.ContextMenuInfo;
 import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.AdapterView;
+import android.widget.AdapterView.AdapterContextMenuInfo;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.Button;
 import android.widget.ListView;
@@ -16,13 +21,16 @@ import android.widget.SimpleCursorAdapter;
 import android.widget.TextView;
 
 public class StartActivity extends Activity {
-	final int ADD_ACTIVITY = 0;
-	final int BACK_BUTTON_PRESSED = -1;
+	private static final int ADD_ACTIVITY = 1;
+	private static final int BACK_BUTTON_PRESSED = -1;
+	private static final int DELETE_ID = Menu.FIRST;
 	
 	private DbAdapter mDbA;
 	ListView mListView;
 	TextView mTextView;
 	Button add;
+	Button presets;
+	Button edit;
 	
 	
 	@Override
@@ -33,38 +41,25 @@ public class StartActivity extends Activity {
         //Start SQLite database;
         mDbA = new DbAdapter(this);
         mDbA.open();
-        //mDbA.enterList("HELLO!", new ArrayList<String>());
-        mDbA.deleteAll();
-        ArrayList<String> sampleArray = new ArrayList<String>();
-        sampleArray.add("YO");
-        sampleArray.add("TEST!");
-        mDbA.enterList("WORLD!", sampleArray);
        
         mListView = (ListView)findViewById(R.id.listselection);
 		hookUpItemClickListener();
+		registerForContextMenu(mListView);
 		
 		mTextView = (TextView)findViewById(R.id.textview);
 		
-		fillData();
-		
 		add = (Button)findViewById(R.id.addbutton);
 		hookUpAdd();
+		
+		edit = (Button)findViewById(R.id.editbutton);
+		hookUpEdit();
+		
+		presets = (Button)findViewById(R.id.presets);
+		hookUpPresets();
+		
+		fillData();
     }
-
-    
-    @SuppressWarnings("deprecation")
-	private void fillData(){
-		Cursor c = mDbA.fetchAll();
-		startManagingCursor(c);
-    	
-    	String[] from = new String[]{DbAdapter.KEY_LIST_HEADER_COLUMN};
-    	int[] to = new int[]{R.id.listitem};
-    	SimpleCursorAdapter mAdapter =
-    			new SimpleCursorAdapter(StartActivity.this, R.layout.list_item,
-    					c, from, to);
-    	mListView.setAdapter(mAdapter);
-    }
-    
+   
     private void hookUpItemClickListener(){
     	mListView.setOnItemClickListener(new OnItemClickListener(){
 
@@ -79,6 +74,25 @@ public class StartActivity extends Activity {
     	});
     }
     
+    @Override
+    public void onCreateContextMenu(ContextMenu menu, View v,
+            ContextMenuInfo menuInfo) {
+        super.onCreateContextMenu(menu, v, menuInfo);
+        menu.add(0, DELETE_ID, 0, R.string.menu_delete);
+    }
+    
+    @Override
+    public boolean onContextItemSelected(MenuItem item) {
+        switch(item.getItemId()) {
+            case DELETE_ID:
+                AdapterContextMenuInfo info = (AdapterContextMenuInfo) item.getMenuInfo();
+                mDbA.deleteListItem(info.id);
+                fillData();
+                return true;
+        }
+        return super.onContextItemSelected(item);
+    }
+       
     private void hookUpAdd(){
     	add.setOnClickListener(new OnClickListener(){
     		@Override
@@ -89,20 +103,42 @@ public class StartActivity extends Activity {
     	});
     }
     
+    private void hookUpEdit(){
+    	//TODO: How do we want to edit lists?
+    }
+    
+    private void hookUpPresets(){
+    	//TODO: Add preset lists
+    }
+    
+    @SuppressWarnings("deprecation")
+   	private void fillData(){
+   		Cursor c = mDbA.fetchAll();
+   		startManagingCursor(c);
+       	
+       	String[] from = new String[]{DbAdapter.KEY_LIST_HEADER_COLUMN};
+       	int[] to = new int[]{R.id.listitem};
+       	SimpleCursorAdapter mAdapter =
+       			new SimpleCursorAdapter(StartActivity.this, R.layout.list_item,
+       					c, from, to);
+       	mListView.setAdapter(mAdapter);
+       }
+    
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data){
     	switch(resultCode){
     	case BACK_BUTTON_PRESSED:
+    		mTextView.setText("BACKBUTTONPRESSED!");
     		break;
     		
     	case ADD_ACTIVITY:
-    		ArrayList<String> newList = data.getStringArrayListExtra("list");
     		String newListHeader = data.getStringExtra("list_header");
+    		ArrayList<String> newList = data.getStringArrayListExtra("list");
     		mDbA.enterList(newListHeader, newList);
+    		
     		fillData();
     		break;
     	}
-    	
     	
     }
     

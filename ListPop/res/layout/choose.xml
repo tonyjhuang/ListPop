@@ -16,6 +16,13 @@
         android:layout_height="wrap_content"
         android:layout_toLeftOf="@id/addbutton"
         android:text="@string/edit" />
+    
+    <Button
+        android:id="@+id/presets"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toLeftOf="@+id/editbutton"
+        android:text="@string/preset" />
     
 	<TextView
 	    android:id="@+id/textview"

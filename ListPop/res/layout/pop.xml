@@ -25,7 +25,5 @@
 	    android:layout_centerHorizontal="true"
 	    android:layout_below="@id/pop"
 	    android:paddingTop="20dp" />
-
-	
 	
 </RelativeLayout>

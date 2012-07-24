@@ -14,5 +14,10 @@
     <string name="addlistnameprompt">Enter text here..</string>
     <string name="addlistitem">Entries</string>
     <string name="addlistitemprompt">Add new entries to your list here..</string>
+    <string name="finishednewlist">Finish</string>
+    <string name="menu_delete">Delete</string>
+    <string name="no_items">Add at least one item!</string>
+    <string name="no_header">Missing name!</string>
+    <string name="preset">p</string>
 
 </resources>

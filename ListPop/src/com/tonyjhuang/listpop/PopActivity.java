@@ -48,12 +48,14 @@ public class PopActivity extends Activity{;
 		pop.setOnClickListener(new OnClickListener(){
 			@Override
 			public void onClick(View view) {
-				Random generator = new Random();
-				
 				int totalNumberOfItems = mListView.getCount();
-				int randomIndex = generator.nextInt(totalNumberOfItems);
-				TextView t = (TextView) mListView.getChildAt(randomIndex);
-				pop.setText(t.getText());
+				if(totalNumberOfItems > 0){
+					Random generator = new Random();
+				
+					int randomIndex = generator.nextInt(totalNumberOfItems);
+					TextView t = (TextView) mListView.getChildAt(randomIndex);
+					pop.setText(t.getText());
+				}
 			}
 		});
 	}
