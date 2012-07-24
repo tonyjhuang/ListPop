@@ -23,37 +23,38 @@ public final class R {
         public static final int ic_launcher=0x7f020001;
     }
     public static final class id {
+        public static final int LetterRangeFragment=0x7f09000b;
         public static final int addbutton=0x7f090006;
+        public static final int ed=0x7f09000c;
         public static final int editbutton=0x7f090007;
         public static final int finishbutton=0x7f090005;
-        public static final int fragmentframe=0x7f090011;
-        public static final int listitem=0x7f09000b;
+        public static final int fragmentframe=0x7f090013;
+        public static final int listitem=0x7f09000d;
         public static final int listitemcreation=0x7f090003;
         public static final int listitemheader=0x7f090002;
-        public static final int listname=0x7f09000c;
+        public static final int listname=0x7f09000e;
         public static final int listnamecreation=0x7f090001;
         public static final int listnameheader=0x7f090000;
         public static final int listselection=0x7f09000a;
-        public static final int listview=0x7f09000e;
-        public static final int menu_settings=0x7f090013;
+        public static final int listview=0x7f090010;
+        public static final int menu_settings=0x7f090014;
         public static final int newitems=0x7f090004;
-        public static final int number_range=0x7f090012;
-        public static final int pop=0x7f09000d;
-        public static final int presetnameheader=0x7f09000f;
+        public static final int pop=0x7f09000f;
+        public static final int presetnameheader=0x7f090011;
         public static final int presets=0x7f090008;
-        public static final int presetspinner=0x7f090010;
+        public static final int presetspinner=0x7f090012;
         public static final int textview=0x7f090009;
     }
     public static final class layout {
         public static final int add=0x7f030000;
         public static final int choose=0x7f030001;
-        public static final int list_item=0x7f030002;
-        public static final int pop=0x7f030003;
-        public static final int presets=0x7f030004;
+        public static final int letter_range=0x7f030002;
+        public static final int list_item=0x7f030003;
+        public static final int pop=0x7f030004;
+        public static final int presets=0x7f030005;
     }
     public static final class menu {
-        public static final int presets=0x7f080000;
-        public static final int start=0x7f080001;
+        public static final int start=0x7f080000;
     }
     public static final class string {
         public static final int add=0x7f050008;
