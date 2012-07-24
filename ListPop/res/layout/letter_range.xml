@@ -1,17 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical"
+<TextView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/ed"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
-    <fragment 
-        android:id="@+id/LetterRangeFragment"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent" >
-        <TextView
-            android:id="@+id/ed"
-            android:layout_width="match_parent"
-        	android:layout_height="wrap_content"
-        	android:text="PISS" />
-        </fragment>
-    
-</LinearLayout>
+  	android:layout_height="wrap_content"
+   	android:text="PISS" />
