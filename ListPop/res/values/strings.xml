@@ -10,5 +10,9 @@
     <string name="poplist">Pop!</string>
     <string name="add">+</string>
     <string name="edit">Edit</string>
+    <string name="addlistname">List Name</string>
+    <string name="addlistnameprompt">Enter text here..</string>
+    <string name="addlistitem">Entries</string>
+    <string name="addlistitemprompt">Add new entries to your list here..</string>
 
 </resources>

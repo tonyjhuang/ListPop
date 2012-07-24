@@ -21,6 +21,7 @@
             </intent-filter>
         </activity>
         <activity android:name="PopActivity"></activity>
+        <activity android:name="AddActivity" android:theme="@android:style/Theme.DeviceDefault.Light.Dialog.NoActionBar"></activity>
         
     </application>
 

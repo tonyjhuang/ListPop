@@ -16,10 +16,13 @@ import android.widget.SimpleCursorAdapter;
 import android.widget.TextView;
 
 public class StartActivity extends Activity {
+	final int ADD_ACTIVITY = 0;
+	final int BACK_BUTTON_PRESSED = -1;
 	
 	private DbAdapter mDbA;
 	ListView mListView;
 	TextView mTextView;
+	Button add;
 	
 	
 	@Override
@@ -43,10 +46,14 @@ public class StartActivity extends Activity {
 		mTextView = (TextView)findViewById(R.id.textview);
 		
 		fillData();
+		
+		add = (Button)findViewById(R.id.addbutton);
+		hookUpAdd();
     }
 
     
-    private void fillData(){
+    @SuppressWarnings("deprecation")
+	private void fillData(){
 		Cursor c = mDbA.fetchAll();
 		startManagingCursor(c);
     	
@@ -66,10 +73,37 @@ public class StartActivity extends Activity {
 					long id) {
 				Intent i = new Intent(StartActivity.this, PopActivity.class);
 				i.putExtra(DbAdapter.KEY_ROWID, id);
-				startActivityForResult(i, 0);
+				startActivity(i);
 				
 			}
     	});
+    }
+    
+    private void hookUpAdd(){
+    	add.setOnClickListener(new OnClickListener(){
+    		@Override
+    		public void onClick(View v){
+    			Intent i = new Intent(StartActivity.this, AddActivity.class);
+    			startActivityForResult(i, ADD_ACTIVITY);
+    		}
+    	});
+    }
+    
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data){
+    	switch(resultCode){
+    	case BACK_BUTTON_PRESSED:
+    		break;
+    		
+    	case ADD_ACTIVITY:
+    		ArrayList<String> newList = data.getStringArrayListExtra("list");
+    		String newListHeader = data.getStringExtra("list_header");
+    		mDbA.enterList(newListHeader, newList);
+    		fillData();
+    		break;
+    	}
+    	
+    	
     }
     
     @Override

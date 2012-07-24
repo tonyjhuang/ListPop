@@ -19,6 +19,8 @@ public class PopActivity extends Activity{;
 	private DbAdapter mDbA;
 	private Button pop;
 	
+	private TextView listHeader;
+	
 	@Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -34,6 +36,12 @@ public class PopActivity extends Activity{;
         mRowId = extras.getLong(DbAdapter.KEY_ROWID);
         
         fillData();
+        
+        Cursor mCursor = mDbA.fetchListItem(mRowId);
+        int KEY_LIST_HEADER_COLUMN_INDEX = mCursor.getColumnIndexOrThrow(DbAdapter.KEY_LIST_HEADER_COLUMN);
+		String listname = mCursor.getString(KEY_LIST_HEADER_COLUMN_INDEX);
+		listHeader = (TextView) findViewById(R.id.listname);
+		listHeader.setText(listname);
 	}
 	
 	private void hookUpPop(){
@@ -50,6 +58,7 @@ public class PopActivity extends Activity{;
 		});
 	}
 	
+	@SuppressWarnings("deprecation")
 	private void fillData(){
 		Cursor mCursor = mDbA.fetchListItem(mRowId);
 		startManagingCursor(mCursor);
