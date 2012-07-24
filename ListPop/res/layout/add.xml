@@ -1,0 +1,57 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" >
+    
+    <TextView
+        android:id="@+id/listnameheader"
+        android:layout_width="wrap_content"
+	    android:layout_height="wrap_content"
+	    android:paddingLeft="20dp"
+	    android:paddingTop="10dp"
+	    android:textSize="25dp"
+	    android:text="@string/addlistname" />
+    
+    <EditText
+        android:id="@+id/listnamecreation"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/listnameheader"
+        android:hint="@string/addlistnameprompt"
+        android:inputType="textNoSuggestions" />
+    
+    <TextView
+        android:id="@+id/listitemheader"
+        android:layout_width="wrap_content"
+	    android:layout_height="wrap_content"
+	    android:paddingLeft="20dp"
+	    android:paddingTop="20dp"
+	    android:layout_below="@id/listnamecreation"
+	    android:textSize="25dp"
+	    android:text="@string/addlistitem" />
+    
+    <EditText
+        android:id="@+id/listitemcreation"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/listitemheader"
+        android:hint="@string/addlistitemprompt"
+        android:inputType="textMultiLine|textNoSuggestions" />
+    
+    <ListView
+        android:id="@+id/newitems"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/listitemcreation"
+        android:layout_above="@+id/finishbutton"
+        android:paddingTop="20dp" />
+    
+    <Button
+	    android:id="@id/finishbutton"
+	    android:layout_width="match_parent"
+	    android:layout_height="wrap_content"
+	    android:layout_alignParentBottom="true"
+	    android:text="@string/finishednewlist" />
+    
+    
+</RelativeLayout>

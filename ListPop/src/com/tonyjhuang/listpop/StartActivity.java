@@ -22,15 +22,14 @@ import android.widget.TextView;
 
 public class StartActivity extends Activity {
 	private static final int ADD_ACTIVITY = 1;
+	private static final int PRESETS_ACTIVITY = ADD_ACTIVITY + 1;
 	private static final int BACK_BUTTON_PRESSED = -1;
 	private static final int DELETE_ID = Menu.FIRST;
 	
 	private DbAdapter mDbA;
 	ListView mListView;
 	TextView mTextView;
-	Button add;
-	Button presets;
-	Button edit;
+	Button add, presets, edit;
 	
 	
 	@Override
@@ -108,7 +107,13 @@ public class StartActivity extends Activity {
     }
     
     private void hookUpPresets(){
-    	//TODO: Add preset lists
+    	presets.setOnClickListener(new OnClickListener(){
+    		@Override
+    		public void onClick(View v){
+    			Intent i = new Intent(StartActivity.this, PresetActivity.class);
+    			startActivityForResult(i, PRESETS_ACTIVITY);
+    		}
+    	});
     }
     
     @SuppressWarnings("deprecation")
