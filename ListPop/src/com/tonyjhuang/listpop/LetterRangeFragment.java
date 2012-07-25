@@ -5,12 +5,10 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.EditText;
 import android.widget.Spinner;
 
 public class LetterRangeFragment extends Fragment {
 	Spinner lower, upper;
-	EditText listHeader;
 	
 	@Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -24,7 +22,6 @@ public class LetterRangeFragment extends Fragment {
 		lower = (Spinner) view.findViewById(R.id.lowerindex);
 		upper = (Spinner) view.findViewById(R.id.upperindex);
 		
-		listHeader = (EditText) view.findViewById(R.id.letterrangetitle);
 	}
 	
 	public Spinner getLetterSpinner(String s){
@@ -35,9 +32,4 @@ public class LetterRangeFragment extends Fragment {
 		}
 		return null;
 	}
-	
-	public String getTitle(){
-		return listHeader.getText().toString();
-	}
-	
 }

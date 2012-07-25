@@ -5,12 +5,10 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.EditText;
 import android.widget.NumberPicker;
 
 public class NumberRangeFragment extends Fragment{
 	NumberPicker lower, upper;
-	EditText listHeader;
 	
 	private static final int LOWEST_INDEX = 0;
 	private static final int HIGHEST_INDEX = 99;
@@ -36,8 +34,6 @@ public class NumberRangeFragment extends Fragment{
 		
 		lower.setValue(LOWEST_INDEX);
 		upper.setValue(UPPER_START_POINT);
-		
-		listHeader = (EditText) view.findViewById(R.id.numberrangetitle);
 	}
 	
 	public NumberPicker getNumberPicker(String s){
@@ -48,11 +44,4 @@ public class NumberRangeFragment extends Fragment{
 		}
 		return null;
 	}
-	
-	public String getTitle(){
-		return listHeader.getText().toString();
-	}
-	
-	
-	
 }

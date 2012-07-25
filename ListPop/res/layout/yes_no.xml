@@ -4,15 +4,6 @@
     android:layout_height="fill_parent"
     android:orientation="vertical" >
 
-    <EditText 
-        android:id="@+id/yesnotitle"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_marginTop="20dp"
-        android:hint="@string/optional"
-        android:inputType="textNoSuggestions" />
-
     <TextView
         android:id="@+id/yes_no_text"
         android:layout_width="wrap_content"

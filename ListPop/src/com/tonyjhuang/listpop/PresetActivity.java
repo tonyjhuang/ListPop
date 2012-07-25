@@ -14,8 +14,8 @@ import android.view.View.OnClickListener;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.Spinner;
-import android.widget.TextView;
 import android.widget.Toast;
 
 @TargetApi(11)
@@ -25,7 +25,8 @@ public class PresetActivity extends Activity {
 	CustomOnItemSelectedListener coisl =
 			new CustomOnItemSelectedListener();
 	FragmentManager fm = getFragmentManager();
-	TextView p;
+	EditText etitle;
+	
 	
 	public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -37,7 +38,7 @@ public class PresetActivity extends Activity {
         finish = (Button)findViewById(R.id.finishbutton);
         hookUpFinish();
         
-        p = (TextView)findViewById(R.id.presetnameheader);
+        etitle = (EditText)findViewById(R.id.presettitle);
 	}
 	
 	private void hookUpFinish(){
@@ -75,7 +76,7 @@ public class PresetActivity extends Activity {
 	private void checkNumberFinale(NumberRangeFragment nrf){
 		int low = nrf.getNumberPicker("lower").getValue();
 		int high = nrf.getNumberPicker("upper").getValue();
-		String title = nrf.getTitle();
+		String title = getListTitle();
 		
 		if(low > high)
 			alertToInvalidRange();
@@ -105,7 +106,7 @@ public class PresetActivity extends Activity {
 		String low = lrf.getLetterSpinner("lower").getSelectedItem().toString();
 		String high = lrf.getLetterSpinner("upper").getSelectedItem().toString();
 		
-		String title = lrf.getTitle();
+		String title = getListTitle();
 		
 		if(low.compareTo(high) > 0){
 			alertToInvalidRange();
@@ -148,7 +149,7 @@ public class PresetActivity extends Activity {
 	}
 	
 	private void checkYesNoFinale(YesNoFragment ynf){
-		String title = ynf.getTitle();
+		String title = getListTitle();
 		
 		ArrayList<String> ynArray = new ArrayList<String>();
 		ynArray.add("Yes");
@@ -170,6 +171,10 @@ public class PresetActivity extends Activity {
 	private void alertToInvalidRange(){
 		Toast.makeText(PresetActivity.this, "invalid range!", Toast.LENGTH_SHORT)
 			.show();
+	}
+	
+	private String getListTitle(){
+		return etitle.getText().toString();
 	}
 	
 	private class CustomOnItemSelectedListener implements OnItemSelectedListener {
@@ -205,7 +210,6 @@ public class PresetActivity extends Activity {
 
 		@Override
 		public void onNothingSelected(AdapterView<?> parent) {
-			// TODO Auto-generated method stub
 			
 		}
 

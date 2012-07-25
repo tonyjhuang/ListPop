@@ -3,15 +3,6 @@
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     android:orientation="vertical" >
-
-    <EditText 
-        android:id="@+id/letterrangetitle"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_marginTop="20dp"
-        android:hint="@string/optional"
-        android:inputType="textNoSuggestions" />
     
      <Spinner
         android:id="@+id/lowerindex"
@@ -19,7 +10,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
         android:layout_centerVertical="true"
-        android:layout_marginLeft="30dp"
+        android:layout_marginLeft="@dimen/side_margin"
         android:entries="@array/letters" />
      
     <Spinner
@@ -28,7 +19,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentRight="true"
         android:layout_centerVertical="true"
-        android:layout_marginRight="30dp"
+        android:layout_marginRight="@dimen/side_margin"
         android:entries="@array/letters" />
 
     <TextView
@@ -38,6 +29,6 @@
         android:layout_centerHorizontal="true"
         android:layout_centerVertical="true"
         android:text="@string/to"
-        android:textSize="20dp" />
+        android:textSize="@dimen/to_text" />
 
 </RelativeLayout>
