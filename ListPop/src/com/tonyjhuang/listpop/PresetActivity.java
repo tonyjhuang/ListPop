@@ -32,26 +32,24 @@ public class PresetActivity extends Activity {
 		@Override
 		public void onItemSelected(AdapterView<?> parent, View view, int position,
 				long id) {
+			FragmentManager fragmentManager = 
+					PresetActivity.this.getFragmentManager();
+			FragmentTransaction fragmentTransaction = 
+					fragmentManager.beginTransaction();
+			
+			Fragment newFragment = null;
+			
 			switch(position){
 			case NUMBER_RANGE_SPINNER_INDEX:
-				Toast.makeText(parent.getContext(), 
-						"OnItemSelectedListener : " + parent.
-						getItemAtPosition(position).toString(),
-						Toast.LENGTH_SHORT).show();
+				newFragment = new NumberRangeFragment();
 				break;
 			case LETTER_RANGE_SPINNER_INDEX:
-				FragmentManager fragmentManager = 
-					PresetActivity.this.getFragmentManager();
-				FragmentTransaction fragmentTransaction = 
-						fragmentManager.beginTransaction();
-				
-				Fragment newFragment = new LetterRangeFragment();
-				
-				fragmentTransaction.add(R.id.fragmentframe, newFragment);
-				fragmentTransaction.commit();
+				newFragment = new LetterRangeFragment();
 			case YES_NO_SPINNER_INDEX:
 				break;
 			}
+			fragmentTransaction.replace(R.id.fragmentframe, newFragment);
+			fragmentTransaction.commit();
 			
 		}
 

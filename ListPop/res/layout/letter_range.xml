@@ -1,6 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
-<TextView xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/ed"
-    android:layout_width="match_parent"
-  	android:layout_height="wrap_content"
-   	android:text="PISS" />
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical" >
+
+    <Button
+        android:id="@+id/fragment_button"
+        android:text="YAH!"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content" />
+    
+
+</LinearLayout>
