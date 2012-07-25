@@ -1,27 +1,93 @@
 package com.tonyjhuang.listpop;
 
+import java.util.ArrayList;
+
 import android.annotation.TargetApi;
 import android.app.Activity;
 import android.app.Fragment;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemSelectedListener;
+import android.widget.Button;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
 @TargetApi(11)
 public class PresetActivity extends Activity {
 	private Spinner listType;
+	private Button finish;
+	CustomOnItemSelectedListener coisl =
+			new CustomOnItemSelectedListener();
+	FragmentManager fm = getFragmentManager();
+	TextView p;
 	
 	public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.presets);
         
         listType = (Spinner)findViewById(R.id.presetspinner);
-        listType.setOnItemSelectedListener(new CustomOnItemSelectedListener());
+        listType.setOnItemSelectedListener(coisl);
+        
+        finish = (Button)findViewById(R.id.finishbutton);
+        hookUpFinish();
+        
+        p = (TextView)findViewById(R.id.presetnameheader);
+	}
+	
+	private void hookUpFinish(){
+		finish.setOnClickListener(new OnClickListener(){
+			@Override
+			public void onClick(View v){
+				Fragment currentFragment;
+				switch(listType.getSelectedItemPosition()){
+				case CustomOnItemSelectedListener
+						.NUMBER_RANGE_SPINNER_INDEX:
+					currentFragment = 
+						(NumberRangeFragment) fm.findFragmentById(R.id.fragmentframe);
+					checkNumberFinale((NumberRangeFragment) currentFragment);
+					break;
+				case CustomOnItemSelectedListener
+						.LETTER_RANGE_SPINNER_INDEX:
+					currentFragment = (LetterRangeFragment) fm.findFragmentById(R.id.fragmentframe);
+					break;
+				case CustomOnItemSelectedListener
+						.YES_NO_SPINNER_INDEX:
+					break;	
+					
+				}
+			}
+		});
+	}
+	
+	private void checkNumberFinale(NumberRangeFragment nrf){
+		int low = nrf.getNumberPicker("lower").getValue();
+		int high = nrf.getNumberPicker("upper").getValue();
+		
+		if(low > high)
+			Toast.makeText(PresetActivity.this, "invalid range!", Toast.LENGTH_SHORT)
+				.show();
+		else{
+			ArrayList<String> a = indexToArray(low, high);
+			Intent i = new Intent();
+			i.putExtra("list_header", String.valueOf(low) + " to " + String.valueOf(high));
+			i.putStringArrayListExtra("list", a);
+			setResult(2, i);
+			finish();
+		}
+	}
+	
+	private ArrayList<String> indexToArray(int low, int high){
+		ArrayList<String> a = new ArrayList<String>();
+		for(int i=0; i<(high+1); i++){
+			a.add(String.valueOf(i + low));
+		}
+		return a;
 	}
 	
 	private class CustomOnItemSelectedListener implements OnItemSelectedListener {
@@ -54,7 +120,7 @@ public class PresetActivity extends Activity {
 		}
 
 		@Override
-		public void onNothingSelected(AdapterView<?> arg0) {
+		public void onNothingSelected(AdapterView<?> parent) {
 			// TODO Auto-generated method stub
 			
 		}

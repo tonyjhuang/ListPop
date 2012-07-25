@@ -137,6 +137,8 @@ public class StartActivity extends Activity {
     		break;
     		
     	case ADD_ACTIVITY:
+    		
+    	case PRESETS_ACTIVITY:
     		String newListHeader = data.getStringExtra("list_header");
     		ArrayList<String> newList = data.getStringArrayListExtra("list");
     		mDbA.enterList(newListHeader, newList);
@@ -144,7 +146,6 @@ public class StartActivity extends Activity {
     		fillData();
     		break;
     	}
-    	
     }
     
     @Override

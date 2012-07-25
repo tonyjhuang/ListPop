@@ -69,6 +69,8 @@ public class AddActivity extends Activity {
 		});
 	}
 	
+	//Error if there is no header or if there are no items.
+	//
 	private void hookUpFinishButton(){
 		finishButton.setOnClickListener(new OnClickListener(){
 			@Override

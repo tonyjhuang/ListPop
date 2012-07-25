@@ -2,10 +2,12 @@ package com.tonyjhuang.listpop;
 
 import java.util.ArrayList;
 import java.util.Random;
+import java.util.logging.Logger;
 
 import android.app.Activity;
 import android.database.Cursor;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.ArrayAdapter;
@@ -18,8 +20,8 @@ public class PopActivity extends Activity{;
 	private Long mRowId;
 	private DbAdapter mDbA;
 	private Button pop;
-	
-	private TextView listHeader;
+	private TextView listHeader, popResult;
+	ArrayAdapter<String> aa;
 	
 	@Override
     public void onCreate(Bundle savedInstanceState) {
@@ -42,19 +44,24 @@ public class PopActivity extends Activity{;
 		String listname = mCursor.getString(KEY_LIST_HEADER_COLUMN_INDEX);
 		listHeader = (TextView) findViewById(R.id.listname);
 		listHeader.setText(listname);
+		
+		popResult = (TextView)findViewById(R.id.popresult);
 	}
 	
 	private void hookUpPop(){
 		pop.setOnClickListener(new OnClickListener(){
 			@Override
 			public void onClick(View view) {
+				
 				int totalNumberOfItems = mListView.getCount();
+				
 				if(totalNumberOfItems > 0){
 					Random generator = new Random();
 				
+					//Random integer from 0 to total number of items in list.
 					int randomIndex = generator.nextInt(totalNumberOfItems);
-					TextView t = (TextView) mListView.getChildAt(randomIndex);
-					pop.setText(t.getText());
+					String randomString = aa.getItem(randomIndex);
+					popResult.setText(randomString);
 				}
 			}
 		});
@@ -69,8 +76,7 @@ public class PopActivity extends Activity{;
 		String sDisplay = mCursor.getString(KEY_LIST_COLUMN_INDEX);
 		ArrayList<String> aDisplay = interpret(sDisplay); 
 		
-		ArrayAdapter<String> aa = 
-				new ArrayAdapter<String>(this, R.layout.list_item, aDisplay);
+		aa = new ArrayAdapter<String>(this, R.layout.list_item, aDisplay);
 		mListView.setAdapter(aa);
 	}
 	
