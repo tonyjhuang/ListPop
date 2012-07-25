@@ -12,30 +12,14 @@
         android:layout_marginTop="20dp"
         android:hint="@string/optional"
         android:inputType="textNoSuggestions" />
-    
-    <NumberPicker
-        android:id="@+id/upperindex"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentRight="true"
-        android:layout_centerVertical="true"
-        android:layout_marginRight="30dp" />
-
-    <NumberPicker
-        android:id="@+id/lowerindex"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_centerVertical="true"
-        android:layout_marginLeft="30dp" />
 
     <TextView
-        android:id="@+id/totext"
+        android:id="@+id/yes_no_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
         android:layout_centerVertical="true"
-        android:text="to"
-        android:textSize="20dp" />
+        android:text="@string/yes_no_fragment_text"
+        android:textSize="60dp" />
 
 </RelativeLayout>

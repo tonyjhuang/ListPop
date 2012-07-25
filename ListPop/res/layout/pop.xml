@@ -32,6 +32,6 @@
 	    android:layout_height="wrap_content"
 	    android:layout_centerHorizontal="true"
 	    android:layout_below="@id/pop"
-	    android:paddingTop="60dp" />
+	    android:layout_marginTop="60dp" />
 	
 </RelativeLayout>

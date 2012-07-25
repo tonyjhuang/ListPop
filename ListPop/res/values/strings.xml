@@ -28,5 +28,7 @@
         <item>TODO: Make more!</item>
     </string-array>
     <string name="preset_name_header">Presets</string>
+    <string name="optional">Enter optional list name here..</string>
+    <string name="yes_no_fragment_text">Yes/No</string>
 
 </resources>

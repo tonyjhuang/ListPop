@@ -52,12 +52,17 @@ public class PresetActivity extends Activity {
 						(NumberRangeFragment) fm.findFragmentById(R.id.fragmentframe);
 					checkNumberFinale((NumberRangeFragment) currentFragment);
 					break;
+					
 				case CustomOnItemSelectedListener
 						.LETTER_RANGE_SPINNER_INDEX:
 					currentFragment = (LetterRangeFragment) fm.findFragmentById(R.id.fragmentframe);
 					break;
+					
 				case CustomOnItemSelectedListener
 						.YES_NO_SPINNER_INDEX:
+					currentFragment =
+						(YesNoFragment) fm.findFragmentById(R.id.fragmentframe);
+					checkYesNoFinale((YesNoFragment) currentFragment);
 					break;	
 					
 				}
@@ -68,6 +73,7 @@ public class PresetActivity extends Activity {
 	private void checkNumberFinale(NumberRangeFragment nrf){
 		int low = nrf.getNumberPicker("lower").getValue();
 		int high = nrf.getNumberPicker("upper").getValue();
+		String title = nrf.getTitle();
 		
 		if(low > high)
 			Toast.makeText(PresetActivity.this, "invalid range!", Toast.LENGTH_SHORT)
@@ -75,11 +81,35 @@ public class PresetActivity extends Activity {
 		else{
 			ArrayList<String> a = indexToArray(low, high);
 			Intent i = new Intent();
-			i.putExtra("list_header", String.valueOf(low) + " to " + String.valueOf(high));
+			if(title == null || title.equals("")){
+				i.putExtra("list_header", String.valueOf(low) + " to " + String.valueOf(high));
+			} else {
+				i.putExtra("list_header", title);
+			}
 			i.putStringArrayListExtra("list", a);
 			setResult(2, i);
 			finish();
 		}
+	}
+	
+	private void checkYesNoFinale(YesNoFragment ynf){
+		String title = ynf.getTitle();
+		
+		ArrayList<String> ynArray = new ArrayList<String>();
+		ynArray.add("Yes");
+		ynArray.add("No");
+		
+		Intent i = new Intent();
+		
+		if(title == null || title.equals("")){
+			i.putExtra("list_header", "Yes or No");
+		} else {
+			i.putExtra("list_header", title);
+		}
+		
+		i.putStringArrayListExtra("list", ynArray);
+		setResult(2, i);
+		finish();
 	}
 	
 	private ArrayList<String> indexToArray(int low, int high){
@@ -111,7 +141,9 @@ public class PresetActivity extends Activity {
 				break;
 			case LETTER_RANGE_SPINNER_INDEX:
 				newFragment = new LetterRangeFragment();
+				break;
 			case YES_NO_SPINNER_INDEX:
+				newFragment = new YesNoFragment();
 				break;
 			}
 			fragmentTransaction.replace(R.id.fragmentframe, newFragment);
