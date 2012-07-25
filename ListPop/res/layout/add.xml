@@ -7,7 +7,7 @@
         android:id="@+id/listnameheader"
         android:layout_width="wrap_content"
 	    android:layout_height="wrap_content"
-	    android:paddingLeft="20dp"
+	    android:layout_marginLeft="@dimen/title_indent"
 	    android:paddingTop="10dp"
 	    android:textSize="25dp"
 	    android:text="@string/addlistname" />
@@ -24,7 +24,7 @@
         android:id="@+id/listitemheader"
         android:layout_width="wrap_content"
 	    android:layout_height="wrap_content"
-	    android:paddingLeft="20dp"
+	    android:layout_marginLeft="@dimen/title_indent"
 	    android:paddingTop="20dp"
 	    android:layout_below="@id/listnamecreation"
 	    android:textSize="25dp"
