@@ -23,19 +23,6 @@ public class NumberRangeFragment extends Fragment{
         return view;
     }
 	
-	public NumberPicker getNumberPicker(String s){
-		if(s.equals("lower")){
-			return lower;
-		} else if(s.equals("upper")){
-			return upper;
-		}
-		return null;
-	}
-	
-	public String getTitle(){
-		return listHeader.getText().toString();
-	}
-	
 	@Override
 	public void onViewCreated(View view, Bundle savedInstanceState) {
 		lower = (NumberPicker) view.findViewById(R.id.lowerindex);
@@ -52,5 +39,20 @@ public class NumberRangeFragment extends Fragment{
 		
 		listHeader = (EditText) view.findViewById(R.id.numberrangetitle);
 	}
+	
+	public NumberPicker getNumberPicker(String s){
+		if(s.equals("lower")){
+			return lower;
+		} else if(s.equals("upper")){
+			return upper;
+		}
+		return null;
+	}
+	
+	public String getTitle(){
+		return listHeader.getText().toString();
+	}
+	
+	
 	
 }

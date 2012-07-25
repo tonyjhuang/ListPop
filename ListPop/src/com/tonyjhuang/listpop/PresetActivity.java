@@ -55,7 +55,9 @@ public class PresetActivity extends Activity {
 					
 				case CustomOnItemSelectedListener
 						.LETTER_RANGE_SPINNER_INDEX:
-					currentFragment = (LetterRangeFragment) fm.findFragmentById(R.id.fragmentframe);
+					currentFragment = 
+						(LetterRangeFragment) fm.findFragmentById(R.id.fragmentframe);
+					checkLetterFinale((LetterRangeFragment) currentFragment);
 					break;
 					
 				case CustomOnItemSelectedListener
@@ -76,8 +78,7 @@ public class PresetActivity extends Activity {
 		String title = nrf.getTitle();
 		
 		if(low > high)
-			Toast.makeText(PresetActivity.this, "invalid range!", Toast.LENGTH_SHORT)
-				.show();
+			alertToInvalidRange();
 		else{
 			ArrayList<String> a = indexToArray(low, high);
 			Intent i = new Intent();
@@ -90,6 +91,60 @@ public class PresetActivity extends Activity {
 			setResult(2, i);
 			finish();
 		}
+	}
+	
+	private ArrayList<String> indexToArray(int low, int high){
+		ArrayList<String> a = new ArrayList<String>();
+		for(int i=low; i<(high+1); i++){
+			a.add(String.valueOf(i));
+		}
+		return a;
+	}
+	
+	private void checkLetterFinale(LetterRangeFragment lrf){
+		String low = lrf.getLetterSpinner("lower").getSelectedItem().toString();
+		String high = lrf.getLetterSpinner("upper").getSelectedItem().toString();
+		
+		String title = lrf.getTitle();
+		
+		if(low.compareTo(high) > 0){
+			alertToInvalidRange();
+		} else {
+			Intent i = new Intent();
+			
+			char _low = low.charAt(0);
+			char _Low = Character.toUpperCase(_low);
+			
+			char _high = high.charAt(0);
+			char _High = Character.toUpperCase(_high);
+			
+			if(title == null || title.equals("")){
+				i.putExtra("list_header", _Low + " to " + _High);
+			} else {
+				i.putExtra("list_header", title);
+			}
+			
+			ArrayList<String> array = indexCharToArray(_low, _high);
+			i.putStringArrayListExtra("list", array);
+			setResult(2, i);
+			finish();
+		}
+	}
+	
+	private ArrayList<String> indexCharToArray(char low, char high){
+		int _low = (int) low;
+		int _high = (int) high;
+		
+		ArrayList<String> array = new ArrayList<String>();
+		
+		for(int i=_low; i<(_high+1); i++){
+			char c = (char) i;
+			String s = Character.toString(c);
+			array.add(s);
+		}
+		
+		return array;
+		
 	}
 	
 	private void checkYesNoFinale(YesNoFragment ynf){
@@ -112,12 +167,9 @@ public class PresetActivity extends Activity {
 		finish();
 	}
 	
-	private ArrayList<String> indexToArray(int low, int high){
-		ArrayList<String> a = new ArrayList<String>();
-		for(int i=0; i<(high+1); i++){
-			a.add(String.valueOf(i + low));
-		}
-		return a;
+	private void alertToInvalidRange(){
+		Toast.makeText(PresetActivity.this, "invalid range!", Toast.LENGTH_SHORT)
+			.show();
 	}
 	
 	private class CustomOnItemSelectedListener implements OnItemSelectedListener {

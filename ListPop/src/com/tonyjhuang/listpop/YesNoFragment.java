@@ -19,7 +19,7 @@ public class YesNoFragment extends Fragment{
 	
 	@Override
 	public void onViewCreated(View view, Bundle savedInstanceState) {
-		listHeader = (EditText) view.findViewById(R.id.numberrangetitle);
+		listHeader = (EditText) view.findViewById(R.id.yesnotitle);
 	}
 	
 	public String getTitle(){

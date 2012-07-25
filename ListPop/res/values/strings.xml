@@ -30,5 +30,15 @@
     <string name="preset_name_header">Presets</string>
     <string name="optional">Enter optional list name here..</string>
     <string name="yes_no_fragment_text">Yes/No</string>
+    <string-array name="letters">
+        <item>a</item><item>b</item><item>c</item><item>d</item>
+        <item>e</item><item>f</item><item>g</item><item>h</item>
+        <item>i</item><item>j</item><item>k</item><item>l</item>
+        <item>m</item><item>n</item><item>o</item><item>p</item>
+        <item>q</item><item>r</item><item>s</item><item>t</item>
+        <item>u</item><item>v</item><item>w</item><item>x</item>
+        <item>y</item><item>z</item>
+    </string-array>
+    <string name ="to">to</string>
 
 </resources>
