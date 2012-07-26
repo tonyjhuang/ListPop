@@ -71,7 +71,7 @@ public class StartActivity extends Activity {
 			public void onItemClick(AdapterView<?> list, View view, int position,
 					long id) {
 				Intent i = new Intent(StartActivity.this, PopActivity.class);
-				i.putExtra(DbAdapter.KEY_ROWID, id);
+				i.putExtra(DbAdapter.ROWID, id);
 				startActivity(i);
 				
 			}
@@ -111,7 +111,7 @@ public class StartActivity extends Activity {
     	edit.setOnClickListener(new OnClickListener(){
     		@Override
     		public void onClick(View v){
-    			if(adapter instanceof CustomAdapter){
+    			if(adapter instanceof CustomCursorAdapter){
     	    		fillData();
     	    	} else {
     	    		fillEditData();
@@ -135,7 +135,7 @@ public class StartActivity extends Activity {
    		c.moveToFirst();
    		startManagingCursor(c);
        	
-       	String[] from = new String[]{DbAdapter.KEY_LIST_HEADER_COLUMN};
+       	String[] from = new String[]{DbAdapter.LIST_HEADER};
        	int[] to = new int[]{R.id.listitem};
        	adapter = new SimpleCursorAdapter(
        			StartActivity.this, 
@@ -146,17 +146,8 @@ public class StartActivity extends Activity {
     
     private void fillEditData(){
     	c.moveToFirst();
-    	int KEY_LIST_HEADER_COLUMN_INDEX = c
-				.getColumnIndexOrThrow(DbAdapter.KEY_LIST_HEADER_COLUMN);
-		ArrayList<String> listHeaders = new ArrayList<String>();
-		
-    	for(int i=0; i<c.getCount(); i++){
-    		String l = c.getString(KEY_LIST_HEADER_COLUMN_INDEX);
-    		listHeaders.add(l);
-    		c.moveToNext();
-    	}
     	
-    	adapter = new CustomAdapter(StartActivity.this, listHeaders);
+    	adapter = new CustomCursorAdapter(StartActivity.this, c);
     	mListView.setAdapter(adapter);
     }
     
@@ -183,7 +174,7 @@ public class StartActivity extends Activity {
     // Otherwise, kill the activity.
     @Override
     public void onBackPressed(){
-    	if(adapter instanceof CustomAdapter){
+    	if(adapter instanceof CustomCursorAdapter){
     		fillData();
     	} else {
     		finish();

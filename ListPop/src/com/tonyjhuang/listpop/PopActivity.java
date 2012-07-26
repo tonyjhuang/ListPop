@@ -33,12 +33,12 @@ public class PopActivity extends Activity{;
         
         mListView = (ListView) findViewById(R.id.listview);
         Bundle extras = getIntent().getExtras();
-        mRowId = extras.getLong(DbAdapter.KEY_ROWID);
+        mRowId = extras.getLong(DbAdapter.ROWID);
         
         fillData();
         
         Cursor mCursor = mDbA.fetchListItem(mRowId);
-        int KEY_LIST_HEADER_COLUMN_INDEX = mCursor.getColumnIndexOrThrow(DbAdapter.KEY_LIST_HEADER_COLUMN);
+        int KEY_LIST_HEADER_COLUMN_INDEX = mCursor.getColumnIndexOrThrow(DbAdapter.LIST_HEADER);
 		String listname = mCursor.getString(KEY_LIST_HEADER_COLUMN_INDEX);
 		listHeader = (TextView) findViewById(R.id.listname);
 		listHeader.setText(listname);
@@ -70,7 +70,7 @@ public class PopActivity extends Activity{;
 		Cursor mCursor = mDbA.fetchListItem(mRowId);
 		startManagingCursor(mCursor);
 		
-		int KEY_LIST_COLUMN_INDEX = mCursor.getColumnIndexOrThrow(DbAdapter.KEY_LIST_COLUMN);
+		int KEY_LIST_COLUMN_INDEX = mCursor.getColumnIndexOrThrow(DbAdapter.LIST);
 		String sDisplay = mCursor.getString(KEY_LIST_COLUMN_INDEX);
 		ArrayList<String> aDisplay = interpret(sDisplay); 
 		

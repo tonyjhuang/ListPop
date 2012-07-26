@@ -21,9 +21,9 @@ public class DbAdapter {
 	private static final String DATABASE_TABLE="CacheOfLists";
 	private static final int DATABASE_VERSION=1;
 	
-	public static final String KEY_ROWID="_id";
-	public static final String KEY_LIST_HEADER_COLUMN="List_Header";
-	public static final String KEY_LIST_COLUMN="List";
+	public static final String ROWID="_id";
+	public static final String LIST_HEADER="List_Header";
+	public static final String LIST="List";
 	
 	private ListPopDBOpenHelper mListPopDBOpenHelper;
 	private SQLiteDatabase mDb;
@@ -64,8 +64,8 @@ public class DbAdapter {
 		String sArray = arraylistToString(array);
 		
 		ContentValues values = new ContentValues();
-		values.put(KEY_LIST_HEADER_COLUMN, list_header);
-		values.put(KEY_LIST_COLUMN, sArray);	
+		values.put(LIST_HEADER, list_header);
+		values.put(LIST, sArray);	
 		
 		return mDb.insert(DATABASE_TABLE, null, values);
 	}
@@ -94,7 +94,7 @@ public class DbAdapter {
 	
 	
 	public boolean deleteListItem(long id){
-		return mDb.delete(DATABASE_TABLE,  KEY_ROWID+"="+id, null) > 0;
+		return mDb.delete(DATABASE_TABLE,  ROWID+"="+id, null) > 0;
 	}
 	
 	public void deleteAll(){
@@ -115,8 +115,8 @@ public class DbAdapter {
 	public Cursor fetchListItem(long rowId) throws SQLException {
 		Cursor mCursor =
 				mDb.query(true, DATABASE_TABLE, new String[] 
-						{KEY_ROWID,KEY_LIST_HEADER_COLUMN,KEY_LIST_COLUMN},
-						KEY_ROWID+"="+rowId, null, null, null, null, null);
+						{ROWID,LIST_HEADER,LIST},
+						ROWID+"="+rowId, null, null, null, null, null);
 		if (mCursor != null){
 			mCursor.moveToFirst();
 		}
@@ -124,7 +124,7 @@ public class DbAdapter {
 	}
 	
 	public Cursor fetchAll(){
-		return mDb.query(DATABASE_TABLE, new String[] {KEY_ROWID, KEY_LIST_HEADER_COLUMN,KEY_LIST_COLUMN},
+		return mDb.query(DATABASE_TABLE, new String[] {ROWID, LIST_HEADER,LIST},
 				null, null, null, null, null);
 	}
 	
@@ -148,9 +148,9 @@ public class DbAdapter {
 		
 		private static final String DATABASE_CREATE=
 				"create table " + DATABASE_TABLE + " ("  
-					+ KEY_ROWID + " integer primary key autoincrement, "
-					+ KEY_LIST_HEADER_COLUMN + " text not null, "
-					+ KEY_LIST_COLUMN + " text not null);";
+					+ ROWID + " integer primary key autoincrement, "
+					+ LIST_HEADER + " text not null, "
+					+ LIST + " text not null);";
 		
 		ListPopDBOpenHelper(Context c, String name,
 				CursorFactory factory, int version){
