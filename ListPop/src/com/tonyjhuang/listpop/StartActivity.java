@@ -15,6 +15,7 @@ import android.view.View.OnClickListener;
 import android.widget.AdapterView;
 import android.widget.AdapterView.AdapterContextMenuInfo;
 import android.widget.AdapterView.OnItemClickListener;
+import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.SimpleCursorAdapter;
@@ -30,6 +31,8 @@ public class StartActivity extends Activity {
 	ListView mListView;
 	TextView mTextView;
 	Button add, presets, edit;
+	private BaseAdapter adapter = null;
+	Cursor c;
 	
 	
 	@Override
@@ -40,6 +43,8 @@ public class StartActivity extends Activity {
         //Start SQLite database;
         mDbA = new DbAdapter(this);
         mDbA.open();
+        
+        c = mDbA.fetchAll();
        
         mListView = (ListView)findViewById(R.id.listselection);
 		hookUpItemClickListener();
@@ -103,7 +108,16 @@ public class StartActivity extends Activity {
     }
     
     private void hookUpEdit(){
-    	//TODO: How do we want to edit lists?
+    	edit.setOnClickListener(new OnClickListener(){
+    		@Override
+    		public void onClick(View v){
+    			if(adapter instanceof CustomAdapter){
+    	    		fillData();
+    	    	} else {
+    	    		fillEditData();
+    	    	}
+    		}
+    	});
     }
     
     private void hookUpPresets(){
@@ -118,16 +132,33 @@ public class StartActivity extends Activity {
     
     @SuppressWarnings("deprecation")
    	private void fillData(){
-   		Cursor c = mDbA.fetchAll();
+   		c.moveToFirst();
    		startManagingCursor(c);
        	
        	String[] from = new String[]{DbAdapter.KEY_LIST_HEADER_COLUMN};
        	int[] to = new int[]{R.id.listitem};
-       	SimpleCursorAdapter mAdapter =
-       			new SimpleCursorAdapter(StartActivity.this, R.layout.list_item,
-       					c, from, to);
-       	mListView.setAdapter(mAdapter);
+       	adapter = new SimpleCursorAdapter(
+       			StartActivity.this, 
+       			R.layout.list_item,
+       			c, from, to);
+       	mListView.setAdapter(adapter);
        }
+    
+    private void fillEditData(){
+    	c.moveToFirst();
+    	int KEY_LIST_HEADER_COLUMN_INDEX = c
+				.getColumnIndexOrThrow(DbAdapter.KEY_LIST_HEADER_COLUMN);
+		ArrayList<String> listHeaders = new ArrayList<String>();
+		
+    	for(int i=0; i<c.getCount(); i++){
+    		String l = c.getString(KEY_LIST_HEADER_COLUMN_INDEX);
+    		listHeaders.add(l);
+    		c.moveToNext();
+    	}
+    	
+    	adapter = new CustomAdapter(StartActivity.this, listHeaders);
+    	mListView.setAdapter(adapter);
+    }
     
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data){
@@ -146,6 +177,18 @@ public class StartActivity extends Activity {
     		fillData();
     		break;
     	}
+    }
+    
+    //If edit mode is enabled, turn it off.
+    // Otherwise, kill the activity.
+    @Override
+    public void onBackPressed(){
+    	if(adapter instanceof CustomAdapter){
+    		fillData();
+    	} else {
+    		finish();
+    	}
+    	
     }
     
     @Override
