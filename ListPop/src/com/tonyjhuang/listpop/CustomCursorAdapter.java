@@ -46,7 +46,7 @@ public class CustomCursorAdapter extends CursorAdapter {
 		
 	}
 	
-	//Attach onClickListener to Buttons
+	//TODO: Attach onClickListener to Buttons
 	private void hookUpEditLine(){
 		
 	}
