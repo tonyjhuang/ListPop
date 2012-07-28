@@ -71,6 +71,8 @@ public final class R {
         public static final int start=0x7f080000;
     }
     public static final class string {
+        public static final int Delete=0x7f050019;
+        public static final int Edit=0x7f050018;
         public static final int add=0x7f050007;
         public static final int addlistitem=0x7f05000b;
         public static final int addlistitemprompt=0x7f05000c;

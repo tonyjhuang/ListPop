@@ -21,14 +21,14 @@
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:layout_toLeftOf="@+id/deleteline"
-        android:text="Edit" />
+        android:text="@string/Edit" />
     
     <Button
         android:id="@id/deleteline"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentRight="true"
-        android:text="Delete" />
+        android:text="@string/Delete" />
 
     
 

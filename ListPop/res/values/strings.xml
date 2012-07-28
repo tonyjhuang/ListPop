@@ -39,5 +39,7 @@
         <item>y</item><item>z</item>
     </string-array>
     <string name ="to">to</string>
+    <string name="Edit">E</string>
+    <string name="Delete">D</string>
 
 </resources>
