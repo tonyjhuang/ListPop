@@ -91,6 +91,7 @@ public class StartActivity extends Activity {
             case DELETE_ID:
                 AdapterContextMenuInfo info = (AdapterContextMenuInfo) item.getMenuInfo();
                 mDbA.deleteListItem(info.id);
+                
                 fillData();
                 return true;
         }
@@ -103,6 +104,16 @@ public class StartActivity extends Activity {
     		public void onClick(View v){
     			Intent i = new Intent(StartActivity.this, AddActivity.class);
     			startActivityForResult(i, ADD_ACTIVITY);
+    		}
+    	});
+    }
+    
+    private void hookUpPresets(){
+    	presets.setOnClickListener(new OnClickListener(){
+    		@Override
+    		public void onClick(View v){
+    			Intent i = new Intent(StartActivity.this, PresetActivity.class);
+    			startActivityForResult(i, PRESETS_ACTIVITY);
     		}
     	});
     }
@@ -120,19 +131,9 @@ public class StartActivity extends Activity {
     	});
     }
     
-    private void hookUpPresets(){
-    	presets.setOnClickListener(new OnClickListener(){
-    		@Override
-    		public void onClick(View v){
-    			Intent i = new Intent(StartActivity.this, PresetActivity.class);
-    			startActivityForResult(i, PRESETS_ACTIVITY);
-    		}
-    	});
-    }
-    
     @SuppressWarnings("deprecation")
    	private void fillData(){
-   		c.moveToFirst();
+    	updateCursor();
    		startManagingCursor(c);
        	
        	String[] from = new String[]{DbAdapter.LIST_HEADER};
@@ -145,7 +146,7 @@ public class StartActivity extends Activity {
        }
     
     private void fillEditData(){
-    	c.moveToFirst();
+    	updateCursor();
     	
     	adapter = new CustomCursorAdapter(StartActivity.this, c);
     	mListView.setAdapter(adapter);
@@ -168,6 +169,11 @@ public class StartActivity extends Activity {
     		fillData();
     		break;
     	}
+    }
+    
+    private void updateCursor(){
+    	c = mDbA.fetchAll();
+    	c.moveToFirst();
     }
     
     //If edit mode is enabled, turn it off.
