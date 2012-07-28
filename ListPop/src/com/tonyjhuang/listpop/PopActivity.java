@@ -3,6 +3,7 @@ package com.tonyjhuang.listpop;
 import java.util.ArrayList;
 import java.util.Random;
 
+import android.app.ActionBar;
 import android.app.Activity;
 import android.database.Cursor;
 import android.os.Bundle;
@@ -54,6 +55,9 @@ public class PopActivity extends Activity {
 		hookUpPop();
 		// fillData();
 
+		ActionBar actionBar = getActionBar();
+        actionBar.setDisplayHomeAsUpEnabled(true);
+        actionBar.setTitle("Add List");
 		
 	}
 

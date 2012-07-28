@@ -30,7 +30,7 @@ public class StartActivity extends Activity {
 	private DbAdapter mDbA;
 	ListView mListView;
 	TextView mTextView;
-	Button add, presets, edit;
+	Button presets;
 	private BaseAdapter adapter = null;
 	Cursor c;
 	
@@ -51,12 +51,6 @@ public class StartActivity extends Activity {
 		registerForContextMenu(mListView);
 		
 		mTextView = (TextView)findViewById(R.id.textview);
-		
-		add = (Button)findViewById(R.id.addbutton);
-		hookUpAdd();
-		
-		edit = (Button)findViewById(R.id.editbutton);
-		hookUpEdit();
 		
 		presets = (Button)findViewById(R.id.presets);
 		hookUpPresets();
@@ -97,16 +91,6 @@ public class StartActivity extends Activity {
         }
         return super.onContextItemSelected(item);
     }
-       
-    private void hookUpAdd(){
-    	add.setOnClickListener(new OnClickListener(){
-    		@Override
-    		public void onClick(View v){
-    			Intent i = new Intent(StartActivity.this, AddActivity.class);
-    			startActivityForResult(i, ADD_ACTIVITY);
-    		}
-    	});
-    }
     
     private void hookUpPresets(){
     	presets.setOnClickListener(new OnClickListener(){
@@ -114,19 +98,6 @@ public class StartActivity extends Activity {
     		public void onClick(View v){
     			Intent i = new Intent(StartActivity.this, PresetActivity.class);
     			startActivityForResult(i, PRESETS_ACTIVITY);
-    		}
-    	});
-    }
-    
-    private void hookUpEdit(){
-    	edit.setOnClickListener(new OnClickListener(){
-    		@Override
-    		public void onClick(View v){
-    			if(adapter instanceof CustomCursorAdapter){
-    	    		fillData();
-    	    	} else {
-    	    		fillEditData();
-    	    	}
     		}
     	});
     }

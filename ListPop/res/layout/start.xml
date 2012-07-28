@@ -4,24 +4,10 @@
     android:layout_height="match_parent" >
     
     <Button
-        android:id="@+id/addbutton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentRight="true"
-        android:text="@string/add" />
-    
-    <Button
-        android:id="@+id/editbutton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_toLeftOf="@id/addbutton"
-        android:text="@string/edit" />
-    
-    <Button
         android:id="@+id/presets"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_toLeftOf="@+id/editbutton"
+        android:layout_alignParentRight="true"
         android:text="@string/preset" />
     
 	<TextView

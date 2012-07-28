@@ -29,9 +29,7 @@ public final class R {
         public static final int ic_launcher=0x7f020003;
     }
     public static final class id {
-        public static final int addbutton=0x7f090014;
         public static final int deleteline=0x7f09000d;
-        public static final int editbutton=0x7f090015;
         public static final int editline=0x7f09000c;
         public static final int finishbutton=0x7f090005;
         public static final int fragmentframe=0x7f090013;
@@ -42,22 +40,21 @@ public final class R {
         public static final int listname=0x7f09000b;
         public static final int listnamecreation=0x7f090001;
         public static final int listnameheader=0x7f090000;
-        public static final int listselection=0x7f090018;
+        public static final int listselection=0x7f090016;
         public static final int lowerindex=0x7f090006;
-        public static final int menu_add=0x7f09001c;
-        public static final int menu_edit=0x7f09001b;
-        public static final int menu_settings=0x7f09001a;
+        public static final int menu_add=0x7f090019;
+        public static final int menu_edit=0x7f090018;
         public static final int newitems=0x7f090004;
         public static final int pop=0x7f09000f;
         public static final int popresult=0x7f09000e;
         public static final int presetnameheader=0x7f090010;
-        public static final int presets=0x7f090016;
+        public static final int presets=0x7f090014;
         public static final int presetspinner=0x7f090011;
         public static final int presettitle=0x7f090012;
-        public static final int textview=0x7f090017;
+        public static final int textview=0x7f090015;
         public static final int totext=0x7f090008;
         public static final int upperindex=0x7f090007;
-        public static final int yes_no_text=0x7f090019;
+        public static final int yes_no_text=0x7f090017;
     }
     public static final class layout {
         public static final int add=0x7f030000;
