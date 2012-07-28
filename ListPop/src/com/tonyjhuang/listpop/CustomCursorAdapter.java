@@ -11,6 +11,7 @@ import android.widget.CursorAdapter;
 import android.widget.TextView;
 import android.widget.Toast;
 
+@SuppressWarnings("unused")
 public class CustomCursorAdapter extends CursorAdapter {
 	private LayoutInflater mInflater;
 	private Cursor cursor;
