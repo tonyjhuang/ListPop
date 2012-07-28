@@ -15,13 +15,10 @@ import android.widget.Button;
 import android.widget.TextView;
 
 public class PopActivity extends Activity {
-	;
-	// private ListView mListView;
-	private Long mRowId;
+	private Long ROWID;
 	private DbAdapter mDbA;
 	private TextView listHeader, popResult;
 	private Button pop;
-	// ArrayAdapter<String> aa;
 	private ArrayList<String> list = new ArrayList<String>();
 
 	@Override
@@ -29,32 +26,35 @@ public class PopActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.pop);
 		
+		//Open SQLite database.
 		mDbA = new DbAdapter(this);
 		mDbA.open();
 		
-		Bundle extras = getIntent().getExtras();
-		mRowId = extras.getLong(DbAdapter.ROWID);
+		//Get row id from passed in intent.
+		ROWID = getIntent().getLongExtra(DbAdapter.ROWID, 0);
 
-		Cursor mCursor = mDbA.fetchListItem(mRowId);
+		Cursor mCursor = mDbA.fetchListItem(ROWID);
 		
+		//Set list header text.
 		int KEY_LIST_HEADER_COLUMN_INDEX = mCursor
 				.getColumnIndex(DbAdapter.LIST_HEADER);
 		String listname = mCursor.getString(KEY_LIST_HEADER_COLUMN_INDEX);
 		listHeader = (TextView) findViewById(R.id.listname);
 		listHeader.setText(listname);
-
-		// mListView = (ListView) findViewById(R.id.listview);
 		
+		//Initialize ArrayList variable.
 		int KEY_LIST_COLUMN_INDEX = mCursor
 				.getColumnIndex(DbAdapter.LIST);
 		String sDisplay = mCursor.getString(KEY_LIST_COLUMN_INDEX);
 		list = interpret(sDisplay);
 		
 		popResult = (TextView) findViewById(R.id.popresult);
+		
+		//Initialize and add OnClickListener to pop button.
 		pop = (Button) findViewById(R.id.pop);
 		hookUpPop();
-		// fillData();
 
+		//Add up navigation affordance to the Action Bar.
 		ActionBar actionBar = getActionBar();
         actionBar.setDisplayHomeAsUpEnabled(true);
         actionBar.setTitle("Add List");
@@ -75,19 +75,6 @@ public class PopActivity extends Activity {
 			}
 		});
 	}
-
-	/*
-	 * @SuppressWarnings("deprecation") private void fillData(){ Cursor mCursor
-	 * = mDbA.fetchListItem(mRowId); startManagingCursor(mCursor);
-	 * 
-	 * int KEY_LIST_COLUMN_INDEX =
-	 * mCursor.getColumnIndexOrThrow(DbAdapter.LIST); String sDisplay =
-	 * mCursor.getString(KEY_LIST_COLUMN_INDEX); ArrayList<String> aDisplay =
-	 * interpret(sDisplay);
-	 * 
-	 * aa = new ArrayAdapter<String>(this, R.layout.list_item, aDisplay);
-	 * mListView.setAdapter(aa); }
-	 */
 
 	private ArrayList<String> interpret(String s) {
 		ArrayList<String> a = new ArrayList<String>();
