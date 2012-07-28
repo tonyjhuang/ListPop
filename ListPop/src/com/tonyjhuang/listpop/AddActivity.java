@@ -2,22 +2,23 @@ package com.tonyjhuang.listpop;
 
 import java.util.ArrayList;
 
+import android.app.ActionBar;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.ContextMenu;
+import android.view.ContextMenu.ContextMenuInfo;
 import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.ContextMenu.ContextMenuInfo;
 import android.view.View.OnClickListener;
 import android.view.View.OnKeyListener;
+import android.widget.AdapterView.AdapterContextMenuInfo;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
-import android.widget.AdapterView.AdapterContextMenuInfo;
 
 public class AddActivity extends Activity {
 	private static final int DELETE_ID = Menu.FIRST;
@@ -44,6 +45,10 @@ public class AddActivity extends Activity {
         
         aa = new ArrayAdapter<String>(this, R.layout.list_item, list);
         currentEntries.setAdapter(aa);
+        
+        ActionBar actionBar = getActionBar();
+        actionBar.setDisplayHomeAsUpEnabled(true);
+        actionBar.setTitle("Add List");
 	}
 	
 	private void hookUpListEntry(){

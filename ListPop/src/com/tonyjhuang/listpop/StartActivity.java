@@ -38,7 +38,7 @@ public class StartActivity extends Activity {
 	@Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.choose);
+        setContentView(R.layout.start);
         
         //Start SQLite database;
         mDbA = new DbAdapter(this);
@@ -199,6 +199,28 @@ public class StartActivity extends Activity {
         getMenuInflater().inflate(R.menu.action_menu, menu);
         return true;
     }
+    
+    @Override
+        public boolean onOptionsItemSelected(MenuItem item){
+            // same as using a normal menu
+            switch(item.getItemId()) {
+            case R.id.menu_edit:
+            	if(adapter instanceof CustomCursorAdapter)
+    	    		fillData();
+    	    	else 
+    	    		fillEditData();
+            	
+                break;
+                
+            case R.id.menu_add:
+            	Intent i = new Intent(StartActivity.this, AddActivity.class);
+    			startActivityForResult(i, ADD_ACTIVITY);
+                break;
+            }
+            
+            return true;
+        }
+
 }
 
     
