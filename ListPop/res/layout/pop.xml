@@ -3,35 +3,31 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:paddingTop="@dimen/padding_large" >
+
     <TextView
         android:id="@+id/listname"
         android:layout_width="wrap_content"
-	    android:layout_height="wrap_content"
-	    android:layout_centerHorizontal="true"
-	    android:textSize="20dp" />
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="30dp"
+        android:textSize="20dp" />
     
-    <Button
-        android:id="@+id/pop"
-	    android:layout_width="wrap_content"
-	    android:layout_height="wrap_content"
-	    android:layout_centerHorizontal="true"
-	    android:layout_below="@id/listname"
-	    android:text="@string/poplist" /> 
-    
-    <TextView
+	<TextView
         android:id="@+id/popresult"
         android:layout_width="wrap_content"
-	    android:layout_height="wrap_content"
-	    android:layout_centerHorizontal="true"
-	    android:layout_below="@id/pop"
-	    android:textSize="30dp" />
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/listname"
+        android:layout_marginTop="60dp"
+        android:layout_centerHorizontal="true"
+        android:textSize="60dp" />
+    <Button
+        android:id="@+id/pop"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:text="@string/poplist" />
+
     
-	<ListView
-	    android:id="@+id/listview"
-	    android:layout_width="wrap_content"
-	    android:layout_height="wrap_content"
-	    android:layout_centerHorizontal="true"
-	    android:layout_below="@id/pop"
-	    android:layout_marginTop="60dp" />
-	
+
 </RelativeLayout>

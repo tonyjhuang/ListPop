@@ -2,18 +2,16 @@
 
     <string name="app_name">ListPop</string>
     <string name="menu_settings">Settings</string>
-    <string name="choose">Choose your list!</string>
-    <string name="chooseButton">Lists</string>
+    <string name="listpopbanner">ListPop!</string>
     <string name="nexttext">Next</string>
     <string name="poptext">Move to pop!</string>
     <string name="poplist">Pop!</string>
     <string name="add">+</string>
-    <string name="edit">Edit</string>
     <string name="addlistname">List Name</string>
     <string name="addlistnameprompt">Enter text here..</string>
     <string name="addlistitem">Entries</string>
     <string name="addlistitemprompt">Add new entries to your list here..</string>
-    <string name="finishednewlist">Finish</string>
+    <string name="finishednewlist">Save List</string>
     <string name="menu_delete">Delete</string>
     <string name="no_items">Add at least one item!</string>
     <string name="no_header">Missing name!</string>
@@ -39,7 +37,9 @@
         <item>y</item><item>z</item>
     </string-array>
     <string name ="to">to</string>
-    <string name="Edit">E</string>
-    <string name="Delete">D</string>
+    <string name="edit">E</string>
+    <string name="delete">D</string>
+    <string name="menu_add">Add</string>
+    <string name="menu_edit">Edit</string>
 
 </resources>

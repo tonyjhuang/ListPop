@@ -30,7 +30,7 @@
 	    android:layout_height="wrap_content"
 	    android:layout_centerHorizontal="true"
 	    android:paddingTop="50dp"
-	    android:text="@string/choose"
+	    android:text="@string/listpopbanner"
 	    android:textSize="40dp" />
 	
 	<ListView
