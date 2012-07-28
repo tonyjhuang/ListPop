@@ -13,64 +13,48 @@ import android.widget.Toast;
 
 public class CustomCursorAdapter extends CursorAdapter {
 	private LayoutInflater mInflater;
-	private Cursor c;
+	private Cursor cursor;
 	private Context context;
-	private int ROWID_INDEX;
-	private int LIST_HEADER_INDEX;
-	Button editLine, deleteLine;
+	private int ROWID_INDEX, LIST_HEADER_INDEX;
+	private Button editLine, deleteLine;
 
 	@SuppressWarnings("deprecation")
 	public CustomCursorAdapter(Context _context, Cursor _c) {
 		// Cache the LayoutInflate to avoid asking for a new one each time.
 		super(_context, _c);
-		
-		mInflater = LayoutInflater.from(context);
-		this.c = _c;
+
+		mInflater = LayoutInflater.from(_context);
+		this.cursor = _c;
 		this.context = _context;
-		
-		ROWID_INDEX = c.getColumnIndex(DbAdapter.ROWID);
-		//LIST_INDEX = c.getColumnIndex(DbAdapter.LIST);
-		LIST_HEADER_INDEX = c.getColumnIndex(DbAdapter.LIST_HEADER);
+
+		ROWID_INDEX = cursor.getColumnIndex(DbAdapter.ROWID);
+		LIST_HEADER_INDEX = cursor.getColumnIndex(DbAdapter.LIST_HEADER);
 	}
 
 	@Override
-	public void bindView(View view, Context context, Cursor cursor) {
+	public void bindView(View view, final Context context, Cursor cursor) {
 		TextView listHeader = (TextView)view.findViewById(R.id.listname);
-		editLine = (Button)view.findViewById(R.id.editline);
-		deleteLine = (Button)view.findViewById(R.id.deleteline);
-		
+		Button editLine = (Button)view.findViewById(R.id.editline);
+		Button deleteLine = (Button)view.findViewById(R.id.deleteline);
+
 		listHeader.setText(cursor.getString(LIST_HEADER_INDEX));
-		
+
 		long id = cursor.getLong(ROWID_INDEX);
 		editLine.setTag(id);
 		deleteLine.setTag(id);
-		
-		hookUpEditLine();
-		hookUpDeleteLine();
-		
-	}
-	
-	//TODO: Attach onClickListener to Buttons
-	private void hookUpEditLine(){
-		editLine.setOnClickListener(new OnClickListener(){
+
+		OnClickListener ocl = new OnClickListener(){
 			@Override
 			public void onClick(View v){
-				Toast t = 
-					Toast.makeText(context, v.getTag().toString(), Toast.LENGTH_SHORT);
+				Toast t = Toast.makeText(context, v.getTag().toString(), 
+					Toast.LENGTH_SHORT);
+				
 				t.show();
 			}
-		});
-	}
-	
-	private void hookUpDeleteLine(){
-		deleteLine.setOnClickListener(new OnClickListener(){
-			@Override
-			public void onClick(View v){
-				Toast t = 
-					Toast.makeText(context, v.getTag().toString(), Toast.LENGTH_SHORT);
-				t.show();
-			}
-		});
+		};
+		
+		editLine.setOnClickListener(ocl);
+		deleteLine.setOnClickListener(ocl);
 	}
 
 	@Override
@@ -78,5 +62,5 @@ public class CustomCursorAdapter extends CursorAdapter {
 		return mInflater.inflate(R.layout.list_item_e, null);
 	}
 
-	
+
 }
