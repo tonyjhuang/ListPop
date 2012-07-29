@@ -42,10 +42,12 @@ public class PopActivity extends Activity {
 		listHeader = (TextView) findViewById(R.id.listname);
 		listHeader.setText(listname);
 		
-		//Initialize ArrayList variable.
+		//Retrieve the codified String from the Cursor result set.
 		int KEY_LIST_COLUMN_INDEX = mCursor
 				.getColumnIndex(DbAdapter.LIST);
 		String sDisplay = mCursor.getString(KEY_LIST_COLUMN_INDEX);
+		
+		//Initialize ArrayList variable.
 		list = interpret(sDisplay);
 		
 		popResult = (TextView) findViewById(R.id.popresult);
@@ -61,6 +63,8 @@ public class PopActivity extends Activity {
 		
 	}
 
+	//Create a random number generator, and set the popResult textview
+	// text to a random String returned from the list field.
 	private void hookUpPop() {
 		pop.setOnClickListener(new OnClickListener() {
 			@Override
@@ -76,6 +80,8 @@ public class PopActivity extends Activity {
 		});
 	}
 
+	//Returns an ArrayList of Strings given a codified String
+	// returned from the SQLite database.
 	private ArrayList<String> interpret(String s) {
 		ArrayList<String> a = new ArrayList<String>();
 		String current = s;
@@ -91,6 +97,8 @@ public class PopActivity extends Activity {
 		return a;
 	}
 
+	
+	//Close up that database, son!
 	@Override
 	public void onDestroy() {
 		super.onDestroy();
