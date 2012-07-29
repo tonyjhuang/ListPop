@@ -12,9 +12,6 @@ import android.database.sqlite.SQLiteDatabase.CursorFactory;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 
-
-
-
 public class DbAdapter {
 
 	private static final String DATABASE_NAME="ListPopDB.db";
@@ -35,7 +32,7 @@ public class DbAdapter {
 	}
 	
 	//Opens Read/Write-accessible database.
-	//Call this in onCreate, onResume!
+	//Call this in onCreate in the main activity!
 	public DbAdapter open() throws android.database.SQLException{
 		mListPopDBOpenHelper = new ListPopDBOpenHelper(mCtx, DATABASE_NAME, 
 														null, DATABASE_VERSION);
@@ -44,22 +41,13 @@ public class DbAdapter {
 	}
 	
 	//Closes database to free up resources.
-	//Call this in onStop!
+	//Call this in onDestroy only!
 	public void close(){
 		mListPopDBOpenHelper.close();
 	}
 	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
+	//Enters a row into the database with a String as the list name and
+	// a String as the ArrayList. See: arraylistToString().
 	public long enterList(String list_header, ArrayList<String> array) {
 		String sArray = arraylistToString(array);
 		
@@ -69,9 +57,9 @@ public class DbAdapter {
 		
 		return mDb.insert(DATABASE_TABLE, null, values);
 	}
-	
     
-  
+	//Converts an ArrayList of Strings into a single string to
+	// store in the database. Used to avoid serializing ArrayLists.
 	private String arraylistToString(ArrayList<String> arraylist){
 		String s = "";
 		Collections.reverse(arraylist);
@@ -81,37 +69,19 @@ public class DbAdapter {
 		return s;
 	}
 	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
+	//Deletes a single row in the database and returns a boolean
+	// representing whether the transaction was successful or not.
 	public boolean deleteListItem(long id){
 		return mDb.delete(DATABASE_TABLE,  ROWID+"="+id, null) > 0;
 	}
 	
+	//Deletes all rows in database. Has no usage now but will probably
+	// be helpful in future debugging...
 	public void deleteAll(){
 		mDb.delete(DATABASE_TABLE, null, null);
 	}
 	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
+	//Returns a result set containing one row.
 	public Cursor fetchListItem(long rowId) throws SQLException {
 		Cursor mCursor =
 				mDb.query(true, DATABASE_TABLE, new String[] 
@@ -123,27 +93,20 @@ public class DbAdapter {
 		return mCursor;
 	}
 	
+	//Returns a result set containing all rows in the database.
 	public Cursor fetchAll(){
 		return mDb.query(DATABASE_TABLE, new String[] {ROWID, LIST_HEADER,LIST},
 				null, null, null, null, null);
 	}
 	
-	public long fetchNumberOfLists(){
-		return fetchAll().getCount();
+	//Returns true if there are no rows in the database.
+	public boolean isEmpty(){
+		return fetchAll().getCount() == 0;
 	}	
 
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
+	//Implementation of SQLiteOpen Helper. Creates database when needed and
+	// aids in rolling out database upgrades. This functionality is
+	// probably not needed though.
 	private static class ListPopDBOpenHelper extends SQLiteOpenHelper {
 		
 		private static final String DATABASE_CREATE=
