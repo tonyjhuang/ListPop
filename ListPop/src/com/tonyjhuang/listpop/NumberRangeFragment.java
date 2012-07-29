@@ -12,7 +12,7 @@ public class NumberRangeFragment extends Fragment{
 	
 	private static final int LOWEST_INDEX = 0;
 	private static final int HIGHEST_INDEX = 99;
-	private static final int UPPER_START_POINT = 10;
+	private static final int UPPER_START_INDEX = 10;
 	
 	@Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -23,9 +23,12 @@ public class NumberRangeFragment extends Fragment{
 	
 	@Override
 	public void onViewCreated(View view, Bundle savedInstanceState) {
+		//Initialize UI references.
 		lower = (NumberPicker) view.findViewById(R.id.lowerindex);
 		upper = (NumberPicker) view.findViewById(R.id.upperindex);
 		
+		//Set both pickers' lower and upper bounds, 
+		// as well as their starting indices.
 		lower.setMinValue(LOWEST_INDEX);
 		upper.setMinValue(LOWEST_INDEX);
 		
@@ -33,15 +36,14 @@ public class NumberRangeFragment extends Fragment{
 		upper.setMaxValue(HIGHEST_INDEX);
 		
 		lower.setValue(LOWEST_INDEX);
-		upper.setValue(UPPER_START_POINT);
+		upper.setValue(UPPER_START_INDEX);
 	}
 	
-	public NumberPicker getNumberPicker(String s){
-		if(s.equals("lower")){
-			return lower;
-		} else if(s.equals("upper")){
-			return upper;
-		}
-		return null;
+	public NumberPicker getLowerBoundPicker(){
+		return lower;
+	}
+	
+	public NumberPicker getUpperBoundPicker(){
+		return upper;
 	}
 }

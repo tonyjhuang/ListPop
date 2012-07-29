@@ -19,17 +19,17 @@ public class LetterRangeFragment extends Fragment {
 	
 	@Override
 	public void onViewCreated(View view, Bundle savedInstanceState) {
+		//Initialize UI references.
 		lower = (Spinner) view.findViewById(R.id.lowerindex);
 		upper = (Spinner) view.findViewById(R.id.upperindex);
 		
 	}
 	
-	public Spinner getLetterSpinner(String s){
-		if(s.equals("lower")){
-			return lower;
-		} else if(s.equals("upper")){
-			return upper;
-		}
-		return null;
+	public Spinner getLowerBoundSpinner(){
+		return lower;
+	}
+	
+	public Spinner getUpperBoundSpinner(){
+		return upper;
 	}
 }

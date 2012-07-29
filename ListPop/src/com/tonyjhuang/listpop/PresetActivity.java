@@ -74,8 +74,8 @@ public class PresetActivity extends Activity {
 	}
 	
 	private void checkNumberFinale(NumberRangeFragment nrf){
-		int low = nrf.getNumberPicker("lower").getValue();
-		int high = nrf.getNumberPicker("upper").getValue();
+		int low = nrf.getLowerBoundPicker().getValue();
+		int high = nrf.getUpperBoundPicker().getValue();
 		String title = getListTitle();
 		
 		if(low > high)
@@ -103,8 +103,10 @@ public class PresetActivity extends Activity {
 	}
 	
 	private void checkLetterFinale(LetterRangeFragment lrf){
-		String low = lrf.getLetterSpinner("lower").getSelectedItem().toString();
-		String high = lrf.getLetterSpinner("upper").getSelectedItem().toString();
+		String low = lrf.getLowerBoundSpinner()
+				.getSelectedItem().toString();
+		String high = lrf.getUpperBoundSpinner()
+				.getSelectedItem().toString();
 		
 		String title = getListTitle();
 		
