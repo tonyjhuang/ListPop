@@ -19,20 +19,17 @@ import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.SimpleCursorAdapter;
-import android.widget.TextView;
 
 public class StartActivity extends Activity {
 	private static final int ADD_ACTIVITY = 1;
 	private static final int PRESETS_ACTIVITY = ADD_ACTIVITY + 1;
-	private static final int BACK_BUTTON_PRESSED = -1;
 	private static final int DELETE_ID = Menu.FIRST;
 	
 	private DbAdapter mDbA;
-	ListView mListView;
-	TextView mTextView;
-	Button presets;
+	private ListView mListView;
+	private Button presets;
 	private BaseAdapter adapter = null;
-	Cursor c;
+	private Cursor c;
 	
 	
 	@Override
@@ -40,27 +37,27 @@ public class StartActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.start);
         
-        //Start SQLite database;
+        //Start SQLite database.
         mDbA = new DbAdapter(this);
         mDbA.open();
         
+        //Initialize cursor (result set of all rows from SQLite database).
         c = mDbA.fetchAll();
        
+        //Register listview for context menu and ItemClickListener.
         mListView = (ListView)findViewById(R.id.listselection);
 		hookUpItemClickListener();
 		registerForContextMenu(mListView);
 		
-		mTextView = (TextView)findViewById(R.id.textview);
-		
 		presets = (Button)findViewById(R.id.presets);
 		hookUpPresets();
 		
+		//Populate listview with a SimpleCursorAdapter.
 		fillData();
     }
    
     private void hookUpItemClickListener(){
     	mListView.setOnItemClickListener(new OnItemClickListener(){
-
 			@Override
 			public void onItemClick(AdapterView<?> list, View view, int position,
 					long id) {
@@ -83,25 +80,31 @@ public class StartActivity extends Activity {
     public boolean onContextItemSelected(MenuItem item) {
         switch(item.getItemId()) {
             case DELETE_ID:
-                AdapterContextMenuInfo info = (AdapterContextMenuInfo) item.getMenuInfo();
+            	//Delete row from database.
+                AdapterContextMenuInfo info = 
+                	(AdapterContextMenuInfo) item.getMenuInfo();
                 mDbA.deleteListItem(info.id);
                 
+                //Repopulate the activity's listview.
                 fillData();
                 return true;
         }
         return super.onContextItemSelected(item);
     }
     
+    //Start PresetActivity on click.
     private void hookUpPresets(){
     	presets.setOnClickListener(new OnClickListener(){
     		@Override
     		public void onClick(View v){
-    			Intent i = new Intent(StartActivity.this, PresetActivity.class);
+    			Intent i = 
+    				new Intent(StartActivity.this, PresetActivity.class);
     			startActivityForResult(i, PRESETS_ACTIVITY);
     		}
     	});
     }
     
+    //Initialize adapter with a SimpleCursorAdapter and populate listview.
     @SuppressWarnings("deprecation")
    	private void fillData(){
     	updateCursor();
@@ -116,38 +119,43 @@ public class StartActivity extends Activity {
        	mListView.setAdapter(adapter);
        }
     
-    private void fillEditData(){
-    	updateCursor();
-    	
-    	adapter = new CustomCursorAdapter(StartActivity.this, c);
-    	mListView.setAdapter(adapter);
+	//If adapter is a CustomCursorAdapter, mutate to SimpleCursorAdapter.
+    // Otherwise, mutate to CustomCursorAdapter.
+    private void toggleEdit(){
+    	if(adapter instanceof CustomCursorAdapter)
+    		fillData();
+    	else {
+    		updateCursor();
+    		adapter = new CustomCursorAdapter(StartActivity.this, c);
+    		mListView.setAdapter(adapter);
+    	}
     }
     
     @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data){
+    protected void onActivityResult(int requestCode, 
+    		int resultCode, Intent data){
     	switch(resultCode){
-    	case BACK_BUTTON_PRESSED:
-    		mTextView.setText("BACKBUTTONPRESSED!");
-    		break;
-    		
     	case ADD_ACTIVITY:
-    		
+    		//Fall through to next case.
     	case PRESETS_ACTIVITY:
+    		//Get data from intent, and enter it as a new row in the database.
     		String newListHeader = data.getStringExtra("list_header");
     		ArrayList<String> newList = data.getStringArrayListExtra("list");
     		mDbA.enterList(newListHeader, newList);
     		
+    		//Then repopulate listview.
     		fillData();
     		break;
     	}
     }
     
+    //Update cursor result set.
     private void updateCursor(){
     	c = mDbA.fetchAll();
     	c.moveToFirst();
     }
     
-    //If edit mode is enabled, turn it off.
+    //If adapter is a CustomCursorAdapter, mutate to SimpleCusorAdapter.
     // Otherwise, kill the activity.
     @Override
     public void onBackPressed(){
@@ -159,6 +167,7 @@ public class StartActivity extends Activity {
     	
     }
     
+    //Make sure you close the database to liberate system resources!
     @Override
     public void onDestroy(){
     	super.onDestroy();
@@ -173,14 +182,9 @@ public class StartActivity extends Activity {
     
     @Override
         public boolean onOptionsItemSelected(MenuItem item){
-            // same as using a normal menu
             switch(item.getItemId()) {
             case R.id.menu_edit:
-            	if(adapter instanceof CustomCursorAdapter)
-    	    		fillData();
-    	    	else 
-    	    		fillEditData();
-            	
+    	    	toggleEdit();
                 break;
                 
             case R.id.menu_add:

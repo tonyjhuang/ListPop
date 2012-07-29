@@ -33,12 +33,15 @@ public class AddActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.add);
         
+        //Initialize UI elements.
         listName = (EditText) findViewById(R.id.listnamecreation);
         listEntry = (EditText) findViewById(R.id.listitemcreation);
-        hookUpListEntry();
         finishButton = (Button) findViewById(R.id.finishbutton);
-        hookUpFinishButton();
         currentEntries = (ListView) findViewById(R.id.newitems);
+        
+        
+        hookUpListEntry();
+        hookUpFinishButton();
         registerForContextMenu(currentEntries);
         
         list = new ArrayList<String>();
@@ -46,6 +49,7 @@ public class AddActivity extends Activity {
         aa = new ArrayAdapter<String>(this, R.layout.list_item, list);
         currentEntries.setAdapter(aa);
         
+        //Add up navigation affordance to the Action Bar.
         ActionBar actionBar = getActionBar();
         actionBar.setDisplayHomeAsUpEnabled(true);
         actionBar.setTitle("Add List");
@@ -86,7 +90,6 @@ public class AddActivity extends Activity {
 					listEntry.setError(getString(R.string.no_items));
 				}
 				else {
-				
 					Intent i = new Intent();
 					i.putExtra("list_header", listName.getText().toString());
 					i.putStringArrayListExtra("list", list);
