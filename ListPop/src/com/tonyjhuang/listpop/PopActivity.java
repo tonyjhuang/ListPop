@@ -6,19 +6,14 @@ import java.util.Random;
 import android.app.ActionBar;
 import android.app.Activity;
 import android.content.Intent;
-import android.database.Cursor;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
-//import android.widget.ArrayAdapter;
 import android.widget.Button;
-//import android.widget.ListView;
 import android.widget.TextView;
 
 public class PopActivity extends Activity {
-	private Long ROWID;
-	private DbAdapter mDbA;
 	private TextView listHeader, popResult;
 	private Button pop;
 	private ArrayList<String> list = new ArrayList<String>();
@@ -28,29 +23,18 @@ public class PopActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.pop);
 		
-		//Open SQLite database.
-		mDbA = new DbAdapter(this);
-		mDbA.open();
-		
-		//Get row id from passed in intent.
-		ROWID = getIntent().getLongExtra(DbAdapter.ROWID, 0);
-
-		Cursor mCursor = mDbA.fetchListItem(ROWID);
+		//Initialize passed in intent and retrieve extras.
+		Intent intentWithExtras = getIntent();
+		String listName = intentWithExtras
+				.getStringExtra(DbAdapter.LIST_HEADER);
+		String codifiedList = intentWithExtras
+				.getStringExtra(DbAdapter.LIST);
 		
 		//Set list header text.
-		int KEY_LIST_HEADER_COLUMN_INDEX = mCursor
-				.getColumnIndex(DbAdapter.LIST_HEADER);
-		String listname = mCursor.getString(KEY_LIST_HEADER_COLUMN_INDEX);
-		listHeader = (TextView) findViewById(R.id.listname);
-		listHeader.setText(listname);
-		
-		//Retrieve the codified String from the Cursor result set.
-		int KEY_LIST_COLUMN_INDEX = mCursor
-				.getColumnIndex(DbAdapter.LIST);
-		String sDisplay = mCursor.getString(KEY_LIST_COLUMN_INDEX);
+		listHeader.setText(listName);
 		
 		//Initialize ArrayList variable.
-		list = interpret(sDisplay);
+		list = interpret(codifiedList);
 		
 		popResult = (TextView) findViewById(R.id.popresult);
 		
@@ -116,12 +100,5 @@ public class PopActivity extends Activity {
 	            return true;
 	    }
 	    return super.onOptionsItemSelected(item);
-	}
-	
-	//Close up that database, son!
-	@Override
-	public void onDestroy() {
-		super.onDestroy();
-		mDbA.close();
 	}
 }
