@@ -18,13 +18,15 @@ import android.widget.AdapterView.AdapterContextMenuInfo;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.ListView;
 
 public class AddActivity extends Activity {
 	private static final int DELETE_ID = Menu.FIRST;
 	EditText listName, listEntry;
 	ListView currentEntries;
-	Button finishButton;
+	Button finish;
+	ImageButton delete;
 	ArrayList<String> list;
 	ArrayAdapter<String> aa;
 
@@ -33,24 +35,26 @@ public class AddActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.add);
 
-		//Initialize UI elements.
+		// Initialize UI elements.
 		listName = (EditText) findViewById(R.id.listnamecreation);
 		listEntry = (EditText) findViewById(R.id.listitemcreation);
-		finishButton = (Button) findViewById(R.id.finishbutton);
+		finish = (Button) findViewById(R.id.finishbutton);
 		currentEntries = (ListView) findViewById(R.id.newitems);
+		delete = (ImageButton) findViewById(R.id.deleteline);
 
 		hookUpListEntry();
-		hookUpFinishButton();
+		hookUpFinish();
+		hookUpDelete();
 		registerForContextMenu(currentEntries);
 
-		//Create activity with an empty ArrayList.
+		// Create activity with an empty ArrayList.
 		list = new ArrayList<String>();
 
-		//Initialize ArrayAdapter with layout and ArrayList.
+		// Initialize ArrayAdapter with layout and ArrayList.
 		aa = new ArrayAdapter<String>(this, R.layout.list_item_d, list);
 		currentEntries.setAdapter(aa);
 
-		//Add up navigation affordance to the Action Bar.
+		// Add up navigation affordance to the Action Bar.
 		ActionBar actionBar = getActionBar();
 		actionBar.setDisplayHomeAsUpEnabled(true);
 		actionBar.setTitle("Add List");
@@ -62,7 +66,7 @@ public class AddActivity extends Activity {
 			public boolean onKey(View v, int keyCode, KeyEvent event) {
 				if (event.getAction() == KeyEvent.ACTION_DOWN) {
 					switch (keyCode) {
-					//If user inputs Enter, add EditText text to ArrayList and
+					// If user inputs Enter, add EditText text to ArrayList and
 					// clear EditText.
 					case KeyEvent.KEYCODE_ENTER:
 						String currentText = listEntry.getText().toString();
@@ -79,11 +83,11 @@ public class AddActivity extends Activity {
 		});
 	}
 
-	//Error if there is no header or if there are no items.
+	// Error if there is no header or if there are no items.
 	// Otherwise, put list name and ArrayList into intent and finish
 	// the activity.
-	private void hookUpFinishButton() {
-		finishButton.setOnClickListener(new OnClickListener() {
+	private void hookUpFinish() {
+		finish.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
 				if (listName.getText().toString().equals("")) {
@@ -99,6 +103,10 @@ public class AddActivity extends Activity {
 				}
 			}
 		});
+	}
+
+	private void hookUpDelete() {
+
 	}
 
 	@Override

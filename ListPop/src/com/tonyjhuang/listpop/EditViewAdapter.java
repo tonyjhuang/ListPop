@@ -21,7 +21,7 @@ public class EditViewAdapter extends CursorAdapter {
 
 	@SuppressWarnings("deprecation")
 	public EditViewAdapter(Context _context, Cursor _c) {
-		//Cache the LayoutInflate to avoid asking for a new one each time.
+		// Cache the LayoutInflate to avoid asking for a new one each time.
 		super(_context, _c);
 
 		mInflater = LayoutInflater.from(_context);
@@ -34,15 +34,15 @@ public class EditViewAdapter extends CursorAdapter {
 
 	@Override
 	public void bindView(View view, final Context context, Cursor cursor) {
-		//Initialize UI references.
+		// Initialize UI references.
 		TextView listHeader = (TextView) view.findViewById(R.id.listname);
 		edit = (ImageButton) view.findViewById(R.id.editline);
 		delete = (ImageButton) view.findViewById(R.id.deleteline);
 
-		//Set list header textbox.
+		// Set list header textbox.
 		listHeader.setText(cursor.getString(LIST_HEADER_INDEX));
 
-		//Add rowid tag to buttons for easier OnClickListener implementations.
+		// Add rowid tag to buttons for easier OnClickListener implementations.
 		long id = cursor.getLong(ROWID_INDEX);
 		edit.setTag(id);
 		delete.setTag(id);
@@ -57,8 +57,8 @@ public class EditViewAdapter extends CursorAdapter {
 				t.show();
 			}
 		});
-		
-		//Call delete function in parent activity with row id obtained 
+
+		// Call delete function in parent activity with row id obtained
 		// by getTag().
 		delete.setOnClickListener(new OnClickListener() {
 			@Override

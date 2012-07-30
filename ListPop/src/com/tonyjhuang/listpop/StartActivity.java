@@ -55,20 +55,20 @@ public class StartActivity extends Activity {
 			@Override
 			public void onItemClick(AdapterView<?> list, View view,
 					int position, long id) {
-				//Fetch row requested from database.
+				// Fetch row requested from database.
 				Cursor result = mDbA.fetchListItem(id);
-				
-				//Query cursor for codified String.
+
+				// Query cursor for codified String.
 				final int KEY_LIST_COLUMN_INDEX = result
 						.getColumnIndex(DbAdapter.LIST);
 				String pList = result.getString(KEY_LIST_COLUMN_INDEX);
-				
-				//Query cursor for name of list.
+
+				// Query cursor for name of list.
 				final int KEY_LIST_HEADER_COLUMN_INDEX = result
 						.getColumnIndex(DbAdapter.LIST_HEADER);
 				String pName = result.getString(KEY_LIST_HEADER_COLUMN_INDEX);
-				
-				//Start PopActivity with codified String.
+
+				// Start PopActivity with codified String.
 				Intent i = new Intent(StartActivity.this, PopActivity.class);
 				i.putExtra(DbAdapter.LIST_HEADER, pName);
 				i.putExtra(DbAdapter.LIST, pList);
@@ -118,7 +118,8 @@ public class StartActivity extends Activity {
 	// Otherwise, mutate to CustomCursorAdapter.
 	private void toggleEdit() {
 		if (mDbA.isEmpty()) {
-			Toast t = Toast.makeText(this, "Add some lists!", Toast.LENGTH_SHORT);
+			Toast t = Toast.makeText(this, "Add some lists!",
+					Toast.LENGTH_SHORT);
 			t.show();
 		} else {
 			if (adapter instanceof EditViewAdapter)

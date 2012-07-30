@@ -78,7 +78,7 @@ public class PresetActivity extends Activity {
 		});
 	}
 
-	//Check if the range is valid (low < high). If not, Toast. If so,
+	// Check if the range is valid (low < high). If not, Toast. If so,
 	// create intent with extras and finish activity.
 	private void checkNumberFinale(NumberRangeFragment nrf) {
 		int low = nrf.getLowerBoundPicker().getValue();
@@ -102,7 +102,7 @@ public class PresetActivity extends Activity {
 		}
 	}
 
-	//Create ArrayList of numbers from low to high converted to Strings.
+	// Create ArrayList of numbers from low to high converted to Strings.
 	private ArrayList<String> indexToArray(int low, int high) {
 		ArrayList<String> a = new ArrayList<String>();
 		for (int i = low; i < (high + 1); i++) {
@@ -111,7 +111,7 @@ public class PresetActivity extends Activity {
 		return a;
 	}
 
-	//Check if range is valid (low < high). If not, toast. If so,
+	// Check if range is valid (low < high). If not, toast. If so,
 	// check title. If it exists, create intent w/extras and finish activity.
 	// If not, create the default title and finish.
 	private void checkLetterFinale(LetterRangeFragment lrf) {
@@ -144,7 +144,7 @@ public class PresetActivity extends Activity {
 		}
 	}
 
-	//Create ArrayList of letters from low to high through ascii codes.
+	// Create ArrayList of letters from low to high through ascii codes.
 	private ArrayList<String> indexCharToArray(char low, char high) {
 		int _low = (int) low;
 		int _high = (int) high;
@@ -161,9 +161,8 @@ public class PresetActivity extends Activity {
 
 	}
 
-	
-	//Check title. If it exists, create intent w/extras and finish activity.
-	// If not, create the default title and finish. 
+	// Check title. If it exists, create intent w/extras and finish activity.
+	// If not, create the default title and finish.
 	private void checkYesNoFinale(YesNoFragment ynf) {
 		String title = getListTitle();
 
@@ -184,18 +183,19 @@ public class PresetActivity extends Activity {
 		finish();
 	}
 
-	//Create toast alerting user to an invalid range.
+	// Create toast alerting user to an invalid range.
 	private void alertToInvalidRange() {
 		Toast.makeText(PresetActivity.this, "invalid range!",
 				Toast.LENGTH_SHORT).show();
 	}
-	
-	//Get list title from EditText view.
+
+	// Get list title from EditText view.
 	private String getListTitle() {
 		return etitle.getText().toString();
 	}
 
-	//My implementation of OnItemSelectedListener for the Fragment preset Spinner.
+	// My implementation of OnItemSelectedListener for the Fragment preset
+	// Spinner.
 	private class CustomOnItemSelectedListener implements
 			OnItemSelectedListener {
 		private static final int NUMBER_RANGE_SPINNER_INDEX = 0;
