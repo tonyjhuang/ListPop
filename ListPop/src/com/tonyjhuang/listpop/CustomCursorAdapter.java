@@ -47,7 +47,7 @@ public class CustomCursorAdapter extends CursorAdapter {
 		edit.setTag(id);
 		delete.setTag(id);
 
-		// Produce a toast when edit is clicked.
+		// Produce a toast when button is clicked.
 		edit.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {

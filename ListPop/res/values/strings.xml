@@ -41,5 +41,7 @@
     <string name="delete">D</string>
     <string name="menu_add">Add</string>
     <string name="menu_edit">Edit</string>
+    <string name="custom_list">Add Custom List</string>
+    <string name="preset_list">Add Preset List</string>
 
 </resources>

@@ -29,6 +29,8 @@ public final class R {
         public static final int ic_launcher=0x7f020003;
     }
     public static final class id {
+        public static final int add_menu=0x7f09001a;
+        public static final int custom=0x7f09001b;
         public static final int deleteline=0x7f09000d;
         public static final int editline=0x7f09000c;
         public static final int finishbutton=0x7f090005;
@@ -47,6 +49,7 @@ public final class R {
         public static final int newitems=0x7f090004;
         public static final int pop=0x7f09000f;
         public static final int popresult=0x7f09000e;
+        public static final int preset=0x7f09001c;
         public static final int presetnameheader=0x7f090010;
         public static final int presets=0x7f090014;
         public static final int presetspinner=0x7f090011;
@@ -77,6 +80,7 @@ public final class R {
         public static final int addlistname=0x7f050007;
         public static final int addlistnameprompt=0x7f050008;
         public static final int app_name=0x7f050000;
+        public static final int custom_list=0x7f05001a;
         public static final int delete=0x7f050017;
         public static final int edit=0x7f050016;
         public static final int finishednewlist=0x7f05000b;
@@ -93,6 +97,7 @@ public final class R {
         public static final int poplist=0x7f050005;
         public static final int poptext=0x7f050004;
         public static final int preset=0x7f05000f;
+        public static final int preset_list=0x7f05001b;
         public static final int preset_name_header=0x7f050012;
         public static final int preset_spinner_prompt=0x7f050011;
         public static final int to=0x7f050015;

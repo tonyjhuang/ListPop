@@ -19,6 +19,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.PopupMenu;
 
 public class AddActivity extends Activity {
 	private static final int DELETE_ID = Menu.FIRST;
@@ -27,40 +28,40 @@ public class AddActivity extends Activity {
 	Button finishButton;
 	ArrayList<String> list;
 	ArrayAdapter<String> aa;
-	
+	PopupMenu addPopupMenu;
+
 	@Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.add);
-        
-        //Initialize UI elements.
-        listName = (EditText) findViewById(R.id.listnamecreation);
-        listEntry = (EditText) findViewById(R.id.listitemcreation);
-        finishButton = (Button) findViewById(R.id.finishbutton);
-        currentEntries = (ListView) findViewById(R.id.newitems);
-        
-        
-        hookUpListEntry();
-        hookUpFinishButton();
-        registerForContextMenu(currentEntries);
-        
-        list = new ArrayList<String>();
-        
-        aa = new ArrayAdapter<String>(this, R.layout.list_item, list);
-        currentEntries.setAdapter(aa);
-        
-        //Add up navigation affordance to the Action Bar.
-        ActionBar actionBar = getActionBar();
-        actionBar.setDisplayHomeAsUpEnabled(true);
-        actionBar.setTitle("Add List");
+	public void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+		setContentView(R.layout.add);
+
+		// Initialize UI elements.
+		listName = (EditText) findViewById(R.id.listnamecreation);
+		listEntry = (EditText) findViewById(R.id.listitemcreation);
+		finishButton = (Button) findViewById(R.id.finishbutton);
+		currentEntries = (ListView) findViewById(R.id.newitems);
+
+		hookUpListEntry();
+		hookUpFinishButton();
+		registerForContextMenu(currentEntries);
+
+		list = new ArrayList<String>();
+
+		aa = new ArrayAdapter<String>(this, R.layout.list_item, list);
+		currentEntries.setAdapter(aa);
+
+		// Add up navigation affordance to the Action Bar.
+		ActionBar actionBar = getActionBar();
+		actionBar.setDisplayHomeAsUpEnabled(true);
+		actionBar.setTitle("Add List");
 	}
-	
-	private void hookUpListEntry(){
-		listEntry.setOnKeyListener(new OnKeyListener(){
+
+	private void hookUpListEntry() {
+		listEntry.setOnKeyListener(new OnKeyListener() {
 			@Override
 			public boolean onKey(View v, int keyCode, KeyEvent event) {
-				if(event.getAction() == KeyEvent.ACTION_DOWN){
-					switch(keyCode){
+				if (event.getAction() == KeyEvent.ACTION_DOWN) {
+					switch (keyCode) {
 					case KeyEvent.KEYCODE_ENTER:
 						String currentText = listEntry.getText().toString();
 						list.add(0, currentText);
@@ -71,25 +72,24 @@ public class AddActivity extends Activity {
 						break;
 					}
 				}
-				
+
 				return false;
 			}
-			
+
 		});
 	}
-	
-	//Error if there is no header or if there are no items.
+
+	// Error if there is no header or if there are no items.
 	//
-	private void hookUpFinishButton(){
-		finishButton.setOnClickListener(new OnClickListener(){
+	private void hookUpFinishButton() {
+		finishButton.setOnClickListener(new OnClickListener() {
 			@Override
-			public void onClick(View v){
-				if(listName.getText().toString().equals("")){
+			public void onClick(View v) {
+				if (listName.getText().toString().equals("")) {
 					listName.setError(getString(R.string.no_header));
-				} else if(list.size() == 0) {
+				} else if (list.size() == 0) {
 					listEntry.setError(getString(R.string.no_items));
-				}
-				else {
+				} else {
 					Intent i = new Intent();
 					i.putExtra("list_header", listName.getText().toString());
 					i.putStringArrayListExtra("list", list);
@@ -99,30 +99,31 @@ public class AddActivity extends Activity {
 			}
 		});
 	}
-	
+
 	@Override
-    public void onCreateContextMenu(ContextMenu menu, View v,
-            ContextMenuInfo menuInfo) {
-        super.onCreateContextMenu(menu, v, menuInfo);
-        menu.add(0, DELETE_ID, 0, R.string.menu_delete);
-    }
-    
-    @Override
-    public boolean onContextItemSelected(MenuItem item) {
-        switch(item.getItemId()) {
-            case DELETE_ID:
-                AdapterContextMenuInfo info = (AdapterContextMenuInfo) item.getMenuInfo();
-                list.remove(info.position);
-				aa.notifyDataSetChanged();
-                return true;
-        }
-        return super.onContextItemSelected(item);
-    }
-	
+	public void onCreateContextMenu(ContextMenu menu, View v,
+			ContextMenuInfo menuInfo) {
+		super.onCreateContextMenu(menu, v, menuInfo);
+		menu.add(0, DELETE_ID, 0, R.string.menu_delete);
+	}
+
 	@Override
-	public void onBackPressed(){
+	public boolean onContextItemSelected(MenuItem item) {
+		switch (item.getItemId()) {
+		case DELETE_ID:
+			AdapterContextMenuInfo info = (AdapterContextMenuInfo) item
+					.getMenuInfo();
+			list.remove(info.position);
+			aa.notifyDataSetChanged();
+			return true;
+		}
+		return super.onContextItemSelected(item);
+	}
+
+	@Override
+	public void onBackPressed() {
 		setResult(0);
 		finish();
 	}
-	
+
 }

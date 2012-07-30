@@ -20,10 +20,9 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name="PopActivity"></activity>
-        <activity android:name="AddActivity"></activity>
-        <activity android:name="PresetActivity" android:theme="@android:style/Theme.DeviceDefault.Light.Dialog.NoActionBar"></activity>
-        
+        <activity android:name="PopActivity" />
+        <activity android:name="AddActivity" />
+        <activity android:name="PresetActivity" />
     </application>
 
 </manifest>
