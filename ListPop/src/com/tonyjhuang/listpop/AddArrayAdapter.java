@@ -64,6 +64,7 @@ public class AddArrayAdapter extends BaseAdapter {
 		return list;
 	}
 
+	//## Overriden methods ##
 	@Override
 	public int getCount() {
 		return list.size();

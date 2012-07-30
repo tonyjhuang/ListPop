@@ -39,13 +39,13 @@ public class StartActivity extends Activity {
 		mDbA.open();
 
 		// Initialize cursor (result set of all rows from SQLite database).
-		c = mDbA.fetchAll();
+		updateCursor();
 
 		// Register listview for context menu and ItemClickListener.
 		mListView = (ListView) findViewById(R.id.listselection);
 		hookUpItemClickListener();
 		registerForContextMenu(mListView);
-
+		
 		// Populate listview with a SimpleCursorAdapter.
 		fillData();
 	}

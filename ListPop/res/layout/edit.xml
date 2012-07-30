@@ -4,20 +4,19 @@
     android:layout_height="match_parent" >
     
 	<TextView
-	    android:id="@+id/textview"
+	    android:id="@+id/listname"
 	    android:layout_width="wrap_content"
 	    android:layout_height="wrap_content"
 	    android:layout_centerHorizontal="true"
 	    android:paddingTop="50dp"
-	    android:text="@string/listpopbanner"
-	    android:textSize="40dp" />
+	    android:textSize="25dp" />
 	
 	<ListView
-	    android:id="@+id/listselection"
+	    android:id="@+id/list"
 	    android:layout_width="wrap_content"
 	    android:layout_height="wrap_content"
 	    android:layout_centerHorizontal="true"
-	    android:layout_below="@id/textview"
+	    android:layout_below="@id/listname"
 	    android:layout_marginTop="30dp" />
 
 	
