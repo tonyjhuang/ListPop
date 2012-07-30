@@ -51,10 +51,7 @@ public class EditViewAdapter extends CursorAdapter {
 		edit.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				Toast t = Toast.makeText(context, v.getTag().toString(),
-						Toast.LENGTH_SHORT);
-
-				t.show();
+				((StartActivity) context).startEditActivity((Long) v.getTag());
 			}
 		});
 

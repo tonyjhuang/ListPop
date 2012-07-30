@@ -97,6 +97,17 @@ public class DbAdapter {
 		return mDb.query(DATABASE_TABLE, new String[] { ROWID, LIST_HEADER,
 				LIST }, null, null, null, null, null);
 	}
+	
+	public boolean updateListItem(long rowId, String list_header, ArrayList<String> array) {
+		String sArray = arraylistToString(array);
+
+		ContentValues values = new ContentValues();
+		values.put(LIST_HEADER, list_header);
+		values.put(LIST, sArray);
+		
+		return mDb.update(DATABASE_TABLE, values,
+				ROWID+"="+rowId, null) > 0;
+	}
 
 	// Returns true if there are no rows in the database.
 	public boolean isEmpty() {

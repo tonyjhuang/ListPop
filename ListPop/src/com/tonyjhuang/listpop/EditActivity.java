@@ -14,6 +14,8 @@ public class EditActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.edit);
 		
+		mListView = (ListView) findViewById(R.id.list);
+		
 		LayoutInflater inflater = getLayoutInflater();
 		View listHeading = inflater.inflate(R.layout.edit_list_header, mListView, false);
 		mListView.addHeaderView(listHeading);

@@ -22,6 +22,7 @@ import android.widget.Toast;
 public class StartActivity extends Activity {
 	private static final int ADD_ACTIVITY = 1;
 	private static final int PRESETS_ACTIVITY = ADD_ACTIVITY + 1;
+	private static final int EDIT_ACTIVITY = ADD_ACTIVITY + 2;
 	private static final int DELETE_ID = Menu.FIRST;
 
 	private DbAdapter mDbA;
@@ -146,6 +147,29 @@ public class StartActivity extends Activity {
 		adapter = new EditViewAdapter(StartActivity.this, c);
 		mListView.setAdapter(adapter);
 	}
+	
+	// Start EditActivity with an Intent bundled with a row id,
+	// list name, and codified string. This avoids exposing
+	// EditActivity to the database and keeps all database transactions
+	// local.
+	public void startEditActivity(Long tag) {
+		Intent i = new Intent(this, EditActivity.class);
+		i.putExtra(DbAdapter.ROWID, tag);
+		
+		Cursor result = mDbA.fetchListItem(tag);
+		final int KEY_LIST_COLUMN_INDEX = result
+				.getColumnIndex(DbAdapter.LIST);
+		String pList = result.getString(KEY_LIST_COLUMN_INDEX);
+		
+		final int KEY_LIST_HEADER_COLUMN_INDEX = result
+				.getColumnIndex(DbAdapter.LIST_HEADER);
+		String pName = result.getString(KEY_LIST_HEADER_COLUMN_INDEX);
+		
+		i.putExtra(DbAdapter.LIST, pList);
+		i.putExtra(DbAdapter.LIST_HEADER, pName);
+		
+		startActivityForResult(i, EDIT_ACTIVITY);
+	}
 
 	@Override
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -161,6 +185,11 @@ public class StartActivity extends Activity {
 			// Then repopulate listview.
 			fillData();
 			break;
+		
+		case EDIT_ACTIVITY:
+			
+			break;
+			
 		}
 	}
 
