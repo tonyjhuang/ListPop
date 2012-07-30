@@ -130,6 +130,21 @@ public class StartActivity extends Activity {
     		mListView.setAdapter(adapter);
     	}
     }
+
+    //Update cursor result set.
+    private void updateCursor(){
+    	c = mDbA.fetchAll();
+    	c.moveToFirst();
+    }
+    
+    //Called from CustomCursorAdapter. Deletes inputted row from database
+    // and refreshes the cursor & adapter.
+    public void deleteFromAdapter(long rowid){
+    	mDbA.deleteListItem(rowid);
+    	updateCursor();
+    	adapter = new CustomCursorAdapter(StartActivity.this, c);
+		mListView.setAdapter(adapter);
+    }
     
     @Override
     protected void onActivityResult(int requestCode, 
@@ -147,12 +162,6 @@ public class StartActivity extends Activity {
     		fillData();
     		break;
     	}
-    }
-    
-    //Update cursor result set.
-    private void updateCursor(){
-    	c = mDbA.fetchAll();
-    	c.moveToFirst();
     }
     
     //If adapter is a CustomCursorAdapter, mutate to SimpleCusorAdapter.

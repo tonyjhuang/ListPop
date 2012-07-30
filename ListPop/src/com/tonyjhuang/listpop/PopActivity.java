@@ -5,8 +5,10 @@ import java.util.Random;
 
 import android.app.ActionBar;
 import android.app.Activity;
+import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
 //import android.widget.ArrayAdapter;
@@ -97,6 +99,24 @@ public class PopActivity extends Activity {
 		return a;
 	}
 
+	//Implementation of Ancestral Navigation via the Action Bar.
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item) {
+	    switch (item.getItemId()) {
+	        case android.R.id.home:
+	            // This is called when the Home (Up) button is pressed
+	            // in the Action Bar. Code was taken from:
+	        	// http://developer.android.com/training/implementing-navigation/ancestral.html
+	            Intent upIntent = new Intent(this, StartActivity.class);
+	            upIntent.addFlags(
+	                    Intent.FLAG_ACTIVITY_CLEAR_TOP |
+	                    Intent.FLAG_ACTIVITY_NEW_TASK);
+	            startActivity(upIntent);
+	            finish();
+	            return true;
+	    }
+	    return super.onOptionsItemSelected(item);
+	}
 	
 	//Close up that database, son!
 	@Override
