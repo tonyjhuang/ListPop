@@ -121,11 +121,11 @@ public class StartActivity extends Activity {
 			Toast t = Toast.makeText(this, "Add some lists!", Toast.LENGTH_SHORT);
 			t.show();
 		} else {
-			if (adapter instanceof CustomCursorAdapter)
+			if (adapter instanceof EditViewAdapter)
 				fillData();
 			else {
 				updateCursor();
-				adapter = new CustomCursorAdapter(StartActivity.this, c);
+				adapter = new EditViewAdapter(StartActivity.this, c);
 				mListView.setAdapter(adapter);
 			}
 		}
@@ -142,7 +142,7 @@ public class StartActivity extends Activity {
 	public void deleteFromAdapter(long rowid) {
 		mDbA.deleteListItem(rowid);
 		updateCursor();
-		adapter = new CustomCursorAdapter(StartActivity.this, c);
+		adapter = new EditViewAdapter(StartActivity.this, c);
 		mListView.setAdapter(adapter);
 	}
 
@@ -167,7 +167,7 @@ public class StartActivity extends Activity {
 	// Otherwise, kill the activity.
 	@Override
 	public void onBackPressed() {
-		if (adapter instanceof CustomCursorAdapter) {
+		if (adapter instanceof EditViewAdapter) {
 			fillData();
 		} else {
 			finish();

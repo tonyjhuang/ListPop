@@ -12,7 +12,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 @SuppressWarnings("unused")
-public class CustomCursorAdapter extends CursorAdapter {
+public class EditViewAdapter extends CursorAdapter {
 	private LayoutInflater mInflater;
 	private Cursor cursor;
 	private Context context;
@@ -20,7 +20,7 @@ public class CustomCursorAdapter extends CursorAdapter {
 	private ImageButton edit, delete;
 
 	@SuppressWarnings("deprecation")
-	public CustomCursorAdapter(Context _context, Cursor _c) {
+	public EditViewAdapter(Context _context, Cursor _c) {
 		//Cache the LayoutInflate to avoid asking for a new one each time.
 		super(_context, _c);
 

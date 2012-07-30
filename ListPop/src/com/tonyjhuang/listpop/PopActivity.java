@@ -84,7 +84,6 @@ public class PopActivity extends Activity {
 		return a;
 	}
 
-	//Implementation of Ancestral Navigation via the Action Bar.
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
 	    switch (item.getItemId()) {

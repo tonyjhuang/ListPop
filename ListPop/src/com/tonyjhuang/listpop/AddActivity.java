@@ -35,7 +35,7 @@ public class AddActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.add);
 
-		// Initialize UI elements.
+		//Initialize UI elements.
 		listName = (EditText) findViewById(R.id.listnamecreation);
 		listEntry = (EditText) findViewById(R.id.listitemcreation);
 		finishButton = (Button) findViewById(R.id.finishbutton);
@@ -50,7 +50,7 @@ public class AddActivity extends Activity {
 		aa = new ArrayAdapter<String>(this, R.layout.list_item, list);
 		currentEntries.setAdapter(aa);
 
-		// Add up navigation affordance to the Action Bar.
+		//Add up navigation affordance to the Action Bar.
 		ActionBar actionBar = getActionBar();
 		actionBar.setDisplayHomeAsUpEnabled(true);
 		actionBar.setTitle("Add List");
@@ -62,6 +62,8 @@ public class AddActivity extends Activity {
 			public boolean onKey(View v, int keyCode, KeyEvent event) {
 				if (event.getAction() == KeyEvent.ACTION_DOWN) {
 					switch (keyCode) {
+					//If user inputs Enter, add EditText text to ArrayList and
+					// clear EditText.
 					case KeyEvent.KEYCODE_ENTER:
 						String currentText = listEntry.getText().toString();
 						list.add(0, currentText);
@@ -72,15 +74,14 @@ public class AddActivity extends Activity {
 						break;
 					}
 				}
-
 				return false;
 			}
-
 		});
 	}
 
-	// Error if there is no header or if there are no items.
-	//
+	//Error if there is no header or if there are no items.
+	// Otherwise, put list name and ArrayList into intent and finish
+	// the activity.
 	private void hookUpFinishButton() {
 		finishButton.setOnClickListener(new OnClickListener() {
 			@Override
