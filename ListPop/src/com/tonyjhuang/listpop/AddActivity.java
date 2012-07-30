@@ -19,7 +19,6 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
-import android.widget.PopupMenu;
 
 public class AddActivity extends Activity {
 	private static final int DELETE_ID = Menu.FIRST;
@@ -28,7 +27,6 @@ public class AddActivity extends Activity {
 	Button finishButton;
 	ArrayList<String> list;
 	ArrayAdapter<String> aa;
-	PopupMenu addPopupMenu;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -45,9 +43,11 @@ public class AddActivity extends Activity {
 		hookUpFinishButton();
 		registerForContextMenu(currentEntries);
 
+		//Create activity with an empty ArrayList.
 		list = new ArrayList<String>();
 
-		aa = new ArrayAdapter<String>(this, R.layout.list_item, list);
+		//Initialize ArrayAdapter with layout and ArrayList.
+		aa = new ArrayAdapter<String>(this, R.layout.list_item_d, list);
 		currentEntries.setAdapter(aa);
 
 		//Add up navigation affordance to the Action Bar.
