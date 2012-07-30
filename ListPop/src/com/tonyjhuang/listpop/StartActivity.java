@@ -17,7 +17,6 @@ import android.widget.AdapterView.OnItemClickListener;
 import android.widget.BaseAdapter;
 import android.widget.ListView;
 import android.widget.SimpleCursorAdapter;
-import android.widget.TextView;
 import android.widget.Toast;
 
 public class StartActivity extends Activity {

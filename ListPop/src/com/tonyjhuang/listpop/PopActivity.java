@@ -24,13 +24,14 @@ public class PopActivity extends Activity {
 		setContentView(R.layout.pop);
 		
 		//Initialize passed in intent and retrieve extras.
-		Intent intentWithExtras = getIntent();
-		String listName = intentWithExtras
-				.getStringExtra(DbAdapter.LIST_HEADER);
-		String codifiedList = intentWithExtras
-				.getStringExtra(DbAdapter.LIST);
+		Bundle extras = getIntent().getExtras();
+		String listName = extras
+				.getString(DbAdapter.LIST_HEADER);
+		String codifiedList = extras
+				.getString(DbAdapter.LIST);
 		
 		//Set list header text.
+		listHeader = (TextView) findViewById(R.id.listname);
 		listHeader.setText(listName);
 		
 		//Initialize ArrayList variable.
