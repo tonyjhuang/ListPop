@@ -6,8 +6,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.CursorAdapter;
+import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -17,7 +17,7 @@ public class CustomCursorAdapter extends CursorAdapter {
 	private Cursor cursor;
 	private Context context;
 	private int ROWID_INDEX, LIST_HEADER_INDEX;
-	private Button edit, delete;
+	private ImageButton edit, delete;
 
 	@SuppressWarnings("deprecation")
 	public CustomCursorAdapter(Context _context, Cursor _c) {
@@ -36,8 +36,8 @@ public class CustomCursorAdapter extends CursorAdapter {
 	public void bindView(View view, final Context context, Cursor cursor) {
 		//Initialize UI references.
 		TextView listHeader = (TextView) view.findViewById(R.id.listname);
-		edit = (Button) view.findViewById(R.id.editline);
-		delete = (Button) view.findViewById(R.id.deleteline);
+		edit = (ImageButton) view.findViewById(R.id.editline);
+		delete = (ImageButton) view.findViewById(R.id.deleteline);
 
 		//Set list header textbox.
 		listHeader.setText(cursor.getString(LIST_HEADER_INDEX));
