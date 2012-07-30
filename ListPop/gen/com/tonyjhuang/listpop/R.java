@@ -34,7 +34,7 @@ public final class R {
     public static final class id {
         public static final int add_menu=0x7f090019;
         public static final int custom=0x7f09001a;
-        public static final int deleteline=0x7f09000c;
+        public static final int deleteline=0x7f09000b;
         public static final int editline=0x7f09000d;
         public static final int finishbutton=0x7f090005;
         public static final int fragmentframe=0x7f090013;
@@ -42,7 +42,7 @@ public final class R {
         public static final int listitem=0x7f090009;
         public static final int listitemcreation=0x7f090003;
         public static final int listitemheader=0x7f090002;
-        public static final int listname=0x7f09000b;
+        public static final int listname=0x7f09000c;
         public static final int listnamecreation=0x7f090001;
         public static final int listnameheader=0x7f090000;
         public static final int listselection=0x7f090015;

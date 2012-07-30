@@ -1,34 +1,22 @@
 package com.tonyjhuang.listpop;
 
-import java.util.ArrayList;
-
 import android.app.ActionBar;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.ContextMenu;
-import android.view.ContextMenu.ContextMenuInfo;
 import android.view.KeyEvent;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.View.OnKeyListener;
-import android.widget.AdapterView.AdapterContextMenuInfo;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ImageButton;
 import android.widget.ListView;
 
 public class AddActivity extends Activity {
-	private static final int DELETE_ID = Menu.FIRST;
 	EditText listName, listEntry;
 	ListView currentEntries;
 	Button finish;
-	ImageButton delete;
-	ArrayList<String> list;
-	ArrayAdapter<String> aa;
+	AddArrayAdapter aa;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -40,18 +28,12 @@ public class AddActivity extends Activity {
 		listEntry = (EditText) findViewById(R.id.listitemcreation);
 		finish = (Button) findViewById(R.id.finishbutton);
 		currentEntries = (ListView) findViewById(R.id.newitems);
-		delete = (ImageButton) findViewById(R.id.deleteline);
 
 		hookUpListEntry();
 		hookUpFinish();
-		hookUpDelete();
-		registerForContextMenu(currentEntries);
 
-		// Create activity with an empty ArrayList.
-		list = new ArrayList<String>();
-
-		// Initialize ArrayAdapter with layout and ArrayList.
-		aa = new ArrayAdapter<String>(this, R.layout.list_item_d, list);
+		// Initialize AddArrayAdapter with ArrayList.
+		aa = new AddArrayAdapter(this);
 		currentEntries.setAdapter(aa);
 
 		// Add up navigation affordance to the Action Bar.
@@ -60,19 +42,18 @@ public class AddActivity extends Activity {
 		actionBar.setTitle("Add List");
 	}
 
+	// If user inputs Enter, add EditText text to ArrayList and
+	// clear EditText.
 	private void hookUpListEntry() {
 		listEntry.setOnKeyListener(new OnKeyListener() {
 			@Override
 			public boolean onKey(View v, int keyCode, KeyEvent event) {
 				if (event.getAction() == KeyEvent.ACTION_DOWN) {
 					switch (keyCode) {
-					// If user inputs Enter, add EditText text to ArrayList and
-					// clear EditText.
 					case KeyEvent.KEYCODE_ENTER:
 						String currentText = listEntry.getText().toString();
-						list.add(0, currentText);
+						aa.add(currentText);
 						listEntry.setText("");
-						aa.notifyDataSetChanged();
 						return true;
 					default:
 						break;
@@ -92,41 +73,17 @@ public class AddActivity extends Activity {
 			public void onClick(View v) {
 				if (listName.getText().toString().equals("")) {
 					listName.setError(getString(R.string.no_header));
-				} else if (list.size() == 0) {
+				} else if (aa.getCount() == 0) {
 					listEntry.setError(getString(R.string.no_items));
 				} else {
 					Intent i = new Intent();
 					i.putExtra("list_header", listName.getText().toString());
-					i.putStringArrayListExtra("list", list);
+					i.putStringArrayListExtra("list", aa.getList());
 					setResult(1, i);
 					finish();
 				}
 			}
 		});
-	}
-
-	private void hookUpDelete() {
-
-	}
-
-	@Override
-	public void onCreateContextMenu(ContextMenu menu, View v,
-			ContextMenuInfo menuInfo) {
-		super.onCreateContextMenu(menu, v, menuInfo);
-		menu.add(0, DELETE_ID, 0, R.string.menu_delete);
-	}
-
-	@Override
-	public boolean onContextItemSelected(MenuItem item) {
-		switch (item.getItemId()) {
-		case DELETE_ID:
-			AdapterContextMenuInfo info = (AdapterContextMenuInfo) item
-					.getMenuInfo();
-			list.remove(info.position);
-			aa.notifyDataSetChanged();
-			return true;
-		}
-		return super.onContextItemSelected(item);
 	}
 
 	@Override
