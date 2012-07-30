@@ -11,14 +11,13 @@ import android.view.ContextMenu.ContextMenuInfo;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.View.OnClickListener;
 import android.widget.AdapterView;
 import android.widget.AdapterView.AdapterContextMenuInfo;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.BaseAdapter;
-import android.widget.Button;
 import android.widget.ListView;
 import android.widget.SimpleCursorAdapter;
+import android.widget.Toast;
 
 public class StartActivity extends Activity {
 	private static final int ADD_ACTIVITY = 1;
@@ -103,12 +102,17 @@ public class StartActivity extends Activity {
 	// If adapter is a CustomCursorAdapter, mutate to SimpleCursorAdapter.
 	// Otherwise, mutate to CustomCursorAdapter.
 	private void toggleEdit() {
-		if (adapter instanceof CustomCursorAdapter)
-			fillData();
-		else {
-			updateCursor();
-			adapter = new CustomCursorAdapter(StartActivity.this, c);
-			mListView.setAdapter(adapter);
+		if (mDbA.isEmpty()) {
+			Toast t = Toast.makeText(this, "Add some lists!", Toast.LENGTH_SHORT);
+			t.show();
+		} else {
+			if (adapter instanceof CustomCursorAdapter)
+				fillData();
+			else {
+				updateCursor();
+				adapter = new CustomCursorAdapter(StartActivity.this, c);
+				mListView.setAdapter(adapter);
+			}
 		}
 	}
 
@@ -175,12 +179,12 @@ public class StartActivity extends Activity {
 		case R.id.menu_edit:
 			toggleEdit();
 			break;
-			
+
 		case R.id.custom:
 			Intent i = new Intent(StartActivity.this, AddActivity.class);
 			startActivityForResult(i, ADD_ACTIVITY);
 			break;
-		
+
 		case R.id.preset:
 			Intent j = new Intent(StartActivity.this, PresetActivity.class);
 			startActivityForResult(j, ADD_ACTIVITY);
