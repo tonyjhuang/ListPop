@@ -18,8 +18,9 @@ public class AddArrayAdapter extends BaseAdapter {
 	private LayoutInflater mInflater;
 	private ImageButton delete;
 	private TextView itemText;
+	private int layout;
 
-	public AddArrayAdapter(Context context) {
+	public AddArrayAdapter(Context context, int _layout) {
 		super();
 
 		// Create LayoutInflater in constructor to avoid asking for a new one
@@ -27,12 +28,21 @@ public class AddArrayAdapter extends BaseAdapter {
 		mInflater = LayoutInflater.from(context);
 
 		// this.context = context;
-		this.list = new ArrayList<String>();
+		list = new ArrayList<String>();
+		layout = _layout;
+	}
+	
+	public AddArrayAdapter(Context context, int _layout, ArrayList<String> _list){
+		super();
+		
+		mInflater = LayoutInflater.from(context);
+		layout = _layout;
+		list = _list;
 	}
 
 	@Override
 	public View getView(final int position, View convertView, ViewGroup parent) {
-		View view = mInflater.inflate(R.layout.list_item_d, null);
+		View view = mInflater.inflate(layout, null);
 
 		itemText = (TextView) view.findViewById(R.id.listitem);
 		delete = (ImageButton) view.findViewById(R.id.deleteline);

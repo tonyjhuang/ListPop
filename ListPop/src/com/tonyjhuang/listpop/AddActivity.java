@@ -33,7 +33,7 @@ public class AddActivity extends Activity {
 		hookUpFinish();
 
 		// Initialize AddArrayAdapter with ArrayList.
-		aa = new AddArrayAdapter(this);
+		aa = new AddArrayAdapter(this, R.layout.list_item_d);
 		currentEntries.setAdapter(aa);
 
 		// Add up navigation affordance to the Action Bar.
