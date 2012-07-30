@@ -27,7 +27,6 @@ public class StartActivity extends Activity {
 
 	private DbAdapter mDbA;
 	private ListView mListView;
-	private Button presets;
 	private BaseAdapter adapter = null;
 	private Cursor c;
 
@@ -47,9 +46,6 @@ public class StartActivity extends Activity {
 		mListView = (ListView) findViewById(R.id.listselection);
 		hookUpItemClickListener();
 		registerForContextMenu(mListView);
-
-		presets = (Button) findViewById(R.id.presets);
-		hookUpPresets();
 
 		// Populate listview with a SimpleCursorAdapter.
 		fillData();
@@ -89,17 +85,6 @@ public class StartActivity extends Activity {
 			return true;
 		}
 		return super.onContextItemSelected(item);
-	}
-
-	// Start PresetActivity on click.
-	private void hookUpPresets() {
-		presets.setOnClickListener(new OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				Intent i = new Intent(StartActivity.this, PresetActivity.class);
-				startActivityForResult(i, PRESETS_ACTIVITY);
-			}
-		});
 	}
 
 	// Initialize adapter with a SimpleCursorAdapter and populate listview.
