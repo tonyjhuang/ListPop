@@ -18,25 +18,49 @@
     <string name="preset">p</string>
     <string name="number_range_menu_title">Number Range</string>
     <string name="preset_spinner_prompt">Presets</string>
+
     <string-array name="preset_choice_array">
         <item>Number Range</item>
         <item>Letter Range</item>
         <item>Yes/No</item>
+        <item>Eight Ball</item>
         <item>TODO: Make more!</item>
     </string-array>
+
     <string name="preset_name_header">Presets</string>
     <string name="optional">Enter optional list name here..</string>
     <string name="yes_no_fragment_text">Yes/No</string>
+
     <string-array name="letters">
-        <item>a</item><item>b</item><item>c</item><item>d</item>
-        <item>e</item><item>f</item><item>g</item><item>h</item>
-        <item>i</item><item>j</item><item>k</item><item>l</item>
-        <item>m</item><item>n</item><item>o</item><item>p</item>
-        <item>q</item><item>r</item><item>s</item><item>t</item>
-        <item>u</item><item>v</item><item>w</item><item>x</item>
-        <item>y</item><item>z</item>
+        <item>a</item>
+        <item>b</item>
+        <item>c</item>
+        <item>d</item>
+        <item>e</item>
+        <item>f</item>
+        <item>g</item>
+        <item>h</item>
+        <item>i</item>
+        <item>j</item>
+        <item>k</item>
+        <item>l</item>
+        <item>m</item>
+        <item>n</item>
+        <item>o</item>
+        <item>p</item>
+        <item>q</item>
+        <item>r</item>
+        <item>s</item>
+        <item>t</item>
+        <item>u</item>
+        <item>v</item>
+        <item>w</item>
+        <item>x</item>
+        <item>y</item>
+        <item>z</item>
     </string-array>
-    <string name ="to">to</string>
+
+    <string name="to">to</string>
     <string name="edit">E</string>
     <string name="delete">D</string>
     <string name="menu_add">Add</string>
@@ -44,5 +68,27 @@
     <string name="custom_list">Add Custom List</string>
     <string name="preset_list">Add Preset List</string>
     <string name="add_item">Add new item</string>
+
+    <string-array name="eight_ball">
+        <item>It is certain</item>
+        <item>It is decidedly so</item>
+        <item>Without a doubt</item>
+        <item>Definitely</item>
+        <item>You may rely on it</item>
+        <item>As I see it, yes</item>
+        <item>Most likely</item>
+        <item>Yes</item>
+        <item>Signs point to yes</item>
+        <item>Reply hazy, try again</item>
+        <item>Ask again later</item>
+        <item>Better not tell you now</item>
+        <item>Cannot predict now</item>
+        <item>Concentrate and ask again</item>
+        <item>Don't count on it</item>
+        <item>My reply is no</item>
+        <item>My sources say no</item>
+        <item>Outlook no so good</item>
+        <item>Very doubtful</item>
+    </string-array>
 
 </resources>

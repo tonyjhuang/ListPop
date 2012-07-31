@@ -7,6 +7,8 @@
 
 package com.tonyjhuang.listpop;
 
+import org.xmlpull.v1.XmlPullParser;
+
 public final class R {
     public static final class array {
         public static final int letters=0x7f060001;

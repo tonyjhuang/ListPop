@@ -201,6 +201,7 @@ public class PresetActivity extends Activity {
 		private static final int NUMBER_RANGE_SPINNER_INDEX = 0;
 		private static final int LETTER_RANGE_SPINNER_INDEX = 1;
 		private static final int YES_NO_SPINNER_INDEX = 2;
+		private static final int EIGHT_BALL_SPINNER_INDEX = 3;
 
 		@Override
 		public void onItemSelected(AdapterView<?> parent, View view,
@@ -222,6 +223,8 @@ public class PresetActivity extends Activity {
 			case YES_NO_SPINNER_INDEX:
 				newFragment = new YesNoFragment();
 				break;
+			case EIGHT_BALL_SPINNER_INDEX:
+				newFragment = new EightBallFragment();
 			}
 			fragmentTransaction.replace(R.id.fragmentframe, newFragment);
 			fragmentTransaction.commit();
