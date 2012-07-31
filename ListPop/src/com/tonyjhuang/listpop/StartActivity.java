@@ -173,10 +173,14 @@ public class StartActivity extends Activity {
 
 	@Override
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-		switch (resultCode) {
-		case ADD_ACTIVITY:
-			// Fall through to next case.
+		switch (requestCode) {
+		case (ADD_ACTIVITY):
+			if(resultCode == RESULT_CANCELED)
+				break;	
+			// Otherwise, fall through to next case.
 		case PRESETS_ACTIVITY:
+			if(resultCode == RESULT_CANCELED)
+				break;	
 			// Get data from intent, and enter it as a new row in the database.
 			String newListHeader = data.getStringExtra("list_header");
 			ArrayList<String> newList = data.getStringArrayListExtra("list");
@@ -232,7 +236,7 @@ public class StartActivity extends Activity {
 
 		case R.id.preset:
 			Intent j = new Intent(StartActivity.this, PresetActivity.class);
-			startActivityForResult(j, ADD_ACTIVITY);
+			startActivityForResult(j, PRESETS_ACTIVITY);
 			break;
 		}
 

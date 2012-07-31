@@ -97,7 +97,7 @@ public class PresetActivity extends Activity {
 				i.putExtra("list_header", title);
 			}
 			i.putStringArrayListExtra("list", a);
-			setResult(2, i);
+			setResult(RESULT_OK, i);
 			finish();
 		}
 	}
@@ -139,7 +139,7 @@ public class PresetActivity extends Activity {
 
 			ArrayList<String> array = indexCharToArray(_low, _high);
 			i.putStringArrayListExtra("list", array);
-			setResult(2, i);
+			setResult(RESULT_OK, i);
 			finish();
 		}
 	}
@@ -179,7 +179,7 @@ public class PresetActivity extends Activity {
 		}
 
 		i.putStringArrayListExtra("list", ynArray);
-		setResult(2, i);
+		setResult(RESULT_OK, i);
 		finish();
 	}
 

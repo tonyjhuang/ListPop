@@ -79,7 +79,7 @@ public class AddActivity extends Activity {
 					Intent i = new Intent();
 					i.putExtra("list_header", listName.getText().toString());
 					i.putStringArrayListExtra("list", aa.getList());
-					setResult(1, i);
+					setResult(RESULT_OK, i);
 					finish();
 				}
 			}
@@ -88,7 +88,7 @@ public class AddActivity extends Activity {
 
 	@Override
 	public void onBackPressed() {
-		setResult(0);
+		setResult(RESULT_CANCELED);
 		finish();
 	}
 
