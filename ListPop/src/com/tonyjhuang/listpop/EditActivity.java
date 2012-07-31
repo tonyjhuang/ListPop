@@ -3,17 +3,21 @@ package com.tonyjhuang.listpop;
 import java.util.ArrayList;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.View.OnClickListener;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
 
 public class EditActivity extends Activity {
-	ListView mListView;
-	EditText listName;
-	ArrayList<String> list;
-	AddArrayAdapter aaa;
+	private ListView mListView;
+	private EditText listName;
+	private Button finish;
+	private AddArrayAdapter aaa;
+	private long rowid;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -23,18 +27,24 @@ public class EditActivity extends Activity {
 		// Grab UI handles.
 		mListView = (ListView) findViewById(R.id.list);
 		listName = (EditText) findViewById(R.id.listname);
+		finish = (Button) findViewById(R.id.finish);
 
 		String listname = getIntent().getStringExtra(DbAdapter.LIST_HEADER);
 		listName.setText(listname);
-		
-		String codifiedList = getIntent().getStringExtra(DbAdapter.LIST);
-		list = interpret(codifiedList);
 
+		String codifiedList = getIntent().getStringExtra(DbAdapter.LIST);
+		ArrayList<String> list = interpret(codifiedList);
+		
+		rowid = getIntent().getLongExtra(DbAdapter.ROWID, 0);
+
+		hookUpFinish();
+
+		// Populate listview with header + list items.
 		LayoutInflater inflater = getLayoutInflater();
 		View listHeading = inflater.inflate(R.layout.edit_list_header,
 				mListView, false);
 		mListView.addHeaderView(listHeading);
-		
+
 		aaa = new AddArrayAdapter(this, R.layout.list_item_d, list);
 		mListView.setAdapter(aaa);
 	}
@@ -55,4 +65,27 @@ public class EditActivity extends Activity {
 
 		return a;
 	}
+
+	// Error if there is no header or if there are no items.
+	// Otherwise, put list name and ArrayList into intent and finish
+	// the activity.
+	private void hookUpFinish() {
+		finish.setOnClickListener(new OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				if (listName.getText().toString().equals("")) {
+					listName.setError(getString(R.string.no_header));
+					//TODO: list size = 0?
+				} else {
+					Intent i = new Intent();
+					i.putExtra("list_header", listName.getText().toString());
+					i.putStringArrayListExtra("list", aaa.getList());
+					i.putExtra(DbAdapter.ROWID, rowid);
+					setResult(RESULT_OK, i);
+					finish();
+				}
+			}
+		});
+	}
+
 }

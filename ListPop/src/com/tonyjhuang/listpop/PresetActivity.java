@@ -91,12 +91,12 @@ public class PresetActivity extends Activity {
 			ArrayList<String> a = indexToArray(low, high);
 			Intent i = new Intent();
 			if (title == null || title.equals("")) {
-				i.putExtra("list_header",
+				i.putExtra(DbAdapter.LIST_HEADER,
 						String.valueOf(low) + " to " + String.valueOf(high));
 			} else {
-				i.putExtra("list_header", title);
+				i.putExtra(DbAdapter.LIST_HEADER, title);
 			}
-			i.putStringArrayListExtra("list", a);
+			i.putStringArrayListExtra(DbAdapter.LIST, a);
 			setResult(RESULT_OK, i);
 			finish();
 		}
@@ -132,13 +132,13 @@ public class PresetActivity extends Activity {
 			char _High = Character.toUpperCase(_high);
 
 			if (title == null || title.equals("")) {
-				i.putExtra("list_header", _Low + " to " + _High);
+				i.putExtra(DbAdapter.LIST_HEADER, _Low + " to " + _High);
 			} else {
-				i.putExtra("list_header", title);
+				i.putExtra(DbAdapter.LIST_HEADER, title);
 			}
 
 			ArrayList<String> array = indexCharToArray(_low, _high);
-			i.putStringArrayListExtra("list", array);
+			i.putStringArrayListExtra(DbAdapter.LIST, array);
 			setResult(RESULT_OK, i);
 			finish();
 		}
@@ -173,12 +173,12 @@ public class PresetActivity extends Activity {
 		Intent i = new Intent();
 
 		if (title == null || title.equals("")) {
-			i.putExtra("list_header", "Yes or No");
+			i.putExtra(DbAdapter.LIST_HEADER, "Yes or No");
 		} else {
-			i.putExtra("list_header", title);
+			i.putExtra(DbAdapter.LIST_HEADER, title);
 		}
 
-		i.putStringArrayListExtra("list", ynArray);
+		i.putStringArrayListExtra(DbAdapter.LIST, ynArray);
 		setResult(RESULT_OK, i);
 		finish();
 	}

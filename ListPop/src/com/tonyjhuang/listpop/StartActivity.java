@@ -182,8 +182,8 @@ public class StartActivity extends Activity {
 			if(resultCode == RESULT_CANCELED)
 				break;	
 			// Get data from intent, and enter it as a new row in the database.
-			String newListHeader = data.getStringExtra("list_header");
-			ArrayList<String> newList = data.getStringArrayListExtra("list");
+			String newListHeader = data.getStringExtra(DbAdapter.LIST_HEADER);
+			ArrayList<String> newList = data.getStringArrayListExtra(DbAdapter.LIST);
 			mDbA.enterList(newListHeader, newList);
 
 			// Then repopulate listview.
@@ -191,7 +191,11 @@ public class StartActivity extends Activity {
 			break;
 		
 		case EDIT_ACTIVITY:
+			long rowid = data.getLongExtra(DbAdapter.ROWID, 0);
+			String title = data.getStringExtra(DbAdapter.LIST_HEADER);
+			ArrayList<String> list = data.getStringArrayListExtra(DbAdapter.LIST);
 			
+			mDbA.updateListItem(rowid, title, list);
 			break;
 			
 		}
