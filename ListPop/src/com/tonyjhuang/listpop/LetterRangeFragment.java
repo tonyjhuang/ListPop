@@ -22,7 +22,6 @@ public class LetterRangeFragment extends Fragment {
 		// Initialize UI references.
 		lower = (Spinner) view.findViewById(R.id.lowerindex);
 		upper = (Spinner) view.findViewById(R.id.upperindex);
-
 	}
 
 	public Spinner getLowerBoundSpinner() {
