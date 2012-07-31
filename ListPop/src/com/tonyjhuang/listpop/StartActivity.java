@@ -27,7 +27,7 @@ public class StartActivity extends Activity {
 
 	private DbAdapter mDbA;
 	private ListView mListView;
-	private BaseAdapter adapter = null;
+	private BaseAdapter adapter;
 	private Cursor c;
 
 	@Override
