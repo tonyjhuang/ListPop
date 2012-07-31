@@ -191,11 +191,14 @@ public class StartActivity extends Activity {
 			break;
 		
 		case EDIT_ACTIVITY:
+			if(resultCode == RESULT_CANCELED)
+				break;
 			long rowid = data.getLongExtra(DbAdapter.ROWID, 0);
 			String title = data.getStringExtra(DbAdapter.LIST_HEADER);
 			ArrayList<String> list = data.getStringArrayListExtra(DbAdapter.LIST);
 			
 			mDbA.updateListItem(rowid, title, list);
+			adapter.notifyDataSetChanged();
 			break;
 			
 		}

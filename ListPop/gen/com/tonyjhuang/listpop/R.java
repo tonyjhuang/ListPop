@@ -67,7 +67,7 @@ public final class R {
     public static final class layout {
         public static final int add=0x7f030000;
         public static final int edit=0x7f030001;
-        public static final int edit_list_header=0x7f030002;
+        public static final int edit_buttonheader=0x7f030002;
         public static final int letter_range=0x7f030003;
         public static final int list_item=0x7f030004;
         public static final int list_item_d=0x7f030005;

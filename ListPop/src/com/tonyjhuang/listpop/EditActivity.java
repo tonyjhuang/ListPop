@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -16,8 +17,10 @@ public class EditActivity extends Activity {
 	private ListView mListView;
 	private EditText listName;
 	private Button finish;
-	private AddArrayAdapter aaa;
+	private AddArrayAdapter aa;
 	private long rowid;
+	private View buttonHeader;
+	private EditText editHeader;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -41,12 +44,12 @@ public class EditActivity extends Activity {
 
 		// Populate listview with header + list items.
 		LayoutInflater inflater = getLayoutInflater();
-		View listHeading = inflater.inflate(R.layout.edit_list_header,
+		buttonHeader = inflater.inflate(R.layout.edit_buttonheader,
 				mListView, false);
-		mListView.addHeaderView(listHeading);
+		mListView.addHeaderView(buttonHeader);
 
-		aaa = new AddArrayAdapter(this, R.layout.list_item_d, list);
-		mListView.setAdapter(aaa);
+		aa = new AddArrayAdapter(this, R.layout.list_item_d, list);
+		mListView.setAdapter(aa);
 	}
 
 	// Returns an ArrayList of Strings given a codified String
@@ -78,8 +81,9 @@ public class EditActivity extends Activity {
 					//TODO: list size = 0?
 				} else {
 					Intent i = new Intent();
-					i.putExtra("list_header", listName.getText().toString());
-					i.putStringArrayListExtra("list", aaa.getList());
+					i.putExtra(DbAdapter.LIST_HEADER, listName.getText().toString());
+					Log.v("EditActivity", "list: " + aa.getList().toString());
+					i.putStringArrayListExtra(DbAdapter.LIST, aa.getList());
 					i.putExtra(DbAdapter.ROWID, rowid);
 					setResult(RESULT_OK, i);
 					finish();
