@@ -1,10 +1,11 @@
 package com.tonyjhuang.listpop;
 
+import java.util.ArrayList;
+
 import android.app.Activity;
 import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.ContextMenu;
 import android.view.ContextMenu.ContextMenuInfo;
 import android.view.Menu;
@@ -15,8 +16,8 @@ import android.widget.AdapterView.AdapterContextMenuInfo;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.BaseAdapter;
 import android.widget.ListView;
-import android.widget.Toast;
 //import android.widget.SimpleCursorAdapter;
+import android.widget.Toast;
 
 public class StartActivity extends Activity {
 	private static final int ADD_ACTIVITY = 1;
@@ -36,6 +37,14 @@ public class StartActivity extends Activity {
 
 		mDbA2 = new DbAdapter2(this);
 		mDbA2.open();
+
+		// mDbA2.deleteAll();
+		ArrayList<String> a = new ArrayList<String>();
+		a.add("0");
+		a.add("1");
+		List l = new List("HELLO", a);
+		mDbA2.enterList2(l);
+		//
 
 		// Initialize cursor (result set of all rows from SQLite database).
 		updateCursor();
@@ -149,16 +158,13 @@ public class StartActivity extends Activity {
 
 	@Override
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-		switch (requestCode) {
+		switch (resultCode) {
 		case ADD_ACTIVITY:
 			// Fall through to next case.
 		case PRESETS_ACTIVITY:
 			// Get data from intent, and enter it as a new row in the database.
 			List list = new List(data.getStringExtra(DbAdapter2.LIST));
-			Log.v("StartActivity", String.valueOf(list == null));
-			List list2 = list;
-			list2.toString();
-			//mDbA2.enterList(list);
+			mDbA2.enterList2(list);
 
 			// Then repopulate listview.
 			fillData();

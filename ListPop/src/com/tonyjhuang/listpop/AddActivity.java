@@ -4,7 +4,6 @@ import android.app.ActionBar;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -78,9 +77,8 @@ public class AddActivity extends Activity {
 					listEntry.setError(getString(R.string.no_items));
 				} else {
 					Intent i = new Intent();
-					List l = new List(listName.getText().toString(), aa.getList());
-					Log.v("AddActivity", aa.getList().toString());
-					i.putExtra(DbAdapter2.LIST, l.toString());
+					i.putExtra("list_header", listName.getText().toString());
+					i.putStringArrayListExtra("list", aa.getList());
 					setResult(1, i);
 					finish();
 				}

@@ -9,7 +9,6 @@ import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.AdapterView;
@@ -89,15 +88,15 @@ public class PresetActivity extends Activity {
 		if (low > high)
 			alertToInvalidRange();
 		else {
+			ArrayList<String> a = indexToArray(low, high);
 			Intent i = new Intent();
-			String t;
 			if (title == null || title.equals("")) {
-				t = String.valueOf(low) + " to " + String.valueOf(high);
+				i.putExtra("list_header",
+						String.valueOf(low) + " to " + String.valueOf(high));
 			} else {
-				t = title;
+				i.putExtra("list_header", title);
 			}
-			List result = new List(t, indexToArray(low, high));
-			i.putExtra(DbAdapter2.LIST, result.toString());
+			i.putStringArrayListExtra("list", a);
 			setResult(2, i);
 			finish();
 		}
