@@ -43,7 +43,7 @@ public class DbAdapter2 {
 	}
 
 	// Enter a single List into the database.
-	public long enterListv2(List l) {
+	public long enterList2(List l) {
 		ContentValues values = new ContentValues();
 		values.put(LIST, l.toString());
 		return mDb.insert(DATABASE_TABLE, null, values);

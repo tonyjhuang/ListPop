@@ -26,6 +26,7 @@ public class StartActivity extends Activity {
 	private static final int DELETE_ID = Menu.FIRST;
 
 	private DbAdapter mDbA;
+	private DbAdapter2 mDbA2;
 	private ListView mListView;
 	private BaseAdapter adapter;
 	private Cursor c;
@@ -78,6 +79,30 @@ public class StartActivity extends Activity {
 			}
 		});
 	}
+	
+	private void hookUpItemClickListener2() {
+		mListView.setOnItemClickListener(new OnItemClickListener() {
+			@Override
+			public void onItemClick(AdapterView<?> listview, View view,
+					int position, long id) {
+				// Fetch row requested from database.
+				Cursor result = mDbA.fetchListItem(id);
+
+				// Query cursor for codified String.
+				final int KEY_LIST_COLUMN_INDEX = result
+						.getColumnIndex(DbAdapter2.LIST);
+				
+				// Regenerate object from String.
+				List list = new List(result.getString(KEY_LIST_COLUMN_INDEX));
+
+				// Pass List to PopActivity.
+				Intent i = new Intent(StartActivity.this, PopActivity.class);
+				i.putExtra(DbAdapter.LIST, list.toString());
+				startActivity(i);
+
+			}
+		});
+	}
 
 	@Override
 	public void onCreateContextMenu(ContextMenu menu, View v,
@@ -115,8 +140,8 @@ public class StartActivity extends Activity {
 		mListView.setAdapter(adapter);
 	}
 
-	// If adapter is a CustomCursorAdapter, mutate to SimpleCursorAdapter.
-	// Otherwise, mutate to CustomCursorAdapter.
+	// If adapter is a EditViewAdapter, mutate to SimpleCursorAdapter.
+	// Otherwise, mutate to EditViewAdapter.
 	private void toggleEdit() {
 		if (mDbA.isEmpty()) {
 			Toast t = Toast.makeText(this, "Add some lists!",
@@ -139,7 +164,7 @@ public class StartActivity extends Activity {
 		c.moveToFirst();
 	}
 
-	// Called from CustomCursorAdapter. Deletes inputted row from database
+	// Called from EditViewAdapter. Deletes inputted row from database
 	// and refreshes the cursor & adapter.
 	public void deleteFromAdapter(long rowid) {
 		mDbA.deleteListItem(rowid);
@@ -170,6 +195,20 @@ public class StartActivity extends Activity {
 		
 		startActivityForResult(i, EDIT_ACTIVITY);
 	}
+	
+	public void startEditActivity2(Long rowid) {
+		Intent i = new Intent(this, EditActivity.class);
+		i.putExtra(DbAdapter.ROWID, rowid);
+		
+		Cursor result = mDbA.fetchListItem(rowid);
+		final int KEY_LIST_COLUMN_INDEX = result
+				.getColumnIndex(DbAdapter.LIST);
+		List list = new List(result.getString(KEY_LIST_COLUMN_INDEX));
+		
+		i.putExtra(DbAdapter.LIST, list.toString());
+		
+		startActivityForResult(i, EDIT_ACTIVITY);
+	}
 
 	@Override
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -188,6 +227,26 @@ public class StartActivity extends Activity {
 		
 		case EDIT_ACTIVITY:
 			
+			break;
+			
+		}
+	}
+	
+	protected void onActivityResult2(int requestCode, int resultCode, Intent data) {
+		switch (resultCode) {
+		case ADD_ACTIVITY:
+			// Fall through to next case.
+		case PRESETS_ACTIVITY:
+			// Get data from intent, and enter it as a new row in the database.
+			List list = new List(data.getStringExtra(DbAdapter2.LIST));
+			mDbA2.enterList2(list);
+
+			// Then repopulate listview.
+			fillData();
+			break;
+		
+		case EDIT_ACTIVITY:
+			//TODO
 			break;
 			
 		}
