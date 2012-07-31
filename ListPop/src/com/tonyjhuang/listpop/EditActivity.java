@@ -3,24 +3,29 @@ package com.tonyjhuang.listpop;
 import java.util.ArrayList;
 
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.view.View.OnKeyListener;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
 
 public class EditActivity extends Activity {
+	static final int DIALOG_DELETE_ID = 0;
+
 	private ListView mListView;
-	private EditText listName;
-	private Button finish;
+	private EditText listName, additem;
+	private Button finish, newitem;
 	private AddArrayAdapter aa;
 	private long rowid;
 	private View buttonHeader;
-	private EditText editHeader;
+	private View editHeader;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -37,16 +42,23 @@ public class EditActivity extends Activity {
 
 		String codifiedList = getIntent().getStringExtra(DbAdapter.LIST);
 		ArrayList<String> list = interpret(codifiedList);
-		
+
 		rowid = getIntent().getLongExtra(DbAdapter.ROWID, 0);
 
 		hookUpFinish();
 
-		// Populate listview with header + list items.
+		// Initialize both headers that will be added dynamically.
 		LayoutInflater inflater = getLayoutInflater();
-		buttonHeader = inflater.inflate(R.layout.edit_buttonheader,
-				mListView, false);
+		buttonHeader = inflater.inflate(R.layout.edit_buttonheader, mListView,
+				false);
+		editHeader = inflater.inflate(R.layout.edit_editheader, mListView,
+				false);
+
+		// Add buttonHeader to the listview
 		mListView.addHeaderView(buttonHeader);
+
+		newitem = (Button) findViewById(R.id.newitem);
+		hookUpNewItem();
 
 		aa = new AddArrayAdapter(this, R.layout.list_item_d, list);
 		mListView.setAdapter(aa);
@@ -78,11 +90,12 @@ public class EditActivity extends Activity {
 			public void onClick(View v) {
 				if (listName.getText().toString().equals("")) {
 					listName.setError(getString(R.string.no_header));
-					//TODO: list size = 0?
+				} else if (aa.getCount() == 0) {
+					createDeleteDialog();
 				} else {
 					Intent i = new Intent();
-					i.putExtra(DbAdapter.LIST_HEADER, listName.getText().toString());
-					Log.v("EditActivity", "list: " + aa.getList().toString());
+					i.putExtra(DbAdapter.LIST_HEADER, listName.getText()
+							.toString());
 					i.putStringArrayListExtra(DbAdapter.LIST, aa.getList());
 					i.putExtra(DbAdapter.ROWID, rowid);
 					setResult(RESULT_OK, i);
@@ -90,6 +103,70 @@ public class EditActivity extends Activity {
 				}
 			}
 		});
+	}
+
+	private void createDeleteDialog() {
+		// Create dialog that asks the user if they want to delete the list.
+		AlertDialog.Builder builder = new AlertDialog.Builder(EditActivity.this);
+		builder.setMessage("Delete list?");
+		builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+			public void onClick(DialogInterface dialog, int id) {
+				finishDelete();
+			}
+		}).setNegativeButton("No", new DialogInterface.OnClickListener() {
+			public void onClick(DialogInterface dialog, int id) {
+				dialog.cancel();
+			}
+		});
+		AlertDialog alert = builder.create();
+		alert.show();
+	}
+
+	private void hookUpNewItem() {
+		newitem.setOnClickListener(new OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				mListView.setAdapter(null);
+				mListView.addHeaderView(editHeader);
+				mListView.removeHeaderView(buttonHeader);
+				mListView.setAdapter(aa);
+				hookUpAddItem();
+			}
+		});
+	}
+
+	private void hookUpAddItem() {
+		additem = (EditText) findViewById(R.id.edititem);
+		additem.setOnKeyListener(new OnKeyListener() {
+			@Override
+			public boolean onKey(View v, int keyCode, KeyEvent event) {
+				if (event.getAction() == KeyEvent.ACTION_DOWN) {
+					switch (keyCode) {
+					case KeyEvent.KEYCODE_ENTER:
+						String currentText = additem.getText().toString();
+						aa.add(currentText);
+						additem.setText("");
+
+						mListView.setAdapter(null);
+						mListView.removeHeaderView(editHeader);
+						mListView.addHeaderView(buttonHeader);
+						mListView.setAdapter(aa);
+						// aa.notifyDataSetChanged();
+						return true;
+					default:
+						break;
+					}
+				}
+				return false;
+			}
+		});
+	}
+	
+	private void finishDelete() {
+		Intent i = new Intent();
+		i.putExtra(DbAdapter.ROWID, rowid);
+		setResult(RESULT_OK, i);
+		finish();
 	}
 
 }

@@ -43,5 +43,6 @@
     <string name="menu_edit">Edit</string>
     <string name="custom_list">Add Custom List</string>
     <string name="preset_list">Add Preset List</string>
+    <string name="add_item">Add new item</string>
 
 </resources>

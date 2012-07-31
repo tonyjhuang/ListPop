@@ -46,7 +46,7 @@ public class StartActivity extends Activity {
 		mListView = (ListView) findViewById(R.id.listselection);
 		hookUpItemClickListener();
 		registerForContextMenu(mListView);
-		
+
 		// Populate listview with a SimpleCursorAdapter.
 		fillData();
 	}
@@ -147,7 +147,7 @@ public class StartActivity extends Activity {
 		adapter = new EditViewAdapter(StartActivity.this, c);
 		mListView.setAdapter(adapter);
 	}
-	
+
 	// Start EditActivity with an Intent bundled with a row id,
 	// list name, and codified string. This avoids exposing
 	// EditActivity to the database and keeps all database transactions
@@ -155,19 +155,18 @@ public class StartActivity extends Activity {
 	public void startEditActivity(Long tag) {
 		Intent i = new Intent(this, EditActivity.class);
 		i.putExtra(DbAdapter.ROWID, tag);
-		
+
 		Cursor result = mDbA.fetchListItem(tag);
-		final int KEY_LIST_COLUMN_INDEX = result
-				.getColumnIndex(DbAdapter.LIST);
+		final int KEY_LIST_COLUMN_INDEX = result.getColumnIndex(DbAdapter.LIST);
 		String pList = result.getString(KEY_LIST_COLUMN_INDEX);
-		
+
 		final int KEY_LIST_HEADER_COLUMN_INDEX = result
 				.getColumnIndex(DbAdapter.LIST_HEADER);
 		String pName = result.getString(KEY_LIST_HEADER_COLUMN_INDEX);
-		
+
 		i.putExtra(DbAdapter.LIST, pList);
 		i.putExtra(DbAdapter.LIST_HEADER, pName);
-		
+
 		startActivityForResult(i, EDIT_ACTIVITY);
 	}
 
@@ -175,32 +174,42 @@ public class StartActivity extends Activity {
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 		switch (requestCode) {
 		case (ADD_ACTIVITY):
-			if(resultCode == RESULT_CANCELED)
-				break;	
+			if (resultCode == RESULT_CANCELED)
+				break;
 			// Otherwise, fall through to next case.
 		case PRESETS_ACTIVITY:
-			if(resultCode == RESULT_CANCELED)
-				break;	
+			if (resultCode == RESULT_CANCELED)
+				break;
 			// Get data from intent, and enter it as a new row in the database.
 			String newListHeader = data.getStringExtra(DbAdapter.LIST_HEADER);
-			ArrayList<String> newList = data.getStringArrayListExtra(DbAdapter.LIST);
+			ArrayList<String> newList = data
+					.getStringArrayListExtra(DbAdapter.LIST);
 			mDbA.enterList(newListHeader, newList);
 
 			// Then repopulate listview.
 			fillData();
 			break;
-		
+
 		case EDIT_ACTIVITY:
-			if(resultCode == RESULT_CANCELED)
+			if (resultCode == RESULT_CANCELED)
 				break;
 			long rowid = data.getLongExtra(DbAdapter.ROWID, 0);
-			String title = data.getStringExtra(DbAdapter.LIST_HEADER);
-			ArrayList<String> list = data.getStringArrayListExtra(DbAdapter.LIST);
-			
-			mDbA.updateListItem(rowid, title, list);
-			adapter.notifyDataSetChanged();
-			break;
-			
+			if (data.getStringExtra(DbAdapter.LIST_HEADER) == null) {
+				mDbA.deleteListItem(rowid);
+				updateCursor();
+				adapter = new EditViewAdapter(StartActivity.this, c);
+				mListView.setAdapter(adapter);
+				break;
+			} else {
+				String title = data.getStringExtra(DbAdapter.LIST_HEADER);
+				ArrayList<String> list = data
+						.getStringArrayListExtra(DbAdapter.LIST);
+
+				mDbA.updateListItem(rowid, title, list);
+				adapter.notifyDataSetChanged();
+				break;
+			}
+
 		}
 	}
 
