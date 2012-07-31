@@ -6,12 +6,12 @@ import android.app.Activity;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.ListView;
-import android.widget.TextView;
 
 public class EditActivity extends Activity {
 	ListView mListView;
-	TextView listName;
+	EditText listName;
 	ArrayList<String> list;
 	AddArrayAdapter aaa;
 
@@ -22,7 +22,7 @@ public class EditActivity extends Activity {
 
 		// Grab UI handles.
 		mListView = (ListView) findViewById(R.id.list);
-		listName = (TextView) findViewById(R.id.listname);
+		listName = (EditText) findViewById(R.id.listname);
 
 		String listname = getIntent().getStringExtra(DbAdapter.LIST_HEADER);
 		listName.setText(listname);
@@ -35,7 +35,7 @@ public class EditActivity extends Activity {
 				mListView, false);
 		mListView.addHeaderView(listHeading);
 		
-		aaa = new AddArrayAdapter(this, R.layout.list_item_e, list);
+		aaa = new AddArrayAdapter(this, R.layout.list_item_d, list);
 		mListView.setAdapter(aaa);
 	}
 

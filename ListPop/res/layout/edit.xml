@@ -2,14 +2,14 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent" >
-    
-	<TextView
+	<EditText
 	    android:id="@+id/listname"
 	    android:layout_width="wrap_content"
 	    android:layout_height="wrap_content"
 	    android:layout_centerHorizontal="true"
 	    android:paddingTop="50dp"
-	    android:textSize="25dp" />
+	    android:textSize="25dp"
+	    android:inputType="textNoSuggestions" />
 	
 	<ListView
 	    android:id="@+id/list"
@@ -17,7 +17,17 @@
 	    android:layout_height="wrap_content"
 	    android:layout_centerHorizontal="true"
 	    android:layout_below="@id/listname"
-	    android:layout_marginTop="30dp" />
+	    android:layout_above="@+id/finishbutton"
+	    android:layout_marginTop="45dp" >
+	    <requestFocus />
+	</ListView>
+	
+	<Button
+	    android:id="@id/finishbutton"
+	    android:layout_width="match_parent"
+	    android:layout_height="wrap_content"
+	    android:layout_alignParentBottom="true"
+	    android:text="@string/finishednewlist" />
 
 	
 </RelativeLayout>

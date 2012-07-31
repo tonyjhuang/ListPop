@@ -23,7 +23,8 @@
         <activity android:name="PopActivity" />
         <activity android:name="AddActivity" />
         <activity android:name="PresetActivity" />
-        <activity android:name="EditActivity" />
+        <activity android:name="EditActivity"
+            android:windowSoftInputMode="stateHidden" />
     </application>
 
 </manifest>

@@ -34,11 +34,11 @@ public final class R {
     public static final class id {
         public static final int add_menu=0x7f09001b;
         public static final int custom=0x7f09001c;
-        public static final int deleteline=0x7f09000e;
+        public static final int deleteline=0x7f09000d;
         public static final int editline=0x7f09000f;
         public static final int finishbutton=0x7f090005;
         public static final int fragmentframe=0x7f090015;
-        public static final int lineItem=0x7f09000d;
+        public static final int lineItem=0x7f09000e;
         public static final int list=0x7f090007;
         public static final int listitem=0x7f09000c;
         public static final int listitemcreation=0x7f090003;

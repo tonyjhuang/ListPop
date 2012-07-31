@@ -3,6 +3,7 @@ package com.tonyjhuang.listpop;
 import java.util.ArrayList;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -42,11 +43,13 @@ public class AddArrayAdapter extends BaseAdapter {
 
 	@Override
 	public View getView(final int position, View convertView, ViewGroup parent) {
-		View view = mInflater.inflate(layout, null);
+		View view = mInflater.inflate(this.layout, null);
 
 		itemText = (TextView) view.findViewById(R.id.listitem);
 		delete = (ImageButton) view.findViewById(R.id.deleteline);
-		itemText.setText(list.get(position));
+		
+		String s = list.get(position).toString();
+		itemText.setText(s);
 
 		delete.setOnClickListener(new OnClickListener() {
 			@Override
