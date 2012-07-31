@@ -2,6 +2,7 @@ package com.tonyjhuang.listpop;
 
 import android.content.Context;
 import android.database.Cursor;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,11 +19,16 @@ public class StartCursorAdapter extends CursorAdapter {
 
 	@Override
 	public void bindView(View view, Context context, Cursor cursor) {
+		Log.v("StartActivity", "Title: " + cursor.getString(cursor
+				.getColumnIndex(DbAdapter2.LIST)));
+		
+		/*
 		List currentList = new List(cursor.getString(cursor
 				.getColumnIndex(DbAdapter2.LIST)));
 		TextView t = (TextView) view.findViewById(R.id.listitem);
 		
 		t.setText(currentList.getTitle());
+		*/
 	}
 
 	@Override
