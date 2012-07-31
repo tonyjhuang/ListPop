@@ -54,7 +54,6 @@ public class List {
 		
 		//Return the resulting string with the title added in front.
 		return title + "|" + s;
-		
 	}
 
 }
