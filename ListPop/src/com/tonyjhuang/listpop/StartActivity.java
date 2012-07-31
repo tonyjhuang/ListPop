@@ -24,7 +24,8 @@ public class StartActivity extends Activity {
 	private static final int PRESETS_ACTIVITY = ADD_ACTIVITY + 1;
 	private static final int EDIT_ACTIVITY = ADD_ACTIVITY + 2;
 	private static final int DELETE_ID = Menu.FIRST;
-	
+
+	// private DbAdapter mDbA;
 	private DbAdapter2 mDbA2;
 	private ListView mListView;
 	private BaseAdapter adapter;
@@ -34,6 +35,10 @@ public class StartActivity extends Activity {
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.start);
+
+		// Start SQLite database.
+		// mDbA = new DbAdapter(this);
+		// mDbA.open();
 
 		mDbA2 = new DbAdapter2(this);
 		mDbA2.open();
@@ -58,6 +63,29 @@ public class StartActivity extends Activity {
 		fillData();
 	}
 
+	/*
+	 * private void hookUpItemClickListener() {
+	 * mListView.setOnItemClickListener(new OnItemClickListener() {
+	 * 
+	 * @Override public void onItemClick(AdapterView<?> list, View view, int
+	 * position, long id) { // Fetch row requested from database. Cursor result
+	 * = mDbA.fetchListItem(id);
+	 * 
+	 * // Query cursor for codified String. final int KEY_LIST_COLUMN_INDEX =
+	 * result .getColumnIndex(DbAdapter.LIST); String pList =
+	 * result.getString(KEY_LIST_COLUMN_INDEX);
+	 * 
+	 * // Query cursor for name of list. final int KEY_LIST_HEADER_COLUMN_INDEX
+	 * = result .getColumnIndex(DbAdapter.LIST_HEADER); String pName =
+	 * result.getString(KEY_LIST_HEADER_COLUMN_INDEX);
+	 * 
+	 * // Start PopActivity with codified String. Intent i = new
+	 * Intent(StartActivity.this, PopActivity.class);
+	 * i.putExtra(DbAdapter.LIST_HEADER, pName); i.putExtra(DbAdapter.LIST,
+	 * pList); startActivity(i);
+	 * 
+	 * } }); }
+	 */
 	private void hookUpItemClickListener() {
 		mListView.setOnItemClickListener(new OnItemClickListener() {
 			@Override
@@ -89,6 +117,15 @@ public class StartActivity extends Activity {
 		menu.add(0, DELETE_ID, 0, R.string.menu_delete);
 	}
 
+	/*
+	 * @Override public boolean onContextItemSelected(MenuItem item) { switch
+	 * (item.getItemId()) { case DELETE_ID: // Delete row from database.
+	 * AdapterContextMenuInfo info = (AdapterContextMenuInfo) item
+	 * .getMenuInfo(); mDbA.deleteListItem(info.id);
+	 * 
+	 * // Repopulate the activity's listview. fillData(); return true; } return
+	 * super.onContextItemSelected(item); }
+	 */
 	@Override
 	public boolean onContextItemSelected(MenuItem item) {
 		switch (item.getItemId()) {
@@ -112,6 +149,15 @@ public class StartActivity extends Activity {
 		mListView.setAdapter(adapter);
 	}
 
+	/*
+	 * // If adapter is a EditViewAdapter, mutate to SimpleCursorAdapter. //
+	 * Otherwise, mutate to EditViewAdapter. private void toggleEdit() { if
+	 * (mDbA.isEmpty()) { Toast t = Toast.makeText(this, "Add some lists!",
+	 * Toast.LENGTH_SHORT); t.show(); } else { if (adapter instanceof
+	 * EditViewAdapter) fillData(); else { updateCursor(); adapter = new
+	 * EditViewAdapter(StartActivity.this, c); mListView.setAdapter(adapter); }
+	 * } }
+	 */
 	private void toggleEdit() {
 		if (mDbA2.isEmpty()) {
 			Toast t = Toast.makeText(this, "Add some lists!",
@@ -134,6 +180,13 @@ public class StartActivity extends Activity {
 		c.moveToFirst();
 	}
 
+	/*
+	 * // Called from EditViewAdapter. Deletes inputted row from database // and
+	 * refreshes the cursor & adapter. public void deleteFromAdapter(long rowid)
+	 * { mDbA.deleteListItem(rowid); updateCursor(); adapter = new
+	 * EditViewAdapter(StartActivity.this, c); mListView.setAdapter(adapter); }
+	 */
+
 	// Called from EditViewAdapter. Deletes inputted row from database
 	// and refreshes the cursor & adapter.
 	public void deleteFromAdapter(long rowid) {
@@ -143,6 +196,26 @@ public class StartActivity extends Activity {
 		mListView.setAdapter(adapter);
 	}
 
+	/*
+	 * // Start EditActivity with an Intent bundled with a row id, // list name,
+	 * and codified string. This avoids exposing // EditActivity to the database
+	 * and keeps all database transactions // local. public void
+	 * startEditActivity(Long tag) { Intent i = new Intent(this,
+	 * EditActivity.class); i.putExtra(DbAdapter.ROWID, tag);
+	 * 
+	 * Cursor result = mDbA.fetchListItem(tag); final int KEY_LIST_COLUMN_INDEX
+	 * = result.getColumnIndex(DbAdapter.LIST); String pList =
+	 * result.getString(KEY_LIST_COLUMN_INDEX);
+	 * 
+	 * final int KEY_LIST_HEADER_COLUMN_INDEX = result
+	 * .getColumnIndex(DbAdapter.LIST_HEADER); String pName =
+	 * result.getString(KEY_LIST_HEADER_COLUMN_INDEX);
+	 * 
+	 * i.putExtra(DbAdapter.LIST, pList); i.putExtra(DbAdapter.LIST_HEADER,
+	 * pName);
+	 * 
+	 * startActivityForResult(i, EDIT_ACTIVITY); }
+	 */
 	public void startEditActivity(Long rowid) {
 		Intent i = new Intent(this, EditActivity.class);
 		i.putExtra(DbAdapter.ROWID, rowid);
@@ -155,6 +228,24 @@ public class StartActivity extends Activity {
 
 		startActivityForResult(i, EDIT_ACTIVITY);
 	}
+
+	/*
+	 * @Override protected void onActivityResult(int requestCode, int
+	 * resultCode, Intent data) { switch (resultCode) { case ADD_ACTIVITY: //
+	 * Fall through to next case. case PRESETS_ACTIVITY: // Get data from
+	 * intent, and enter it as a new row in the database. String newListHeader =
+	 * data.getStringExtra("list_header"); ArrayList<String> newList =
+	 * data.getStringArrayListExtra("list"); mDbA.enterList(newListHeader,
+	 * newList);
+	 * 
+	 * // Then repopulate listview. fillData(); break;
+	 * 
+	 * case EDIT_ACTIVITY:
+	 * 
+	 * break;
+	 * 
+	 * } }
+	 */
 
 	@Override
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -188,6 +279,12 @@ public class StartActivity extends Activity {
 		}
 
 	}
+
+	/*
+	 * // Make sure you close the database to liberate system resources!
+	 * 
+	 * @Override public void onDestroy() { super.onDestroy(); mDbA.close(); }
+	 */
 
 	// Make sure you close the database to liberate system resources!
 	@Override
