@@ -4,6 +4,7 @@ import android.app.ActionBar;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -17,6 +18,7 @@ public class AddActivity extends Activity {
 	ListView currentEntries;
 	Button finish;
 	AddArrayAdapter aa;
+	private static final String TAG = "AddActivity";
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -68,6 +70,7 @@ public class AddActivity extends Activity {
 	// Otherwise, put list name and ArrayList into intent and finish
 	// the activity.
 	private void hookUpFinish() {
+		
 		finish.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
@@ -77,8 +80,10 @@ public class AddActivity extends Activity {
 					listEntry.setError(getString(R.string.no_items));
 				} else {
 					Intent i = new Intent();
-					i.putExtra("list_header", listName.getText().toString());
-					i.putStringArrayListExtra("list", aa.getList());
+					String newListName = listName.getText().toString();
+					i.putExtra(DbAdapter.LIST_HEADER, newListName);
+					
+					i.putStringArrayListExtra(DbAdapter.LIST, aa.getList());
 					setResult(RESULT_OK, i);
 					finish();
 				}

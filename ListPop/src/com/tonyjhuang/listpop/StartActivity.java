@@ -6,6 +6,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.ContextMenu;
 import android.view.ContextMenu.ContextMenuInfo;
 import android.view.Menu;
@@ -24,6 +25,7 @@ public class StartActivity extends Activity {
 	private static final int PRESETS_ACTIVITY = ADD_ACTIVITY + 1;
 	private static final int EDIT_ACTIVITY = ADD_ACTIVITY + 2;
 	private static final int DELETE_ID = Menu.FIRST;
+	private static final String TAG = "StartActivity";
 
 	private DbAdapter mDbA;
 	private ListView mListView;
@@ -172,45 +174,46 @@ public class StartActivity extends Activity {
 
 	@Override
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-		switch (requestCode) {
-		case (ADD_ACTIVITY):
-			if (resultCode == RESULT_CANCELED)
-				break;
-			// Otherwise, fall through to next case.
-		case PRESETS_ACTIVITY:
-			if (resultCode == RESULT_CANCELED)
-				break;
-			// Get data from intent, and enter it as a new row in the database.
-			String newListHeader = data.getStringExtra(DbAdapter.LIST_HEADER);
-			ArrayList<String> newList = data
-					.getStringArrayListExtra(DbAdapter.LIST);
-			mDbA.enterList(newListHeader, newList);
-
-			// Then repopulate listview.
-			fillData();
-			break;
-
-		case EDIT_ACTIVITY:
-			if (resultCode == RESULT_CANCELED)
-				break;
-			long rowid = data.getLongExtra(DbAdapter.ROWID, 0);
-			if (data.getStringExtra(DbAdapter.LIST_HEADER) == null) {
-				mDbA.deleteListItem(rowid);
-				updateCursor();
-				adapter = new EditViewAdapter(StartActivity.this, c);
-				mListView.setAdapter(adapter);
-				break;
-			} else {
-				String title = data.getStringExtra(DbAdapter.LIST_HEADER);
-				ArrayList<String> list = data
+		if (resultCode != RESULT_CANCELED) {
+			
+			switch (requestCode) {
+			
+			case ADD_ACTIVITY:
+				
+			case PRESETS_ACTIVITY:
+				// Get data from intent, and enter it as a new row in the
+				// database.
+				String newListHeader = data
+						.getStringExtra(DbAdapter.LIST_HEADER);
+				ArrayList<String> newList = data
 						.getStringArrayListExtra(DbAdapter.LIST);
+				mDbA.enterList(newListHeader, newList);
 
-				mDbA.updateListItem(rowid, title, list);
-				adapter.notifyDataSetChanged();
+				// Then repopulate listview.
+				fillData();
 				break;
+
+			case EDIT_ACTIVITY:
+				long rowid = data.getLongExtra(DbAdapter.ROWID, 0);
+				if (data.getStringExtra(DbAdapter.LIST_HEADER) == null) {
+					mDbA.deleteListItem(rowid);
+					updateCursor();
+					adapter = new EditViewAdapter(StartActivity.this, c);
+					mListView.setAdapter(adapter);
+					break;
+				} else {
+					String title = data.getStringExtra(DbAdapter.LIST_HEADER);
+					ArrayList<String> list = data
+							.getStringArrayListExtra(DbAdapter.LIST);
+
+					mDbA.updateListItem(rowid, title, list);
+					adapter.notifyDataSetChanged();
+					break;
+				}
 			}
 
-		}
+		} else
+			Log.d(TAG, "resultCode = RESULT_CANCELED");
 	}
 
 	// If adapter is a CustomCursorAdapter, mutate to SimpleCusorAdapter.
