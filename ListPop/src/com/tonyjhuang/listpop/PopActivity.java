@@ -81,7 +81,7 @@ public class PopActivity extends Activity {
 
 				int randomIndex = generator.nextInt(totalNumberOfItems);
 				popResult.setText(list.get(randomIndex));
-				startBounce(300);
+				startBounce(1000);
 				
 				
 				// Animations. Only used once, so why not?
@@ -110,7 +110,7 @@ public class PopActivity extends Activity {
 			public void onClick(View view) {
 				int randomIndex = generator.nextInt(totalNumberOfItems);
 				popResult.setText(list.get(randomIndex));
-				startBounce(0);
+				startBounce(300);
 			}
 		});
 	}
