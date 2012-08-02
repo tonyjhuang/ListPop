@@ -34,17 +34,17 @@ public final class R {
     }
     public static final class id {
         public static final int add_menu=0x7f09001f;
-        public static final int additem=0x7f09000b;
+        public static final int additem=0x7f090007;
         public static final int custom=0x7f090020;
         public static final int deleteline=0x7f090011;
-        public static final int edititem=0x7f09000a;
+        public static final int edititem=0x7f09000b;
         public static final int editline=0x7f090013;
         public static final int eightballlist=0x7f09000c;
-        public static final int finish=0x7f090008;
+        public static final int finish=0x7f090009;
         public static final int finishbutton=0x7f090005;
         public static final int fragmentframe=0x7f090019;
         public static final int lineItem=0x7f090012;
-        public static final int list=0x7f090007;
+        public static final int list=0x7f090008;
         public static final int listitem=0x7f090010;
         public static final int listitemcreation=0x7f090003;
         public static final int listitemheader=0x7f090002;
@@ -55,7 +55,7 @@ public final class R {
         public static final int lowerindex=0x7f09000d;
         public static final int menu_add=0x7f09001e;
         public static final int menu_edit=0x7f09001d;
-        public static final int newitem=0x7f090009;
+        public static final int newitem=0x7f09000a;
         public static final int newitems=0x7f090004;
         public static final int pop=0x7f090015;
         public static final int popresult=0x7f090014;

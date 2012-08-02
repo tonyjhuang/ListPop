@@ -9,7 +9,6 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.KeyEvent;
-import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -23,11 +22,9 @@ public class EditActivity extends Activity {
 
 	private ListView mListView;
 	private EditText listName, additem;
-	private Button finish, newitem;
+	private Button finish;
 	private AddArrayAdapter aa;
 	private long rowid;
-	private View buttonHeader;
-	private View editHeader;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -38,29 +35,17 @@ public class EditActivity extends Activity {
 		mListView = (ListView) findViewById(R.id.list);
 		listName = (EditText) findViewById(R.id.listname);
 		finish = (Button) findViewById(R.id.finish);
+		additem = (EditText) findViewById(R.id.additem);
 
-		String listname = getIntent().getStringExtra(DbAdapter.LIST_HEADER);
-		listName.setText(listname);
-
-		String codifiedList = getIntent().getStringExtra(DbAdapter.LIST);
-		ArrayList<String> list = interpret(codifiedList);
-
-		rowid = getIntent().getLongExtra(DbAdapter.ROWID, 0);
+		// Retrieve information about list from intent.
+		Intent i = getIntent();
+		listName.setText(i.getStringExtra(DbAdapter.LIST_HEADER));
+		ArrayList<String> list = interpret(i.getStringExtra(DbAdapter.LIST));
+		rowid = i.getLongExtra(DbAdapter.ROWID, 0);
 
 		hookUpFinish();
 
-		// Initialize both headers that will be added dynamically.
-		LayoutInflater inflater = getLayoutInflater();
-		buttonHeader = inflater.inflate(R.layout.edit_buttonheader, mListView,
-				false);
-		editHeader = inflater.inflate(R.layout.edit_editheader, mListView,
-				false);
-
-		// Add buttonHeader to the listview
-		mListView.addHeaderView(buttonHeader);
-
-		newitem = (Button) findViewById(R.id.newitem);
-		hookUpNewItem();
+		hookUpAddItem();
 
 		aa = new AddArrayAdapter(this, R.layout.list_item_d, list);
 		mListView.setAdapter(aa);
@@ -129,21 +114,8 @@ public class EditActivity extends Activity {
 		alert.show();
 	}
 
-	private void hookUpNewItem() {
-		newitem.setOnClickListener(new OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				mListView.setAdapter(null);
-				mListView.addHeaderView(editHeader);
-				mListView.removeHeaderView(buttonHeader);
-				mListView.setAdapter(aa);
-				hookUpAddItem();
-			}
-		});
-	}
-
+	// Sets up new item EditText with a shiny new OnKeyListener for ENTER.
 	private void hookUpAddItem() {
-		additem = (EditText) findViewById(R.id.edititem);
 		additem.setOnKeyListener(new OnKeyListener() {
 			@Override
 			public boolean onKey(View v, int keyCode, KeyEvent event) {
@@ -153,12 +125,6 @@ public class EditActivity extends Activity {
 						String currentText = additem.getText().toString();
 						aa.add(currentText);
 						additem.setText("");
-
-						mListView.setAdapter(null);
-						mListView.removeHeaderView(editHeader);
-						mListView.addHeaderView(buttonHeader);
-						mListView.setAdapter(aa);
-						// aa.notifyDataSetChanged();
 						return true;
 					default:
 						break;

@@ -2,16 +2,16 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent" >
-    
+
     <TextView
         android:id="@+id/listnameheader"
         android:layout_width="wrap_content"
-	    android:layout_height="wrap_content"
-	    android:layout_marginLeft="@dimen/title_indent"
-	    android:paddingTop="10dp"
-	    android:textSize="25dp"
-	    android:text="@string/addlistname" />
-    
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/title_indent"
+        android:layout_marginTop="10dp"
+        android:text="@string/addlistname"
+        android:textSize="25dp" />
+
     <EditText
         android:id="@+id/listnamecreation"
         android:layout_width="match_parent"
@@ -19,17 +19,17 @@
         android:layout_below="@id/listnameheader"
         android:hint="@string/addlistnameprompt"
         android:inputType="textNoSuggestions" />
-    
+
     <TextView
         android:id="@+id/listitemheader"
         android:layout_width="wrap_content"
-	    android:layout_height="wrap_content"
-	    android:layout_marginLeft="@dimen/title_indent"
-	    android:paddingTop="20dp"
-	    android:layout_below="@id/listnamecreation"
-	    android:textSize="25dp"
-	    android:text="@string/addlistitem" />
-    
+        android:layout_height="wrap_content"
+        android:layout_below="@id/listnamecreation"
+        android:layout_marginLeft="@dimen/title_indent"
+        android:layout_marginTop="20dp"
+        android:text="@string/addlistitem"
+        android:textSize="25dp" />
+
     <EditText
         android:id="@+id/listitemcreation"
         android:layout_width="match_parent"
@@ -37,20 +37,19 @@
         android:layout_below="@id/listitemheader"
         android:hint="@string/addlistitemprompt"
         android:inputType="textMultiLine|textNoSuggestions" />
-    
+
     <ListView
         android:id="@+id/newitems"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/listitemcreation"
-        android:layout_above="@+id/finishbutton" />
-    
+        android:layout_above="@+id/finishbutton"
+        android:layout_below="@id/listitemcreation" />
+
     <Button
-	    android:id="@id/finishbutton"
-	    android:layout_width="match_parent"
-	    android:layout_height="wrap_content"
-	    android:layout_alignParentBottom="true"
-	    android:text="@string/finishednewlist" />
-    
-    
+        android:id="@id/finishbutton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:text="@string/finishednewlist" />
+
 </RelativeLayout>
