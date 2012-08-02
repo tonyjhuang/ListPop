@@ -11,17 +11,25 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
+import android.widget.RelativeLayout;
+import android.widget.RelativeLayout.LayoutParams;
 import android.widget.TextView;
 
 public class PopActivity extends Activity {
 	private TextView listHeader, popResult;
-	private Button pop;
+	private Button tPop, pPop;
 	private ArrayList<String> list = new ArrayList<String>();
+	private int totalNumberOfItems;
+	private RelativeLayout layout;
+	private Random generator = new Random();
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.pop);
+
+		// Grab Layout handle.
+		layout = (RelativeLayout) findViewById(R.id.rlayout);
 
 		// Initialize passed in intent and retrieve extras.
 		Bundle extras = getIntent().getExtras();
@@ -34,12 +42,24 @@ public class PopActivity extends Activity {
 
 		// Initialize ArrayList variable.
 		list = interpret(codifiedList);
+		totalNumberOfItems = list.size();
 
 		popResult = (TextView) findViewById(R.id.popresult);
 
-		// Initialize and add OnClickListener to pop button.
-		pop = (Button) findViewById(R.id.pop);
-		hookUpPop();
+		// Initialize and add OnClickListener to the transient pop button.
+		tPop = (Button) findViewById(R.id.pop);
+		hookUpTransientPop();
+
+		// Initialize permenant pop button.
+		pPop = new Button(this);
+
+		// Initialize LayoutParams for permenant pop button.
+		RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(
+				LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT);
+		params.addRule(RelativeLayout.ALIGN_PARENT_BOTTOM);
+		params.addRule(RelativeLayout.CENTER_HORIZONTAL);
+		pPop.setLayoutParams(params);
+		pPop.setText(getResources().getString(R.string.poplist));
 
 		// Add up navigation affordance to the Action Bar.
 		ActionBar actionBar = getActionBar();
@@ -50,17 +70,29 @@ public class PopActivity extends Activity {
 
 	// Create a random number generator, and set the popResult textview
 	// text to a random String returned from the list field.
-	private void hookUpPop() {
-		pop.setOnClickListener(new OnClickListener() {
+	// Removes this button from layout and adds pPop.
+	private void hookUpTransientPop() {
+		tPop.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View view) {
-				Random generator = new Random();
-
-				int totalNumberOfItems = list.size();
 
 				int randomIndex = generator.nextInt(totalNumberOfItems);
-				String randomString = list.get(randomIndex);
-				popResult.setText(randomString);
+				popResult.setText(list.get(randomIndex));
+
+				// Remove View from Layout.
+				layout.removeView(tPop);
+				layout.addView(pPop);
+				hookUpPermanentPop();
+			}
+		});
+	}
+
+	private void hookUpPermanentPop() {
+		pPop.setOnClickListener(new OnClickListener() {
+			@Override
+			public void onClick(View view) {
+				int randomIndex = generator.nextInt(totalNumberOfItems);
+				popResult.setText(list.get(randomIndex));
 			}
 		});
 	}
