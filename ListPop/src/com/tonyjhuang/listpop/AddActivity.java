@@ -70,7 +70,7 @@ public class AddActivity extends Activity {
 	// Otherwise, put list name and ArrayList into intent and finish
 	// the activity.
 	private void hookUpFinish() {
-		
+
 		finish.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
@@ -82,7 +82,7 @@ public class AddActivity extends Activity {
 					Intent i = new Intent();
 					String newListName = listName.getText().toString();
 					i.putExtra(DbAdapter.LIST_HEADER, newListName);
-					
+
 					i.putStringArrayListExtra(DbAdapter.LIST, aa.getList());
 					setResult(RESULT_OK, i);
 					finish();

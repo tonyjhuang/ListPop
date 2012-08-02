@@ -62,7 +62,7 @@ public class AddArrayAdapter extends BaseAdapter {
 
 	// Add new String to end of ArrayList.
 	public void add(String s) {
-		list.add(s);
+		list.add(0, s);
 		this.notifyDataSetChanged();
 	}
 

@@ -6,7 +6,6 @@
     <string name="nexttext">Next</string>
     <string name="poptext">Move to pop!</string>
     <string name="poplist">Pop!</string>
-    <string name="add">+</string>
     <string name="addlistname">List Name</string>
     <string name="addlistnameprompt">Enter text here..</string>
     <string name="addlistitem">Entries</string>
@@ -15,9 +14,9 @@
     <string name="menu_delete">Delete</string>
     <string name="no_items">Add at least one item!</string>
     <string name="no_header">Missing name!</string>
-    <string name="preset">p</string>
     <string name="number_range_menu_title">Number Range</string>
     <string name="preset_spinner_prompt">Presets</string>
+    <string name="invalid_range">Invalid range!</string>
 
     <string-array name="preset_choice_array">
         <item>Number Range</item>
@@ -90,5 +89,7 @@
         <item>Outlook no so good</item>
         <item>Very doubtful</item>
     </string-array>
+    
+    <string name="optionaleightball">Add new items to this preset here..</string>
 
 </resources>

@@ -23,7 +23,7 @@ public class PresetActivity extends Activity {
 	private Spinner listType;
 	private Button finish;
 	// Custom Spinner selection listener.
-	CustomOnItemSelectedListener coisl = new CustomOnItemSelectedListener();
+	COISL coisl = new COISL();
 	FragmentManager fm = getFragmentManager();
 	EditText etitle;
 
@@ -52,27 +52,33 @@ public class PresetActivity extends Activity {
 				Fragment currentFragment;
 
 				switch (listType.getSelectedItemPosition()) {
-				case CustomOnItemSelectedListener.NUMBER_RANGE_SPINNER_INDEX:
+				case COISL.NUMBER_RANGE_SPINNER_INDEX:
 					currentFragment = (NumberRangeFragment) fm
 							.findFragmentById(R.id.fragmentframe);
 
 					checkNumberFinale((NumberRangeFragment) currentFragment);
 					break;
 
-				case CustomOnItemSelectedListener.LETTER_RANGE_SPINNER_INDEX:
+				case COISL.LETTER_RANGE_SPINNER_INDEX:
 					currentFragment = (LetterRangeFragment) fm
 							.findFragmentById(R.id.fragmentframe);
 
 					checkLetterFinale((LetterRangeFragment) currentFragment);
 					break;
 
-				case CustomOnItemSelectedListener.YES_NO_SPINNER_INDEX:
+				case COISL.YES_NO_SPINNER_INDEX:
 					currentFragment = (YesNoFragment) fm
 							.findFragmentById(R.id.fragmentframe);
 
 					checkYesNoFinale((YesNoFragment) currentFragment);
 					break;
 
+				case COISL.EIGHT_BALL_SPINNER_INDEX:
+					currentFragment = (EightBallFragment) fm
+							.findFragmentById(R.id.fragmentframe);
+
+					checkEightBallFinale((EightBallFragment) currentFragment);
+					break;
 				}
 			}
 		});
@@ -91,8 +97,8 @@ public class PresetActivity extends Activity {
 			ArrayList<String> a = indexToArray(low, high);
 			Intent i = new Intent();
 			if (title == null || title.equals("")) {
-				i.putExtra(DbAdapter.LIST_HEADER,
-						String.valueOf(low) + " to " + String.valueOf(high));
+				i.putExtra(DbAdapter.LIST_HEADER, String.valueOf(low) + " to "
+						+ String.valueOf(high));
 			} else {
 				i.putExtra(DbAdapter.LIST_HEADER, title);
 			}
@@ -183,9 +189,33 @@ public class PresetActivity extends Activity {
 		finish();
 	}
 
+	private void checkEightBallFinale(EightBallFragment ebf) {
+		String title = getListTitle();
+		ArrayList<String> list = ebf.getList();
+		
+		Intent i = new Intent();
+		
+		if(list.size() == 0) {
+			String warning = getResources().getString(R.string.no_items);
+			Toast.makeText(PresetActivity.this, warning,
+					Toast.LENGTH_SHORT).show();
+		} else {
+			if (title == null || title.equals("")) 
+				i.putExtra(DbAdapter.LIST_HEADER, "Eight Ball");
+			 else 
+				i.putExtra(DbAdapter.LIST_HEADER, title);
+			
+			i.putStringArrayListExtra(DbAdapter.LIST, list);
+			setResult(RESULT_OK, i);
+			finish();
+			
+		}
+	}
+
 	// Create toast alerting user to an invalid range.
 	private void alertToInvalidRange() {
-		Toast.makeText(PresetActivity.this, "invalid range!",
+		String warning = getResources().getString(R.string.invalid_range);
+		Toast.makeText(PresetActivity.this, warning,
 				Toast.LENGTH_SHORT).show();
 	}
 
@@ -196,8 +226,7 @@ public class PresetActivity extends Activity {
 
 	// My implementation of OnItemSelectedListener for the Fragment preset
 	// Spinner.
-	private class CustomOnItemSelectedListener implements
-			OnItemSelectedListener {
+	private class COISL implements OnItemSelectedListener {
 		private static final int NUMBER_RANGE_SPINNER_INDEX = 0;
 		private static final int LETTER_RANGE_SPINNER_INDEX = 1;
 		private static final int YES_NO_SPINNER_INDEX = 2;

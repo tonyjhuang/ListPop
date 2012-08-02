@@ -43,8 +43,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/listitemcreation"
-        android:layout_above="@+id/finishbutton"
-        android:paddingTop="20dp" />
+        android:layout_above="@+id/finishbutton" />
     
     <Button
 	    android:id="@id/finishbutton"
