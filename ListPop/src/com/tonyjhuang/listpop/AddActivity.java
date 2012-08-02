@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.KeyEvent;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.View.OnKeyListener;
@@ -95,6 +96,23 @@ public class AddActivity extends Activity {
 	public void onBackPressed() {
 		setResult(RESULT_CANCELED);
 		finish();
+	}
+	
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item) {
+	    switch (item.getItemId()) {
+	        case android.R.id.home:
+	            // This is called when the Home (Up) button is pressed
+	            // in the Action Bar.
+	            Intent i = new Intent(this, StartActivity.class);
+	            i.addFlags(
+	                    Intent.FLAG_ACTIVITY_CLEAR_TOP |
+	                    Intent.FLAG_ACTIVITY_NEW_TASK);
+	            startActivity(i);
+	            finish();
+	            return true;
+	    }
+	    return super.onOptionsItemSelected(item);
 	}
 
 }

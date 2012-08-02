@@ -41,16 +41,17 @@ public class StartActivity extends Activity {
 		mDbA = new DbAdapter(this);
 		mDbA.open();
 
-		// Initialize cursor (result set of all rows from SQLite database).
-		updateCursor();
-
 		// Register listview for context menu and ItemClickListener.
 		mListView = (ListView) findViewById(R.id.listselection);
 		hookUpItemClickListener();
 		registerForContextMenu(mListView);
 
-		// Populate listview with a SimpleCursorAdapter.
-		fillData();
+		Intent i = getIntent();
+		if (i.getBooleanExtra("Edit", false) == true)
+			toggleEdit();
+		else
+			// Populate listview with a SimpleCursorAdapter.
+			fillData();
 	}
 
 	private void hookUpItemClickListener() {
@@ -175,11 +176,11 @@ public class StartActivity extends Activity {
 	@Override
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 		if (resultCode != RESULT_CANCELED) {
-			
+
 			switch (requestCode) {
-			
+
 			case ADD_ACTIVITY:
-				
+
 			case PRESETS_ACTIVITY:
 				// Get data from intent, and enter it as a new row in the
 				// database.

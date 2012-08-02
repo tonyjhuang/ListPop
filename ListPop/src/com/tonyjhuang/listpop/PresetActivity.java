@@ -3,12 +3,14 @@ package com.tonyjhuang.listpop;
 import java.util.ArrayList;
 
 import android.annotation.TargetApi;
+import android.app.ActionBar;
 import android.app.Activity;
 import android.app.Fragment;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.AdapterView;
@@ -41,6 +43,11 @@ public class PresetActivity extends Activity {
 
 		// EditText handle.
 		etitle = (EditText) findViewById(R.id.presettitle);
+
+		// Add up navigation affordance to the Action Bar.
+		ActionBar actionBar = getActionBar();
+		actionBar.setDisplayHomeAsUpEnabled(true);
+		actionBar.setTitle("Add Preset List");
 	}
 
 	// Depending on which Fragment is active, call the appropriate finish
@@ -192,36 +199,52 @@ public class PresetActivity extends Activity {
 	private void checkEightBallFinale(EightBallFragment ebf) {
 		String title = getListTitle();
 		ArrayList<String> list = ebf.getList();
-		
+
 		Intent i = new Intent();
-		
-		if(list.size() == 0) {
+
+		if (list.size() == 0) {
 			String warning = getResources().getString(R.string.no_items);
-			Toast.makeText(PresetActivity.this, warning,
-					Toast.LENGTH_SHORT).show();
+			Toast.makeText(PresetActivity.this, warning, Toast.LENGTH_SHORT)
+					.show();
 		} else {
-			if (title == null || title.equals("")) 
+			if (title == null || title.equals(""))
 				i.putExtra(DbAdapter.LIST_HEADER, "Eight Ball");
-			 else 
+			else
 				i.putExtra(DbAdapter.LIST_HEADER, title);
-			
+
 			i.putStringArrayListExtra(DbAdapter.LIST, list);
 			setResult(RESULT_OK, i);
 			finish();
-			
+
 		}
 	}
 
 	// Create toast alerting user to an invalid range.
 	private void alertToInvalidRange() {
 		String warning = getResources().getString(R.string.invalid_range);
-		Toast.makeText(PresetActivity.this, warning,
-				Toast.LENGTH_SHORT).show();
+		Toast.makeText(PresetActivity.this, warning, Toast.LENGTH_SHORT).show();
 	}
 
 	// Get list title from EditText view.
 	private String getListTitle() {
 		return etitle.getText().toString();
+	}
+	
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item) {
+	    switch (item.getItemId()) {
+	        case android.R.id.home:
+	            // This is called when the Home (Up) button is pressed
+	            // in the Action Bar.
+	            Intent i = new Intent(this, StartActivity.class);
+	            i.addFlags(
+	                    Intent.FLAG_ACTIVITY_CLEAR_TOP |
+	                    Intent.FLAG_ACTIVITY_NEW_TASK);
+	            startActivity(i);
+	            finish();
+	            return true;
+	    }
+	    return super.onOptionsItemSelected(item);
 	}
 
 	// My implementation of OnItemSelectedListener for the Fragment preset

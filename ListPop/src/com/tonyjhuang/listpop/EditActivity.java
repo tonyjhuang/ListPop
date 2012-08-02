@@ -2,6 +2,7 @@ package com.tonyjhuang.listpop;
 
 import java.util.ArrayList;
 
+import android.app.ActionBar;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
@@ -9,6 +10,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.View.OnKeyListener;
@@ -62,6 +64,11 @@ public class EditActivity extends Activity {
 
 		aa = new AddArrayAdapter(this, R.layout.list_item_d, list);
 		mListView.setAdapter(aa);
+
+		// Add up navigation affordance to the Action Bar.
+		ActionBar actionBar = getActionBar();
+		actionBar.setDisplayHomeAsUpEnabled(true);
+		actionBar.setTitle("Edit List");
 	}
 
 	// Returns an ArrayList of Strings given a codified String
@@ -161,12 +168,30 @@ public class EditActivity extends Activity {
 			}
 		});
 	}
-	
+
 	private void finishDelete() {
 		Intent i = new Intent();
 		i.putExtra(DbAdapter.ROWID, rowid);
 		setResult(RESULT_OK, i);
 		finish();
+	}
+	
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item) {
+	    switch (item.getItemId()) {
+	        case android.R.id.home:
+	            // This is called when the Home (Up) button is pressed
+	            // in the Action Bar.
+	            Intent i = new Intent(this, StartActivity.class);
+	            i.addFlags(
+	                    Intent.FLAG_ACTIVITY_CLEAR_TOP |
+	                    Intent.FLAG_ACTIVITY_NEW_TASK);
+	            i.putExtra("Edit", true);
+	            startActivity(i);
+	            finish();
+	            return true;
+	    }
+	    return super.onOptionsItemSelected(item);
 	}
 
 }
