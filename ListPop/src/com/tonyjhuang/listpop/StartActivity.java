@@ -6,12 +6,16 @@ import android.app.Activity;
 import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
-import android.util.Log;
+import android.os.Handler;
+//import android.util.Log;
 import android.view.ContextMenu;
 import android.view.ContextMenu.ContextMenuInfo;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
+import android.view.animation.LayoutAnimationController;
 import android.widget.AdapterView;
 import android.widget.AdapterView.AdapterContextMenuInfo;
 import android.widget.AdapterView.OnItemClickListener;
@@ -25,12 +29,13 @@ public class StartActivity extends Activity {
 	private static final int PRESETS_ACTIVITY = ADD_ACTIVITY + 1;
 	private static final int EDIT_ACTIVITY = ADD_ACTIVITY + 2;
 	private static final int DELETE_ID = Menu.FIRST;
-	private static final String TAG = "StartActivity";
+	//private static final String TAG = "StartActivity";
 
 	private DbAdapter mDbA;
 	private ListView mListView;
 	private BaseAdapter adapter;
 	private Cursor c;
+	LayoutAnimationController controller;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -52,6 +57,11 @@ public class StartActivity extends Activity {
 		else
 			// Populate listview with a SimpleCursorAdapter.
 			fillData();
+
+		controller = AnimationUtils.loadLayoutAnimation(this,
+				R.anim.layout_controller);
+		mListView.setLayoutAnimation(controller);
+
 	}
 
 	private void hookUpItemClickListener() {
@@ -142,13 +152,28 @@ public class StartActivity extends Activity {
 		c.moveToFirst();
 	}
 
-	// Called from CustomCursorAdapter. Deletes inputted row from database
-	// and refreshes the cursor & adapter.
-	public void deleteFromAdapter(long rowid) {
-		mDbA.deleteListItem(rowid);
-		updateCursor();
-		adapter = new EditViewAdapter(StartActivity.this, c);
-		mListView.setAdapter(adapter);
+	/**** Callback ****/
+	// Called from CustomCursorAdapter. Animates row,
+	// then deletes from database.
+	// Afterwards, refreshes the cursor & adapter.
+	public void deleteFromAdapter(int pos, final long rowid) {
+		// The animation!
+		Animation anim = AnimationUtils.loadAnimation(this,
+				android.R.anim.slide_out_right);
+		anim.setDuration(500);
+		mListView.getChildAt(pos).startAnimation(anim);
+
+		// The deleting!
+		new Handler().postDelayed(new Runnable() {
+
+			public void run() {
+				mDbA.deleteListItem(rowid);
+				updateCursor();
+				adapter = new EditViewAdapter(StartActivity.this, c);
+				mListView.setAdapter(adapter);
+			}
+
+		}, anim.getDuration());
 	}
 
 	// Start EditActivity with an Intent bundled with a row id,
@@ -213,8 +238,9 @@ public class StartActivity extends Activity {
 				}
 			}
 
-		} else
-			Log.d(TAG, "resultCode = RESULT_CANCELED");
+		}
+		
+		mListView.setLayoutAnimation(controller);
 	}
 
 	// If adapter is a CustomCursorAdapter, mutate to SimpleCusorAdapter.
@@ -259,7 +285,7 @@ public class StartActivity extends Activity {
 			startActivityForResult(j, PRESETS_ACTIVITY);
 			break;
 		}
-
+		
 		return true;
 	}
 

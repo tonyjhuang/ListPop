@@ -1,11 +1,15 @@
 package com.tonyjhuang.listpop;
 
+import java.util.Hashtable;
+
 import android.content.Context;
 import android.database.Cursor;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.CursorAdapter;
 import android.widget.ImageButton;
 import android.widget.TextView;
@@ -13,6 +17,9 @@ import android.widget.Toast;
 
 @SuppressWarnings("unused")
 public class EditViewAdapter extends CursorAdapter {
+	private static final String ROWID = "rowid";
+	private static final String POSITION = "position";
+	
 	private LayoutInflater mInflater;
 	private Cursor cursor;
 	private Context context;
@@ -43,15 +50,21 @@ public class EditViewAdapter extends CursorAdapter {
 		listHeader.setText(cursor.getString(LIST_HEADER_INDEX));
 
 		// Add rowid tag to buttons for easier OnClickListener implementations.
-		long id = cursor.getLong(ROWID_INDEX);
-		edit.setTag(id);
-		delete.setTag(id);
+		Hashtable<String, Integer> tag = new Hashtable<String, Integer>();
+		int rowid = (int) cursor.getLong(ROWID_INDEX);
+		int pos = cursor.getPosition();
+		tag.put(ROWID, rowid);
+		tag.put(POSITION, pos);
+		edit.setTag(tag);
+		delete.setTag(tag);
 
-		// Produce a toast when button is clicked.
+		// Starts EditActivity on the selected list.
 		edit.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				((StartActivity) context).startEditActivity((Long) v.getTag());
+				@SuppressWarnings("unchecked")
+				Hashtable<String, Integer> table = (Hashtable<String, Integer>) v.getTag();
+				((StartActivity) context).startEditActivity((long) table.get(ROWID));
 			}
 		});
 
@@ -60,8 +73,11 @@ public class EditViewAdapter extends CursorAdapter {
 		delete.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				long rowid = (Long) v.getTag();
-				((StartActivity) context).deleteFromAdapter(rowid);
+				@SuppressWarnings("unchecked")
+				Hashtable<String, Integer> table = (Hashtable<String, Integer>) v.getTag();
+				int pos = table.get(POSITION);
+				
+				((StartActivity) context).deleteFromAdapter(pos, (long) table.get(ROWID));
 			}
 		});
 	}
