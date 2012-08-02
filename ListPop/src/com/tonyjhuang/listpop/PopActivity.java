@@ -10,6 +10,9 @@ import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.view.animation.AlphaAnimation;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.RelativeLayout;
 import android.widget.RelativeLayout.LayoutParams;
@@ -78,11 +81,25 @@ public class PopActivity extends Activity {
 
 				int randomIndex = generator.nextInt(totalNumberOfItems);
 				popResult.setText(list.get(randomIndex));
+				startBounce(300);
+				
+				
+				// Animations. Only used once, so why not?
+				AlphaAnimation anim1 = new AlphaAnimation(1.0f, 0.0f);
+			    anim1.setDuration(300);
 
+			    AlphaAnimation anim2 = new AlphaAnimation(0.0f, 1.0f);
+			    anim2.setDuration(300);
+			    anim2.setStartOffset(300);
+			    
+			    tPop.startAnimation(anim1);
 				// Remove View from Layout.
 				layout.removeView(tPop);
+				
+				// Add View, then start Animation.
 				layout.addView(pPop);
 				hookUpPermanentPop();
+				pPop.startAnimation(anim2);
 			}
 		});
 	}
@@ -93,6 +110,7 @@ public class PopActivity extends Activity {
 			public void onClick(View view) {
 				int randomIndex = generator.nextInt(totalNumberOfItems);
 				popResult.setText(list.get(randomIndex));
+				startBounce(0);
 			}
 		});
 	}
@@ -114,6 +132,12 @@ public class PopActivity extends Activity {
 		return a;
 	}
 
+	private void startBounce(int startOffset) {
+		Animation bounce = AnimationUtils.loadAnimation(this, R.anim.bounce);
+		bounce.setStartOffset(startOffset);
+		popResult.startAnimation(bounce);
+	}
+	
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
 		switch (item.getItemId()) {
