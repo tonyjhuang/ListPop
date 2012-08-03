@@ -4,22 +4,22 @@ import java.util.Hashtable;
 
 import android.content.Context;
 import android.database.Cursor;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
-import android.view.animation.Animation;
-import android.view.animation.AnimationUtils;
 import android.widget.CursorAdapter;
 import android.widget.ImageButton;
 import android.widget.TextView;
-import android.widget.Toast;
 
 @SuppressWarnings("unused")
 public class EditViewAdapter extends CursorAdapter {
 	private static final String ROWID = "rowid";
 	private static final String POSITION = "position";
-	
+	private static final String TAG = "EditViewAdapter";
+	private static final String STATUS = "clicked?";
+
 	private LayoutInflater mInflater;
 	private Cursor cursor;
 	private Context context;
@@ -55,6 +55,7 @@ public class EditViewAdapter extends CursorAdapter {
 		int pos = cursor.getPosition();
 		tag.put(ROWID, rowid);
 		tag.put(POSITION, pos);
+		tag.put(STATUS, 0);
 		edit.setTag(tag);
 		delete.setTag(tag);
 
@@ -63,8 +64,12 @@ public class EditViewAdapter extends CursorAdapter {
 			@Override
 			public void onClick(View v) {
 				@SuppressWarnings("unchecked")
-				Hashtable<String, Integer> table = (Hashtable<String, Integer>) v.getTag();
-				((StartActivity) context).startEditActivity((long) table.get(ROWID));
+				Hashtable<String, Integer> table = (Hashtable<String, Integer>) v
+						.getTag();
+				if (table.get(STATUS) == 0) {
+					((StartActivity) context).startEditActivity((long) table
+							.get(ROWID));
+				}
 			}
 		});
 
@@ -74,10 +79,16 @@ public class EditViewAdapter extends CursorAdapter {
 			@Override
 			public void onClick(View v) {
 				@SuppressWarnings("unchecked")
-				Hashtable<String, Integer> table = (Hashtable<String, Integer>) v.getTag();
-				int pos = table.get(POSITION);
-				
-				((StartActivity) context).deleteFromAdapter(pos, (long) table.get(ROWID));
+				Hashtable<String, Integer> table = (Hashtable<String, Integer>) v
+						.getTag();
+				if (table.get(STATUS) == 0) {
+					int pos = table.get(POSITION);
+					((StartActivity) context).deleteFromAdapter(pos,
+							(long) table.get(ROWID));
+					table.put(STATUS, 1);
+					v.setTag(table);
+				}
+
 			}
 		});
 	}

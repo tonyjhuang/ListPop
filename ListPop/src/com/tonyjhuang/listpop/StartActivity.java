@@ -7,7 +7,7 @@ import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.os.Handler;
-//import android.util.Log;
+import android.util.Log;
 import android.view.ContextMenu;
 import android.view.ContextMenu.ContextMenuInfo;
 import android.view.Menu;
@@ -29,7 +29,7 @@ public class StartActivity extends Activity {
 	private static final int PRESETS_ACTIVITY = ADD_ACTIVITY + 1;
 	private static final int EDIT_ACTIVITY = ADD_ACTIVITY + 2;
 	private static final int DELETE_ID = Menu.FIRST;
-	//private static final String TAG = "StartActivity";
+	private static final String TAG = "StartActivity";
 
 	private DbAdapter mDbA;
 	private ListView mListView;
@@ -136,6 +136,7 @@ public class StartActivity extends Activity {
 					Toast.LENGTH_SHORT);
 			t.show();
 		} else {
+			mListView.clearAnimation();
 			if (adapter instanceof EditViewAdapter)
 				fillData();
 			else {
@@ -217,6 +218,21 @@ public class StartActivity extends Activity {
 
 				// Then repopulate listview.
 				fillData();
+				
+				mListView.post(new Runnable() {
+				    public void run() {
+				    	int wantedPosition = mListView.getCount() - 1;
+				        int lastVisiblePosition = mListView.getLastVisiblePosition();
+				        Log.d(TAG, "wantedPosition = " + wantedPosition);
+				        Log.d(TAG, "lastVisiblePosition = " + lastVisiblePosition);
+				        if(wantedPosition == lastVisiblePosition){
+							Animation anim = AnimationUtils.loadAnimation(StartActivity.this, R.anim.slidein);
+							anim.setDuration(500);
+							mListView.getChildAt(wantedPosition).startAnimation(anim);
+						}
+				    }
+				});
+				
 				break;
 
 			case EDIT_ACTIVITY:
@@ -240,7 +256,7 @@ public class StartActivity extends Activity {
 
 		}
 		
-		mListView.setLayoutAnimation(controller);
+		//mListView.setLayoutAnimation(controller);
 	}
 
 	// If adapter is a CustomCursorAdapter, mutate to SimpleCusorAdapter.
