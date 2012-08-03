@@ -94,8 +94,9 @@ public class DbAdapter {
 
 	// Returns a result set containing all rows in the database.
 	public Cursor fetchAll() {
+		String orderBy = ROWID + " DESC";
 		return mDb.query(DATABASE_TABLE, new String[] { ROWID, LIST_HEADER,
-				LIST }, null, null, null, null, null);
+				LIST }, null, null, null, null, orderBy);
 	}
 	
 	public boolean updateListItem(long rowId, String list_header, ArrayList<String> array) {

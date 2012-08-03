@@ -18,7 +18,6 @@ public class EditViewAdapter extends CursorAdapter {
 	private static final String ROWID = "rowid";
 	private static final String POSITION = "position";
 	private static final String TAG = "EditViewAdapter";
-	private static final String STATUS = "clicked?";
 
 	private LayoutInflater mInflater;
 	private Cursor cursor;
@@ -55,7 +54,6 @@ public class EditViewAdapter extends CursorAdapter {
 		int pos = cursor.getPosition();
 		tag.put(ROWID, rowid);
 		tag.put(POSITION, pos);
-		tag.put(STATUS, 0);
 		edit.setTag(tag);
 		delete.setTag(tag);
 
@@ -66,10 +64,9 @@ public class EditViewAdapter extends CursorAdapter {
 				@SuppressWarnings("unchecked")
 				Hashtable<String, Integer> table = (Hashtable<String, Integer>) v
 						.getTag();
-				if (table.get(STATUS) == 0) {
-					((StartActivity) context).startEditActivity((long) table
-							.get(ROWID));
-				}
+				((StartActivity) context).startEditActivity((long) table
+						.get(ROWID));
+
 			}
 		});
 
@@ -81,13 +78,10 @@ public class EditViewAdapter extends CursorAdapter {
 				@SuppressWarnings("unchecked")
 				Hashtable<String, Integer> table = (Hashtable<String, Integer>) v
 						.getTag();
-				if (table.get(STATUS) == 0) {
-					int pos = table.get(POSITION);
-					((StartActivity) context).deleteFromAdapter(pos,
-							(long) table.get(ROWID));
-					table.put(STATUS, 1);
-					v.setTag(table);
-				}
+				int pos = table.get(POSITION);
+				((StartActivity) context).deleteFromAdapter(pos,
+						(long) table.get(ROWID));
+				v.setTag(table);
 
 			}
 		});

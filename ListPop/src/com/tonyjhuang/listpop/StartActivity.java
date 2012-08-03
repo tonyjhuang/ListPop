@@ -35,7 +35,9 @@ public class StartActivity extends Activity {
 	private ListView mListView;
 	private BaseAdapter adapter;
 	private Cursor c;
-	LayoutAnimationController controller;
+	private LayoutAnimationController controller;
+	private long animationTime;
+	private long beginAnimationTime;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -62,6 +64,9 @@ public class StartActivity extends Activity {
 				R.anim.layout_controller);
 		mListView.setLayoutAnimation(controller);
 
+		refreshTime(1200);
+		Log.d(TAG, "animationTime = " + animationTime);
+		Log.d(TAG, "beginAnimationTime = " + beginAnimationTime);
 	}
 
 	private void hookUpItemClickListener() {
@@ -69,24 +74,27 @@ public class StartActivity extends Activity {
 			@Override
 			public void onItemClick(AdapterView<?> list, View view,
 					int position, long id) {
-				// Fetch row requested from database.
-				Cursor result = mDbA.fetchListItem(id);
+				if (notAnimating()) {
+					// Fetch row requested from database.
+					Cursor result = mDbA.fetchListItem(id);
 
-				// Query cursor for codified String.
-				final int KEY_LIST_COLUMN_INDEX = result
-						.getColumnIndex(DbAdapter.LIST);
-				String pList = result.getString(KEY_LIST_COLUMN_INDEX);
+					// Query cursor for codified String.
+					final int KEY_LIST_COLUMN_INDEX = result
+							.getColumnIndex(DbAdapter.LIST);
+					String pList = result.getString(KEY_LIST_COLUMN_INDEX);
 
-				// Query cursor for name of list.
-				final int KEY_LIST_HEADER_COLUMN_INDEX = result
-						.getColumnIndex(DbAdapter.LIST_HEADER);
-				String pName = result.getString(KEY_LIST_HEADER_COLUMN_INDEX);
+					// Query cursor for name of list.
+					final int KEY_LIST_HEADER_COLUMN_INDEX = result
+							.getColumnIndex(DbAdapter.LIST_HEADER);
+					String pName = result
+							.getString(KEY_LIST_HEADER_COLUMN_INDEX);
 
-				// Start PopActivity with codified String.
-				Intent i = new Intent(StartActivity.this, PopActivity.class);
-				i.putExtra(DbAdapter.LIST_HEADER, pName);
-				i.putExtra(DbAdapter.LIST, pList);
-				startActivity(i);
+					// Start PopActivity with codified String.
+					Intent i = new Intent(StartActivity.this, PopActivity.class);
+					i.putExtra(DbAdapter.LIST_HEADER, pName);
+					i.putExtra(DbAdapter.LIST, pList);
+					startActivity(i);
+				}
 
 			}
 		});
@@ -95,8 +103,10 @@ public class StartActivity extends Activity {
 	@Override
 	public void onCreateContextMenu(ContextMenu menu, View v,
 			ContextMenuInfo menuInfo) {
-		super.onCreateContextMenu(menu, v, menuInfo);
-		menu.add(0, DELETE_ID, 0, R.string.menu_delete);
+		if (notAnimating()) {
+			super.onCreateContextMenu(menu, v, menuInfo);
+			menu.add(0, DELETE_ID, 0, R.string.menu_delete);
+		}
 	}
 
 	@Override
@@ -136,7 +146,6 @@ public class StartActivity extends Activity {
 					Toast.LENGTH_SHORT);
 			t.show();
 		} else {
-			mListView.clearAnimation();
 			if (adapter instanceof EditViewAdapter)
 				fillData();
 			else {
@@ -158,23 +167,37 @@ public class StartActivity extends Activity {
 	// then deletes from database.
 	// Afterwards, refreshes the cursor & adapter.
 	public void deleteFromAdapter(int pos, final long rowid) {
-		// The animation!
-		Animation anim = AnimationUtils.loadAnimation(this,
-				android.R.anim.slide_out_right);
-		anim.setDuration(500);
-		mListView.getChildAt(pos).startAnimation(anim);
+		if (notAnimating()) {
+			// The animation!
+			long animDuration = 500;
+			Animation anim = AnimationUtils.loadAnimation(this,
+					android.R.anim.slide_out_right);
+			anim.setDuration(animDuration);
+			refreshTime(animDuration);
+			mListView.getChildAt(pos).startAnimation(anim);
 
-		// The deleting!
-		new Handler().postDelayed(new Runnable() {
+			// The deleting!
+			new Handler().postDelayed(new Runnable() {
 
-			public void run() {
-				mDbA.deleteListItem(rowid);
-				updateCursor();
-				adapter = new EditViewAdapter(StartActivity.this, c);
-				mListView.setAdapter(adapter);
-			}
+				public void run() {
+					mDbA.deleteListItem(rowid);
+					updateCursor();
+					adapter = new EditViewAdapter(StartActivity.this, c);
+					mListView.setAdapter(adapter);
+				}
 
-		}, anim.getDuration());
+			}, anim.getDuration());
+		}
+	}
+
+	// Refresh beginAnimationTime and set new animationTime.
+	private void refreshTime(long newAnimationTime) {
+		animationTime = newAnimationTime;
+		beginAnimationTime = System.currentTimeMillis();
+	}
+
+	private boolean notAnimating() {
+		return System.currentTimeMillis() > (beginAnimationTime + animationTime);
 	}
 
 	// Start EditActivity with an Intent bundled with a row id,
@@ -182,21 +205,24 @@ public class StartActivity extends Activity {
 	// EditActivity to the database and keeps all database transactions
 	// local.
 	public void startEditActivity(Long tag) {
-		Intent i = new Intent(this, EditActivity.class);
-		i.putExtra(DbAdapter.ROWID, tag);
+		if (notAnimating()) {
+			Intent i = new Intent(this, EditActivity.class);
+			i.putExtra(DbAdapter.ROWID, tag);
 
-		Cursor result = mDbA.fetchListItem(tag);
-		final int KEY_LIST_COLUMN_INDEX = result.getColumnIndex(DbAdapter.LIST);
-		String pList = result.getString(KEY_LIST_COLUMN_INDEX);
+			Cursor result = mDbA.fetchListItem(tag);
+			final int KEY_LIST_COLUMN_INDEX = result
+					.getColumnIndex(DbAdapter.LIST);
+			String pList = result.getString(KEY_LIST_COLUMN_INDEX);
 
-		final int KEY_LIST_HEADER_COLUMN_INDEX = result
-				.getColumnIndex(DbAdapter.LIST_HEADER);
-		String pName = result.getString(KEY_LIST_HEADER_COLUMN_INDEX);
+			final int KEY_LIST_HEADER_COLUMN_INDEX = result
+					.getColumnIndex(DbAdapter.LIST_HEADER);
+			String pName = result.getString(KEY_LIST_HEADER_COLUMN_INDEX);
 
-		i.putExtra(DbAdapter.LIST, pList);
-		i.putExtra(DbAdapter.LIST_HEADER, pName);
+			i.putExtra(DbAdapter.LIST, pList);
+			i.putExtra(DbAdapter.LIST_HEADER, pName);
 
-		startActivityForResult(i, EDIT_ACTIVITY);
+			startActivityForResult(i, EDIT_ACTIVITY);
+		}
 	}
 
 	@Override
@@ -218,26 +244,26 @@ public class StartActivity extends Activity {
 
 				// Then repopulate listview.
 				fillData();
-				
+
 				mListView.post(new Runnable() {
-				    public void run() {
-				    	int wantedPosition = mListView.getCount() - 1;
-				        int lastVisiblePosition = mListView.getLastVisiblePosition();
-				        Log.d(TAG, "wantedPosition = " + wantedPosition);
-				        Log.d(TAG, "lastVisiblePosition = " + lastVisiblePosition);
-				        if(wantedPosition == lastVisiblePosition){
-							Animation anim = AnimationUtils.loadAnimation(StartActivity.this, R.anim.slidein);
-							anim.setDuration(500);
-							mListView.getChildAt(wantedPosition).startAnimation(anim);
-						}
-				    }
+					public void run() {
+						long animDuration = 500;
+						Animation anim = AnimationUtils.loadAnimation(
+								StartActivity.this, R.anim.slidein);
+						anim.setDuration(animDuration);
+						refreshTime(animDuration);
+						mListView.getChildAt(
+								mListView.getFirstVisiblePosition())
+								.startAnimation(anim);
+					}
 				});
-				
+
 				break;
 
 			case EDIT_ACTIVITY:
 				long rowid = data.getLongExtra(DbAdapter.ROWID, 0);
 				if (data.getStringExtra(DbAdapter.LIST_HEADER) == null) {
+					
 					mDbA.deleteListItem(rowid);
 					updateCursor();
 					adapter = new EditViewAdapter(StartActivity.this, c);
@@ -255,8 +281,8 @@ public class StartActivity extends Activity {
 			}
 
 		}
-		
-		//mListView.setLayoutAnimation(controller);
+
+		// mListView.setLayoutAnimation(controller);
 	}
 
 	// If adapter is a CustomCursorAdapter, mutate to SimpleCusorAdapter.
@@ -288,20 +314,25 @@ public class StartActivity extends Activity {
 	public boolean onOptionsItemSelected(MenuItem item) {
 		switch (item.getItemId()) {
 		case R.id.menu_edit:
-			toggleEdit();
+			if (notAnimating()){
+				toggleEdit();
+				Log.d(TAG, "Current time = " + System.nanoTime());
+			}
 			break;
 
 		case R.id.custom:
 			Intent i = new Intent(StartActivity.this, AddActivity.class);
 			startActivityForResult(i, ADD_ACTIVITY);
+			refreshTime(0);
 			break;
 
 		case R.id.preset:
 			Intent j = new Intent(StartActivity.this, PresetActivity.class);
 			startActivityForResult(j, PRESETS_ACTIVITY);
+			refreshTime(0);
 			break;
 		}
-		
+
 		return true;
 	}
 
