@@ -8,23 +8,30 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.View.OnKeyListener;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
 
-public class EditActivity extends Activity {
+public class EditActivity extends Activity implements AddArrayContainer {
 	static final int DIALOG_DELETE_ID = 0;
+	private static final String TAG = "EditActivity";
 
 	private ListView mListView;
 	private EditText listName, additem;
 	private Button finish;
 	private AddArrayAdapter aa;
 	private long rowid;
+	private long animationTime;
+	private long beginAnimationTime;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -54,6 +61,8 @@ public class EditActivity extends Activity {
 		ActionBar actionBar = getActionBar();
 		actionBar.setDisplayHomeAsUpEnabled(true);
 		actionBar.setTitle("Edit List");
+
+		refreshTime(0);
 	}
 
 	// Returns an ArrayList of Strings given a codified String
@@ -141,23 +150,58 @@ public class EditActivity extends Activity {
 		setResult(RESULT_OK, i);
 		finish();
 	}
-	
+
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
-	    switch (item.getItemId()) {
-	        case android.R.id.home:
-	            // This is called when the Home (Up) button is pressed
-	            // in the Action Bar.
-	            Intent i = new Intent(this, StartActivity.class);
-	            i.addFlags(
-	                    Intent.FLAG_ACTIVITY_CLEAR_TOP |
-	                    Intent.FLAG_ACTIVITY_NEW_TASK);
-	            i.putExtra("Edit", true);
-	            startActivity(i);
-	            finish();
-	            return true;
-	    }
-	    return super.onOptionsItemSelected(item);
+		switch (item.getItemId()) {
+		case android.R.id.home:
+			// This is called when the Home (Up) button is pressed
+			// in the Action Bar.
+			Intent i = new Intent(this, StartActivity.class);
+			i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP
+					| Intent.FLAG_ACTIVITY_NEW_TASK);
+			i.putExtra("Edit", true);
+			startActivity(i);
+			finish();
+			return true;
+		}
+		return super.onOptionsItemSelected(item);
+	}
+	
+	public void deleteFromAdapter(final int position) {
+		Log.d(TAG, "deleteFromAdapter called");
+		if (notAnimating()) {
+			Log.d(TAG, "Ready to animate...");
+			long animDuration = 500;
+			Animation anim = AnimationUtils.loadAnimation(this,
+					android.R.anim.slide_out_right);
+			anim.setDuration(animDuration);
+			refreshTime(animDuration);
+			Log.d(TAG, "Time refreshed...");
+			mListView.getChildAt(position).startAnimation(anim);
+			Log.d(TAG, "Row animating");
+
+			// The deleting!
+			new Handler().postDelayed(new Runnable() {
+
+				public void run() {
+					aa.remove(position);
+				}
+
+			}, anim.getDuration());
+		}
+	}
+	
+	// Refresh beginAnimationTime and set new animationTime.
+	private void refreshTime(long newAnimationTime) {
+		animationTime = newAnimationTime;
+		beginAnimationTime = System.currentTimeMillis();
 	}
 
+	private boolean notAnimating() {
+		Log.d(TAG, "Current Time = " + System.currentTimeMillis());
+		Log.d(TAG, "beginAnimationTime + " + beginAnimationTime);
+		Log.d(TAG, "animationTime + " + animationTime);
+		return System.currentTimeMillis() > (beginAnimationTime + animationTime);
+	}
 }

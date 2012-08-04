@@ -4,21 +4,26 @@ import android.app.ActionBar;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 //import android.util.Log;
 import android.view.KeyEvent;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.View.OnKeyListener;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
 
-public class AddActivity extends Activity {
+public class AddActivity extends Activity implements AddArrayContainer{
 	EditText listName, listEntry;
-	ListView currentEntries;
+	ListView mListView;
 	Button finish;
 	AddArrayAdapter aa;
+	private long animationTime;
+	private long beginAnimationTime;
 	//private static final String TAG = "AddActivity";
 
 	@Override
@@ -30,19 +35,21 @@ public class AddActivity extends Activity {
 		listName = (EditText) findViewById(R.id.listnamecreation);
 		listEntry = (EditText) findViewById(R.id.listitemcreation);
 		finish = (Button) findViewById(R.id.finishbutton);
-		currentEntries = (ListView) findViewById(R.id.newitems);
+		mListView = (ListView) findViewById(R.id.newitems);
 
 		hookUpListEntry();
 		hookUpFinish();
 
 		// Initialize AddArrayAdapter with ArrayList.
 		aa = new AddArrayAdapter(this, R.layout.list_item_d);
-		currentEntries.setAdapter(aa);
+		mListView.setAdapter(aa);
 
 		// Add up navigation affordance to the Action Bar.
 		ActionBar actionBar = getActionBar();
 		actionBar.setDisplayHomeAsUpEnabled(true);
 		actionBar.setTitle("Add List");
+		
+		refreshTime(0);
 	}
 
 	// If user inputs Enter, add EditText text to ArrayList and
@@ -113,6 +120,36 @@ public class AddActivity extends Activity {
 	            return true;
 	    }
 	    return super.onOptionsItemSelected(item);
+	}
+	
+	public void deleteFromAdapter(final int position) {
+		if (notAnimating()) {
+			long animDuration = 500;
+			Animation anim = AnimationUtils.loadAnimation(this,
+					android.R.anim.slide_out_right);
+			anim.setDuration(animDuration);
+			refreshTime(animDuration);
+			mListView.getChildAt(position).startAnimation(anim);
+
+			// The deleting!
+			new Handler().postDelayed(new Runnable() {
+
+				public void run() {
+					aa.remove(position);
+				}
+
+			}, anim.getDuration());
+		}
+	}
+
+	// Refresh beginAnimationTime and set new animationTime.
+	private void refreshTime(long newAnimationTime) {
+		animationTime = newAnimationTime;
+		beginAnimationTime = System.currentTimeMillis();
+	}
+
+	private boolean notAnimating() {
+		return System.currentTimeMillis() > (beginAnimationTime + animationTime);
 	}
 
 }

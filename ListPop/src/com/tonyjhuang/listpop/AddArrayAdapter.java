@@ -3,6 +3,7 @@ package com.tonyjhuang.listpop;
 import java.util.ArrayList;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -12,48 +13,57 @@ import android.widget.ImageButton;
 import android.widget.TextView;
 
 public class AddArrayAdapter extends BaseAdapter {
+	private static final String TAG = "AddArrayAdapter";
 
-	// private final Context context;
 	private ArrayList<String> list;
 	private LayoutInflater mInflater;
 	private ImageButton delete;
 	private TextView itemText;
 	private int layout;
+	private AddArrayContainer context;
 
-	public AddArrayAdapter(Context context, int _layout) {
+	public AddArrayAdapter(Context _context, int _layout) {
 		super();
 
 		// Create LayoutInflater in constructor to avoid asking for a new one
 		// everytime in GetView.
-		mInflater = LayoutInflater.from(context);
+		mInflater = LayoutInflater.from(_context);
 
 		// this.context = context;
 		list = new ArrayList<String>();
 		layout = _layout;
+		context = (AddArrayContainer) _context;
 	}
-	
-	public AddArrayAdapter(Context context, int _layout, ArrayList<String> _list){
+
+	public AddArrayAdapter(Context _context, int _layout, ArrayList<String> _list) {
 		super();
-		
-		mInflater = LayoutInflater.from(context);
+
+		mInflater = LayoutInflater.from(_context);
 		layout = _layout;
 		list = _list;
+		context = (AddArrayContainer) _context;
 	}
 
 	@Override
-	public View getView(final int position, View convertView, ViewGroup parent) {
+	public View getView(int position, View convertView, ViewGroup parent) {
 		View view = mInflater.inflate(this.layout, null);
 
 		itemText = (TextView) view.findViewById(R.id.listitem);
 		delete = (ImageButton) view.findViewById(R.id.deleteline);
-		
+		delete.setTag(position);
+
 		String s = list.get(position).toString();
 		itemText.setText(s);
 
 		delete.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				AddArrayAdapter.this.remove(position);
+				Log.d(TAG, "attempting deleteFromAdapter...");
+				Log.d(TAG, "Tag = " + v.getTag());
+				Log.d(TAG, "Current Time = " + System.currentTimeMillis());
+				Log.d(TAG, String.valueOf(context == null));
+				context.deleteFromAdapter((Integer) v.getTag());
+				Log.d(TAG, "deleteFromAdapter call successful!");
 			}
 		});
 
@@ -76,7 +86,7 @@ public class AddArrayAdapter extends BaseAdapter {
 		return list;
 	}
 
-	//## Overriden methods ##
+	// ## Overriden methods ##
 	@Override
 	public int getCount() {
 		return list.size();
