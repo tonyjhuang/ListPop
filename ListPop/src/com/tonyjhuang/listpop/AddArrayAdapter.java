@@ -35,7 +35,8 @@ public class AddArrayAdapter extends BaseAdapter {
 		context = (AddArrayContainer) _context;
 	}
 
-	public AddArrayAdapter(Context _context, int _layout, ArrayList<String> _list) {
+	public AddArrayAdapter(Context _context, int _layout,
+			ArrayList<String> _list) {
 		super();
 
 		mInflater = LayoutInflater.from(_context);
@@ -97,7 +98,6 @@ public class AddArrayAdapter extends BaseAdapter {
 		return list.get(pos);
 	}
 
-	@Override
 	public long getItemId(int pos) {
 		return pos;
 	}

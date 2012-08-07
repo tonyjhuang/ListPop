@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.os.Handler;
@@ -20,7 +21,9 @@ import android.widget.AdapterView;
 import android.widget.AdapterView.AdapterContextMenuInfo;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.BaseAdapter;
+import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.RelativeLayout;
 import android.widget.SimpleCursorAdapter;
 import android.widget.Toast;
 
@@ -44,11 +47,32 @@ public class StartActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.start);
 
+		SharedPreferences settings = getPreferences(MODE_PRIVATE);
+		boolean firstRun = settings.getBoolean("firstRun", true);
+		if (firstRun) {
+
+			// Show splash screen
+			ImageView splash = new ImageView(this);
+			splash.setImageResource(R.drawable.splash);
+			RelativeLayout.LayoutParams lp = new RelativeLayout.LayoutParams(
+					RelativeLayout.LayoutParams.WRAP_CONTENT,
+					RelativeLayout.LayoutParams.WRAP_CONTENT);
+			lp.addRule(RelativeLayout.CENTER_HORIZONTAL);
+			lp.addRule(RelativeLayout.CENTER_VERTICAL);
+
+			RelativeLayout rl = 
+					(RelativeLayout) findViewById(R.id.banner);
+			rl.addView(splash, lp);
+
+			// Save the state
+			settings.edit().putBoolean("firstRun", false).commit();
+		}
+
 		// Start SQLite database.
 		mDbA = new DbAdapter(this);
 		mDbA.open();
 
-		// Register listview for context menu and ItemClickListener.
+		// Register ListView for context menu and ItemClickListener.
 		mListView = (ListView) findViewById(R.id.listselection);
 		hookUpItemClickListener();
 		registerForContextMenu(mListView);
@@ -263,7 +287,7 @@ public class StartActivity extends Activity {
 			case EDIT_ACTIVITY:
 				long rowid = data.getLongExtra(DbAdapter.ROWID, 0);
 				if (data.getStringExtra(DbAdapter.LIST_HEADER) == null) {
-					
+
 					mDbA.deleteListItem(rowid);
 					updateCursor();
 					adapter = new EditViewAdapter(StartActivity.this, c);
@@ -314,7 +338,7 @@ public class StartActivity extends Activity {
 	public boolean onOptionsItemSelected(MenuItem item) {
 		switch (item.getItemId()) {
 		case R.id.menu_edit:
-			if (notAnimating()){
+			if (notAnimating()) {
 				toggleEdit();
 				Log.d(TAG, "Current time = " + System.nanoTime());
 			}
