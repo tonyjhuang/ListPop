@@ -91,5 +91,7 @@
     </string-array>
     
     <string name="optionaleightball">Add new items to this preset here..</string>
+    
+    <color name="bg">#FFA500</color>
 
 </resources>

@@ -21,7 +21,7 @@ import android.widget.Spinner;
 import android.widget.Toast;
 
 @TargetApi(11)
-public class PresetActivity extends Activity {
+public class PresetActivity extends Activity implements AddArrayContainer  {
 	private Spinner listType;
 	private Button finish;
 	// Custom Spinner selection listener.
@@ -288,5 +288,13 @@ public class PresetActivity extends Activity {
 
 		}
 
+	}
+
+	@Override
+	public void deleteFromAdapter(int position) {
+		EightBallFragment currentFragment = (EightBallFragment) fm
+				.findFragmentById(R.id.fragmentframe);
+		currentFragment.deleteFromActivity(position);
+		
 	}
 }

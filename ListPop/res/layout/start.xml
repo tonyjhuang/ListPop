@@ -1,24 +1,30 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent" >
+    android:layout_height="match_parent"
+    android:background="@color/bg" >
+
     
-	<TextView
-	    android:id="@+id/textview"
-	    android:layout_width="wrap_content"
-	    android:layout_height="wrap_content"
-	    android:layout_centerHorizontal="true"
-	    android:paddingTop="50dp"
-	    android:text="@string/listpopbanner"
-	    android:textSize="40dp" />
-	
-	<ListView
-	    android:id="@+id/listselection"
-	    android:layout_width="wrap_content"
-	    android:layout_height="wrap_content"
-	    android:layout_centerHorizontal="true"
-	    android:layout_below="@id/textview"
-	    android:layout_marginTop="30dp" />
 
-	
+    <ImageView
+        android:id="@+id/banner"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="38dp"
+        android:contentDescription="@string/listpopbanner"
+        android:src="@drawable/banner" />
+    
+    <ListView
+        android:id="@+id/listselection"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:layout_marginTop="15dp"
+        android:layout_below="@+id/banner" >
+
+    </ListView>
+
 </RelativeLayout>

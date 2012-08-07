@@ -30,8 +30,7 @@ public class EditActivity extends Activity implements AddArrayContainer {
 	private Button finish;
 	private AddArrayAdapter aa;
 	private long rowid;
-	private long animationTime;
-	private long beginAnimationTime;
+	private long animationTime, beginAnimationTime;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
