@@ -39,8 +39,7 @@ public class StartActivity extends Activity {
 	private BaseAdapter adapter;
 	private Cursor c;
 	private LayoutAnimationController controller;
-	private long animationTime;
-	private long beginAnimationTime;
+	private long animationTime, beginAnimationTime;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -49,7 +48,7 @@ public class StartActivity extends Activity {
 
 		SharedPreferences settings = getPreferences(MODE_PRIVATE);
 		boolean firstRun = settings.getBoolean("firstRun", true);
-		if (firstRun) {
+		if (true) {
 
 			// Show splash screen
 			ImageView splash = new ImageView(this);
@@ -61,7 +60,7 @@ public class StartActivity extends Activity {
 			lp.addRule(RelativeLayout.CENTER_VERTICAL);
 
 			RelativeLayout rl = 
-					(RelativeLayout) findViewById(R.id.banner);
+					(RelativeLayout) findViewById(R.id.relative);
 			rl.addView(splash, lp);
 
 			// Save the state
