@@ -46,10 +46,9 @@ public final class R {
         public static final int start=0x7f02000a;
     }
     public static final class id {
-        public static final int add_menu=0x7f0b0021;
+        public static final int add_menu=0x7f0b0020;
         public static final int additem=0x7f0b0007;
-        public static final int banner=0x7f0b001c;
-        public static final int custom=0x7f0b0022;
+        public static final int custom=0x7f0b0021;
         public static final int deleteline=0x7f0b0011;
         public static final int edititem=0x7f0b000b;
         public static final int editline=0x7f0b0013;
@@ -65,15 +64,15 @@ public final class R {
         public static final int listname=0x7f0b0006;
         public static final int listnamecreation=0x7f0b0001;
         public static final int listnameheader=0x7f0b0000;
-        public static final int listselection=0x7f0b001d;
+        public static final int listselection=0x7f0b001c;
         public static final int lowerindex=0x7f0b000d;
-        public static final int menu_add=0x7f0b0020;
-        public static final int menu_edit=0x7f0b001f;
+        public static final int menu_add=0x7f0b001f;
+        public static final int menu_edit=0x7f0b001e;
         public static final int newitem=0x7f0b000a;
         public static final int newitems=0x7f0b0004;
         public static final int pop=0x7f0b0016;
         public static final int popresult=0x7f0b0015;
-        public static final int preset=0x7f0b0023;
+        public static final int preset=0x7f0b0022;
         public static final int presetnameheader=0x7f0b0017;
         public static final int presetspinner=0x7f0b0018;
         public static final int presettitle=0x7f0b0019;
@@ -81,7 +80,7 @@ public final class R {
         public static final int rlayout=0x7f0b0014;
         public static final int totext=0x7f0b000f;
         public static final int upperindex=0x7f0b000e;
-        public static final int yes_no_text=0x7f0b001e;
+        public static final int yes_no_text=0x7f0b001d;
     }
     public static final class layout {
         public static final int add=0x7f030000;

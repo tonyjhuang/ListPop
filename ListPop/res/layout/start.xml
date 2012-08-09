@@ -3,17 +3,7 @@
     android:id="@+id/relative"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/bg" >
-
-    <ImageView
-        android:id="@+id/banner"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="38dp"
-        android:contentDescription="@string/listpopbanner"
-        android:src="@drawable/banner" />
+    android:background="@drawable/start" >
 
     <ListView
         android:id="@+id/listselection"
@@ -21,8 +11,9 @@
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_alignParentLeft="true"
-        android:layout_below="@+id/banner"
-        android:layout_marginTop="15dp" >
-    </ListView>
+        android:layout_marginBottom="31dp"
+        android:layout_marginLeft="28dp"
+        android:layout_marginRight="28dp"
+        android:layout_marginTop="157dp" />
 
 </RelativeLayout>
