@@ -45,40 +45,45 @@ public class StartActivity extends Activity {
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.start);
-		/*
-		 * // Check if this is the first run of the activity through
-		 * Preferences. //SharedPreferences settings =
-		 * getPreferences(MODE_PRIVATE); //boolean firstRun =
-		 * settings.getBoolean("firstRun", true); if (true) {
-		 * 
-		 * // Grab Splash handler. final ImageView splash = new ImageView(this);
-		 * splash.setImageResource(R.drawable.splash);
-		 * 
-		 * // Define layout terms. RelativeLayout.LayoutParams lp = new
-		 * RelativeLayout.LayoutParams(
-		 * RelativeLayout.LayoutParams.WRAP_CONTENT,
-		 * RelativeLayout.LayoutParams.WRAP_CONTENT);
-		 * lp.addRule(RelativeLayout.CENTER_HORIZONTAL);
-		 * lp.addRule(RelativeLayout.CENTER_VERTICAL);
-		 * 
-		 * // Grab RelativeLayout handler and add the splash screen. final
-		 * RelativeLayout rl = (RelativeLayout) findViewById(R.id.relative);
-		 * rl.addView(splash, lp);
-		 * 
-		 * // Call the fade out animation on the splash screen Animation
-		 * myFadeInAnimation = AnimationUtils.loadAnimation(this,
-		 * R.anim.fade_out); splash.startAnimation(myFadeInAnimation);
-		 * 
-		 * // Delete the splash screen after 3 seconds. new
-		 * Handler().postDelayed(new Runnable() {
-		 * 
-		 * public void run() { rl.removeView(splash); }
-		 * 
-		 * }, 3000);
-		 * 
-		 * // Save the state //settings.edit().putBoolean("firstRun",
-		 * false).commit(); }
-		 */
+/*
+		// Check if this is the first run of the activity through Preferences.
+		//SharedPreferences settings = getPreferences(MODE_PRIVATE);
+		//boolean firstRun = settings.getBoolean("firstRun", true);
+		if (true) {
+
+			// Grab Splash handler.
+			final ImageView splash = new ImageView(this);
+			splash.setImageResource(R.drawable.splash);
+
+			// Define layout terms.
+			RelativeLayout.LayoutParams lp = new RelativeLayout.LayoutParams(
+					RelativeLayout.LayoutParams.WRAP_CONTENT,
+					RelativeLayout.LayoutParams.WRAP_CONTENT);
+			lp.addRule(RelativeLayout.CENTER_HORIZONTAL);
+			lp.addRule(RelativeLayout.CENTER_VERTICAL);
+
+			// Grab RelativeLayout handler and add the splash screen.
+			final RelativeLayout rl = (RelativeLayout) findViewById(R.id.relative);
+			rl.addView(splash, lp);
+
+			// Call the fade out animation on the splash screen
+			Animation myFadeInAnimation = AnimationUtils.loadAnimation(this,
+					R.anim.fade_out);
+			splash.startAnimation(myFadeInAnimation);
+
+			// Delete the splash screen after 3 seconds.
+			new Handler().postDelayed(new Runnable() {
+
+				public void run() {
+					rl.removeView(splash);
+				}
+
+			}, 3000);
+
+			// Save the state
+			//settings.edit().putBoolean("firstRun", false).commit();
+		}
+*/
 		// Start SQLite database.
 		mDbA = new DbAdapter(this);
 		mDbA.open();
@@ -97,14 +102,7 @@ public class StartActivity extends Activity {
 
 		animateListView();
 
-		int currentChildren = mListView.getCount();
-		Log.d(TAG, "Current number of items in listview: " + currentChildren);
-		
-		if(currentChildren > 6)
-			refreshTime(6 * 420 + 180);
-		else
-			refreshTime(currentChildren * 420 + 180);
-		
+		refreshTime(1200);
 		Log.d(TAG, "animationTime = " + animationTime);
 		Log.d(TAG, "beginAnimationTime = " + beginAnimationTime);
 	}
@@ -114,7 +112,7 @@ public class StartActivity extends Activity {
 				R.anim.layout_controller);
 		mListView.setLayoutAnimation(controller);
 	}
-
+	
 	private void hookUpItemClickListener() {
 		mListView.setOnItemClickListener(new OnItemClickListener() {
 			@Override
@@ -240,7 +238,6 @@ public class StartActivity extends Activity {
 	private void refreshTime(long newAnimationTime) {
 		animationTime = newAnimationTime;
 		beginAnimationTime = System.currentTimeMillis();
-		Log.d(TAG, "beginAnimationTime = " + beginAnimationTime);
 	}
 
 	private boolean notAnimating() {
@@ -363,7 +360,7 @@ public class StartActivity extends Activity {
 		case R.id.menu_edit:
 			if (notAnimating()) {
 				toggleEdit();
-				Log.d(TAG, "Current time = " + System.currentTimeMillis());
+				Log.d(TAG, "Current time = " + System.nanoTime());
 			}
 			break;
 

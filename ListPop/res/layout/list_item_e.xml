@@ -4,7 +4,6 @@
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:gravity="center_vertical" >
-
     <TextView
         android:id="@+id/listname"
         android:layout_width="fill_parent"
@@ -12,28 +11,31 @@
         android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
         android:gravity="center"
-        android:paddingBottom="10dp"
-        android:paddingTop="10dp"
-        android:textSize="20dp"
-        android:textColor="#FFFFFF" />
-
+    	android:paddingTop="10dp"
+    	android:paddingBottom="10dp"
+        android:textSize="20dp" />
+        
     <ImageButton
         android:id="@+id/editline"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:layout_toLeftOf="@+id/deleteline"
+        android:src="@drawable/edit"
         android:background="@android:color/transparent"
-        android:contentDescription="@string/edit"
-        android:src="@drawable/edit" />
-
+        android:contentDescription="@string/edit" />
+    
     <ImageButton
         android:id="@id/deleteline"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentRight="true"
+        android:src="@drawable/delete1"
         android:background="@android:color/transparent"
-        android:contentDescription="@string/delete"
-        android:src="@drawable/delete1" />
+        android:contentDescription="@string/delete" />
+
+    
+
+    
 
 </RelativeLayout>
