@@ -4,6 +4,7 @@ import java.util.Hashtable;
 
 import android.content.Context;
 import android.database.Cursor;
+import android.graphics.Typeface;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -47,6 +48,9 @@ public class EditViewAdapter extends CursorAdapter {
 
 		// Set list header textbox.
 		listHeader.setText(cursor.getString(LIST_HEADER_INDEX));
+		Typeface font = Typeface.createFromAsset(context.getAssets(), 
+				"fonts/DroidSans-Bold.ttf");
+		listHeader.setTypeface(font);
 
 		// Add rowid tag to buttons for easier OnClickListener implementations.
 		Hashtable<String, Integer> tag = new Hashtable<String, Integer>();

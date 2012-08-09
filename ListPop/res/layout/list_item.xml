@@ -7,4 +7,5 @@
     android:textSize="20dp"
     android:gravity="center"
     android:paddingTop="10dp"
-    android:paddingBottom="10dp" />
+    android:paddingBottom="10dp"
+    android:textColor="#FFFFFF" />
