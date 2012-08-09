@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 import android.app.Activity;
 import android.content.Intent;
-import android.content.SharedPreferences;
+//import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.os.Handler;
@@ -45,10 +45,10 @@ public class StartActivity extends Activity {
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.start);
-
+/*
 		// Check if this is the first run of the activity through Preferences.
-		SharedPreferences settings = getPreferences(MODE_PRIVATE);
-		boolean firstRun = settings.getBoolean("firstRun", true);
+		//SharedPreferences settings = getPreferences(MODE_PRIVATE);
+		//boolean firstRun = settings.getBoolean("firstRun", true);
 		if (true) {
 
 			// Grab Splash handler.
@@ -81,9 +81,9 @@ public class StartActivity extends Activity {
 			}, 3000);
 
 			// Save the state
-			settings.edit().putBoolean("firstRun", false).commit();
+			//settings.edit().putBoolean("firstRun", false).commit();
 		}
-
+*/
 		// Start SQLite database.
 		mDbA = new DbAdapter(this);
 		mDbA.open();
@@ -100,15 +100,19 @@ public class StartActivity extends Activity {
 			// Populate listview with a SimpleCursorAdapter.
 			fillData();
 
-		controller = AnimationUtils.loadLayoutAnimation(this,
-				R.anim.layout_controller);
-		mListView.setLayoutAnimation(controller);
+		animateListView();
 
 		refreshTime(1200);
 		Log.d(TAG, "animationTime = " + animationTime);
 		Log.d(TAG, "beginAnimationTime = " + beginAnimationTime);
 	}
 
+	private void animateListView() {
+		controller = AnimationUtils.loadLayoutAnimation(this,
+				R.anim.layout_controller);
+		mListView.setLayoutAnimation(controller);
+	}
+	
 	private void hookUpItemClickListener() {
 		mListView.setOnItemClickListener(new OnItemClickListener() {
 			@Override

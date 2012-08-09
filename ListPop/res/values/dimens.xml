@@ -6,5 +6,6 @@
     <dimen name="side_margin">30dp</dimen>
     <dimen name="to_text">20dp</dimen>
     <dimen name="title_indent">20dp</dimen>
+    <dimen name="start_list_side_margin">33dp</dimen>
 
 </resources>
