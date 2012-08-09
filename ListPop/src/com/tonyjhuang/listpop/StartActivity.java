@@ -46,39 +46,22 @@ public class StartActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.start);
 
-		// Check if this is the first run of the activity through Preferences.
 		SharedPreferences settings = getPreferences(MODE_PRIVATE);
 		boolean firstRun = settings.getBoolean("firstRun", true);
 		if (true) {
 
-			// Grab Splash handler.
-			final ImageView splash = new ImageView(this);
+			// Show splash screen
+			ImageView splash = new ImageView(this);
 			splash.setImageResource(R.drawable.splash);
-
-			// Define layout terms.
 			RelativeLayout.LayoutParams lp = new RelativeLayout.LayoutParams(
 					RelativeLayout.LayoutParams.WRAP_CONTENT,
 					RelativeLayout.LayoutParams.WRAP_CONTENT);
 			lp.addRule(RelativeLayout.CENTER_HORIZONTAL);
 			lp.addRule(RelativeLayout.CENTER_VERTICAL);
 
-			// Grab RelativeLayout handler and add the splash screen.
-			final RelativeLayout rl = (RelativeLayout) findViewById(R.id.relative);
+			RelativeLayout rl = 
+					(RelativeLayout) findViewById(R.id.relative);
 			rl.addView(splash, lp);
-
-			// Call the fade out animation on the splash screen
-			Animation myFadeInAnimation = AnimationUtils.loadAnimation(this,
-					R.anim.fade_out);
-			splash.startAnimation(myFadeInAnimation);
-
-			// Delete the splash screen after 3 seconds.
-			new Handler().postDelayed(new Runnable() {
-
-				public void run() {
-					rl.removeView(splash);
-				}
-
-			}, 3000);
 
 			// Save the state
 			settings.edit().putBoolean("firstRun", false).commit();

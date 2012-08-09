@@ -10,9 +10,8 @@ package com.tonyjhuang.listpop;
 public final class R {
     public static final class anim {
         public static final int bounce=0x7f040000;
-        public static final int fade_out=0x7f040001;
-        public static final int layout_controller=0x7f040002;
-        public static final int slidein=0x7f040003;
+        public static final int layout_controller=0x7f040001;
+        public static final int slidein=0x7f040002;
     }
     public static final class array {
         public static final int eight_ball=0x7f070002;
