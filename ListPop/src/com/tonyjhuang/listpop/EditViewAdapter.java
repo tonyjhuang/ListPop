@@ -48,9 +48,6 @@ public class EditViewAdapter extends CursorAdapter {
 
 		// Set list header textbox.
 		listHeader.setText(cursor.getString(LIST_HEADER_INDEX));
-		Typeface font = Typeface.createFromAsset(context.getAssets(), 
-				"fonts/DroidSans-Bold.ttf");
-		listHeader.setTypeface(font);
 
 		// Add rowid tag to buttons for easier OnClickListener implementations.
 		Hashtable<String, Integer> tag = new Hashtable<String, Integer>();

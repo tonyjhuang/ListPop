@@ -23,6 +23,7 @@ public final class R {
     }
     public static final class color {
         public static final int bg=0x7f080000;
+        public static final int textcolor=0x7f080001;
     }
     public static final class dimen {
         public static final int padding_large=0x7f050002;
@@ -30,6 +31,7 @@ public final class R {
         public static final int padding_small=0x7f050000;
         public static final int side_margin=0x7f050003;
         public static final int start_list_side_margin=0x7f050006;
+        public static final int text_size=0x7f050007;
         public static final int title_indent=0x7f050005;
         public static final int to_text=0x7f050004;
     }
@@ -37,15 +39,14 @@ public final class R {
         public static final int action_edit=0x7f020000;
         public static final int add=0x7f020001;
         public static final int banner=0x7f020002;
-        public static final int delete1=0x7f020003;
-        public static final int delete2=0x7f020004;
-        public static final int divider=0x7f020005;
-        public static final int edit=0x7f020006;
-        public static final int ic_action_search=0x7f020007;
-        public static final int ic_launcher=0x7f020008;
-        public static final int icon=0x7f020009;
-        public static final int splash=0x7f02000a;
-        public static final int start=0x7f02000b;
+        public static final int delete=0x7f020003;
+        public static final int divider=0x7f020004;
+        public static final int edit=0x7f020005;
+        public static final int ic_action_search=0x7f020006;
+        public static final int ic_launcher=0x7f020007;
+        public static final int icon=0x7f020008;
+        public static final int splash=0x7f020009;
+        public static final int start=0x7f02000a;
     }
     public static final class id {
         public static final int add_menu=0x7f0b0020;
@@ -131,6 +132,7 @@ public final class R {
         public static final int preset_list=0x7f06001a;
         public static final int preset_name_header=0x7f060011;
         public static final int preset_spinner_prompt=0x7f06000f;
+        public static final int textstyle=0x7f06001d;
         public static final int to=0x7f060014;
         public static final int yes_no_fragment_text=0x7f060013;
     }

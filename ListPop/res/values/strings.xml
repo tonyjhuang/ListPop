@@ -93,5 +93,8 @@
     <string name="optionaleightball">Add new items to this preset here..</string>
     
     <color name="bg">#FFA500</color>
+    <color name="textcolor">#FFFFFF</color>
+    <string name="textstyle">bold</string>
+    
 
 </resources>

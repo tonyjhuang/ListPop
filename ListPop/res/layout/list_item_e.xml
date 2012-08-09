@@ -14,8 +14,9 @@
         android:gravity="center"
         android:paddingBottom="10dp"
         android:paddingTop="10dp"
-        android:textSize="20dp"
-        android:textColor="#FFFFFF" />
+        android:textColor="@color/textcolor"
+        android:textSize="@dimen/text_size"
+        android:textStyle="bold" />
 
     <ImageButton
         android:id="@+id/editline"
@@ -34,6 +35,6 @@
         android:layout_alignParentRight="true"
         android:background="@android:color/transparent"
         android:contentDescription="@string/delete"
-        android:src="@drawable/delete1" />
+        android:src="@drawable/delete" />
 
 </RelativeLayout>
