@@ -49,10 +49,11 @@ public class StartActivity extends Activity {
 
 		SharedPreferences settings = getPreferences(MODE_PRIVATE);
 		boolean firstRun = settings.getBoolean("firstRun", true);
-		if (firstRun) {
+		Log.d(TAG, "firstRun = " + firstRun);
+		if (true) {
 
 			// Show splash screen
-			ImageView splash = new ImageView(this);
+			final ImageView splash = new ImageView(this);
 			splash.setImageResource(R.drawable.splash);
 			RelativeLayout.LayoutParams lp = new RelativeLayout.LayoutParams(
 					RelativeLayout.LayoutParams.WRAP_CONTENT,
@@ -60,9 +61,18 @@ public class StartActivity extends Activity {
 			lp.addRule(RelativeLayout.CENTER_HORIZONTAL);
 			lp.addRule(RelativeLayout.CENTER_VERTICAL);
 
-			RelativeLayout rl = 
-					(RelativeLayout) findViewById(R.id.banner);
+			final RelativeLayout rl = (RelativeLayout) findViewById(R.id.relative);
 			rl.addView(splash, lp);
+
+			splash.startAnimation(AnimationUtils.loadAnimation(this,
+					R.anim.fade_out));
+			
+			new Handler().postDelayed(new Runnable() {
+				@Override
+				public void run() {
+					rl.removeView(splash);
+				}
+			}, 2000);
 
 			// Save the state
 			settings.edit().putBoolean("firstRun", false).commit();
