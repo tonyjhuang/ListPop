@@ -2,8 +2,10 @@ package com.tonyjhuang.listpop;
 
 import java.util.Hashtable;
 
+import android.app.Activity;
 import android.content.Context;
 import android.database.Cursor;
+import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,12 +15,12 @@ import android.widget.CursorAdapter;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
-@SuppressWarnings("unused")
 public class EditViewAdapter extends CursorAdapter {
 	private static final String ROWID = "rowid";
 	private static final String POSITION = "position";
 	private static final String TAG = "EditViewAdapter";
 
+	private double density;
 	private LayoutInflater mInflater;
 	private Cursor cursor;
 	private Context context;
@@ -36,6 +38,24 @@ public class EditViewAdapter extends CursorAdapter {
 
 		ROWID_INDEX = cursor.getColumnIndex(DbAdapter.ROWID);
 		LIST_HEADER_INDEX = cursor.getColumnIndex(DbAdapter.LIST_HEADER);
+
+		DisplayMetrics metrics = new DisplayMetrics();
+		((Activity) context).getWindowManager().getDefaultDisplay()
+				.getMetrics(metrics);
+
+		switch (metrics.densityDpi) {
+		case DisplayMetrics.DENSITY_MEDIUM:
+			density = 1.0;
+			break;
+		case DisplayMetrics.DENSITY_HIGH:
+			density = 1.5;
+			break;
+		case DisplayMetrics.DENSITY_XHIGH:
+			density = 2.0;
+			break;
+		}
+
+		Log.d(TAG, "Screen density multiplier: " + density);
 	}
 
 	@Override
@@ -47,6 +67,7 @@ public class EditViewAdapter extends CursorAdapter {
 
 		// Set list header textbox.
 		listHeader.setText(cursor.getString(LIST_HEADER_INDEX));
+		listHeader.setSelected(true);
 
 		// Add rowid tag to buttons for easier OnClickListener implementations.
 		Hashtable<String, Integer> tag = new Hashtable<String, Integer>();
@@ -89,7 +110,12 @@ public class EditViewAdapter extends CursorAdapter {
 
 	@Override
 	public View newView(Context context, Cursor cursor, ViewGroup parent) {
-		return mInflater.inflate(R.layout.list_item_e, null);
+		Log.d(TAG, "Current String = " + cursor.getString(LIST_HEADER_INDEX));
+		String current = cursor.getString(LIST_HEADER_INDEX);
+		if(current.length() > (12 * density))
+			return mInflater.inflate(R.layout.list_item_e_long, null);
+		else
+			return mInflater.inflate(R.layout.list_item_e, null);
 	}
 
 }

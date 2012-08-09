@@ -92,11 +92,12 @@ public final class R {
         public static final int list_item=0x7f030006;
         public static final int list_item_d=0x7f030007;
         public static final int list_item_e=0x7f030008;
-        public static final int number_range=0x7f030009;
-        public static final int pop=0x7f03000a;
-        public static final int presets=0x7f03000b;
-        public static final int start=0x7f03000c;
-        public static final int yes_no=0x7f03000d;
+        public static final int list_item_e_long=0x7f030009;
+        public static final int number_range=0x7f03000a;
+        public static final int pop=0x7f03000b;
+        public static final int presets=0x7f03000c;
+        public static final int start=0x7f03000d;
+        public static final int yes_no=0x7f03000e;
     }
     public static final class menu {
         public static final int action_menu=0x7f0a0000;

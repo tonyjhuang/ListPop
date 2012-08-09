@@ -18,7 +18,7 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/listnameheader"
         android:hint="@string/addlistnameprompt"
-        android:inputType="textNoSuggestions" />
+        android:inputType="textCapWords" />
 
     <TextView
         android:id="@+id/listitemheader"
@@ -36,7 +36,7 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/listitemheader"
         android:hint="@string/addlistitemprompt"
-        android:inputType="textMultiLine|textNoSuggestions" />
+        android:inputType="textMultiLine|textCapSentences" />
 
     <ListView
         android:id="@+id/newitems"
