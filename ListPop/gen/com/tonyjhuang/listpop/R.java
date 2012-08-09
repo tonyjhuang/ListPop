@@ -43,6 +43,7 @@ public final class R {
         public static final int ic_launcher=0x7f020007;
         public static final int icon=0x7f020008;
         public static final int splash=0x7f020009;
+        public static final int start=0x7f02000a;
     }
     public static final class id {
         public static final int add_menu=0x7f0b0021;
