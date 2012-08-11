@@ -28,7 +28,7 @@
         android:layout_marginTop="20dp"
         android:layout_below="@id/presetspinner"
         android:hint="@string/optional"
-        android:inputType="textNoSuggestions" />
+        android:inputType="textCapWords" />
      
      <FrameLayout
          android:id="@+id/fragmentframe"
