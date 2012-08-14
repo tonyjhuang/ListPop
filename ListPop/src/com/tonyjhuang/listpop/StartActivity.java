@@ -66,7 +66,7 @@ public class StartActivity extends Activity {
 
 			splash.startAnimation(AnimationUtils.loadAnimation(this,
 					R.anim.fade_out));
-			
+
 			new Handler().postDelayed(new Runnable() {
 				@Override
 				public void run() {
@@ -364,6 +364,11 @@ public class StartActivity extends Activity {
 			Intent j = new Intent(StartActivity.this, PresetActivity.class);
 			startActivityForResult(j, PRESETS_ACTIVITY);
 			refreshTime(0);
+			break;
+
+		case R.id.tab:
+			Intent k = new Intent(StartActivity.this, TabsActivity.class);
+			startActivity(k);
 			break;
 		}
 

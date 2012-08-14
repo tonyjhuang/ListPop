@@ -11,12 +11,16 @@
         android:showAsAction="ifRoom"
         android:title="@string/menu_add">
         <menu android:id="@+id/add_menu" >
-            <item android:id="@+id/custom"
-                android:title="@string/custom_list" />
-            <item android:id="@+id/preset"
-                android:title="@string/preset_list" />
+            <item
+                android:id="@+id/custom"
+                android:title="@string/custom_list"/>
+            <item
+                android:id="@+id/preset"
+                android:title="@string/preset_list"/>
+            <item
+                android:id="@+id/tab"
+                android:title="Tabs"/>
         </menu>
-        
     </item>
 
 </menu>
