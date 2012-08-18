@@ -6,11 +6,12 @@
     android:background="@drawable/bg" >
 
     <ImageView
+        android:id="@+id/banner"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/listselection"
         android:layout_alignParentTop="true"
-        android:layout_marginTop="13dp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="14dp"
         android:contentDescription="@string/listpopbanner"
         android:src="@drawable/banner" />
 
@@ -18,13 +19,12 @@
         android:id="@+id/imageView1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentLeft="true"
+		android:layout_below="@id/banner"
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="28dp"
         android:layout_marginLeft="22dp"
         android:layout_marginRight="22dp"
-        android:layout_marginTop="139dp"
+        android:layout_marginTop="25dp"
         android:scaleType="fitXY"
         android:src="@drawable/list_bg" />
 
@@ -32,13 +32,10 @@
         android:id="@+id/listselection"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentLeft="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="37dp"
-        android:layout_marginLeft="32dp"
-        android:layout_marginRight="32dp"
-        android:layout_marginTop="148dp"
+        android:layout_alignBottom="@+id/imageView1"
+        android:layout_alignLeft="@+id/imageView1"
+        android:layout_alignRight="@+id/imageView1"
+        android:layout_alignTop="@+id/imageView1"
         android:cacheColorHint="#00000000" />
 
 </RelativeLayout>
