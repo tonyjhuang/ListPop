@@ -180,13 +180,19 @@ public class StartActivity extends Activity {
 					Toast.LENGTH_SHORT);
 			t.show();
 		} else {
-			if (adapter instanceof EditViewAdapter)
+			int index = mListView.getFirstVisiblePosition();
+			View v = mListView.getChildAt(0);
+			int top = (v == null) ? 0 : v.getTop();
+			
+			if (adapter instanceof EditViewAdapter) 
 				fillData();
-			else {
+			 else {
 				updateCursor();
 				adapter = new EditViewAdapter(StartActivity.this, c);
 				mListView.setAdapter(adapter);
 			}
+			
+			mListView.setSelectionFromTop(index, top);
 		}
 	}
 
