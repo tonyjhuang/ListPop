@@ -45,8 +45,9 @@ public final class R {
         public static final int ic_action_search=0x7f020009;
         public static final int icon=0x7f02000a;
         public static final int list_bg=0x7f02000b;
-        public static final int splash=0x7f02000c;
-        public static final int start=0x7f02000d;
+        public static final int listbg=0x7f02000c;
+        public static final int splash=0x7f02000d;
+        public static final int start=0x7f02000e;
     }
     public static final class id {
         public static final int add_menu=0x7f0b0022;
