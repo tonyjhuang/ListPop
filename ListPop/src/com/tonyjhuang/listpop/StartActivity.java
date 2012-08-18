@@ -55,6 +55,7 @@ public class StartActivity extends Activity {
 			// Show splash screen
 			final ImageView splash = new ImageView(this);
 			splash.setImageResource(R.drawable.splash);
+			splash.setScaleType(ImageView.ScaleType.FIT_XY);
 			RelativeLayout.LayoutParams lp = new RelativeLayout.LayoutParams(
 					RelativeLayout.LayoutParams.WRAP_CONTENT,
 					RelativeLayout.LayoutParams.WRAP_CONTENT);
