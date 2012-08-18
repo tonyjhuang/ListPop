@@ -4,7 +4,6 @@ import java.util.ArrayList;
 
 import android.app.Activity;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.os.Handler;
@@ -47,37 +46,28 @@ public class StartActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.start);
 
-		SharedPreferences settings = getPreferences(MODE_PRIVATE);
-		boolean firstRun = settings.getBoolean("firstRun", true);
-		Log.d(TAG, "firstRun = " + firstRun);
-		if (true) {
+		// Show splash screen
+		final ImageView splash = new ImageView(this);
+		splash.setImageResource(R.drawable.splash);
+		splash.setScaleType(ImageView.ScaleType.FIT_XY);
+		RelativeLayout.LayoutParams lp = new RelativeLayout.LayoutParams(
+				RelativeLayout.LayoutParams.WRAP_CONTENT,
+				RelativeLayout.LayoutParams.WRAP_CONTENT);
+		lp.addRule(RelativeLayout.CENTER_HORIZONTAL);
+		lp.addRule(RelativeLayout.CENTER_VERTICAL);
 
-			// Show splash screen
-			final ImageView splash = new ImageView(this);
-			splash.setImageResource(R.drawable.splash);
-			splash.setScaleType(ImageView.ScaleType.FIT_XY);
-			RelativeLayout.LayoutParams lp = new RelativeLayout.LayoutParams(
-					RelativeLayout.LayoutParams.WRAP_CONTENT,
-					RelativeLayout.LayoutParams.WRAP_CONTENT);
-			lp.addRule(RelativeLayout.CENTER_HORIZONTAL);
-			lp.addRule(RelativeLayout.CENTER_VERTICAL);
+		final RelativeLayout rl = (RelativeLayout) findViewById(R.id.relative);
+		rl.addView(splash, lp);
 
-			final RelativeLayout rl = (RelativeLayout) findViewById(R.id.relative);
-			rl.addView(splash, lp);
+		splash.startAnimation(AnimationUtils.loadAnimation(this,
+				R.anim.fade_out));
 
-			splash.startAnimation(AnimationUtils.loadAnimation(this,
-					R.anim.fade_out));
-
-			new Handler().postDelayed(new Runnable() {
-				@Override
-				public void run() {
-					rl.removeView(splash);
-				}
-			}, 2000);
-
-			// Save the state
-			settings.edit().putBoolean("firstRun", false).commit();
-		}
+		new Handler().postDelayed(new Runnable() {
+			@Override
+			public void run() {
+				rl.removeView(splash);
+			}
+		}, 2000);
 
 		// Start SQLite database.
 		mDbA = new DbAdapter(this);
@@ -184,15 +174,15 @@ public class StartActivity extends Activity {
 			int index = mListView.getFirstVisiblePosition();
 			View v = mListView.getChildAt(0);
 			int top = (v == null) ? 0 : v.getTop();
-			
-			if (adapter instanceof EditViewAdapter) 
+
+			if (adapter instanceof EditViewAdapter)
 				fillData();
-			 else {
+			else {
 				updateCursor();
 				adapter = new EditViewAdapter(StartActivity.this, c);
 				mListView.setAdapter(adapter);
 			}
-			
+
 			mListView.setSelectionFromTop(index, top);
 		}
 	}
