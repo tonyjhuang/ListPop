@@ -15,16 +15,17 @@
         android:contentDescription="@string/listpopbanner"
         android:src="@drawable/banner" />
 
+
     <ImageView
         android:id="@+id/imageView1"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-		android:layout_below="@id/banner"
+        android:layout_height="match_parent"
+        android:layout_below="@id/banner"
         android:layout_centerHorizontal="true"
-        android:layout_marginBottom="28dp"
-        android:layout_marginLeft="22dp"
-        android:layout_marginRight="22dp"
-        android:layout_marginTop="25dp"
+        android:layout_marginBottom="22dp"
+        android:layout_marginLeft="0dp"
+        android:layout_marginRight="0dp"
+        android:layout_marginTop="30dp"
         android:scaleType="fitXY"
         android:src="@drawable/list_bg" />
 
@@ -36,6 +37,10 @@
         android:layout_alignLeft="@+id/imageView1"
         android:layout_alignRight="@+id/imageView1"
         android:layout_alignTop="@+id/imageView1"
+        android:layout_marginBottom="@dimen/list_padding"
+        android:layout_marginLeft="@dimen/list_padding"
+        android:layout_marginRight="@dimen/list_padding"
+        android:layout_marginTop="@dimen/list_padding"
         android:cacheColorHint="#00000000" />
 
 </RelativeLayout>
