@@ -38,6 +38,6 @@
         android:layout_centerVertical="true"
         android:background="@android:color/transparent"
         android:contentDescription="@string/delete"
-        android:src="@drawable/ic_action_delete" />
+        android:src="@drawable/trash" />
 
 </RelativeLayout>

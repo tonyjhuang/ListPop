@@ -33,21 +33,15 @@ public final class R {
         public static final int to_text=0x7f050004;
     }
     public static final class drawable {
-        public static final int action_edit=0x7f020000;
-        public static final int add=0x7f020001;
-        public static final int banner=0x7f020002;
-        public static final int bg=0x7f020003;
-        public static final int delete1=0x7f020004;
-        public static final int delete2=0x7f020005;
-        public static final int edit=0x7f020006;
-        public static final int ic_action_delete=0x7f020007;
-        public static final int ic_action_edit=0x7f020008;
-        public static final int ic_action_search=0x7f020009;
-        public static final int icon=0x7f02000a;
-        public static final int list_bg=0x7f02000b;
-        public static final int listbg=0x7f02000c;
-        public static final int splash=0x7f02000d;
-        public static final int start=0x7f02000e;
+        public static final int add=0x7f020000;
+        public static final int banner=0x7f020001;
+        public static final int bg=0x7f020002;
+        public static final int edit=0x7f020003;
+        public static final int icon=0x7f020004;
+        public static final int list_bg=0x7f020005;
+        public static final int listbg=0x7f020006;
+        public static final int splash=0x7f020007;
+        public static final int trash=0x7f020008;
     }
     public static final class id {
         public static final int add_menu=0x7f0b0022;
