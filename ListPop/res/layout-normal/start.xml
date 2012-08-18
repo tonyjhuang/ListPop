@@ -6,6 +6,15 @@
     android:background="@drawable/bg" >
 
     <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/listselection"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="13dp"
+        android:contentDescription="@string/listpopbanner"
+        android:src="@drawable/banner" />
+
+    <ImageView
         android:id="@+id/imageView1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -15,7 +24,7 @@
         android:layout_marginBottom="28dp"
         android:layout_marginLeft="22dp"
         android:layout_marginRight="22dp"
-        android:layout_marginTop="169dp"
+        android:layout_marginTop="139dp"
         android:scaleType="fitXY"
         android:src="@drawable/list_bg" />
 
@@ -26,19 +35,10 @@
         android:layout_alignParentBottom="true"
         android:layout_alignParentLeft="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginBottom="35dp"
+        android:layout_marginBottom="37dp"
         android:layout_marginLeft="32dp"
         android:layout_marginRight="32dp"
-        android:layout_marginTop="177dp"
+        android:layout_marginTop="148dp"
         android:cacheColorHint="#00000000" />
-
-    <ImageView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/listselection"
-        android:layout_alignParentTop="true"
-        android:layout_marginTop="23dp"
-        android:contentDescription="@string/listpopbanner"
-        android:src="@drawable/banner" />
 
 </RelativeLayout>
