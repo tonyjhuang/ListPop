@@ -154,7 +154,7 @@ public class EditActivity extends Activity implements AddArrayContainer {
 			public void run() {
 				// Move ListView to top.
 				mListView.smoothScrollToPosition(0);
-				// The deleting!
+				// Wait for the scrolling to stop...
 				new Handler().postDelayed(new Runnable() {
 					public void run() {
 						long animDuration = 500;
