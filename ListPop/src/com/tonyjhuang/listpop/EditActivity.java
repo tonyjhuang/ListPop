@@ -169,6 +169,8 @@ public class EditActivity extends Activity implements AddArrayContainer {
 	
 	public void deleteFromAdapter(final int position) {
 		Log.d(TAG, "deleteFromAdapter called");
+		Log.d(TAG, "beginAnimationTime = " + beginAnimationTime);
+		Log.d(TAG, "animating? " + !notAnimating());
 		if (notAnimating()) {
 			Log.d(TAG, "Ready to animate...");
 			long animDuration = 500;
@@ -177,7 +179,13 @@ public class EditActivity extends Activity implements AddArrayContainer {
 			anim.setDuration(animDuration);
 			refreshTime(animDuration);
 			Log.d(TAG, "Time refreshed...");
-			mListView.getChildAt(position).startAnimation(anim);
+			Log.d(TAG, "View to be animated's position = " + position);
+			Log.d(TAG, "FirstVisiblePosition = " + mListView.getFirstVisiblePosition());
+			Log.d(TAG, "Attempting animate child at position " 
+					+ (position - mListView.getFirstVisiblePosition()) 
+					+"...");
+			mListView.getChildAt(position - mListView.getFirstVisiblePosition())
+				.startAnimation(anim);
 			Log.d(TAG, "Row animating");
 
 			// The deleting!
@@ -188,6 +196,8 @@ public class EditActivity extends Activity implements AddArrayContainer {
 				}
 
 			}, anim.getDuration());
+			
+			Log.d(TAG, "Animation/deletion completed successfully!");
 		}
 	}
 	
@@ -199,8 +209,8 @@ public class EditActivity extends Activity implements AddArrayContainer {
 
 	private boolean notAnimating() {
 		Log.d(TAG, "Current Time = " + System.currentTimeMillis());
-		Log.d(TAG, "beginAnimationTime + " + beginAnimationTime);
-		Log.d(TAG, "animationTime + " + animationTime);
+		Log.d(TAG, "beginAnimationTime = " + beginAnimationTime);
+		Log.d(TAG, "animationTime = " + animationTime);
 		return System.currentTimeMillis() > (beginAnimationTime + animationTime);
 	}
 }

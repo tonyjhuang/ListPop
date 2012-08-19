@@ -370,7 +370,9 @@ public class StartActivity extends Activity {
 			
 		case R.id.populate:
 			ArrayList<String> f = new ArrayList<String>();
-			f.add("YO WORLD!");
+			for(int b=1; b<11; b++){
+				f.add(0, "Filler " + b);
+			}
 			for(int a=10; a>0; a--){
 				mDbA.enterList("Filler List " + a, f);
 			}

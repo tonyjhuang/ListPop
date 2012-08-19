@@ -56,9 +56,12 @@ public class AddArrayAdapter extends BaseAdapter {
 		String s = list.get(position).toString();
 		itemText.setText(s);
 
+		Log.d(TAG, "Position of view = " + position);
+		Log.d(TAG, "HELLO!");
 		delete.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
+				Log.d(TAG, "Position of view clicked : " + v.getTag());
 				Log.d(TAG, "attempting deleteFromAdapter...");
 				Log.d(TAG, "Tag = " + v.getTag());
 				Log.d(TAG, "Current Time = " + System.currentTimeMillis());

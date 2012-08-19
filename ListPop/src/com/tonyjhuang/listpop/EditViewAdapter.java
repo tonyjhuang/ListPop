@@ -103,6 +103,7 @@ public class EditViewAdapter extends CursorAdapter {
 				Hashtable<String, Integer> table = (Hashtable<String, Integer>) v
 						.getTag();
 				int pos = table.get(POSITION);
+				Log.d(TAG, "View position to be deleted = " + pos);
 				((StartActivity) context).deleteFromAdapter(pos,
 						(long) table.get(ROWID));
 				v.setTag(table);
