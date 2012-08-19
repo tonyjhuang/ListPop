@@ -2,8 +2,9 @@ package com.tonyjhuang.listpop;
 
 import java.util.ArrayList;
 
-import android.app.ActionBar;
-import android.app.Activity;
+import com.actionbarsherlock.app.ActionBar;
+import com.actionbarsherlock.app.SherlockActivity;
+
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -11,7 +12,6 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
 import android.view.KeyEvent;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.View.OnKeyListener;
@@ -21,7 +21,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
 
-public class EditActivity extends Activity implements AddArrayContainer {
+public class EditActivity extends SherlockActivity implements AddArrayContainer {
 	static final int DIALOG_DELETE_ID = 0;
 	private static final String TAG = "EditActivity";
 
@@ -57,7 +57,7 @@ public class EditActivity extends Activity implements AddArrayContainer {
 		mListView.setAdapter(aa);
 
 		// Add up navigation affordance to the Action Bar.
-		ActionBar actionBar = getActionBar();
+		ActionBar actionBar = getSupportActionBar();
 		actionBar.setDisplayHomeAsUpEnabled(true);
 		actionBar.setTitle("Edit List");
 
@@ -179,7 +179,8 @@ public class EditActivity extends Activity implements AddArrayContainer {
 	}
 
 	@Override
-	public boolean onOptionsItemSelected(MenuItem item) {
+	public boolean onOptionsItemSelected(
+			com.actionbarsherlock.view.MenuItem item) {
 		switch (item.getItemId()) {
 		case android.R.id.home:
 			// This is called when the Home (Up) button is pressed
