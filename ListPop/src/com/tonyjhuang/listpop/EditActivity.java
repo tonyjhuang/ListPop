@@ -131,8 +131,7 @@ public class EditActivity extends Activity implements AddArrayContainer {
 					switch (keyCode) {
 					case KeyEvent.KEYCODE_ENTER:
 						String currentText = additem.getText().toString();
-						aa.add(currentText);
-						additem.setText("");
+						addItem(currentText);
 						return true;
 					default:
 						break;
@@ -141,6 +140,35 @@ public class EditActivity extends Activity implements AddArrayContainer {
 				return false;
 			}
 		});
+	}
+
+	private void addItem(String t) {
+		// Add item to array.
+		aa.add(t);
+
+		// Clear input field.
+		additem.setText("");
+
+		// Animate first view.
+		mListView.post(new Runnable() {
+			public void run() {
+				// Move ListView to top.
+				mListView.smoothScrollToPosition(0);
+				// The deleting!
+				new Handler().postDelayed(new Runnable() {
+					public void run() {
+						long animDuration = 500;
+						Animation anim = AnimationUtils.loadAnimation(
+								EditActivity.this, R.anim.slidein);
+						anim.setDuration(animDuration);
+						refreshTime(animDuration + 300);
+						Log.d(TAG, "Attempting to start animation on child 0.");
+						mListView.getChildAt(0).startAnimation(anim);
+					}
+				}, 300);
+			}
+		});
+
 	}
 
 	private void finishDelete() {
@@ -166,7 +194,7 @@ public class EditActivity extends Activity implements AddArrayContainer {
 		}
 		return super.onOptionsItemSelected(item);
 	}
-	
+
 	public void deleteFromAdapter(final int position) {
 		Log.d(TAG, "deleteFromAdapter called");
 		Log.d(TAG, "beginAnimationTime = " + beginAnimationTime);
@@ -180,12 +208,14 @@ public class EditActivity extends Activity implements AddArrayContainer {
 			refreshTime(animDuration);
 			Log.d(TAG, "Time refreshed...");
 			Log.d(TAG, "View to be animated's position = " + position);
-			Log.d(TAG, "FirstVisiblePosition = " + mListView.getFirstVisiblePosition());
-			Log.d(TAG, "Attempting animate child at position " 
-					+ (position - mListView.getFirstVisiblePosition()) 
-					+"...");
-			mListView.getChildAt(position - mListView.getFirstVisiblePosition())
-				.startAnimation(anim);
+			Log.d(TAG,
+					"FirstVisiblePosition = "
+							+ mListView.getFirstVisiblePosition());
+			Log.d(TAG, "Attempting animate child at position "
+					+ (position - mListView.getFirstVisiblePosition()) + "...");
+			mListView
+					.getChildAt(position - mListView.getFirstVisiblePosition())
+					.startAnimation(anim);
 			Log.d(TAG, "Row animating");
 
 			// The deleting!
@@ -196,11 +226,11 @@ public class EditActivity extends Activity implements AddArrayContainer {
 				}
 
 			}, anim.getDuration());
-			
+
 			Log.d(TAG, "Animation/deletion completed successfully!");
 		}
 	}
-	
+
 	// Refresh beginAnimationTime and set new animationTime.
 	private void refreshTime(long newAnimationTime) {
 		animationTime = newAnimationTime;
