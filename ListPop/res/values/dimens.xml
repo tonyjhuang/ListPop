@@ -6,5 +6,7 @@
     <dimen name="list_bg_side">20dp</dimen>
     <dimen name="list_bg_bottom">10dp</dimen>
     <dimen name="list_bg_top">20dp</dimen>
+    <dimen name="pop_textsize">40sp</dimen>
+    
 
 </resources>

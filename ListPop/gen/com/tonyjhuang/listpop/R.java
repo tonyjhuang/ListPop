@@ -29,9 +29,10 @@ public final class R {
         public static final int list_bg_padding=0x7f050003;
         public static final int list_bg_side=0x7f050004;
         public static final int list_bg_top=0x7f050006;
-        public static final int padding_large=0x7f050009;
-        public static final int padding_medium=0x7f050008;
-        public static final int padding_small=0x7f050007;
+        public static final int padding_large=0x7f05000a;
+        public static final int padding_medium=0x7f050009;
+        public static final int padding_small=0x7f050008;
+        public static final int pop_textsize=0x7f050007;
         public static final int side_margin=0x7f050002;
         public static final int title_indent=0x7f050001;
         public static final int to_text=0x7f050000;

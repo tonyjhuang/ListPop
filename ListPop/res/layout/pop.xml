@@ -12,7 +12,7 @@
         android:layout_centerHorizontal="true"
         android:layout_centerVertical="true"
         android:gravity="center"
-        android:textSize="40dp" />
+        android:textSize="@dimen/pop_textsize" />
 
     <Button
         android:id="@+id/pop"
