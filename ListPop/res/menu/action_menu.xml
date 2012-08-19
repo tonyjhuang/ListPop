@@ -20,6 +20,12 @@
             <item
                 android:id="@+id/tab"
                 android:title="Tabs"/>
+            <item
+                android:id="@+id/populate"
+                android:title="Populate"/>
+            <item
+                android:id="@+id/clear"
+                android:title="Clear"/>
         </menu>
     </item>
 

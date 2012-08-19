@@ -26,6 +26,7 @@
             android:screenOrientation="portrait" />
         <activity
             android:name="AddActivity"
+            android:windowSoftInputMode="adjustResize"
             android:screenOrientation="portrait" />
         <activity
             android:name="PresetActivity"

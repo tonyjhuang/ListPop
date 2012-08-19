@@ -44,6 +44,9 @@ public class EditViewAdapter extends CursorAdapter {
 				.getMetrics(metrics);
 
 		switch (metrics.densityDpi) {
+		case DisplayMetrics.DENSITY_LOW:
+			density = .75;
+			break;
 		case DisplayMetrics.DENSITY_MEDIUM:
 			density = 1.0;
 			break;
@@ -111,8 +114,10 @@ public class EditViewAdapter extends CursorAdapter {
 	@Override
 	public View newView(Context context, Cursor cursor, ViewGroup parent) {
 		Log.d(TAG, "Current String = " + cursor.getString(LIST_HEADER_INDEX));
+		Log.d(TAG, "Current String Length = " + cursor.getString(LIST_HEADER_INDEX).length());
+		
 		String current = cursor.getString(LIST_HEADER_INDEX);
-		if(current.length() > (12 * density))
+		if(current.length() >= (16 * density))
 			return mInflater.inflate(R.layout.list_item_e_long, null);
 		else
 			return mInflater.inflate(R.layout.list_item_e, null);

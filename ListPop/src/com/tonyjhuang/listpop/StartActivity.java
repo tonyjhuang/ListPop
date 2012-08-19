@@ -51,8 +51,8 @@ public class StartActivity extends Activity {
 		splash.setImageResource(R.drawable.splash);
 		splash.setScaleType(ImageView.ScaleType.FIT_XY);
 		RelativeLayout.LayoutParams lp = new RelativeLayout.LayoutParams(
-				RelativeLayout.LayoutParams.WRAP_CONTENT,
-				RelativeLayout.LayoutParams.WRAP_CONTENT);
+				RelativeLayout.LayoutParams.MATCH_PARENT,
+				RelativeLayout.LayoutParams.MATCH_PARENT);
 		lp.addRule(RelativeLayout.CENTER_HORIZONTAL);
 		lp.addRule(RelativeLayout.CENTER_VERTICAL);
 
@@ -367,6 +367,19 @@ public class StartActivity extends Activity {
 			Intent k = new Intent(StartActivity.this, TabsActivity.class);
 			startActivity(k);
 			break;
+			
+		case R.id.populate:
+			ArrayList<String> f = new ArrayList<String>();
+			f.add("YO WORLD!");
+			for(int a=10; a>0; a--){
+				mDbA.enterList("Filler List " + a, f);
+			}
+			fillData();
+			break;
+			
+		case R.id.clear:
+			mDbA.deleteAll();
+			fillData();
 		}
 
 		return true;
