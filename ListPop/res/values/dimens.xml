@@ -2,7 +2,7 @@
     <dimen name="to_text">20sp</dimen>
     <dimen name="title_indent">20dp</dimen>
     <dimen name="side_margin">20dp</dimen>
-    <dimen name="list_bg_padding">8dp</dimen>
+    <dimen name="list_bg_padding">9dp</dimen>
     <dimen name="list_bg_side">20dp</dimen>
     <dimen name="list_bg_bottom">10dp</dimen>
     <dimen name="list_bg_top">20dp</dimen>
