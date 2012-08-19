@@ -19,7 +19,7 @@ import android.widget.RelativeLayout.LayoutParams;
 import android.widget.TextView;
 
 public class PopActivity extends Activity {
-	private TextView listHeader, popResult;
+	private TextView popResult;
 	private Button tPop, pPop;
 	private ArrayList<String> list = new ArrayList<String>();
 	private int totalNumberOfItems;
@@ -38,10 +38,6 @@ public class PopActivity extends Activity {
 		Bundle extras = getIntent().getExtras();
 		String listName = extras.getString(DbAdapter.LIST_HEADER);
 		String codifiedList = extras.getString(DbAdapter.LIST);
-
-		// Set list header text.
-		listHeader = (TextView) findViewById(R.id.listname);
-		listHeader.setText(listName);
 
 		// Initialize ArrayList variable.
 		list = interpret(codifiedList);
@@ -67,7 +63,7 @@ public class PopActivity extends Activity {
 		// Add up navigation affordance to the Action Bar.
 		ActionBar actionBar = getActionBar();
 		actionBar.setDisplayHomeAsUpEnabled(true);
-		actionBar.setTitle("Add List");
+		actionBar.setTitle(listName);
 
 	}
 
