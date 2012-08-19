@@ -41,10 +41,11 @@ public final class R {
         public static final int banner=0x7f020001;
         public static final int bg=0x7f020002;
         public static final int edit=0x7f020003;
-        public static final int icon=0x7f020004;
-        public static final int list_bg=0x7f020005;
-        public static final int splash=0x7f020006;
-        public static final int trash=0x7f020007;
+        public static final int ic_action_edit=0x7f020004;
+        public static final int icon=0x7f020005;
+        public static final int list_bg=0x7f020006;
+        public static final int splash=0x7f020007;
+        public static final int trash=0x7f020008;
     }
     public static final class id {
         public static final int add_menu=0x7f0b0024;
