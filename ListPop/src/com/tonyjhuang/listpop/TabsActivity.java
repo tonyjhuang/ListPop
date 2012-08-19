@@ -14,16 +14,21 @@ public class TabsActivity extends Activity {
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.tabs);
+
 		ActionBar bar = getActionBar();
+
 		bar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
+		bar.setDisplayOptions(0, ActionBar.DISPLAY_SHOW_TITLE);
+		bar.setDisplayHomeAsUpEnabled(true);
+
 		ActionBar.Tab customTab = bar.newTab().setText("Custom");
 		ActionBar.Tab presetTab = bar.newTab().setText("Preset");
 		Fragment addFrag = new AddFrag();
 		Fragment presFrag = new PresFrag();
-		
+
 		customTab.setTabListener(new MyTabsListener(addFrag));
 		presetTab.setTabListener(new MyTabsListener(presFrag));
-		
+
 		bar.addTab(customTab);
 		bar.addTab(presetTab);
 	}
