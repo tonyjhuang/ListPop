@@ -2,7 +2,9 @@ package com.tonyjhuang.listpop;
 
 import java.util.ArrayList;
 
-import android.app.Activity;
+import com.actionbarsherlock.app.SherlockActivity;
+import com.actionbarsherlock.view.*;
+
 import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
@@ -10,8 +12,6 @@ import android.os.Handler;
 import android.util.Log;
 import android.view.ContextMenu;
 import android.view.ContextMenu.ContextMenuInfo;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
@@ -26,7 +26,7 @@ import android.widget.RelativeLayout;
 import android.widget.SimpleCursorAdapter;
 import android.widget.Toast;
 
-public class StartActivity extends Activity {
+public class StartActivity extends SherlockActivity {
 	private static final int ADD_ACTIVITY = 1;
 	private static final int PRESETS_ACTIVITY = ADD_ACTIVITY + 1;
 	private static final int EDIT_ACTIVITY = ADD_ACTIVITY + 2;
@@ -135,7 +135,7 @@ public class StartActivity extends Activity {
 	}
 
 	@Override
-	public boolean onContextItemSelected(MenuItem item) {
+	public boolean onContextItemSelected(android.view.MenuItem item) {
 		switch (item.getItemId()) {
 		case DELETE_ID:
 			// Delete row from database.
@@ -335,14 +335,15 @@ public class StartActivity extends Activity {
 		mDbA.close();
 	}
 
-	@Override
-	public boolean onCreateOptionsMenu(Menu menu) {
-		getMenuInflater().inflate(R.menu.action_menu, menu);
+	public boolean onCreateOptionsMenu(com.actionbarsherlock.view.Menu menu) {
+
+		((MenuInflater) getSupportMenuInflater()).inflate(R.menu.action_menu,
+				menu);
 		return true;
 	}
 
-	@Override
-	public boolean onOptionsItemSelected(MenuItem item) {
+	public boolean onOptionsItemSelected(
+			com.actionbarsherlock.view.MenuItem item) {
 		switch (item.getItemId()) {
 		case R.id.menu_edit:
 			if (notAnimating()) {
@@ -367,18 +368,18 @@ public class StartActivity extends Activity {
 			Intent k = new Intent(StartActivity.this, TabsActivity.class);
 			startActivity(k);
 			break;
-			
+
 		case R.id.populate:
 			ArrayList<String> f = new ArrayList<String>();
-			for(int b=1; b<11; b++){
+			for (int b = 1; b < 11; b++) {
 				f.add(0, "Filler " + b);
 			}
-			for(int a=10; a>0; a--){
+			for (int a = 10; a > 0; a--) {
 				mDbA.enterList("Filler List " + a, f);
 			}
 			fillData();
 			break;
-			
+
 		case R.id.clear:
 			mDbA.deleteAll();
 			fillData();
