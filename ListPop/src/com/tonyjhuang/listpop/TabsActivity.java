@@ -1,5 +1,6 @@
 package com.tonyjhuang.listpop;
 
+import android.annotation.SuppressLint;
 import android.app.ActionBar;
 import android.app.ActionBar.Tab;
 import android.app.Activity;
@@ -45,10 +46,11 @@ public class TabsActivity extends Activity {
 
 		}
 
+		@SuppressLint("NewApi")
 		@Override
-		public void onTabUnselected(Tab arg0, FragmentTransaction arg1) {
+		public void onTabUnselected(Tab arg0, FragmentTransaction ft) {
 			// TODO Auto-generated method stub
-
+			ft.detach(fragment);
 		}
 	}
 }
