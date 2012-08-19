@@ -165,7 +165,7 @@ public class EditActivity extends Activity implements AddArrayContainer {
 						Log.d(TAG, "Attempting to start animation on child 0.");
 						mListView.getChildAt(0).startAnimation(anim);
 					}
-				}, 300);
+				}, (mListView.getFirstVisiblePosition() * 40));
 			}
 		});
 
