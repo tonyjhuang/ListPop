@@ -18,9 +18,6 @@
                 android:id="@+id/preset"
                 android:title="@string/preset_list"/>
             <item
-                android:id="@+id/tab"
-                android:title="Tabs"/>
-            <item
                 android:id="@+id/populate"
                 android:title="Populate"/>
             <item

@@ -848,7 +848,7 @@ containing a value of this type.
         public static final int add_menu=0x7f05004b;
         public static final int additem=0x7f05002f;
         public static final int banner=0x7f050045;
-        public static final int clear=0x7f050050;
+        public static final int clear=0x7f05004f;
         public static final int custom=0x7f05004c;
         public static final int deleteline=0x7f050039;
         public static final int disableHome=0x7f050009;
@@ -879,7 +879,7 @@ containing a value of this type.
         public static final int normal=0x7f050001;
         public static final int pop=0x7f05003e;
         public static final int popresult=0x7f05003d;
-        public static final int populate=0x7f05004f;
+        public static final int populate=0x7f05004e;
         public static final int preset=0x7f05004d;
         public static final int presetnameheader=0x7f05003f;
         public static final int presetspinner=0x7f050040;
@@ -890,7 +890,6 @@ containing a value of this type.
         public static final int showCustom=0x7f050008;
         public static final int showHome=0x7f050005;
         public static final int showTitle=0x7f050007;
-        public static final int tab=0x7f05004e;
         public static final int tabMode=0x7f050003;
         public static final int totext=0x7f050037;
         public static final int upperindex=0x7f050036;

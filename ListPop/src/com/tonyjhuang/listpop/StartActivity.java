@@ -364,11 +364,6 @@ public class StartActivity extends SherlockActivity {
 			refreshTime(0);
 			break;
 
-		case R.id.tab:
-			Intent k = new Intent(StartActivity.this, TabsActivity.class);
-			startActivity(k);
-			break;
-
 		case R.id.populate:
 			ArrayList<String> f = new ArrayList<String>();
 			for (int b = 1; b < 11; b++) {
