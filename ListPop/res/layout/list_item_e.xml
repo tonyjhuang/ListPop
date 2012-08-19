@@ -27,7 +27,7 @@
         android:layout_toLeftOf="@+id/deleteline"
         android:background="@android:color/transparent"
         android:contentDescription="@string/edit"
-        android:src="@drawable/ic_action_edit" />
+        android:src="@drawable/edit" />
 
     <ImageButton
         android:id="@id/deleteline"
