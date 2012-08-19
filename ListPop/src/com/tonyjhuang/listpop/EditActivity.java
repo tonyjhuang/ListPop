@@ -26,7 +26,7 @@ public class EditActivity extends SherlockActivity implements AddArrayContainer 
 	private static final String TAG = "EditActivity";
 
 	private ListView mListView;
-	private EditText listName, additem;
+	private EditText listName, addItem;
 	private Button finish;
 	private AddArrayAdapter aa;
 	private long rowid;
@@ -41,7 +41,7 @@ public class EditActivity extends SherlockActivity implements AddArrayContainer 
 		mListView = (ListView) findViewById(R.id.list);
 		listName = (EditText) findViewById(R.id.listname);
 		finish = (Button) findViewById(R.id.finish);
-		additem = (EditText) findViewById(R.id.additem);
+		addItem = (EditText) findViewById(R.id.additem);
 
 		// Retrieve information about list from intent.
 		Intent i = getIntent();
@@ -124,13 +124,13 @@ public class EditActivity extends SherlockActivity implements AddArrayContainer 
 
 	// Sets up new item EditText with a shiny new OnKeyListener for ENTER.
 	private void hookUpAddItem() {
-		additem.setOnKeyListener(new OnKeyListener() {
+		addItem.setOnKeyListener(new OnKeyListener() {
 			@Override
 			public boolean onKey(View v, int keyCode, KeyEvent event) {
 				if (event.getAction() == KeyEvent.ACTION_DOWN) {
 					switch (keyCode) {
 					case KeyEvent.KEYCODE_ENTER:
-						String currentText = additem.getText().toString();
+						String currentText = addItem.getText().toString();
 						addItem(currentText);
 						return true;
 					default:
@@ -147,7 +147,7 @@ public class EditActivity extends SherlockActivity implements AddArrayContainer 
 		aa.add(t);
 
 		// Clear input field.
-		additem.setText("");
+		addItem.setText("");
 
 		// Animate first view.
 		mListView.post(new Runnable() {
