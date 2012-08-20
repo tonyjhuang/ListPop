@@ -3,39 +3,28 @@ package com.tonyjhuang.listpop;
 import java.util.ArrayList;
 
 import com.actionbarsherlock.app.ActionBar;
-import com.actionbarsherlock.app.SherlockActivity;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.Handler;
-import android.util.Log;
-import android.view.KeyEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.view.View.OnKeyListener;
-import android.view.animation.Animation;
-import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
 
-public class EditActivity extends SherlockActivity implements AddArrayContainer {
-	static final int DIALOG_DELETE_ID = 0;
-	private static final String TAG = "EditActivity";
-
-	private ListView mListView;
-	private EditText listName, addItem;
-	private Button finish;
-	private AddArrayAdapter aa;
+public class EditActivity extends AddEditSC implements AddArrayContainer {
 	private long rowid;
-	private long animationTime, beginAnimationTime;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.edit);
+
+		// Initialize superclass handlers.
+		TAG = "EditActivity";
+		context = this;
 
 		// Grab UI handles.
 		mListView = (ListView) findViewById(R.id.list);
@@ -49,9 +38,8 @@ public class EditActivity extends SherlockActivity implements AddArrayContainer 
 		ArrayList<String> list = interpret(i.getStringExtra(DbAdapter.LIST));
 		rowid = i.getLongExtra(DbAdapter.ROWID, 0);
 
-		hookUpFinish();
-
 		hookUpAddItem();
+		hookUpFinish();
 
 		aa = new AddArrayAdapter(this, R.layout.list_item_d, list);
 		mListView.setAdapter(aa);
@@ -122,55 +110,6 @@ public class EditActivity extends SherlockActivity implements AddArrayContainer 
 		alert.show();
 	}
 
-	// Sets up new item EditText with a shiny new OnKeyListener for ENTER.
-	private void hookUpAddItem() {
-		addItem.setOnKeyListener(new OnKeyListener() {
-			@Override
-			public boolean onKey(View v, int keyCode, KeyEvent event) {
-				if (event.getAction() == KeyEvent.ACTION_DOWN) {
-					switch (keyCode) {
-					case KeyEvent.KEYCODE_ENTER:
-						String currentText = addItem.getText().toString();
-						addItem(currentText);
-						return true;
-					default:
-						break;
-					}
-				}
-				return false;
-			}
-		});
-	}
-
-	private void addItem(String t) {
-		// Add item to array.
-		aa.add(t);
-
-		// Clear input field.
-		addItem.setText("");
-
-		// Animate first view.
-		mListView.post(new Runnable() {
-			public void run() {
-				// Move ListView to top.
-				mListView.smoothScrollToPosition(0);
-				// Wait for the scrolling to stop...
-				new Handler().postDelayed(new Runnable() {
-					public void run() {
-						long animDuration = 500;
-						Animation anim = AnimationUtils.loadAnimation(
-								EditActivity.this, R.anim.slidein);
-						anim.setDuration(animDuration);
-						refreshTime(animDuration + 300);
-						Log.d(TAG, "Attempting to start animation on child 0.");
-						mListView.getChildAt(0).startAnimation(anim);
-					}
-				}, (mListView.getFirstVisiblePosition() * 40));
-			}
-		});
-
-	}
-
 	private void finishDelete() {
 		Intent i = new Intent();
 		i.putExtra(DbAdapter.ROWID, rowid);
@@ -178,70 +117,5 @@ public class EditActivity extends SherlockActivity implements AddArrayContainer 
 		finish();
 	}
 
-	@Override
-	public boolean onOptionsItemSelected(
-			com.actionbarsherlock.view.MenuItem item) {
-		switch (item.getItemId()) {
-		case android.R.id.home:
-			// This is called when the Home (Up) button is pressed
-			// in the Action Bar.
-			Intent i = new Intent(this, StartActivity.class);
-			i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP
-					| Intent.FLAG_ACTIVITY_NEW_TASK);
-			i.putExtra("Edit", true);
-			startActivity(i);
-			finish();
-			return true;
-		}
-		return super.onOptionsItemSelected(item);
-	}
-
-	public void deleteFromAdapter(final int position) {
-		Log.d(TAG, "deleteFromAdapter called");
-		Log.d(TAG, "beginAnimationTime = " + beginAnimationTime);
-		Log.d(TAG, "animating? " + !notAnimating());
-		if (notAnimating()) {
-			Log.d(TAG, "Ready to animate...");
-			long animDuration = 500;
-			Animation anim = AnimationUtils.loadAnimation(this,
-					android.R.anim.slide_out_right);
-			anim.setDuration(animDuration);
-			refreshTime(animDuration);
-			Log.d(TAG, "Time refreshed...");
-			Log.d(TAG, "View to be animated's position = " + position);
-			Log.d(TAG,
-					"FirstVisiblePosition = "
-							+ mListView.getFirstVisiblePosition());
-			Log.d(TAG, "Attempting animate child at position "
-					+ (position - mListView.getFirstVisiblePosition()) + "...");
-			mListView
-					.getChildAt(position - mListView.getFirstVisiblePosition())
-					.startAnimation(anim);
-			Log.d(TAG, "Row animating");
-
-			// The deleting!
-			new Handler().postDelayed(new Runnable() {
-
-				public void run() {
-					aa.remove(position);
-				}
-
-			}, anim.getDuration());
-
-			Log.d(TAG, "Animation/deletion completed successfully!");
-		}
-	}
-
-	// Refresh beginAnimationTime and set new animationTime.
-	private void refreshTime(long newAnimationTime) {
-		animationTime = newAnimationTime;
-		beginAnimationTime = System.currentTimeMillis();
-	}
-
-	private boolean notAnimating() {
-		Log.d(TAG, "Current Time = " + System.currentTimeMillis());
-		Log.d(TAG, "beginAnimationTime = " + beginAnimationTime);
-		Log.d(TAG, "animationTime = " + animationTime);
-		return System.currentTimeMillis() > (beginAnimationTime + animationTime);
-	}
+	
 }
