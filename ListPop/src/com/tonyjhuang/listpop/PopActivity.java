@@ -3,11 +3,13 @@ package com.tonyjhuang.listpop;
 import java.util.ArrayList;
 import java.util.Random;
 
-import android.app.ActionBar;
-import android.app.Activity;
+import com.actionbarsherlock.app.ActionBar;
+import com.actionbarsherlock.app.SherlockActivity;
+import com.actionbarsherlock.view.MenuItem;
+
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.MenuItem;
+import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.animation.AlphaAnimation;
@@ -18,7 +20,9 @@ import android.widget.RelativeLayout;
 import android.widget.RelativeLayout.LayoutParams;
 import android.widget.TextView;
 
-public class PopActivity extends Activity {
+public class PopActivity extends SherlockActivity {
+	private static final String TAG = "PopActivity";
+	
 	private TextView popResult;
 	private Button tPop, pPop;
 	private ArrayList<String> list = new ArrayList<String>();
@@ -33,21 +37,29 @@ public class PopActivity extends Activity {
 
 		// Grab Layout handle.
 		layout = (RelativeLayout) findViewById(R.id.rlayout);
+		Log.d(TAG, "Grabbed layout handler");
 
 		// Initialize passed in intent and retrieve extras.
 		Bundle extras = getIntent().getExtras();
 		String listName = extras.getString(DbAdapter.LIST_HEADER);
+		Log.d(TAG, "List name = " + listName);
 		String codifiedList = extras.getString(DbAdapter.LIST);
-
+		Log.d(TAG, "Codified list = " + codifiedList);
+		
+		Log.d(TAG, "Intent extras successfully retrieved.");
+		
 		// Initialize ArrayList variable.
 		list = interpret(codifiedList);
 		totalNumberOfItems = list.size();
 
 		popResult = (TextView) findViewById(R.id.popresult);
+		Log.d(TAG, "TextView handle successfully initialized.");
 
 		// Initialize and add OnClickListener to the transient pop button.
 		tPop = (Button) findViewById(R.id.pop);
+		Log.d(TAG, "Button handle initialized.");
 		hookUpTransientPop();
+		Log.d(TAG, "Existing button hooked up with onClickListener");
 
 		// Initialize permenant pop button.
 		pPop = new Button(this);
@@ -61,7 +73,7 @@ public class PopActivity extends Activity {
 		pPop.setText(getResources().getString(R.string.poplist));
 
 		// Add up navigation affordance to the Action Bar.
-		ActionBar actionBar = getActionBar();
+		ActionBar actionBar = getSupportActionBar();
 		actionBar.setDisplayHomeAsUpEnabled(true);
 		actionBar.setTitle(listName);
 
@@ -76,8 +88,12 @@ public class PopActivity extends Activity {
 			public void onClick(View view) {
 
 				int randomIndex = generator.nextInt(totalNumberOfItems);
+				Log.d(TAG,
+					"randomIndex initialized. randomIndex = " + randomIndex);
+				Log.d(TAG, "Result = " + list.get(randomIndex));
 				popResult.setText(list.get(randomIndex));
 				startBounce(1000);
+				Log.d(TAG, "Result successfully animated");
 				
 				
 				// Animations. Only used once, so why not?
