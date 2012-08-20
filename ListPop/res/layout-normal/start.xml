@@ -25,6 +25,7 @@
         android:layout_marginLeft="@dimen/list_bg_side"
         android:layout_marginRight="@dimen/list_bg_side"
         android:layout_marginTop="@dimen/list_bg_top"
+        android:focusable="false"
         android:scaleType="fitXY"
         android:src="@drawable/list_bg" />
 

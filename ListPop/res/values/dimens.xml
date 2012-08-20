@@ -7,6 +7,8 @@
     <dimen name="list_bg_bottom">10dp</dimen>
     <dimen name="list_bg_top">20dp</dimen>
     <dimen name="pop_textsize">40sp</dimen>
+    <dimen name="pop_bottom">9dp</dimen>
+    <color name="transparent">#0000</color>
     
 
 </resources>
