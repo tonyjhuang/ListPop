@@ -812,12 +812,14 @@ containing a value of this type.
         public static final int banner=0x7f020056;
         public static final int bg=0x7f020057;
         public static final int bottle=0x7f020058;
-        public static final int edit=0x7f020059;
-        public static final int icon=0x7f02005a;
-        public static final int list_bg=0x7f02005b;
-        public static final int pop_button=0x7f02005c;
-        public static final int splash=0x7f02005d;
-        public static final int trash=0x7f02005e;
+        public static final int bubble_large=0x7f020059;
+        public static final int bubble_small=0x7f02005a;
+        public static final int edit=0x7f02005b;
+        public static final int icon=0x7f02005c;
+        public static final int list_bg=0x7f02005d;
+        public static final int pop_button=0x7f02005e;
+        public static final int splash=0x7f02005f;
+        public static final int trash=0x7f020060;
     }
     public static final class id {
         public static final int abs__action_bar=0x7f050022;
@@ -849,12 +851,13 @@ containing a value of this type.
         public static final int abs__title=0x7f05001b;
         public static final int abs__titleDivider=0x7f05001c;
         public static final int abs__up=0x7f05000b;
-        public static final int add_menu=0x7f05004c;
+        public static final int add_menu=0x7f05004d;
         public static final int additem=0x7f05002f;
-        public static final int banner=0x7f050046;
-        public static final int bottle=0x7f05003f;
-        public static final int clear=0x7f050050;
-        public static final int custom=0x7f05004d;
+        public static final int banner=0x7f050047;
+        public static final int bottle=0x7f050040;
+        public static final int bubblelarge=0x7f05003f;
+        public static final int clear=0x7f050051;
+        public static final int custom=0x7f05004e;
         public static final int deleteline=0x7f050039;
         public static final int disableHome=0x7f050009;
         public static final int edititem=0x7f050033;
@@ -862,10 +865,10 @@ containing a value of this type.
         public static final int eightballlist=0x7f050034;
         public static final int finish=0x7f050031;
         public static final int finishbutton=0x7f05002d;
-        public static final int fragment_place=0x7f050048;
-        public static final int fragmentframe=0x7f050043;
+        public static final int fragment_place=0x7f050049;
+        public static final int fragmentframe=0x7f050044;
         public static final int homeAsUp=0x7f050006;
-        public static final int imageView1=0x7f050047;
+        public static final int imageView1=0x7f050048;
         public static final int lineItem=0x7f05003a;
         public static final int list=0x7f050030;
         public static final int listMode=0x7f050002;
@@ -875,21 +878,21 @@ containing a value of this type.
         public static final int listname=0x7f05002e;
         public static final int listnamecreation=0x7f050029;
         public static final int listnameheader=0x7f050028;
-        public static final int listselection=0x7f050045;
+        public static final int listselection=0x7f050046;
         public static final int lowerindex=0x7f050035;
-        public static final int menu_add=0x7f05004b;
-        public static final int menu_edit=0x7f05004a;
+        public static final int menu_add=0x7f05004c;
+        public static final int menu_edit=0x7f05004b;
         public static final int newitem=0x7f050032;
         public static final int newitems=0x7f05002c;
         public static final int normal=0x7f050001;
         public static final int pop=0x7f05003e;
         public static final int popresult=0x7f05003d;
-        public static final int populate=0x7f05004f;
-        public static final int preset=0x7f05004e;
-        public static final int presetnameheader=0x7f050040;
-        public static final int presetspinner=0x7f050041;
-        public static final int presettitle=0x7f050042;
-        public static final int relative=0x7f050044;
+        public static final int populate=0x7f050050;
+        public static final int preset=0x7f05004f;
+        public static final int presetnameheader=0x7f050041;
+        public static final int presetspinner=0x7f050042;
+        public static final int presettitle=0x7f050043;
+        public static final int relative=0x7f050045;
         public static final int rlayout=0x7f05003c;
         public static final int scroll=0x7f050027;
         public static final int showCustom=0x7f050008;
@@ -900,7 +903,7 @@ containing a value of this type.
         public static final int upperindex=0x7f050036;
         public static final int useLogo=0x7f050004;
         public static final int wrap_content=0x7f050000;
-        public static final int yes_no_text=0x7f050049;
+        public static final int yes_no_text=0x7f05004a;
     }
     public static final class integer {
         public static final int abs__max_action_buttons=0x7f090000;
