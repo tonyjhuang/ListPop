@@ -10,24 +10,19 @@ import com.actionbarsherlock.view.MenuItem;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.view.animation.AlphaAnimation;
-import android.view.animation.Animation;
-import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.RelativeLayout;
-import android.widget.RelativeLayout.LayoutParams;
 import android.widget.TextView;
 
 public class PopActivity extends SherlockActivity {
 	private static final String TAG = "PopActivity";
-	
-	private TextView popResult;
-	private Button tPop, pPop;
-	private ArrayList<String> list = new ArrayList<String>();
+
+	private Button pop;
+	private ArrayList<String> list;
 	private int totalNumberOfItems;
-	private RelativeLayout layout;
 	private Random generator = new Random();
 
 	@Override
@@ -35,42 +30,24 @@ public class PopActivity extends SherlockActivity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.pop);
 
-		// Grab Layout handle.
-		layout = (RelativeLayout) findViewById(R.id.rlayout);
-		Log.d(TAG, "Grabbed layout handler");
-
 		// Initialize passed in intent and retrieve extras.
 		Bundle extras = getIntent().getExtras();
 		String listName = extras.getString(DbAdapter.LIST_HEADER);
 		Log.d(TAG, "List name = " + listName);
 		String codifiedList = extras.getString(DbAdapter.LIST);
 		Log.d(TAG, "Codified list = " + codifiedList);
-		
+
 		Log.d(TAG, "Intent extras successfully retrieved.");
-		
+
 		// Initialize ArrayList variable.
-		list = interpret(codifiedList);
+		list = DbAdapter.interpret(codifiedList);
 		totalNumberOfItems = list.size();
 
-		popResult = (TextView) findViewById(R.id.popresult);
-		Log.d(TAG, "TextView handle successfully initialized.");
-
 		// Initialize and add OnClickListener to the transient pop button.
-		tPop = (Button) findViewById(R.id.pop);
+		pop = (Button) findViewById(R.id.pop);
 		Log.d(TAG, "Button handle initialized.");
-		hookUpTransientPop();
-		Log.d(TAG, "Existing button hooked up with onClickListener");
-
-		// Initialize permenant pop button.
-		pPop = new Button(this);
-
-		// Initialize LayoutParams for permenant pop button.
-		RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(
-				LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT);
-		params.addRule(RelativeLayout.ALIGN_PARENT_BOTTOM);
-		params.addRule(RelativeLayout.CENTER_HORIZONTAL);
-		pPop.setLayoutParams(params);
-		pPop.setText(getResources().getString(R.string.poplist));
+		hookUpPop();
+		Log.d(TAG, "Pop button hooked up with onClickListener");
 
 		// Add up navigation affordance to the Action Bar.
 		ActionBar actionBar = getSupportActionBar();
@@ -82,74 +59,20 @@ public class PopActivity extends SherlockActivity {
 	// Create a random number generator, and set the popResult textview
 	// text to a random String returned from the list field.
 	// Removes this button from layout and adds pPop.
-	private void hookUpTransientPop() {
-		tPop.setOnClickListener(new OnClickListener() {
+	private void hookUpPop() {
+		pop.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View view) {
-
 				int randomIndex = generator.nextInt(totalNumberOfItems);
-				Log.d(TAG,
-					"randomIndex initialized. randomIndex = " + randomIndex);
-				Log.d(TAG, "Result = " + list.get(randomIndex));
-				popResult.setText(list.get(randomIndex));
-				startBounce(1000);
-				Log.d(TAG, "Result successfully animated");
+				Log.d(TAG, "randomIndex initialized. randomIndex = "
+						+ randomIndex);
 				
-				
-				// Animations. Only used once, so why not?
-				AlphaAnimation anim1 = new AlphaAnimation(1.0f, 0.0f);
-			    anim1.setDuration(300);
-
-			    AlphaAnimation anim2 = new AlphaAnimation(0.0f, 1.0f);
-			    anim2.setDuration(300);
-			    anim2.setStartOffset(300);
-			    
-			    tPop.startAnimation(anim1);
-				// Remove View from Layout.
-				layout.removeView(tPop);
-				
-				// Add View, then start Animation.
-				layout.addView(pPop);
-				hookUpPermanentPop();
-				pPop.startAnimation(anim2);
+				String result = list.get(randomIndex);
+				Log.d(TAG, "Result = " + result);
 			}
 		});
 	}
 
-	private void hookUpPermanentPop() {
-		pPop.setOnClickListener(new OnClickListener() {
-			@Override
-			public void onClick(View view) {
-				int randomIndex = generator.nextInt(totalNumberOfItems);
-				popResult.setText(list.get(randomIndex));
-				startBounce(300);
-			}
-		});
-	}
-
-	// Returns an ArrayList of Strings given a codified String
-	// returned from the SQLite database.
-	private ArrayList<String> interpret(String s) {
-		ArrayList<String> a = new ArrayList<String>();
-		String current = s;
-
-		int nextCommaIndex = current.indexOf("|");
-
-		while (current.length() != 0) {
-			a.add(current.substring(0, nextCommaIndex));
-			current = current.substring(nextCommaIndex + 1);
-			nextCommaIndex = current.indexOf("|");
-		}
-
-		return a;
-	}
-
-	private void startBounce(int startOffset) {
-		Animation bounce = AnimationUtils.loadAnimation(this, R.anim.bounce);
-		bounce.setStartOffset(startOffset);
-		popResult.startAnimation(bounce);
-	}
-	
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
 		switch (item.getItemId()) {
@@ -165,5 +88,27 @@ public class PopActivity extends SherlockActivity {
 			return true;
 		}
 		return super.onOptionsItemSelected(item);
+	}
+
+	static class Animator {
+		RelativeLayout layout;
+		String result;
+		TextView resultDisplay;
+
+		public Animator(SherlockActivity _c, String r) {
+			result = r;
+			LayoutInflater factory = 
+				((SherlockActivity) _c).getLayoutInflater();
+			
+			// Inflate pop layout and grab TextView and layout handler.
+			final View tempLayout = factory.inflate(R.layout.pop, null);
+			resultDisplay = 
+				(TextView) tempLayout.findViewById(R.id.popresult);
+			layout = 
+				(RelativeLayout) tempLayout.findViewById(R.id.rlayout);
+			
+			// We want the text to be invisible until the animation finishes.
+			resultDisplay.setText("");
+		}
 	}
 }

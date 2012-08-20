@@ -98,21 +98,38 @@ public class DbAdapter {
 		return mDb.query(DATABASE_TABLE, new String[] { ROWID, LIST_HEADER,
 				LIST }, null, null, null, null, orderBy);
 	}
-	
-	public boolean updateListItem(long rowId, String list_header, ArrayList<String> array) {
+
+	public boolean updateListItem(long rowId, String list_header,
+			ArrayList<String> array) {
 		String sArray = arraylistToString(array);
 
 		ContentValues values = new ContentValues();
 		values.put(LIST_HEADER, list_header);
 		values.put(LIST, sArray);
-		
-		return mDb.update(DATABASE_TABLE, values,
-				ROWID+"="+rowId, null) > 0;
+
+		return mDb.update(DATABASE_TABLE, values, ROWID + "=" + rowId, null) > 0;
 	}
 
 	// Returns true if there are no rows in the database.
 	public boolean isEmpty() {
 		return fetchAll().getCount() == 0;
+	}
+
+	// Returns an ArrayList of Strings given a codified String
+	// returned from the SQLite database.
+	static ArrayList<String> interpret(String s) {
+		ArrayList<String> a = new ArrayList<String>();
+		String current = s;
+
+		int nextCommaIndex = current.indexOf("|");
+
+		while (current.length() != 0) {
+			a.add(current.substring(0, nextCommaIndex));
+			current = current.substring(nextCommaIndex + 1);
+			nextCommaIndex = current.indexOf("|");
+		}
+
+		return a;
 	}
 
 	// Implementation of SQLiteOpen Helper. Creates database when needed and
