@@ -14,6 +14,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -29,6 +30,12 @@ public class PopActivity extends SherlockActivity {
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.pop);
+		
+		// Before anything else, make bubbles invisible!
+		ImageView bubbleLarge = (ImageView) findViewById(R.id.bubblelarge);
+		bubbleLarge.setAlpha(0);
+		ImageView bubbleSmall = (ImageView) findViewById(R.id.bubblesmall);
+		bubbleSmall.setAlpha(0);
 
 		// Initialize passed in intent and retrieve extras.
 		Bundle extras = getIntent().getExtras();
