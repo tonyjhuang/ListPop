@@ -331,8 +331,11 @@ public class StartActivity extends SherlockActivity {
 	// Make sure you close the database to liberate system resources!
 	@Override
 	public void onDestroy() {
-		super.onDestroy();
+		Log.d(TAG,"Activity destroyed!");
+		if(c != null) 
+			c.close();
 		mDbA.close();
+		super.onDestroy();
 	}
 
 	public boolean onCreateOptionsMenu(com.actionbarsherlock.view.Menu menu) {
@@ -383,4 +386,5 @@ public class StartActivity extends SherlockActivity {
 		return true;
 	}
 
+	
 }
