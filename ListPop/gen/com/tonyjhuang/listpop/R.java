@@ -856,7 +856,7 @@ containing a value of this type.
         public static final int bottle=0x7f05003f;
         public static final int bubblelarge=0x7f050040;
         public static final int bubblesmall=0x7f050041;
-        public static final int clear=0x7f050053;
+        public static final int clear=0x7f050052;
         public static final int custom=0x7f050050;
         public static final int deleteline=0x7f050039;
         public static final int disableHome=0x7f050009;
@@ -887,8 +887,7 @@ containing a value of this type.
         public static final int normal=0x7f050001;
         public static final int pop=0x7f05003e;
         public static final int popresult=0x7f05003d;
-        public static final int populate=0x7f050052;
-        public static final int preset=0x7f050051;
+        public static final int populate=0x7f050051;
         public static final int presetnameheader=0x7f050042;
         public static final int presetspinner=0x7f050043;
         public static final int presettitle=0x7f050044;

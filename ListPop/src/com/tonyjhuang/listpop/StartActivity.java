@@ -28,8 +28,7 @@ import android.widget.Toast;
 
 public class StartActivity extends SherlockActivity {
 	private static final int ADD_ACTIVITY = 1;
-	private static final int PRESETS_ACTIVITY = ADD_ACTIVITY + 1;
-	private static final int EDIT_ACTIVITY = ADD_ACTIVITY + 2;
+	private static final int EDIT_ACTIVITY = ADD_ACTIVITY + 1;
 	private static final int DELETE_ID = Menu.FIRST;
 	private static final String TAG = "StartActivity";
 
@@ -263,8 +262,6 @@ public class StartActivity extends SherlockActivity {
 			switch (requestCode) {
 
 			case ADD_ACTIVITY:
-
-			case PRESETS_ACTIVITY:
 				// Get data from intent, and enter it as a new row in the
 				// database.
 				String newListHeader = data
@@ -358,12 +355,6 @@ public class StartActivity extends SherlockActivity {
 		case R.id.custom:
 			Intent i = new Intent(StartActivity.this, AddActivity.class);
 			startActivityForResult(i, ADD_ACTIVITY);
-			refreshTime(0);
-			break;
-
-		case R.id.preset:
-			Intent j = new Intent(StartActivity.this, PresetActivity.class);
-			startActivityForResult(j, PRESETS_ACTIVITY);
 			refreshTime(0);
 			break;
 

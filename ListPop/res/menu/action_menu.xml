@@ -15,9 +15,6 @@
                 android:id="@+id/custom"
                 android:title="@string/custom_list"/>
             <item
-                android:id="@+id/preset"
-                android:title="@string/preset_list"/>
-            <item
                 android:id="@+id/populate"
                 android:title="Populate"/>
             <item

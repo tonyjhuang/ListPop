@@ -21,9 +21,7 @@
     <string-array name="preset_choice_array">
         <item>Number Range</item>
         <item>Letter Range</item>
-        <item>Yes/No</item>
         <item>Eight Ball</item>
-        <item>TODO: Make more!</item>
     </string-array>
 
     <string name="preset_name_header">Presets</string>
