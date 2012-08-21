@@ -126,26 +126,26 @@ public class PopActivity extends SherlockActivity {
 		public void run() {
 			Handler h = new Handler();
 
-			h.post(new Runnable() {
+			h.postDelayed(new Runnable() {
 				@Override
 				public void run() {
 					small.setAlpha(255);
 				}
-			});
+			}, 300);
 
 			h.postDelayed(new Runnable() {
 				@Override
 				public void run() {
 					large.setAlpha(255);
 				}
-			}, 500);
+			}, 800);
 			
 			h.postDelayed(new Runnable() {
 				@Override
 				public void run() {
 					resultDisplay.setText(result);
 				}
-			}, 1000);
+			}, 1300);
 		}
 	}
 }

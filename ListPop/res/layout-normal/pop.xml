@@ -5,16 +5,6 @@
     android:layout_height="match_parent"
     android:background="@drawable/bg" >
 
-    <TextView
-        android:id="@+id/popresult"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="98dp"
-        android:gravity="center"
-        android:textSize="@dimen/pop_textsize" />
-
     <ImageView
         android:id="@+id/bottle"
         android:layout_width="wrap_content"
@@ -35,13 +25,20 @@
         android:contentDescription="Pop!"
         android:src="@drawable/pop_button" />
 
+    <TextView
+        android:id="@+id/popresult"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:gravity="center"
+        android:textSize="@dimen/pop_textsize" />
+
     <ImageView
         android:id="@+id/bubblesmall"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_above="@+id/bottle"
-        android:layout_alignLeft="@+id/bottle"
-        android:layout_marginBottom="55dp"
+        android:layout_alignLeft="@+id/pop"
         android:focusable="false"
         android:src="@drawable/bubble_small" />
 
@@ -49,11 +46,8 @@
         android:id="@+id/bubblelarge"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_above="@id/bubblesmall"
-        android:layout_below="@id/popresult"
-        android:layout_alignRight="@+id/bottle"
-        android:layout_marginTop="15dp"
-        android:layout_marginBottom="49dp"
+        android:layout_above="@+id/bubblesmall"
+        android:layout_toRightOf="@+id/popresult"
         android:focusable="false"
         android:src="@drawable/bubble_large" />
 
