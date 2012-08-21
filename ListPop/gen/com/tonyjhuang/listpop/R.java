@@ -769,12 +769,16 @@ containing a value of this type.
          */
         public static final int action_button_min_width=0x7f08000b;
         public static final int list_bg_bottom=0x7f080011;
+        public static final int list_bg_e_bottom=0x7f080017;
+        public static final int list_bg_e_padding=0x7f080015;
+        public static final int list_bg_e_side=0x7f080016;
+        public static final int list_bg_e_top=0x7f080018;
         public static final int list_bg_padding=0x7f08000f;
         public static final int list_bg_side=0x7f080010;
         public static final int list_bg_top=0x7f080012;
-        public static final int padding_large=0x7f080017;
-        public static final int padding_medium=0x7f080016;
-        public static final int padding_small=0x7f080015;
+        public static final int padding_large=0x7f08001b;
+        public static final int padding_medium=0x7f08001a;
+        public static final int padding_small=0x7f080019;
         public static final int pop_bottom=0x7f080014;
         public static final int pop_textsize=0x7f080013;
         public static final int side_margin=0x7f08000e;
