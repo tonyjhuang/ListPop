@@ -3,39 +3,43 @@ package com.tonyjhuang.listpop;
 import java.util.ArrayList;
 import java.util.Random;
 
-import com.actionbarsherlock.app.ActionBar;
-import com.actionbarsherlock.app.SherlockActivity;
-import com.actionbarsherlock.view.MenuItem;
-
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.actionbarsherlock.app.ActionBar;
+import com.actionbarsherlock.app.SherlockActivity;
+import com.actionbarsherlock.view.MenuItem;
+
 public class PopActivity extends SherlockActivity {
 	private static final String TAG = "PopActivity";
 
-	private Button pop;
+	private ImageButton pop;
 	private ArrayList<String> list;
 	private int totalNumberOfItems;
 	private Random generator = new Random();
+	private TextView resultDisplay;
+	private ImageView small, large;
+	private Animator a;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.pop);
-		
+
 		// Before anything else, make bubbles invisible!
-		ImageView bubbleLarge = (ImageView) findViewById(R.id.bubblelarge);
-		bubbleLarge.setAlpha(0);
-		ImageView bubbleSmall = (ImageView) findViewById(R.id.bubblesmall);
-		bubbleSmall.setAlpha(0);
+		large = (ImageView) findViewById(R.id.bubblelarge);
+		large.setAlpha(0);
+		small = (ImageView) findViewById(R.id.bubblesmall);
+		small.setAlpha(0);
 
 		// Initialize passed in intent and retrieve extras.
 		Bundle extras = getIntent().getExtras();
@@ -50,8 +54,10 @@ public class PopActivity extends SherlockActivity {
 		list = DbAdapter.interpret(codifiedList);
 		totalNumberOfItems = list.size();
 
+		resultDisplay = (TextView) findViewById(R.id.popresult);
+
 		// Initialize and add OnClickListener to the transient pop button.
-		pop = (Button) findViewById(R.id.pop);
+		pop = (ImageButton) findViewById(R.id.pop);
 		Log.d(TAG, "Button handle initialized.");
 		hookUpPop();
 		Log.d(TAG, "Pop button hooked up with onClickListener");
@@ -60,6 +66,8 @@ public class PopActivity extends SherlockActivity {
 		ActionBar actionBar = getSupportActionBar();
 		actionBar.setDisplayHomeAsUpEnabled(true);
 		actionBar.setTitle(listName);
+		
+		a = null;
 
 	}
 
@@ -73,9 +81,14 @@ public class PopActivity extends SherlockActivity {
 				int randomIndex = generator.nextInt(totalNumberOfItems);
 				Log.d(TAG, "randomIndex initialized. randomIndex = "
 						+ randomIndex);
-				
+
 				String result = list.get(randomIndex);
 				Log.d(TAG, "Result = " + result);
+				
+				// Start animation.
+				a = new Animator(PopActivity.this, result);
+				a.run();
+				Log.d(TAG, "Animator object created");
 			}
 		});
 	}
@@ -97,25 +110,42 @@ public class PopActivity extends SherlockActivity {
 		return super.onOptionsItemSelected(item);
 	}
 
-	static class Animator {
-		RelativeLayout layout;
+	class Animator {
 		String result;
-		TextView resultDisplay;
+
+		// private static final String TAG = "PopActivity.Animator";
 
 		public Animator(SherlockActivity _c, String r) {
 			result = r;
-			LayoutInflater factory = 
-				((SherlockActivity) _c).getLayoutInflater();
-			
-			// Inflate pop layout and grab TextView and layout handler.
-			final View tempLayout = factory.inflate(R.layout.pop, null);
-			resultDisplay = 
-				(TextView) tempLayout.findViewById(R.id.popresult);
-			layout = 
-				(RelativeLayout) tempLayout.findViewById(R.id.rlayout);
-			
-			// We want the text to be invisible until the animation finishes.
+			// Reset screen.
 			resultDisplay.setText("");
+			small.setAlpha(0);
+			large.setAlpha(0);
+		}
+
+		public void run() {
+			Handler h = new Handler();
+
+			h.post(new Runnable() {
+				@Override
+				public void run() {
+					small.setAlpha(255);
+				}
+			});
+
+			h.postDelayed(new Runnable() {
+				@Override
+				public void run() {
+					large.setAlpha(255);
+				}
+			}, 500);
+			
+			h.postDelayed(new Runnable() {
+				@Override
+				public void run() {
+					resultDisplay.setText(result);
+				}
+			}, 1000);
 		}
 	}
 }

@@ -49,8 +49,10 @@
         android:id="@+id/bubblelarge"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_above="@+id/bubblesmall"
+        android:layout_above="@id/bubblesmall"
+        android:layout_below="@id/popresult"
         android:layout_alignRight="@+id/bottle"
+        android:layout_marginTop="15dp"
         android:layout_marginBottom="49dp"
         android:focusable="false"
         android:src="@drawable/bubble_large" />
