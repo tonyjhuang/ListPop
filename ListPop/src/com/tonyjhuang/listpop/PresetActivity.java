@@ -3,11 +3,12 @@ package com.tonyjhuang.listpop;
 import java.util.ArrayList;
 
 import android.app.Activity;
-import android.app.Fragment;
-import android.app.FragmentManager;
-import android.app.FragmentTransaction;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentActivity;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -17,12 +18,12 @@ import android.widget.Button;
 import android.widget.Spinner;
 import android.widget.Toast;
 
-public class PresetActivity extends Activity implements AddArrayContainer  {
+public class PresetActivity extends FragmentActivity implements AddArrayContainer  {
 	private Spinner listType;
 	private Button finish;
 	// Custom Spinner selection listener.
 	COISL coisl = new COISL();
-	FragmentManager fm = getFragmentManager();
+	FragmentManager fm = getSupportFragmentManager();
 
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -47,7 +48,7 @@ public class PresetActivity extends Activity implements AddArrayContainer  {
 
 				switch (listType.getSelectedItemPosition()) {
 				case COISL.NUMBER_RANGE_SPINNER_INDEX:
-					currentFragment = (NumberRangeFragment) fm
+					currentFragment = (Fragment) fm
 							.findFragmentById(R.id.fragmentframe);
 
 					checkNumberFinale((NumberRangeFragment) currentFragment);
@@ -185,7 +186,7 @@ public class PresetActivity extends Activity implements AddArrayContainer  {
 		public void onItemSelected(AdapterView<?> parent, View view,
 				int position, long id) {
 			FragmentManager fragmentManager = PresetActivity.this
-					.getFragmentManager();
+					.getSupportFragmentManager();
 			FragmentTransaction fragmentTransaction = fragmentManager
 					.beginTransaction();
 

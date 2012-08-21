@@ -3,9 +3,9 @@ package com.tonyjhuang.listpop;
 import java.util.ArrayList;
 import java.util.Collections;
 
-import android.app.Fragment;
 import android.os.Bundle;
 import android.os.Handler;
+import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
