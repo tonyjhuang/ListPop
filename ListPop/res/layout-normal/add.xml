@@ -11,7 +11,7 @@
         android:layout_centerHorizontal="true"
         android:layout_marginTop="15dp"
         android:inputType="textNoSuggestions"
-        android:hint="Enter list name"
+        android:hint="@string/addlistnameprompt"
         android:textSize="25dp" />
 
     <EditText

@@ -1,0 +1,32 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="fill_parent"
+    android:background="@drawable/bg" >
+     
+     <Spinner
+         android:id="@+id/spinner"
+         android:layout_width="match_parent"
+         android:layout_height="wrap_content"
+         android:paddingTop="10dp"
+         android:entries="@array/preset_choice_array"
+         android:prompt="@string/preset_spinner_prompt" />
+     
+
+     <FrameLayout
+         android:id="@+id/fragmentframe"
+         android:layout_width="match_parent"
+         android:layout_height="fill_parent"
+         android:layout_above="@+id/finish"
+         android:layout_below="@+id/spinner" >
+     </FrameLayout>
+     
+     <Button
+	    android:id="@id/finish"
+	    android:layout_width="match_parent"
+	    android:layout_height="wrap_content"
+	    android:layout_alignParentBottom="true"
+	    android:text="@string/finishpreset" />
+
+    
+</RelativeLayout>

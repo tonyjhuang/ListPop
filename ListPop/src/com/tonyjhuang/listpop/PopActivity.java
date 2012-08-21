@@ -29,6 +29,7 @@ public class PopActivity extends SherlockActivity {
 	private TextView resultDisplay;
 	private ImageView small, large;
 	private Animator a;
+	private Handler h = new Handler();
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -66,7 +67,7 @@ public class PopActivity extends SherlockActivity {
 		ActionBar actionBar = getSupportActionBar();
 		actionBar.setDisplayHomeAsUpEnabled(true);
 		actionBar.setTitle(listName);
-		
+
 		a = null;
 
 	}
@@ -84,7 +85,7 @@ public class PopActivity extends SherlockActivity {
 
 				String result = list.get(randomIndex);
 				Log.d(TAG, "Result = " + result);
-				
+
 				// Start animation.
 				a = new Animator(PopActivity.this, result);
 				a.run();
@@ -115,37 +116,41 @@ public class PopActivity extends SherlockActivity {
 
 		// private static final String TAG = "PopActivity.Animator";
 
+		private final Runnable r = new Runnable() {
+			@Override
+			public void run() {
+				small.setAlpha(255);
+			}
+		};
+		private final Runnable s = new Runnable() {
+			@Override
+			public void run() {
+				large.setAlpha(255);
+			}
+		};
+		private final Runnable t = new Runnable() {
+			@Override
+			public void run() {
+				resultDisplay.setText(result);
+			}
+		};
+
 		public Animator(SherlockActivity _c, String r) {
 			result = r;
 			// Reset screen.
 			resultDisplay.setText("");
 			small.setAlpha(0);
 			large.setAlpha(0);
+			
 		}
 
 		public void run() {
-			Handler h = new Handler();
+			// Remove current animations if there are any. 
+			// Then set new animations to start.
+			h.postDelayed(r, 300);
+			h.postDelayed(s, 800);
+			h.postDelayed(t, 1300);
 
-			h.postDelayed(new Runnable() {
-				@Override
-				public void run() {
-					small.setAlpha(255);
-				}
-			}, 300);
-
-			h.postDelayed(new Runnable() {
-				@Override
-				public void run() {
-					large.setAlpha(255);
-				}
-			}, 800);
-			
-			h.postDelayed(new Runnable() {
-				@Override
-				public void run() {
-					resultDisplay.setText(result);
-				}
-			}, 1300);
 		}
 	}
 }

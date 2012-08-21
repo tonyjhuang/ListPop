@@ -7,7 +7,7 @@
     <string name="poptext">Move to pop!</string>
     <string name="poplist">Pop!</string>
     <string name="addlistname">List Name</string>
-    <string name="addlistnameprompt">Enter text here..</string>
+    <string name="addlistnameprompt">List name</string>
     <string name="addlistitem">Entries</string>
     <string name="addlistitemprompt">Add new entries to your list here..</string>
     <string name="finishednewlist">Save List</string>
@@ -91,7 +91,6 @@
     </string-array>
     
     <string name="optionaleightball">Add new items to this preset here..</string>
-    
-    <color name="bg">#FFA500</color>
+    <string name="finishpreset">Add To List</string>
 
 </resources>
