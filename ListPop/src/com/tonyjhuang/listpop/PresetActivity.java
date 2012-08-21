@@ -2,13 +2,13 @@ package com.tonyjhuang.listpop;
 
 import java.util.ArrayList;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -18,24 +18,30 @@ import android.widget.Button;
 import android.widget.Spinner;
 import android.widget.Toast;
 
-public class PresetActivity extends FragmentActivity implements AddArrayContainer  {
+public class PresetActivity extends FragmentActivity implements
+		AddArrayContainer {
 	private Spinner listType;
 	private Button finish;
 	// Custom Spinner selection listener.
 	COISL coisl = new COISL();
 	FragmentManager fm = getSupportFragmentManager();
+	private static final String TAG = "PresetActivity";
 
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.presets);
+		Log.d(TAG, "PresetActivity started!");
 
 		// Get Spinner handle and attach custom listener.
-		listType = (Spinner) findViewById(R.id.presetspinner);
+		listType = (Spinner) findViewById(R.id.spinner);
+		Log.d(TAG, "Spinner reference gotten. Attempting Operation: COISL.");
+		Log.d(TAG, "Before anything... getSupportFragmentManager = " + PresetActivity.this.getSupportFragmentManager());
 		listType.setOnItemSelectedListener(coisl);
-
+		Log.d(TAG, "Spinner initialized!");
 		// Get finish button handle and attach OnClickListener.
-		finish = (Button) findViewById(R.id.finishbutton);
+		finish = (Button) findViewById(R.id.finish);
 		hookUpFinish();
+		Log.d(TAG, "Finish Button initialized! Setup completed!");
 	}
 
 	// Depending on which Fragment is active, call the appropriate finish
@@ -112,7 +118,8 @@ public class PresetActivity extends FragmentActivity implements AddArrayContaine
 
 			char _low = low.charAt(0);
 			char _high = high.charAt(0);
-			i.putStringArrayListExtra(DbAdapter.LIST, indexCharToArray(_low, _high));
+			i.putStringArrayListExtra(DbAdapter.LIST,
+					indexCharToArray(_low, _high));
 			setResult(RESULT_OK, i);
 			finish();
 		}
@@ -157,22 +164,21 @@ public class PresetActivity extends FragmentActivity implements AddArrayContaine
 		String warning = getResources().getString(R.string.invalid_range);
 		Toast.makeText(PresetActivity.this, warning, Toast.LENGTH_SHORT).show();
 	}
-	
+
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
-	    switch (item.getItemId()) {
-	        case android.R.id.home:
-	            // This is called when the Home (Up) button is pressed
-	            // in the Action Bar.
-	            Intent i = new Intent(this, StartActivity.class);
-	            i.addFlags(
-	                    Intent.FLAG_ACTIVITY_CLEAR_TOP |
-	                    Intent.FLAG_ACTIVITY_NEW_TASK);
-	            startActivity(i);
-	            finish();
-	            return true;
-	    }
-	    return super.onOptionsItemSelected(item);
+		switch (item.getItemId()) {
+		case android.R.id.home:
+			// This is called when the Home (Up) button is pressed
+			// in the Action Bar.
+			Intent i = new Intent(this, StartActivity.class);
+			i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP
+					| Intent.FLAG_ACTIVITY_NEW_TASK);
+			startActivity(i);
+			finish();
+			return true;
+		}
+		return super.onOptionsItemSelected(item);
 	}
 
 	// My implementation of OnItemSelectedListener for the Fragment preset
@@ -181,17 +187,22 @@ public class PresetActivity extends FragmentActivity implements AddArrayContaine
 		private static final int NUMBER_RANGE_SPINNER_INDEX = 0;
 		private static final int LETTER_RANGE_SPINNER_INDEX = 1;
 		private static final int EIGHT_BALL_SPINNER_INDEX = 2;
+		private static final String TAG = "PresetActivity.COISL";
 
 		@Override
 		public void onItemSelected(AdapterView<?> parent, View view,
 				int position, long id) {
+			
+			Log.d(TAG, "COISL initialized, getting fragment manager.");
 			FragmentManager fragmentManager = PresetActivity.this
 					.getSupportFragmentManager();
-			FragmentTransaction fragmentTransaction = fragmentManager
+			FragmentTransaction fragmentTransaction = ((android.support.v4.app.FragmentManager) fragmentManager)
 					.beginTransaction();
 
 			Fragment newFragment = null;
-
+			Log.d(TAG, "COISL initialized.");
+			
+			
 			switch (position) {
 			case NUMBER_RANGE_SPINNER_INDEX:
 				newFragment = new NumberRangeFragment();
@@ -219,6 +230,6 @@ public class PresetActivity extends FragmentActivity implements AddArrayContaine
 		EightBallFragment currentFragment = (EightBallFragment) fm
 				.findFragmentById(R.id.fragmentframe);
 		currentFragment.deleteFromActivity(position);
-		
+
 	}
 }

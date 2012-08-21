@@ -30,8 +30,7 @@
             android:windowSoftInputMode="adjustResize" />
         <activity
             android:name="PresetActivity"
-            android:screenOrientation="portrait"
-            android:theme="@android:style/Theme.DeviceDefault.Dialog.NoActionBar.MinWidth" />
+            android:screenOrientation="portrait" />
         <activity
             android:name="EditActivity"
             android:screenOrientation="portrait"

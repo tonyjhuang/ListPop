@@ -154,6 +154,10 @@ public class NumberPicker extends LinearLayout implements OnClickListener,
         mText.setText( "" + mCurrent );
     }
 
+    public int getValue() {
+    	return mCurrent;
+    }
+    
     @Override
     public void setEnabled(boolean enabled) {
         super.setEnabled(enabled);

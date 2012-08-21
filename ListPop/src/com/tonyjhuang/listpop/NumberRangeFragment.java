@@ -5,7 +5,6 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.NumberPicker;
 
 public class NumberRangeFragment extends Fragment {
 	NumberPicker lower, upper;
@@ -29,14 +28,11 @@ public class NumberRangeFragment extends Fragment {
 
 		// Set both pickers' lower and upper bounds,
 		// as well as their starting indices.
-		lower.setMinValue(LOWEST_INDEX);
-		upper.setMinValue(LOWEST_INDEX);
+		lower.setRange(LOWEST_INDEX, HIGHEST_INDEX);
+		upper.setRange(LOWEST_INDEX, HIGHEST_INDEX);
 
-		lower.setMaxValue(HIGHEST_INDEX);
-		upper.setMaxValue(HIGHEST_INDEX);
-
-		lower.setValue(LOWEST_INDEX);
-		upper.setValue(UPPER_START_INDEX);
+		lower.setCurrent(LOWEST_INDEX);
+		upper.setCurrent(UPPER_START_INDEX);
 	}
 
 	public NumberPicker getLowerBoundPicker() {

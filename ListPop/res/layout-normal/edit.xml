@@ -21,7 +21,22 @@
         android:layout_marginTop="30dp"
         android:hint="@string/addlistitemprompt"
         android:inputType="textMultiLine|textNoSuggestions" />
-    <ListView
+
+     <ImageView
+        android:id="@+id/imageView1"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/additem"
+        android:layout_above="@+id/finish"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="@dimen/list_bg_bottom"
+        android:layout_marginLeft="@dimen/list_bg_side"
+        android:layout_marginRight="@dimen/list_bg_side"
+        android:layout_marginTop="@dimen/list_bg_top"
+        android:focusable="false"
+        android:scaleType="fitXY"
+        android:src="@drawable/list_bg" />
+        <ListView
         android:id="@+id/list"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
