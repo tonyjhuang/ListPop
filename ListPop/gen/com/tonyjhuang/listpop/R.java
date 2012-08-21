@@ -197,6 +197,14 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
          */
         public static final int customNavigationLayout=0x7f010041;
+        /** <p>Must be an integer value, such as "<code>100</code>".
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+         */
+        public static final int defaultValue=0x7f010053;
         /**  Options affecting how the action bar is displayed. 
          <p>Must be one or more (separated by '|') of the following constant values.</p>
 <table>
@@ -236,6 +244,14 @@ theme attribute (in the form
 containing a value of this type.
          */
         public static final int dropdownListPreferredItemHeight=0x7f01002f;
+        /** <p>Must be an integer value, such as "<code>100</code>".
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+         */
+        public static final int endRange=0x7f010052;
         /**  The drawable to show in the button for expanding the activities overflow popup.
              <strong>Note:</strong> Clients would like to set this drawable
              as a clue about the action the chosen activity will perform. For
@@ -371,6 +387,14 @@ containing a value of this type.
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
          */
         public static final int logo=0x7f01003f;
+        /** <p>Must be an integer value, such as "<code>100</code>".
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+         */
+        public static final int maxValue=0x7f010054;
         /**  The type of navigation to use. 
          <p>Must be one of the following constant values.</p>
 <table>
@@ -384,6 +408,26 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
 </table>
          */
         public static final int navigationMode=0x7f01003a;
+        /**  NumberPicker down button style. 
+         <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
+or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
+         */
+        public static final int numberPickerDownButtonStyle=0x7f010058;
+        /**  NumberPicker input text style. 
+         <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
+or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
+         */
+        public static final int numberPickerInputTextStyle=0x7f010059;
+        /**  NumberPicker style. 
+         <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
+or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
+         */
+        public static final int numberPickerStyle=0x7f010056;
+        /**  NumberPicker up button style. 
+         <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
+or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
+         */
+        public static final int numberPickerUpButtonStyle=0x7f010057;
         /** <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
          */
@@ -421,6 +465,14 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
          */
         public static final int spinnerItemStyle=0x7f010021;
+        /** <p>Must be an integer value, such as "<code>100</code>".
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+         */
+        public static final int startRange=0x7f010051;
         /**  Specifies subtitle text used for navigationMode="normal" 
          <p>Must be a string value, using '\\;' to escape characters such as '\\n' or '\\uxxxx' for a unicode character.
 <p>This may also be a reference to a resource (in the form
@@ -570,6 +622,14 @@ theme attribute (in the form
 containing a value of this type.
          */
         public static final int windowSplitActionBar=0x7f010035;
+        /** <p>Must be a boolean value, either "<code>true</code>" or "<code>false</code>".
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+         */
+        public static final int wrap=0x7f010055;
     }
     public static final class bool {
         public static final int abs__action_bar_embed_tabs=0x7f060000;
@@ -816,9 +876,55 @@ containing a value of this type.
         public static final int edit=0x7f02005b;
         public static final int icon=0x7f02005c;
         public static final int list_bg=0x7f02005d;
-        public static final int pop_button=0x7f02005e;
-        public static final int splash=0x7f02005f;
-        public static final int trash=0x7f020060;
+        public static final int numberpicker_down_btn=0x7f02005e;
+        public static final int numberpicker_down_btn_holo_dark=0x7f02005f;
+        public static final int numberpicker_down_btn_holo_light=0x7f020060;
+        public static final int numberpicker_down_disabled=0x7f020061;
+        public static final int numberpicker_down_disabled_focused=0x7f020062;
+        public static final int numberpicker_down_disabled_focused_holo_dark=0x7f020063;
+        public static final int numberpicker_down_disabled_focused_holo_light=0x7f020064;
+        public static final int numberpicker_down_disabled_holo_dark=0x7f020065;
+        public static final int numberpicker_down_disabled_holo_light=0x7f020066;
+        public static final int numberpicker_down_focused_holo_dark=0x7f020067;
+        public static final int numberpicker_down_focused_holo_light=0x7f020068;
+        public static final int numberpicker_down_longpressed_holo_dark=0x7f020069;
+        public static final int numberpicker_down_longpressed_holo_light=0x7f02006a;
+        public static final int numberpicker_down_normal=0x7f02006b;
+        public static final int numberpicker_down_normal_holo_dark=0x7f02006c;
+        public static final int numberpicker_down_normal_holo_light=0x7f02006d;
+        public static final int numberpicker_down_pressed=0x7f02006e;
+        public static final int numberpicker_down_pressed_holo_dark=0x7f02006f;
+        public static final int numberpicker_down_pressed_holo_light=0x7f020070;
+        public static final int numberpicker_down_selected=0x7f020071;
+        public static final int numberpicker_input=0x7f020072;
+        public static final int numberpicker_input_disabled=0x7f020073;
+        public static final int numberpicker_input_normal=0x7f020074;
+        public static final int numberpicker_input_pressed=0x7f020075;
+        public static final int numberpicker_input_selected=0x7f020076;
+        public static final int numberpicker_selection_divider=0x7f020077;
+        public static final int numberpicker_up_btn=0x7f020078;
+        public static final int numberpicker_up_btn_holo_dark=0x7f020079;
+        public static final int numberpicker_up_btn_holo_light=0x7f02007a;
+        public static final int numberpicker_up_disabled=0x7f02007b;
+        public static final int numberpicker_up_disabled_focused=0x7f02007c;
+        public static final int numberpicker_up_disabled_focused_holo_dark=0x7f02007d;
+        public static final int numberpicker_up_disabled_focused_holo_light=0x7f02007e;
+        public static final int numberpicker_up_disabled_holo_dark=0x7f02007f;
+        public static final int numberpicker_up_disabled_holo_light=0x7f020080;
+        public static final int numberpicker_up_focused_holo_dark=0x7f020081;
+        public static final int numberpicker_up_focused_holo_light=0x7f020082;
+        public static final int numberpicker_up_longpressed_holo_dark=0x7f020083;
+        public static final int numberpicker_up_longpressed_holo_light=0x7f020084;
+        public static final int numberpicker_up_normal=0x7f020085;
+        public static final int numberpicker_up_normal_holo_dark=0x7f020086;
+        public static final int numberpicker_up_normal_holo_light=0x7f020087;
+        public static final int numberpicker_up_pressed=0x7f020088;
+        public static final int numberpicker_up_pressed_holo_dark=0x7f020089;
+        public static final int numberpicker_up_pressed_holo_light=0x7f02008a;
+        public static final int numberpicker_up_selected=0x7f02008b;
+        public static final int pop_button=0x7f02008c;
+        public static final int splash=0x7f02008d;
+        public static final int trash=0x7f02008e;
     }
     public static final class id {
         public static final int abs__action_bar=0x7f050022;
@@ -850,60 +956,64 @@ containing a value of this type.
         public static final int abs__title=0x7f05001b;
         public static final int abs__titleDivider=0x7f05001c;
         public static final int abs__up=0x7f05000b;
-        public static final int add_menu=0x7f05004f;
+        public static final int add_menu=0x7f050053;
         public static final int additem=0x7f05002f;
-        public static final int banner=0x7f050049;
-        public static final int bottle=0x7f05003f;
-        public static final int bubblelarge=0x7f050040;
-        public static final int bubblesmall=0x7f050041;
-        public static final int clear=0x7f050052;
-        public static final int custom=0x7f050050;
-        public static final int deleteline=0x7f050039;
+        public static final int banner=0x7f05004e;
+        public static final int bottle=0x7f050043;
+        public static final int bubblelarge=0x7f050044;
+        public static final int bubblesmall=0x7f050045;
+        public static final int clear=0x7f050056;
+        public static final int custom=0x7f050054;
+        public static final int decrement=0x7f05003f;
+        public static final int deleteline=0x7f05003a;
         public static final int disableHome=0x7f050009;
-        public static final int edititem=0x7f050033;
-        public static final int editline=0x7f05003b;
-        public static final int eightballlist=0x7f050034;
+        public static final int edititem=0x7f050034;
+        public static final int editline=0x7f05003c;
+        public static final int eightballlist=0x7f050035;
         public static final int finish=0x7f050031;
         public static final int finishbutton=0x7f05002d;
-        public static final int fragment_place=0x7f05004b;
-        public static final int fragmentframe=0x7f050045;
+        public static final int fragment_place=0x7f050050;
+        public static final int fragmentframe=0x7f05004a;
         public static final int homeAsUp=0x7f050006;
-        public static final int imageView1=0x7f05004a;
-        public static final int lineItem=0x7f05003a;
+        public static final int imageView1=0x7f05004f;
+        public static final int increment=0x7f05003d;
+        public static final int lineItem=0x7f05003b;
         public static final int list=0x7f050030;
         public static final int listMode=0x7f050002;
-        public static final int listitem=0x7f050038;
+        public static final int listitem=0x7f050039;
         public static final int listitemcreation=0x7f05002b;
         public static final int listitemheader=0x7f05002a;
         public static final int listname=0x7f05002e;
         public static final int listnamecreation=0x7f050029;
         public static final int listnameheader=0x7f050028;
-        public static final int listselection=0x7f050048;
-        public static final int lowerindex=0x7f050035;
-        public static final int menu_add=0x7f05004e;
-        public static final int menu_edit=0x7f05004d;
-        public static final int newitem=0x7f050032;
+        public static final int listselection=0x7f05004d;
+        public static final int lowerindex=0x7f050036;
+        public static final int menu_add=0x7f050052;
+        public static final int menu_edit=0x7f050051;
+        public static final int newitem=0x7f050033;
         public static final int newitems=0x7f05002c;
         public static final int normal=0x7f050001;
-        public static final int pop=0x7f05003e;
-        public static final int popresult=0x7f05003d;
-        public static final int populate=0x7f050051;
-        public static final int presetnameheader=0x7f050042;
-        public static final int presetspinner=0x7f050043;
-        public static final int presettitle=0x7f050044;
-        public static final int relative=0x7f050047;
-        public static final int rlayout=0x7f05003c;
+        public static final int num_picker=0x7f050032;
+        public static final int pop=0x7f050042;
+        public static final int popresult=0x7f050041;
+        public static final int populate=0x7f050055;
+        public static final int pref_num_picker=0x7f050046;
+        public static final int presetnameheader=0x7f050047;
+        public static final int presetspinner=0x7f050048;
+        public static final int presettitle=0x7f050049;
+        public static final int relative=0x7f05004c;
+        public static final int rlayout=0x7f050040;
         public static final int scroll=0x7f050027;
         public static final int showCustom=0x7f050008;
         public static final int showHome=0x7f050005;
         public static final int showTitle=0x7f050007;
-        public static final int spinner=0x7f050046;
+        public static final int spinner=0x7f05004b;
         public static final int tabMode=0x7f050003;
-        public static final int totext=0x7f050037;
-        public static final int upperindex=0x7f050036;
+        public static final int timepicker_input=0x7f05003e;
+        public static final int totext=0x7f050038;
+        public static final int upperindex=0x7f050037;
         public static final int useLogo=0x7f050004;
         public static final int wrap_content=0x7f050000;
-        public static final int yes_no_text=0x7f05004c;
     }
     public static final class integer {
         public static final int abs__max_action_buttons=0x7f090000;
@@ -930,23 +1040,25 @@ containing a value of this type.
         public static final int abs__screen_simple=0x7f030012;
         public static final int abs__screen_simple_overlay_action_mode=0x7f030013;
         public static final int add=0x7f030014;
-        public static final int edit=0x7f030015;
-        public static final int edit_buttonheader=0x7f030016;
-        public static final int edit_editheader=0x7f030017;
-        public static final int eight_ball=0x7f030018;
-        public static final int letter_range=0x7f030019;
-        public static final int list_item=0x7f03001a;
-        public static final int list_item_d=0x7f03001b;
-        public static final int list_item_e=0x7f03001c;
-        public static final int list_item_e_long=0x7f03001d;
-        public static final int number_range=0x7f03001e;
-        public static final int pop=0x7f03001f;
-        public static final int presets=0x7f030020;
-        public static final int sherlock_spinner_dropdown_item=0x7f030021;
-        public static final int sherlock_spinner_item=0x7f030022;
-        public static final int start=0x7f030023;
-        public static final int tabs=0x7f030024;
-        public static final int yes_no=0x7f030025;
+        public static final int dialog_number_picker=0x7f030015;
+        public static final int edit=0x7f030016;
+        public static final int edit_buttonheader=0x7f030017;
+        public static final int edit_editheader=0x7f030018;
+        public static final int eight_ball=0x7f030019;
+        public static final int letter_range=0x7f03001a;
+        public static final int list_item=0x7f03001b;
+        public static final int list_item_d=0x7f03001c;
+        public static final int list_item_e=0x7f03001d;
+        public static final int list_item_e_long=0x7f03001e;
+        public static final int number_picker=0x7f03001f;
+        public static final int number_range=0x7f030020;
+        public static final int pop=0x7f030021;
+        public static final int pref_number_picker=0x7f030022;
+        public static final int presets=0x7f030023;
+        public static final int sherlock_spinner_dropdown_item=0x7f030024;
+        public static final int sherlock_spinner_item=0x7f030025;
+        public static final int start=0x7f030026;
+        public static final int tabs=0x7f030027;
     }
     public static final class menu {
         public static final int action_menu=0x7f0d0000;
@@ -990,6 +1102,9 @@ containing a value of this type.
         public static final int app_name=0x7f0a000a;
         public static final int custom_list=0x7f0a0023;
         public static final int delete=0x7f0a0020;
+        public static final int dialog_cancel=0x7f0a0029;
+        public static final int dialog_picker_title=0x7f0a002a;
+        public static final int dialog_set_number=0x7f0a0028;
         public static final int edit=0x7f0a001f;
         public static final int finishednewlist=0x7f0a0014;
         public static final int finishpreset=0x7f0a0027;
@@ -1017,6 +1132,12 @@ containing a value of this type.
         public static final int AppTheme=0x7f0b0058;
         public static final int DialogWindowTitle_Sherlock=0x7f0b0033;
         public static final int DialogWindowTitle_Sherlock_Light=0x7f0b0034;
+        public static final int NumberPickerDownButton=0x7f0b005b;
+        public static final int NumberPickerDownButtonLight=0x7f0b005d;
+        public static final int NumberPickerInputText=0x7f0b0059;
+        public static final int NumberPickerInputTextLight=0x7f0b005e;
+        public static final int NumberPickerUpButton=0x7f0b005a;
+        public static final int NumberPickerUpButtonLight=0x7f0b005c;
         public static final int Sherlock___TextAppearance_Small=0x7f0b0047;
         public static final int Sherlock___Theme=0x7f0b004a;
         public static final int Sherlock___Theme_DarkActionBar=0x7f0b004c;
@@ -2935,5 +3056,97 @@ containing a value of this type.
           @attr name android:windowSplitActionBar
         */
         public static final int SherlockTheme_windowSplitActionBar = 48;
+        /** Attributes that can be used with a numberpicker.
+           <p>Includes the following attributes:</p>
+           <table>
+           <colgroup align="left" />
+           <colgroup align="left" />
+           <tr><th>Attribute</th><th>Description</th></tr>
+           <tr><td><code>{@link #numberpicker_defaultValue com.tonyjhuang.listpop:defaultValue}</code></td><td></td></tr>
+           <tr><td><code>{@link #numberpicker_endRange com.tonyjhuang.listpop:endRange}</code></td><td></td></tr>
+           <tr><td><code>{@link #numberpicker_maxValue com.tonyjhuang.listpop:maxValue}</code></td><td></td></tr>
+           <tr><td><code>{@link #numberpicker_startRange com.tonyjhuang.listpop:startRange}</code></td><td></td></tr>
+           <tr><td><code>{@link #numberpicker_wrap com.tonyjhuang.listpop:wrap}</code></td><td></td></tr>
+           </table>
+           @see #numberpicker_defaultValue
+           @see #numberpicker_endRange
+           @see #numberpicker_maxValue
+           @see #numberpicker_startRange
+           @see #numberpicker_wrap
+         */
+        public static final int[] numberpicker = {
+            0x7f010051, 0x7f010052, 0x7f010053, 0x7f010054,
+            0x7f010055
+        };
+        /**
+          <p>This symbol is the offset where the {@link com.tonyjhuang.listpop.R.attr#defaultValue}
+          attribute's value can be found in the {@link #numberpicker} array.
+
+
+          <p>Must be an integer value, such as "<code>100</code>".
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+          @attr name android:defaultValue
+        */
+        public static final int numberpicker_defaultValue = 2;
+        /**
+          <p>This symbol is the offset where the {@link com.tonyjhuang.listpop.R.attr#endRange}
+          attribute's value can be found in the {@link #numberpicker} array.
+
+
+          <p>Must be an integer value, such as "<code>100</code>".
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+          @attr name android:endRange
+        */
+        public static final int numberpicker_endRange = 1;
+        /**
+          <p>This symbol is the offset where the {@link com.tonyjhuang.listpop.R.attr#maxValue}
+          attribute's value can be found in the {@link #numberpicker} array.
+
+
+          <p>Must be an integer value, such as "<code>100</code>".
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+          @attr name android:maxValue
+        */
+        public static final int numberpicker_maxValue = 3;
+        /**
+          <p>This symbol is the offset where the {@link com.tonyjhuang.listpop.R.attr#startRange}
+          attribute's value can be found in the {@link #numberpicker} array.
+
+
+          <p>Must be an integer value, such as "<code>100</code>".
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+          @attr name android:startRange
+        */
+        public static final int numberpicker_startRange = 0;
+        /**
+          <p>This symbol is the offset where the {@link com.tonyjhuang.listpop.R.attr#wrap}
+          attribute's value can be found in the {@link #numberpicker} array.
+
+
+          <p>Must be a boolean value, either "<code>true</code>" or "<code>false</code>".
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+          @attr name android:wrap
+        */
+        public static final int numberpicker_wrap = 4;
     };
 }

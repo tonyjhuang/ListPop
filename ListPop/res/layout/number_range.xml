@@ -4,7 +4,7 @@
     android:layout_height="fill_parent"
     android:orientation="vertical" >
     
-    <NumberPicker
+    <com.tonyjhuang.listpop.NumberPicker
         android:id="@+id/upperindex"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -12,7 +12,7 @@
         android:layout_centerVertical="true"
         android:layout_marginRight="@dimen/side_margin" />
 
-    <NumberPicker
+    <com.tonyjhuang.listpop.NumberPicker
         android:id="@+id/lowerindex"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
