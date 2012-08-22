@@ -1,6 +1,7 @@
 package com.tonyjhuang.listpop;
 
 import java.util.ArrayList;
+import java.util.Collection;
 
 import android.content.Context;
 import android.util.Log;
@@ -77,6 +78,11 @@ public class AddArrayAdapter extends BaseAdapter {
 	// Add new String to end of ArrayList.
 	public void add(String s) {
 		list.add(0, s);
+		this.notifyDataSetChanged();
+	}
+	
+	public void addAll(Collection<String> c){
+		list.addAll(0, c);
 		this.notifyDataSetChanged();
 	}
 

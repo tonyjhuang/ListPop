@@ -174,7 +174,7 @@ public class PresetActivity extends FragmentActivity implements
 			Intent i = new Intent(this, StartActivity.class);
 			i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP
 					| Intent.FLAG_ACTIVITY_NEW_TASK);
-			startActivity(i);
+			setResult(RESULT_CANCELED, i);
 			finish();
 			return true;
 		}

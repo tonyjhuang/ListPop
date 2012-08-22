@@ -70,10 +70,11 @@ abstract class AddEditSC extends SherlockActivity {
 						Log.d(TAG, "Attempting to start animation on child 0.");
 						mListView.getChildAt(0).startAnimation(anim);
 					}
-				}, 
+				},
 				// Fixes bug where if there are no children in list,
 				// the first item flashes briefly and then slides in.
-				aa.getCount() == 0 ? 0 : mListView.getFirstVisiblePosition() * 40);
+						aa.getCount() == 0 ? 0 : mListView
+								.getFirstVisiblePosition() * 40);
 			}
 		});
 
@@ -89,7 +90,7 @@ abstract class AddEditSC extends SherlockActivity {
 	private boolean notAnimating() {
 		return System.currentTimeMillis() > (beginAnimationTime + animationTime);
 	}
-	
+
 	public void deleteFromAdapter(final int position) {
 		Log.d(TAG, "deleteFromAdapter called");
 		Log.d(TAG, "beginAnimationTime = " + beginAnimationTime);
@@ -125,7 +126,7 @@ abstract class AddEditSC extends SherlockActivity {
 			Log.d(TAG, "Animation/deletion completed successfully!");
 		}
 	}
-	
+
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
 		switch (item.getItemId()) {
@@ -135,18 +136,12 @@ abstract class AddEditSC extends SherlockActivity {
 			Intent i = new Intent(this, StartActivity.class);
 			i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP
 					| Intent.FLAG_ACTIVITY_NEW_TASK);
-			
-			if(TAG.equals("EditActivity"))
-				i.putExtra("Edit", true);
-			else
-				i.putExtra("Edit", false);
-			
-			startActivity(i);
+
+			setResult(RESULT_CANCELED, i);
 			finish();
 			return true;
 		}
 		return super.onOptionsItemSelected(item);
 	}
-	
-	
+
 }

@@ -83,12 +83,18 @@ public class StartActivity extends SherlockActivity {
 		else
 			// Populate listview with a SimpleCursorAdapter.
 			fillData();
-
+		
 		controller = AnimationUtils.loadLayoutAnimation(this,
 				R.anim.layout_controller);
-		mListView.setLayoutAnimation(controller);
+		new Handler().postDelayed(new Runnable() {
+			@Override
+			public void run() {
+				mListView.setLayoutAnimation(controller);
+			}
+		}, 1000);
+		
 
-		refreshTime(1200);
+		refreshTime(2000);
 		Log.d(TAG, "animationTime = " + animationTime);
 		Log.d(TAG, "beginAnimationTime = " + beginAnimationTime);
 	}
@@ -310,7 +316,7 @@ public class StartActivity extends SherlockActivity {
 
 		}
 
-		// mListView.setLayoutAnimation(controller);
+		// If activity was canceled via up navigation, we need to check
 	}
 
 	// If adapter is a CustomCursorAdapter, mutate to SimpleCusorAdapter.
