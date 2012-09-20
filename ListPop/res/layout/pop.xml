@@ -11,8 +11,9 @@
         android:layout_centerHorizontal="true"
         android:layout_centerVertical="true"
         android:paddingBottom="20dp"
-        android:textColor="#000"
-        android:textSize="22sp" />
+        android:textStyle="bold"
+        android:textColor="#FFF"
+        android:textSize="30sp" />
 
     <ImageView
         android:id="@+id/bubbles"

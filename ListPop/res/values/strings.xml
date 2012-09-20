@@ -9,7 +9,7 @@
     <string name="addlistname">List Name</string>
     <string name="addlistnameprompt">List name</string>
     <string name="addlistitem">Entries</string>
-    <string name="addlistitemprompt">Add new entries to your list here..</string>
+    <string name="addlistitemprompt">Add new entries</string>
     <string name="finishednewlist">Save List</string>
     <string name="menu_delete">Delete</string>
     <string name="no_items">Add at least one item!</string>
@@ -25,7 +25,6 @@
     </string-array>
 
     <string name="preset_name_header">Presets</string>
-    <string name="optional">Enter optional list name here..</string>
     <string name="yes_no_fragment_text">Yes/No</string>
 
     <string-array name="letters">
@@ -88,7 +87,7 @@
         <item>Very doubtful</item>
     </string-array>
     
-    <string name="optionaleightball">Add new items to this preset here..</string>
+    <string name="optionaleightball">Add new items..</string>
     <string name="finishpreset">Add To List</string>
 
     <string name="dialog_set_number">Set</string>
@@ -97,5 +96,5 @@
     <string name="no_lower_bound">Add a lower bound!</string>
     <string name="no_upper_bound">Add an upper bound!</string>
     <string name="invalid_number">Invalid number!</string>
-    <string name="numberpicker_prompt">0-99</string>
+    <string name="numberpicker_prompt">0&#8211;99</string>
 </resources>

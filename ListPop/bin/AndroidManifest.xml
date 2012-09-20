@@ -30,6 +30,7 @@
             android:windowSoftInputMode="stateVisible|adjustPan" />
         <activity
             android:name="PresetActivity"
+            android:theme="@style/Theme.Sherlock.Dialog"
             android:screenOrientation="portrait" />
         <activity
             android:name="EditActivity"
