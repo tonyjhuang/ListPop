@@ -1,62 +1,48 @@
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:fillViewport="true" >
+    android:background="@drawable/bg" >
 
-    <RelativeLayout
-        android:id="@+id/scroll"
+    <EditText
+        android:id="@+id/listname"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="15dp"
+        android:inputType="textNoSuggestions"
+        android:hint="@string/addlistnameprompt"
+        android:textSize="25dp" />
+
+    <EditText
+        android:id="@+id/additem"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" >
+        android:layout_height="wrap_content"
+        android:layout_below="@id/listname"
+        android:layout_marginTop="30dp"
+        android:hint="@string/addlistitemprompt"
+        android:inputType="textMultiLine|textNoSuggestions" />
+    <ListView
+        android:id="@+id/list"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/finish"
+        android:layout_below="@+id/additem"
+        android:layout_centerHorizontal="true" />
 
-        <TextView
-            android:id="@+id/listnameheader"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="@dimen/title_indent"
-            android:layout_marginTop="10dp"
-            android:text="@string/addlistname"
-            android:textSize="25dp" />
+    <Button
+        android:id="@id/finish"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:text="@string/finishednewlist" />
 
-        <EditText
-            android:id="@+id/listnamecreation"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/listnameheader"
-            android:hint="@string/addlistnameprompt"
-            android:inputType="textCapWords" />
+    <Button
+        android:id="@+id/preset"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentTop="true"
+        android:text="Presets" />
 
-        <TextView
-            android:id="@+id/listitemheader"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/listnamecreation"
-            android:layout_marginLeft="@dimen/title_indent"
-            android:layout_marginTop="20dp"
-            android:text="@string/addlistitem"
-            android:textSize="25dp" />
-
-        <EditText
-            android:id="@+id/listitemcreation"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/listitemheader"
-            android:hint="@string/addlistitemprompt"
-            android:inputType="textMultiLine|textCapSentences" />
-
-        <ListView
-            android:id="@+id/newitems"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_above="@+id/finishbutton"
-            android:layout_below="@id/listitemcreation" />
-
-        <Button
-            android:id="@id/finishbutton"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
-            android:text="@string/finishednewlist" />
-    </RelativeLayout>
-
-</ScrollView>
+</RelativeLayout>

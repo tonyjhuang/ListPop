@@ -83,7 +83,7 @@ public class StartActivity extends SherlockActivity {
 		else
 			// Populate listview with a SimpleCursorAdapter.
 			fillData();
-		
+
 		controller = AnimationUtils.loadLayoutAnimation(this,
 				R.anim.layout_controller);
 		new Handler().postDelayed(new Runnable() {
@@ -92,7 +92,6 @@ public class StartActivity extends SherlockActivity {
 				mListView.setLayoutAnimation(controller);
 			}
 		}, 1000);
-		
 
 		refreshTime(2000);
 		Log.d(TAG, "animationTime = " + animationTime);
@@ -334,8 +333,8 @@ public class StartActivity extends SherlockActivity {
 	// Make sure you close the database to liberate system resources!
 	@Override
 	public void onDestroy() {
-		Log.d(TAG,"Activity destroyed!");
-		if(c != null) 
+		Log.d(TAG, "Activity destroyed!");
+		if (c != null)
 			c.close();
 		mDbA.close();
 		super.onDestroy();
@@ -358,30 +357,14 @@ public class StartActivity extends SherlockActivity {
 			}
 			break;
 
-		case R.id.custom:
+		case R.id.menu_add:
 			Intent i = new Intent(StartActivity.this, AddActivity.class);
 			startActivityForResult(i, ADD_ACTIVITY);
 			refreshTime(0);
 			break;
 
-		case R.id.populate:
-			ArrayList<String> f = new ArrayList<String>();
-			for (int b = 1; b < 11; b++) {
-				f.add(0, "Filler " + b);
-			}
-			for (int a = 10; a > 0; a--) {
-				mDbA.enterList("Filler List " + a, f);
-			}
-			fillData();
-			break;
-
-		case R.id.clear:
-			mDbA.deleteAll();
-			fillData();
 		}
-
 		return true;
 	}
 
-	
 }

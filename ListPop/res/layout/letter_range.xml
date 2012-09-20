@@ -3,24 +3,26 @@
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     android:orientation="vertical" >
-    
-     <Spinner
+
+    <Spinner
         android:id="@+id/lowerindex"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
         android:layout_centerVertical="true"
-        android:layout_marginLeft="@dimen/side_margin"
-        android:entries="@array/letters" />
-     
+        android:layout_marginLeft="@dimen/preset_side_margin"
+        android:entries="@array/letters"
+        android:textSize="24sp" />
+
     <Spinner
         android:id="@+id/upperindex"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentRight="true"
         android:layout_centerVertical="true"
-        android:layout_marginRight="@dimen/side_margin"
-        android:entries="@array/letters" />
+        android:layout_marginRight="@dimen/preset_side_margin"
+        android:entries="@array/letters"
+        android:textSize="24sp" />
 
     <TextView
         android:id="@+id/totext"
