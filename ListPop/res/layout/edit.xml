@@ -10,7 +10,7 @@
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="15dp"
-        android:inputType="textNoSuggestions"
+        android:inputType="textCapWords"
         android:textColor="#000"
         android:textSize="25dp" />
 
@@ -21,7 +21,7 @@
         android:layout_below="@id/listname"
         android:layout_marginTop="30dp"
         android:hint="@string/addlistitemprompt"
-        android:inputType="textMultiLine|textNoSuggestions" />
+        android:inputType="textMultiLine|textCapWords" />
 
     <ImageView
         android:id="@+id/list_bg"
