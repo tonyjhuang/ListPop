@@ -33,7 +33,7 @@ public class PresetActivity extends FragmentActivity implements
 		Log.d(TAG, "PresetActivity started!");
 
 		// Get Spinner handle and attach custom listener.
-		listType = (Spinner) findViewById(R.id.spinner);
+		listType = (Spinner) findViewById(R.id.presetspinner);
 		Log.d(TAG, "Spinner reference gotten. Attempting Operation: COISL.");
 		Log.d(TAG, "Before anything... getSupportFragmentManager = "
 				+ PresetActivity.this.getSupportFragmentManager());
