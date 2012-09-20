@@ -205,7 +205,7 @@ public class StartActivity extends SherlockActivity {
 	public void deleteFromAdapter(int pos, final long rowid) {
 		if (notAnimating()) {
 			// The animation!
-			long animDuration = 500;
+			long animDuration = 200;
 			Animation anim = AnimationUtils.loadAnimation(this,
 					android.R.anim.slide_out_right);
 			anim.setDuration(animDuration);
@@ -281,7 +281,7 @@ public class StartActivity extends SherlockActivity {
 
 				mListView.post(new Runnable() {
 					public void run() {
-						long animDuration = 500;
+						long animDuration = 200;
 						Animation anim = AnimationUtils.loadAnimation(
 								StartActivity.this, R.anim.slidein);
 						anim.setDuration(animDuration);

@@ -5,13 +5,10 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
 
 public class NumberRangeFragment extends Fragment {
-	NumberPicker lower, upper;
-
-	private static final int LOWEST_INDEX = 0;
-	private static final int HIGHEST_INDEX = 99;
-	private static final int UPPER_START_INDEX = 10;
+	EditText lower, upper;
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -23,23 +20,35 @@ public class NumberRangeFragment extends Fragment {
 	@Override
 	public void onViewCreated(View view, Bundle savedInstanceState) {
 		// Initialize UI references.
-		lower = (NumberPicker) view.findViewById(R.id.lowerindex);
-		upper = (NumberPicker) view.findViewById(R.id.upperindex);
-
-		// Set both pickers' lower and upper bounds,
-		// as well as their starting indices.
-		lower.setRange(LOWEST_INDEX, HIGHEST_INDEX);
-		upper.setRange(LOWEST_INDEX, HIGHEST_INDEX);
-
-		lower.setCurrent(LOWEST_INDEX);
-		upper.setCurrent(UPPER_START_INDEX);
+		lower = (EditText) view.findViewById(R.id.lowerindex);
+		upper = (EditText) view.findViewById(R.id.upperindex);
+		
+		
 	}
 
-	public NumberPicker getLowerBoundPicker() {
-		return lower;
+	public int getLowerBound() {
+		String lb = lower.getText().toString();
+		// If there is no input
+		if(lb.equals("")){
+			lower.setError(getString(R.string.no_lower_bound));
+			return 100;
+		} else if (Integer.parseInt(lb) < 0 || Integer.parseInt(lb) > 99){
+			lower.setError(getString(R.string.invalid_number));
+			return 100;
+		} else
+			return Integer.parseInt(lb);
 	}
 
-	public NumberPicker getUpperBoundPicker() {
-		return upper;
+	public int getUpperBound() {
+		String ub = upper.getText().toString();
+		// If there is no input
+		if(ub.equals("")){
+			upper.setError(getString(R.string.no_upper_bound));
+			return 100;
+		} else if (Integer.parseInt(ub) < 0 || Integer.parseInt(ub) > 99){
+			upper.setError(getString(R.string.invalid_number));
+			return 100;
+		} else
+			return Integer.parseInt(ub);
 	}
 }

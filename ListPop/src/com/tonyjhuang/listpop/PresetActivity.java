@@ -35,7 +35,8 @@ public class PresetActivity extends FragmentActivity implements
 		// Get Spinner handle and attach custom listener.
 		listType = (Spinner) findViewById(R.id.spinner);
 		Log.d(TAG, "Spinner reference gotten. Attempting Operation: COISL.");
-		Log.d(TAG, "Before anything... getSupportFragmentManager = " + PresetActivity.this.getSupportFragmentManager());
+		Log.d(TAG, "Before anything... getSupportFragmentManager = "
+				+ PresetActivity.this.getSupportFragmentManager());
 		listType.setOnItemSelectedListener(coisl);
 		Log.d(TAG, "Spinner initialized!");
 		// Get finish button handle and attach OnClickListener.
@@ -81,17 +82,20 @@ public class PresetActivity extends FragmentActivity implements
 	// Check if the range is valid (low < high). If not, Toast. If so,
 	// create intent with extras and finish activity.
 	private void checkNumberFinale(NumberRangeFragment nrf) {
-		int low = nrf.getLowerBoundPicker().getValue();
-		int high = nrf.getUpperBoundPicker().getValue();
+		int low = nrf.getLowerBound();
+		int high = nrf.getUpperBound();
 
-		if (low > high)
-			alertToInvalidRange();
-		else {
-			ArrayList<String> a = indexToArray(low, high);
-			Intent i = new Intent();
-			i.putStringArrayListExtra(DbAdapter.LIST, a);
-			setResult(RESULT_OK, i);
-			finish();
+		if (low != 100 && high != 100) {
+
+			if (low > high)
+				alertToInvalidRange();
+			else {
+				ArrayList<String> a = indexToArray(low, high);
+				Intent i = new Intent();
+				i.putStringArrayListExtra(DbAdapter.LIST, a);
+				setResult(RESULT_OK, i);
+				finish();
+			}
 		}
 	}
 
@@ -192,7 +196,7 @@ public class PresetActivity extends FragmentActivity implements
 		@Override
 		public void onItemSelected(AdapterView<?> parent, View view,
 				int position, long id) {
-			
+
 			Log.d(TAG, "COISL initialized, getting fragment manager.");
 			FragmentManager fragmentManager = PresetActivity.this
 					.getSupportFragmentManager();
@@ -201,8 +205,7 @@ public class PresetActivity extends FragmentActivity implements
 
 			Fragment newFragment = null;
 			Log.d(TAG, "COISL initialized.");
-			
-			
+
 			switch (position) {
 			case NUMBER_RANGE_SPINNER_INDEX:
 				newFragment = new NumberRangeFragment();

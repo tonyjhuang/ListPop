@@ -94,4 +94,8 @@
     <string name="dialog_set_number">Set</string>
     <string name="dialog_cancel">Cancel</string>
     <string name="dialog_picker_title">Choose a number</string>
+    <string name="no_lower_bound">Add a lower bound!</string>
+    <string name="no_upper_bound">Add an upper bound!</string>
+    <string name="invalid_number">Invalid number!</string>
+    <string name="numberpicker_prompt">0-99</string>
 </resources>

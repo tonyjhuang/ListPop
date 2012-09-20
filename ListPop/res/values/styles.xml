@@ -2,28 +2,4 @@
 
     <style name="AppTheme" parent="android:Theme.Light" />
 
-    <style name="NumberPickerInputText" parent="@android:style/TextAppearance.Large.Inverse">
-        <item name="android:textColor">@android:color/primary_text_light</item>
-        <item name="android:textSize">30sp</item>
-    </style>
-
-    <style name="NumberPickerUpButton" parent="@android:style/Widget.ImageButton">
-        <item name="android:background">@drawable/numberpicker_up_btn</item>
-        <item name="android:paddingTop">22dip</item>
-        <item name="android:paddingBottom">22dip</item>
-    </style>
-
-    <style name="NumberPickerDownButton" parent="@android:style/Widget.ImageButton">
-        <item name="android:background">@drawable/numberpicker_down_btn</item>
-        <item name="android:paddingTop">22dip</item>
-        <item name="android:paddingBottom">22dip</item>
-    </style>
-
-    <style name="NumberPickerInputText" parent="@android:style/Widget.EditText">
-        <item name="android:textAppearance">@style/NumberPickerInputText</item>
-        <item name="android:gravity">center</item>
-        <item name="android:singleLine">true</item>
-        <item name="android:background">@drawable/numberpicker_input</item>
-    </style>
-
 </resources>

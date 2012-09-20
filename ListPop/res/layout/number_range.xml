@@ -3,22 +3,24 @@
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     android:orientation="vertical" >
-    
-    <com.tonyjhuang.listpop.NumberPicker
+
+    <EditText
         android:id="@+id/upperindex"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentRight="true"
         android:layout_centerVertical="true"
-        android:layout_marginRight="@dimen/side_margin" />
+        android:layout_marginRight="@dimen/side_margin"
+        android:hint="@string/numberpicker_prompt" />
 
-    <com.tonyjhuang.listpop.NumberPicker
+    <EditText
         android:id="@+id/lowerindex"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
         android:layout_centerVertical="true"
-        android:layout_marginLeft="@dimen/side_margin" />
+        android:layout_marginLeft="@dimen/side_margin"
+        android:hint="@string/numberpicker_prompt" />
 
     <TextView
         android:id="@+id/totext"
