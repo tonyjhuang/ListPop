@@ -9,8 +9,8 @@ import android.view.View;
 import android.view.View.OnKeyListener;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
-import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.ListView;
 
 import com.actionbarsherlock.app.SherlockActivity;
@@ -19,7 +19,7 @@ import com.actionbarsherlock.view.MenuItem;
 abstract class AddEditSC extends SherlockActivity {
 	protected EditText listName, addItem;
 	protected ListView mListView;
-	protected Button finish;
+	protected ImageButton finish;
 	protected AddArrayAdapter aa;
 	protected long animationTime, beginAnimationTime;
 	protected Context context;

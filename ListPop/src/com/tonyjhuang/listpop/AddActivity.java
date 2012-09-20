@@ -9,9 +9,8 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.view.animation.AnimationUtils;
-import android.view.animation.LayoutAnimationController;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.EditText;
 import android.widget.ListView;
 
@@ -31,7 +30,7 @@ public class AddActivity extends AddEditSC implements AddArrayContainer {
 		// Initialize UI elements.
 		listName = (EditText) findViewById(R.id.listname);
 		addItem = (EditText) findViewById(R.id.additem);
-		finish = (Button) findViewById(R.id.finish);
+		finish = (ImageButton) findViewById(R.id.finish);
 		mListView = (ListView) findViewById(R.id.list);
 
 		hookUpAddItem();

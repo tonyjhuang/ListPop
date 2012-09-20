@@ -10,7 +10,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.EditText;
 import android.widget.ListView;
 
@@ -29,7 +29,7 @@ public class EditActivity extends AddEditSC implements AddArrayContainer {
 		// Grab UI handles.
 		mListView = (ListView) findViewById(R.id.list);
 		listName = (EditText) findViewById(R.id.listname);
-		finish = (Button) findViewById(R.id.finish);
+		finish = (ImageButton) findViewById(R.id.finish);
 		addItem = (EditText) findViewById(R.id.additem);
 
 		// Retrieve information about list from intent.

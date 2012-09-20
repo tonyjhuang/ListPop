@@ -46,11 +46,12 @@
         android:layout_alignRight="@id/list_bg"
         android:layout_alignTop="@id/list_bg" />
 
-    <Button
+    <ImageButton
         android:id="@id/finish"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:text="@string/finishednewlist" />
+        android:src="@drawable/save"
+        android:contentDescription="Save your changes" />
 
 </RelativeLayout>
