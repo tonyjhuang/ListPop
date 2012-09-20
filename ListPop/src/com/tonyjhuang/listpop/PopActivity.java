@@ -27,20 +27,11 @@ public class PopActivity extends SherlockActivity {
 	private int totalNumberOfItems;
 	private Random generator = new Random();
 	private TextView resultDisplay;
-	private ImageView small, large;
-	private Animator a;
-	private Handler h = new Handler();
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.pop);
-
-		// Before anything else, make bubbles invisible!
-		large = (ImageView) findViewById(R.id.bubblelarge);
-		large.setAlpha(0);
-		small = (ImageView) findViewById(R.id.bubblesmall);
-		small.setAlpha(0);
 
 		// Initialize passed in intent and retrieve extras.
 		Bundle extras = getIntent().getExtras();
@@ -55,10 +46,10 @@ public class PopActivity extends SherlockActivity {
 		list = DbAdapter.interpret(codifiedList);
 		totalNumberOfItems = list.size();
 
-		resultDisplay = (TextView) findViewById(R.id.popresult);
+		resultDisplay = (TextView) findViewById(R.id.result);
 
 		// Initialize and add OnClickListener to the transient pop button.
-		pop = (ImageButton) findViewById(R.id.pop);
+		pop = (ImageButton) findViewById(R.id.button);
 		Log.d(TAG, "Button handle initialized.");
 		hookUpPop();
 		Log.d(TAG, "Pop button hooked up with onClickListener");
@@ -67,8 +58,6 @@ public class PopActivity extends SherlockActivity {
 		ActionBar actionBar = getSupportActionBar();
 		actionBar.setDisplayHomeAsUpEnabled(true);
 		actionBar.setTitle(listName);
-
-		a = null;
 
 	}
 
@@ -86,10 +75,6 @@ public class PopActivity extends SherlockActivity {
 				String result = list.get(randomIndex);
 				Log.d(TAG, "Result = " + result);
 
-				// Start animation.
-				a = new Animator(PopActivity.this, result);
-				a.run();
-				Log.d(TAG, "Animator object created");
 			}
 		});
 	}
@@ -109,48 +94,5 @@ public class PopActivity extends SherlockActivity {
 			return true;
 		}
 		return super.onOptionsItemSelected(item);
-	}
-
-	class Animator {
-		String result;
-
-		// private static final String TAG = "PopActivity.Animator";
-
-		private final Runnable r = new Runnable() {
-			@Override
-			public void run() {
-				small.setAlpha(255);
-			}
-		};
-		private final Runnable s = new Runnable() {
-			@Override
-			public void run() {
-				large.setAlpha(255);
-			}
-		};
-		private final Runnable t = new Runnable() {
-			@Override
-			public void run() {
-				resultDisplay.setText(result);
-			}
-		};
-
-		public Animator(SherlockActivity _c, String r) {
-			result = r;
-			// Reset screen.
-			resultDisplay.setText("");
-			small.setAlpha(0);
-			large.setAlpha(0);
-			
-		}
-
-		public void run() {
-			// Remove current animations if there are any. 
-			// Then set new animations to start.
-			h.postDelayed(r, 300);
-			h.postDelayed(s, 800);
-			h.postDelayed(t, 1300);
-
-		}
 	}
 }
