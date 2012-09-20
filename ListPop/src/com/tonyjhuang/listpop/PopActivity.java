@@ -5,14 +5,12 @@ import java.util.Random;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.Handler;
 import android.util.Log;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.ImageButton;
-import android.widget.ImageView;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.actionbarsherlock.app.ActionBar;
@@ -27,6 +25,7 @@ public class PopActivity extends SherlockActivity {
 	private int totalNumberOfItems;
 	private Random generator = new Random();
 	private TextView result;
+	private Animation anim;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -53,6 +52,9 @@ public class PopActivity extends SherlockActivity {
 		Log.d(TAG, "Button handle initialized.");
 		hookUpPop();
 		Log.d(TAG, "Pop button hooked up with onClickListener");
+		
+		// Initialize animation.
+		anim = AnimationUtils.loadAnimation(this, R.anim.bounce);
 
 		// Add up navigation affordance to the Action Bar.
 		ActionBar actionBar = getSupportActionBar();
@@ -74,7 +76,9 @@ public class PopActivity extends SherlockActivity {
 
 				String result = list.get(randomIndex);
 				Log.d(TAG, "Result = " + result);
-
+				
+				PopActivity.this.result.startAnimation(anim);
+				PopActivity.this.result.setText(result);
 			}
 		});
 	}
