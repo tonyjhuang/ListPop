@@ -26,7 +26,7 @@ public class PopActivity extends SherlockActivity {
 	private ArrayList<String> list;
 	private int totalNumberOfItems;
 	private Random generator = new Random();
-	private TextView resultDisplay;
+	private TextView result;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -46,7 +46,7 @@ public class PopActivity extends SherlockActivity {
 		list = DbAdapter.interpret(codifiedList);
 		totalNumberOfItems = list.size();
 
-		resultDisplay = (TextView) findViewById(R.id.result);
+		result = (TextView) findViewById(R.id.result);
 
 		// Initialize and add OnClickListener to the transient pop button.
 		pop = (ImageButton) findViewById(R.id.button);
@@ -84,12 +84,12 @@ public class PopActivity extends SherlockActivity {
 		switch (item.getItemId()) {
 		case android.R.id.home:
 			// This is called when the Home (Up) button is pressed
-			// in the Action Bar. Code was taken from:
-			// http://developer.android.com/training/implementing-navigation/ancestral.html
-			Intent upIntent = new Intent(this, StartActivity.class);
-			upIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP
+			// in the Action Bar.
+			Intent i = new Intent(this, StartActivity.class);
+			i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP
 					| Intent.FLAG_ACTIVITY_NEW_TASK);
-			startActivity(upIntent);
+
+			setResult(RESULT_CANCELED, i);
 			finish();
 			return true;
 		}
