@@ -33,12 +33,17 @@
         android:layout_below="@+id/additem"
         android:layout_centerHorizontal="true" />
 
-    <Button
+    <ImageButton
         android:id="@id/finish"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:text="@string/finishednewlist" />
+        android:layout_marginBottom="2dp"
+        android:layout_marginLeft="@dimen/list_bg_e_side"
+        android:layout_marginRight="@dimen/list_bg_e_side"
+        android:background="#0000"
+        android:contentDescription="Save your changes"
+        android:src="@drawable/save" />
 
     <Button
         android:id="@+id/preset"

@@ -31,6 +31,7 @@
         android:src="@drawable/listbg_e"
         android:layout_above="@+id/finish"
         android:layout_below="@+id/additem"
+        android:layout_marginBottom="5dp"
         android:layout_centerHorizontal="true" />
 
     <ListView
@@ -45,13 +46,17 @@
         android:layout_alignLeft="@id/list_bg"
         android:layout_alignRight="@id/list_bg"
         android:layout_alignTop="@id/list_bg" />
-
+
     <ImageButton
         android:id="@id/finish"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:src="@drawable/save"
-        android:contentDescription="Save your changes" />
+        android:layout_marginBottom="5dp"
+        android:layout_marginLeft="@dimen/list_bg_e_side"
+        android:layout_marginRight="@dimen/list_bg_e_side"
+        android:background="#0000"
+        android:contentDescription="Save your changes"
+        android:src="@drawable/save" />
 
 </RelativeLayout>
