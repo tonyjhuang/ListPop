@@ -1,7 +1,8 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="fill_parent" >
+    android:layout_height="fill_parent"
+    android:background="@drawable/bg" >
     
      <TextView
         android:id="@+id/presetnameheader"
@@ -21,31 +22,21 @@
          android:layout_below="@id/presetnameheader"
          android:paddingTop="10dp"
          android:entries="@array/preset_choice_array"
-         android:prompt="@string/preset_spinner_prompt" />
-     
-     <EditText 
-        android:id="@+id/presettitle"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:layout_below="@id/presetspinner"
-        android:hint="@string/optional"
-        android:inputType="textCapWords" />
-     
+         android:prompt="@string/preset_spinner_prompt" />
      <FrameLayout
          android:id="@+id/fragmentframe"
          android:layout_width="match_parent"
          android:layout_height="fill_parent"
-         android:layout_above="@+id/finishbutton"
-         android:layout_below="@+id/presettitle" >
+         android:layout_above="@+id/finish"
+         android:layout_below="@+id/presetspinner" >
      </FrameLayout>
      
      <Button
-	    android:id="@id/finishbutton"
+	    android:id="@id/finish"
 	    android:layout_width="match_parent"
 	    android:layout_height="wrap_content"
 	    android:layout_alignParentBottom="true"
-	    android:text="@string/finishednewlist" />
+	    android:text="@string/finishpreset" />
 
     
 </RelativeLayout>

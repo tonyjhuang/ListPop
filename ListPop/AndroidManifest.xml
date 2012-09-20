@@ -27,7 +27,7 @@
         <activity
             android:name="AddActivity"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="adjustResize" />
+            android:windowSoftInputMode="stateVisible|adjustPan" />
         <activity
             android:name="PresetActivity"
             android:screenOrientation="portrait" />
@@ -35,9 +35,6 @@
             android:name="EditActivity"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateVisible|adjustPan" />
-        <activity
-            android:name="TabsActivity"
-            android:screenOrientation="portrait" />
     </application>
 
 </manifest>

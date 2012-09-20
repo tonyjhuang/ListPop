@@ -25,13 +25,29 @@
         android:inputType="textMultiLine|textCapWords"
         android:textColor="#000" />
 
+    <ImageView
+        android:id="@+id/list_bg"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@+id/finish"
+        android:layout_below="@+id/additem"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="2dp"
+        android:clickable="false"
+        android:src="@drawable/listbg_e" />
+
     <ListView
         android:id="@+id/list"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_above="@+id/finish"
-        android:layout_below="@+id/additem"
-        android:layout_centerHorizontal="true" />
+        android:layout_alignBottom="@id/list_bg"
+        android:layout_alignLeft="@id/list_bg"
+        android:layout_alignRight="@id/list_bg"
+        android:layout_alignTop="@id/list_bg"
+        android:layout_marginBottom="@dimen/list_bg_e_side"
+        android:layout_marginLeft="@dimen/list_bg_e_side"
+        android:layout_marginRight="@dimen/list_bg_e_side"
+        android:layout_marginTop="@dimen/list_bg_e_side" />
 
     <ImageButton
         android:id="@id/finish"
@@ -43,6 +59,7 @@
         android:layout_marginRight="@dimen/list_bg_e_side"
         android:background="#0000"
         android:contentDescription="Save your changes"
+        android:scaleType="fitXY"
         android:src="@drawable/save" />
 
     <Button
