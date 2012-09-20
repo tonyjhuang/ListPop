@@ -12,8 +12,8 @@
     
     <dimen name="list_bg_e_padding">6dp</dimen>
     <dimen name="list_bg_e_side">5dp</dimen>
-    <dimen name="list_bg_e_bottom">2dp</dimen>
-    <dimen name="list_bg_e_top">15dp</dimen>
+    <dimen name="list_bg_e_bottom">5dp</dimen>
+    <dimen name="list_bg_e_top">10dp</dimen>
     <dimen name="preset_side_margin">30dp</dimen>
     
 
