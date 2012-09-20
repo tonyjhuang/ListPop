@@ -1,7 +1,8 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent" >
+    android:layout_height="match_parent"
+    android:background="@drawable/bg" >
 
     <EditText
         android:id="@+id/listname"
@@ -10,6 +11,7 @@
         android:layout_centerHorizontal="true"
         android:layout_marginTop="15dp"
         android:inputType="textNoSuggestions"
+        android:textColor="#000000"
         android:textSize="25dp" />
 
     <EditText
@@ -19,14 +21,37 @@
         android:layout_below="@id/listname"
         android:layout_marginTop="30dp"
         android:hint="@string/addlistitemprompt"
-        android:inputType="textMultiLine|textNoSuggestions" />
+        android:inputType="textMultiLine|textNoSuggestions"
+        android:textColor="#000000" />
+
+    <ImageView
+        android:id="@+id/imageView1"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@+id/finish"
+        android:layout_below="@id/additem"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="@dimen/list_bg_e_bottom"
+        android:layout_marginLeft="@dimen/list_bg_e_side"
+        android:layout_marginRight="@dimen/list_bg_e_side"
+        android:layout_marginTop="@dimen/list_bg_e_top"
+        android:focusable="false"
+        android:scaleType="fitXY"
+        android:src="@drawable/listbg_e" />
+
     <ListView
         android:id="@+id/list"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_above="@+id/finish"
-        android:layout_below="@+id/additem"
-        android:layout_centerHorizontal="true" />
+        android:layout_height="match_parent"
+        android:layout_alignBottom="@+id/imageView1"
+        android:layout_alignLeft="@+id/imageView1"
+        android:layout_alignRight="@+id/imageView1"
+        android:layout_alignTop="@+id/imageView1"
+        android:layout_marginBottom="@dimen/list_bg_padding"
+        android:layout_marginLeft="@dimen/list_bg_padding"
+        android:layout_marginRight="@dimen/list_bg_padding"
+        android:layout_marginTop="@dimen/list_bg_padding"
+        android:cacheColorHint="@color/transparent" />
 
     <Button
         android:id="@id/finish"

@@ -3,23 +3,56 @@
     android:id="@+id/rlayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingTop="10dp" >
+    android:background="@drawable/bg" >
+
+    <ImageView
+        android:id="@+id/bottle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:focusable="false"
+        android:src="@drawable/bottle" />
+
+    <ImageButton
+        android:id="@+id/pop"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@id/bottle"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="@dimen/pop_bottom"
+        android:background="@color/transparent"
+        android:contentDescription="Pop!"
+        android:src="@drawable/pop_button" />
 
     <TextView
         android:id="@+id/popresult"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_above="@+id/bubblelarge"
         android:layout_centerHorizontal="true"
-        android:layout_centerVertical="true"
+        android:layout_marginBottom="20dp"
         android:gravity="center"
         android:textSize="@dimen/pop_textsize" />
 
-    <Button
-        android:id="@+id/pop"
-        android:layout_width="match_parent"
+    <ImageView
+        android:id="@+id/bubblelarge"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:layout_centerVertical="true"
-        android:text="@string/poplist" />
+        android:layout_above="@+id/bubblesmall"
+        android:layout_alignRight="@id/bottle"
+        android:layout_marginBottom="20dp"
+        android:focusable="false"
+        android:src="@drawable/bubble_large" />
+
+    <ImageView
+        android:id="@+id/bubblesmall"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@id/bottle"
+        android:layout_alignLeft="@id/bottle"
+        android:layout_marginBottom="20dp"
+        android:focusable="false"
+        android:src="@drawable/bubble_small" />
 
 </RelativeLayout>
