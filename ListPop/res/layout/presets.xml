@@ -1,39 +1,50 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="fill_parent"
-    android:background="@drawable/bg" >
-
-    <TextView
-        android:id="@+id/header"
+    android:layout_height="fill_parent" >
+    
+     <TextView
+        android:id="@+id/presetnameheader"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="@dimen/title_indent"
-        android:paddingTop="10dp"
-        android:text="@string/preset_name_header"
-        android:textSize="25dp" />
-
-    <Spinner
-        android:id="@+id/spinner"
+	    android:layout_height="wrap_content"
+	    android:layout_marginLeft="@dimen/title_indent"
+	    android:paddingTop="10dp"
+	    android:textSize="25dp"
+	    android:textColor="#000"
+	    android:text="@string/preset_name_header" />
+     
+     <Spinner
+         android:id="@+id/presetspinner"
+         android:layout_width="match_parent"
+         android:layout_height="wrap_content"
+         android:layout_below="@id/presetnameheader"
+         android:paddingTop="10dp"
+         android:entries="@array/preset_choice_array"
+         android:prompt="@string/preset_spinner_prompt" />
+     
+     <EditText 
+        android:id="@+id/presettitle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/header"
-        android:entries="@array/preset_choice_array"
-        android:paddingTop="10dp"
-        android:prompt="@string/preset_spinner_prompt" />
+        android:layout_marginTop="20dp"
+        android:layout_below="@id/presetspinner"
+        android:hint="@string/optional"
+        android:inputType="textCapWords" />
+     
+     <FrameLayout
+         android:id="@+id/fragmentframe"
+         android:layout_width="match_parent"
+         android:layout_height="fill_parent"
+         android:layout_above="@+id/finishbutton"
+         android:layout_below="@+id/presettitle" >
+     </FrameLayout>
+     
+     <Button
+	    android:id="@id/finishbutton"
+	    android:layout_width="match_parent"
+	    android:layout_height="wrap_content"
+	    android:layout_alignParentBottom="true"
+	    android:text="@string/finishednewlist" />
 
-    <FrameLayout
-        android:id="@+id/fragmentframe"
-        android:layout_width="match_parent"
-        android:layout_height="fill_parent"
-        android:layout_above="@+id/finish"
-        android:layout_below="@+id/spinner" />
-
-    <Button
-        android:id="@id/finish"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:text="@string/finishpreset" />
-
+    
 </RelativeLayout>

@@ -33,6 +33,7 @@
         android:layout_centerHorizontal="true"
         android:layout_centerVertical="true"
         android:text="@string/to"
+        android:textColor="#000"
         android:textSize="@dimen/to_text" />
 
 </RelativeLayout>

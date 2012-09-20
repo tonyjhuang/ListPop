@@ -10,8 +10,9 @@
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="15dp"
-        android:inputType="textNoSuggestions"
         android:hint="@string/addlistnameprompt"
+        android:inputType="textNoSuggestions"
+        android:textColor="#000"
         android:textSize="25dp" />
 
     <EditText
@@ -21,7 +22,9 @@
         android:layout_below="@id/listname"
         android:layout_marginTop="30dp"
         android:hint="@string/addlistitemprompt"
-        android:inputType="textMultiLine|textNoSuggestions" />
+        android:inputType="textMultiLine|textNoSuggestions"
+        android:textColor="#000" />
+
     <ListView
         android:id="@+id/list"
         android:layout_width="wrap_content"
