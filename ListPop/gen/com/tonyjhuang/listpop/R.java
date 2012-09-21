@@ -1089,6 +1089,7 @@ containing a value of this type.
         public static final int Sherlock___Widget_Holo_ListView=0x7f0b0026;
         public static final int Sherlock___Widget_Holo_Spinner=0x7f0b0023;
         public static final int SpinnerItem=0x7f0b005a;
+        public static final int SpinnerItem_DropDownItem=0x7f0b005b;
         public static final int TextAppearance_Sherlock_DialogWindowTitle=0x7f0b0045;
         public static final int TextAppearance_Sherlock_Light_DialogWindowTitle=0x7f0b0046;
         public static final int TextAppearance_Sherlock_Light_Small=0x7f0b0049;
@@ -1109,8 +1110,6 @@ containing a value of this type.
         public static final int TextAppearance_Sherlock_Widget_PopupMenu_Large=0x7f0b003f;
         public static final int TextAppearance_Sherlock_Widget_PopupMenu_Small=0x7f0b0041;
         public static final int TextAppearance_Sherlock_Widget_TextView_SpinnerItem=0x7f0b0043;
-        /**   <item name="android:spinnerDropDownItemStyle">@style/SpinnerItem.DropDownItem</item> 
-         */
         public static final int Theme_CustomSherlock=0x7f0b0059;
         public static final int Theme_Sherlock=0x7f0b004e;
         public static final int Theme_Sherlock_Dialog=0x7f0b0056;
